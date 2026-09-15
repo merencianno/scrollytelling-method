@@ -1,0 +1,687 @@
+<title>Manual do Scrollytelling</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300;400;500;600&family=Funnel+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  /* Página deliberadamente escura: o sistema que ela documenta é escuro, e
+     apresentá-lo sobre branco descaracterizaria o objeto. Tudo pintado
+     explicitamente para não depender do tema do hospedeiro. */
+  :root {
+    --canvas: #04060c;
+    --canvas-deep: #000000;
+    --surface: #0e131d;
+    --surface-2: #141b28;
+    --line: rgba(255,255,255,.09);
+    --line-strong: rgba(88,172,225,.32);
+    --ink: #ffffff;
+    --ink-2: rgba(255,255,255,.80);
+    --ink-3: rgba(255,255,255,.55);
+    --blue-deep: <MARCA-PROFUNDA>;
+    --blue-core: <MARCA-NUCLEO>;
+    --blue-glow: #46a1fc;
+    --blue-ice: #93d4fe;
+    --success: <POSITIVO>;
+    --danger: <NEGATIVO>;
+    --display: "<FONTE-DISPLAY>", ui-sans-serif, system-ui, sans-serif;
+    --body: "Funnel Sans", ui-sans-serif, system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+    --radius-card: 20px;
+    --radius-tile: 14px;
+  }
+
+  body {
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .halo {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(70% 55% at 50% 0%, rgba(0,131,232,.20), transparent 70%),
+      radial-gradient(60% 50% at 50% 100%, rgba(26,69,174,.16), transparent 72%);
+    z-index: 0;
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 60rem;
+    margin: 0 auto;
+    padding-inline: 20px;
+    padding-block: 0 96px;
+  }
+
+  /* ---------- navegação ---------- */
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 18px;
+    padding-block: 14px;
+    margin-bottom: 40px;
+    background: color-mix(in srgb, var(--canvas) 88%, transparent);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  nav a { color: var(--ink-3); text-decoration: none; }
+  nav a:hover, nav a:focus-visible { color: var(--blue-glow); }
+
+  /* ---------- cabeçalho ---------- */
+
+  header { padding-top: 48px; }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--blue-glow);
+    margin: 0 0 18px;
+  }
+
+  h1 {
+    font-family: var(--display);
+    font-size: clamp(2.3rem, 6.2vw, 4rem);
+    font-weight: 400;
+    line-height: 1.04;
+    letter-spacing: -.03em;
+    text-wrap: balance;
+    margin: 0 0 20px;
+  }
+
+  .lede {
+    font-size: clamp(1.05rem, 2.3vw, 1.3rem);
+    font-weight: 300;
+    color: var(--ink-2);
+    max-width: 38rem;
+    margin: 0 0 28px;
+    text-wrap: pretty;
+  }
+
+  .lineage {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--ink-3);
+    line-height: 2;
+    word-break: break-word;
+  }
+  .lineage b { color: var(--blue-ice); font-weight: 500; }
+
+  /* ---------- seções ---------- */
+
+  section { margin-top: 72px; scroll-margin-top: 64px; }
+
+  h2 {
+    font-family: var(--display);
+    font-size: clamp(1.5rem, 3.4vw, 2.1rem);
+    font-weight: 400;
+    letter-spacing: -.02em;
+    margin: 0 0 8px;
+    text-wrap: balance;
+  }
+
+  .sub {
+    color: var(--ink-3);
+    font-size: .96rem;
+    margin: 0 0 26px;
+    max-width: 40rem;
+    text-wrap: pretty;
+  }
+
+  /* ---------- fases ---------- */
+
+  .phases { display: grid; gap: 12px; }
+
+  .phase {
+    display: grid;
+    grid-template-columns: 3.4rem 1fr;
+    gap: 0 18px;
+    padding: 18px 20px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-tile);
+    background: var(--surface);
+    align-items: start;
+  }
+  .phase .n {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .1em;
+    color: var(--blue-glow);
+    padding-top: 4px;
+  }
+  .phase h3 {
+    font-family: var(--display);
+    font-size: 1.05rem;
+    font-weight: 500;
+    margin: 0 0 4px;
+  }
+  .phase p { margin: 0; color: var(--ink-3); font-size: .93rem; }
+
+  /* ---------- gosto ---------- */
+
+  .taste { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 14px; }
+
+  .pile {
+    border: 1px solid var(--line);
+    border-radius: var(--radius-tile);
+    background: var(--surface);
+    padding: 20px;
+  }
+  .pile h3 {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    font-weight: 500;
+  }
+  .pile.no h3 { color: var(--danger); }
+  .pile.yes h3 { color: var(--success); }
+  .pile ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 9px; }
+  .pile li { display: grid; grid-template-columns: 1rem 1fr; gap: 10px; font-size: .92rem; color: var(--ink-2); }
+  .pile.no li::before { content: "✕"; color: var(--danger); font-size: .8rem; line-height: 1.7; }
+  .pile.yes li::before { content: "✓"; color: var(--success); font-size: .8rem; line-height: 1.7; }
+  .pile li i { font-style: normal; color: var(--ink-3); font-size: .85rem; display: block; }
+
+  /* ---------- mecanismos ---------- */
+
+  .mechs { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius-tile); overflow: hidden; }
+  .mech { background: var(--surface); padding: 16px 18px; }
+  .mech .q { font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 6px; }
+  .mech .a { font-family: var(--display); font-size: 1rem; font-weight: 500; margin: 0; color: var(--blue-ice); }
+
+  /* ---------- tabela ---------- */
+
+  .scroller { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius-tile); }
+  table { border-collapse: collapse; width: 100%; font-size: .88rem; min-width: 34rem; }
+  th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); font-weight: 500; background: var(--surface-2); }
+  tr:last-child td { border-bottom: none; }
+  td:first-child { font-family: var(--display); font-weight: 500; white-space: nowrap; }
+  td .named { color: var(--blue-ice); }
+  .tone { font-family: var(--mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; padding: 2px 7px; border-radius: 999px; white-space: nowrap; }
+  .tone.d { background: rgba(255,255,255,.07); color: var(--ink-2); }
+  .tone.l { background: #f0f2f5; color: #1b1b1b; }
+  .tone.p { background: rgba(26,69,174,.4); color: var(--blue-ice); }
+
+  /* ---------- paleta ---------- */
+
+  .swatches { display: grid; grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr)); gap: 10px; }
+  .sw { border-radius: var(--radius-tile); border: 1px solid var(--line); overflow: hidden; }
+  .sw .chip { height: 62px; }
+  .sw .meta { padding: 9px 11px; background: var(--surface); }
+  .sw .name { font-family: var(--mono); font-size: 10px; color: var(--ink-3); display: block; letter-spacing: .04em; }
+  .sw .hex { font-family: var(--mono); font-size: 11.5px; color: var(--ink); }
+
+  .typescale { display: grid; gap: 14px; border: 1px solid var(--line); border-radius: var(--radius-tile); padding: 22px; background: var(--surface); }
+  .typescale div { display: grid; gap: 2px; }
+  .typescale .lbl { font-family: var(--mono); font-size: 10px; color: var(--ink-3); letter-spacing: .08em; }
+  .t-hero { font-family: var(--display); font-size: clamp(2.15rem, 5.4vw, 4.35rem); line-height: 1.06; letter-spacing: -.03em; font-weight: 400; }
+  .t-h2 { font-family: var(--display); font-size: clamp(1.85rem, 4vw, 3.25rem); line-height: 1.1; letter-spacing: -.025em; font-weight: 400; }
+  .t-body { font-size: clamp(1rem, 2vw, 1.25rem); font-weight: 300; line-height: 1.62; color: var(--ink-2); }
+
+  /* ---------- issues ---------- */
+
+  .issue-group { border: 1px solid var(--line); border-radius: var(--radius-tile); background: var(--surface); margin-bottom: 12px; overflow: hidden; }
+  .issue-head { display: flex; align-items: center; gap: 12px; padding: 13px 16px; background: var(--surface-2); flex-wrap: wrap; }
+  .issue-head h3 { font-family: var(--display); font-size: 1rem; font-weight: 500; margin: 0; flex: 1 1 12rem; }
+  .issue-head .count { font-family: var(--mono); font-size: 10px; color: var(--ink-3); letter-spacing: .08em; }
+  .issue-list { padding: 6px 16px 16px; display: grid; gap: 0; }
+  .issue-list li { list-style: none; padding: 9px 0; border-bottom: 1px solid var(--line); font-size: .92rem; color: var(--ink-2); display: grid; grid-template-columns: 1.6rem 1fr; gap: 10px; }
+  .issue-list li:last-child { border-bottom: none; }
+  .issue-list .num { font-family: var(--mono); font-size: 11px; color: var(--blue-glow); }
+  .issue-list ul { margin: 0; padding: 0; }
+
+  button.copy {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    background: rgba(255,255,255,.06);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 6px 14px;
+    cursor: pointer;
+    transition: background .18s, color .18s, border-color .18s;
+    white-space: nowrap;
+  }
+  button.copy:hover, button.copy:focus-visible { background: rgba(0,131,232,.18); color: var(--ink); border-color: var(--line-strong); }
+  button.copy[data-done="1"] { background: rgba(95,211,179,.18); color: var(--success); border-color: rgba(95,211,179,.35); }
+
+  /* ---------- código ---------- */
+
+  .code {
+    position: relative;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-tile);
+    background: var(--canvas-deep);
+    padding: 16px 18px;
+    overflow-x: auto;
+  }
+  .code pre { margin: 0; font-family: var(--mono); font-size: 12.5px; line-height: 1.75; color: var(--blue-ice); }
+  .code + .code { margin-top: 10px; }
+  .code-row { display: flex; gap: 10px; align-items: center; margin-bottom: 8px; flex-wrap: wrap; }
+  .code-row .what { font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); flex: 1 1 auto; }
+
+  /* ---------- listas simples ---------- */
+
+  .plain { display: grid; gap: 10px; padding: 0; margin: 0; list-style: none; }
+  .plain li { padding-left: 18px; position: relative; color: var(--ink-2); font-size: .95rem; }
+  .plain li::before { content: "—"; position: absolute; left: 0; color: var(--blue-glow); }
+
+  footer {
+    margin-top: 76px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 11px;
+    line-height: 2;
+    color: var(--ink-3);
+  }
+  footer a { color: var(--blue-ice); }
+
+  @media (max-width: 620px) {
+    .phase { grid-template-columns: 1fr; gap: 6px; }
+    .phase .n { padding-top: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+
+<div class="halo"></div>
+<div class="wrap">
+
+  <nav aria-label="Seções">
+    <a href="#metodo">Método</a>
+    <a href="#gosto">Gosto</a>
+    <a href="#mecanismos">Mecanismos</a>
+    <a href="#conceitos">Conceitos</a>
+    <a href="#sistema">Sistema</a>
+    <a href="#pipeline">Pipeline</a>
+    <a href="#scripts">Scripts</a>
+    <a href="#instalar">Instalar</a>
+  </nav>
+
+  <header>
+    <p class="eyebrow">scrollytelling-method · v1.0-beta</p>
+    <h1>Manual do Scrollytelling</h1>
+    <p class="lede">A inteligência que produziu a página do o projeto de referência, extraída num formato que outra pessoa — ou outra IA — consegue executar sem estar lá.</p>
+    <p class="lineage">
+      <b>mav</b> → <b>vsl-pmv</b> → <b>pmv-bio</b> → skill v1 → <b>/ref</b> → esta skill<br>
+      Seis versões em doze horas · 14 dobras · 2.522 linhas de método
+    </p>
+  </header>
+
+  <section id="metodo">
+    <h2>O método, em seis fases</h2>
+    <p class="sub">Não é um tema visual. Trocar cor e fonte numa estrutura existente é maquiagem, e foi reprovado toda vez que se tentou.</p>
+    <div class="phases">
+      <div class="phase"><span class="n">Fase 0</span><div><h3>Fundações</h3><p>Ficha do projeto, copy congelada como contrato, tokens antes de componentes, e o ritmo de superfícies claro/escuro mapeado na jornada emocional.</p></div></div>
+      <div class="phase"><span class="n">Fase 1</span><div><h3>Blocagem</h3><p>A copy crua vira tabela antes de virar código: dobra → função → conceito → componente → ato → motion → assets. A fase mais barata de errar.</p></div></div>
+      <div class="phase"><span class="n">Fase 2</span><div><h3>Direção visual</h3><p>Classificar o papel do Figma antes de extrair. Página desenhada pede tradução; direção visual pede só paleta, assets e frames como moodboard.</p></div></div>
+      <div class="phase"><span class="n">Fase 3</span><div><h3>Reimaginação</h3><p>Uma seção por vez, cada uma com conceito nomeável. Interface no lugar de imagem. GSAP faz entrada, CSS faz loop. Subagentes: um arquivo cada, um commit cada.</p></div></div>
+      <div class="phase"><span class="n">Fase 4</span><div><h3>Verificação</h3><p>Gates fixos, contrato de copy executável, e prints em várias larguras — medição não substitui olhar a página.</p></div></div>
+      <div class="phase"><span class="n">Fase 5</span><div><h3>Registro</h3><p>Changelog no mesmo commit, decisão difícil vira registro datado, publicação rastreável. O artefato publicado nunca é editado à mão.</p></div></div>
+    </div>
+  </section>
+
+  <section id="gosto">
+    <h2>O gosto codificado</h2>
+    <p class="sub">O que nenhum modelo tem sozinho. Quase toda a distância entre a v1 e a v6 foi gosto, não técnica — e sem isto o resultado converge para o visual genérico de IA que foi rejeitado várias vezes nesta página.</p>
+    <div class="taste">
+      <div class="pile no">
+        <h3>Vetado</h3>
+        <ul>
+          <li>Medalha dourada <i>brigou com uma página construída em azul frio; refeita em cromo da marca</i></li>
+          <li>Gradiente verde no bloco de preço <i>acento semântico virando tema deixa o bloco com cara de banner</i></li>
+          <li>Relógio e rosácea como selo <i>garantia é o momento de reconhecer o objeto, não de decodificar metáfora</i></li>
+          <li>Imagem com fade ou blur de borda <i>lido como defeito de renderização — o "blur branco"</i></li>
+          <li>Moldura em volta de imagem <i>o que segura a cena é o palco atrás dela</i></li>
+          <li>Recorte panorâmico em cena conceitual <i>decapita a imagem</i></li>
+          <li>Cards roxos com texto pequeno <i>cor fora da paleta e descrição em corpo decorativo</i></li>
+          <li>Marcadores numéricos de dobra <i>denunciam a página como esquema e o leitor começa a contar</i></li>
+          <li>Bifurcação vermelho/verde no fechamento <i>no último momento o leitor quer ver o que compra</i></li>
+        </ul>
+      </div>
+      <div class="pile yes">
+        <h3>Aprovado e virou padrão</h3>
+        <ul>
+          <li>A janela de app <i>referência de animação preferida; replicada em cinco dobras a pedido</i></li>
+          <li>O bento de dez janelas <i>"você matou, ficou muito boa, mantém"</i></li>
+          <li>O card de oferta de verdade no fechamento <i>"achei muito bom"</i></li>
+          <li>Hero com o lead arrastado pelo cursor <i>"muito bonito"</i></li>
+          <li>Cenas conceituais inteiras, sem corte</li>
+          <li>Mobile sem nada alinhado à esquerda</li>
+          <li>Preço sempre parcelado, nunca o valor cheio</li>
+          <li>Verde e vermelho somados abaixo de 10% da tela</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="mecanismos">
+    <h2>Catálogo de mecanismos</h2>
+    <p class="sub">Problema narrativo de um lado, solução visual já aprovada do outro. Para quando se sabe o que a seção precisa dizer, mas não como mostrar.</p>
+    <div class="mechs">
+      <div class="mech"><p class="q">Mostrar o produto sem screenshot feio</p><p class="a">Janela de app com barra de título</p></div>
+      <div class="mech"><p class="q">Quatro produtos no espaço de um</p><p class="a">Ciclo de abas de 32 s</p></div>
+      <div class="mech"><p class="q">Dar peso a uma oferta</p><p class="a">Pilha que pousa placa a placa</p></div>
+      <div class="mech"><p class="q">Ancorar preço contra custo maior</p><p class="a">Ledger fixo com barras por scroll</p></div>
+      <div class="mech"><p class="q">Qualificar o público</p><p class="a">Spec sheet de uma folha</p></div>
+      <div class="mech"><p class="q">Garantir</p><p class="a">Selo em cromo da cor da marca</p></div>
+      <div class="mech"><p class="q">Apresentar um catálogo</p><p class="a">Bento com uma janela por item</p></div>
+      <div class="mech"><p class="q">Sugerir abundância</p><p class="a">Marquee duplo em direções opostas</p></div>
+      <div class="mech"><p class="q">Superfície premium</p><p class="a">Liquid Glass — precisa de luz atrás</p></div>
+      <div class="mech"><p class="q">Respiro entre dobras</p><p class="a">Cena inteira, sem corte nem fade</p></div>
+    </div>
+  </section>
+
+  <section id="conceitos">
+    <h2>Conceito por função narrativa</h2>
+    <p class="sub">A regra de ouro: se não dá para nomear a cena numa frase, ainda é repaginação disfarçada. Abaixo, o que funciona em cada momento da página.</p>
+    <div class="scroller">
+      <table>
+        <thead><tr><th>Função</th><th>Superfície</th><th>Conceito que funciona</th></tr></thead>
+        <tbody>
+          <tr><td>Promessa</td><td><span class="tone d">escuro</span></td><td>O produto funcionando, não a promessa ilustrada — <span class="named">"a janela que troca de ferramenta sozinha"</span></td></tr>
+          <tr><td>Dor</td><td><span class="tone l">claro</span></td><td>Uma cena curta por frase, com o objeto do desejo presente e apagado — <span class="named">"os quatro ainda"</span></td></tr>
+          <tr><td>Mecanismo</td><td><span class="tone d">escuro</span></td><td>Estações ligadas por um conector que acende na ordem — <span class="named">"o fluxo em quatro estações"</span></td></tr>
+          <tr><td>Diagnóstico</td><td><span class="tone l">claro</span></td><td>A falha encenada no fim do ciclo, não explicada — <span class="named">"o stepper que apaga na quinta"</span></td></tr>
+          <tr><td>Armadilha</td><td><span class="tone d">escuro</span></td><td>As duas saídas com o mesmo peso quando ambas são ruins — <span class="named">"paga duas vezes"</span></td></tr>
+          <tr><td>Virada</td><td><span class="tone p">deep</span></td><td>A decisão sendo tomada diante do leitor — <span class="named">"a mesa de diagnóstico"</span></td></tr>
+          <tr><td>Oferta</td><td><span class="tone d">escuro</span></td><td>Esquema numérico fora do card, um objeto iluminado com o preço — <span class="named">"3 + 10"</span></td></tr>
+          <tr><td>Produto</td><td><span class="tone l">claro</span></td><td>Uma peça por item, cada uma com vida própria — <span class="named">"o bento de 10 janelas"</span></td></tr>
+          <tr><td>Prova</td><td><span class="tone d">escuro</span></td><td>Passagem de posse: a peça sai, atravessa e pousa — <span class="named">"a cópia que vira sua"</span></td></tr>
+          <tr><td>Serviço</td><td><span class="tone l">claro</span></td><td>Gente trabalhando dentro da UI — <span class="named">"a instalação, uma por vez"</span></td></tr>
+          <tr><td>Ancoragem</td><td><span class="tone d">escuro</span></td><td>A conta do outro lado somando sem sair da tela — <span class="named">"o placar" + "The Stack"</span></td></tr>
+          <tr><td>Qualificação</td><td><span class="tone l">claro</span></td><td>Spec sheet mais grade curta de perfis — <span class="named">"a lista do que vem na caixa"</span></td></tr>
+          <tr><td>Garantia</td><td><span class="tone d">escuro</span></td><td>Um objeto só, reconhecível, sem metáfora extra — <span class="named">"a medalha em cromo azul"</span></td></tr>
+          <tr><td>Decisão</td><td><span class="tone p">deep</span></td><td>O card de oferta repetido por inteiro — <span class="named">"o card de oferta"</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="sistema">
+    <h2>O sistema, visto</h2>
+    <p class="sub">Uma cor de marca com derivados por papel, dois semânticos escassos, e escala tipográfica em <code style="font-family:var(--mono);font-size:.85em">clamp()</code> em vez de degraus fixos. Tokens de espaçamento não existem de propósito — isso fica nos utilitários do framework.</p>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:<MARCA-PROFUNDA>"></div><div class="meta"><span class="name">deep</span><span class="hex"><MARCA-PROFUNDA></span></div></div>
+      <div class="sw"><div class="chip" style="background:<MARCA-NUCLEO>"></div><div class="meta"><span class="name">core</span><span class="hex">#0083E8</span></div></div>
+      <div class="sw"><div class="chip" style="background:#46a1fc"></div><div class="meta"><span class="name">glow</span><span class="hex">#46A1FC</span></div></div>
+      <div class="sw"><div class="chip" style="background:#93d4fe"></div><div class="meta"><span class="name">ice</span><span class="hex">#93D4FE</span></div></div>
+      <div class="sw"><div class="chip" style="background:<POSITIVO>"></div><div class="meta"><span class="name">success</span><span class="hex">#5FD3B3</span></div></div>
+      <div class="sw"><div class="chip" style="background:<NEGATIVO>"></div><div class="meta"><span class="name">danger</span><span class="hex">#E07A7A</span></div></div>
+      <div class="sw"><div class="chip" style="background:#f5f5f7"></div><div class="meta"><span class="name">light canvas</span><span class="hex">#F5F5F7</span></div></div>
+      <div class="sw"><div class="chip" style="background:#04060c;border-bottom:1px solid var(--line)"></div><div class="meta"><span class="name">deep canvas</span><span class="hex">#04060C</span></div></div>
+    </div>
+    <div class="typescale" style="margin-top:14px">
+      <div><span class="lbl">hero — clamp(2.15rem, 5.4vw, 4.35rem)</span><span class="t-hero">Tudo em um só lugar</span></div>
+      <div><span class="lbl">h2 de dobra — clamp(1.85rem, 4vw, 3.25rem)</span><span class="t-h2">O que muda na prática</span></div>
+      <div><span class="lbl">corpo — peso 300, altura 1.62</span><span class="t-body">O contraste entre seções é parte da sensação de progresso: escuro nos picos, claro nos respiros.</span></div>
+    </div>
+  </section>
+
+  <section id="pipeline">
+    <h2>O projeto em 21 issues</h2>
+    <p class="sub">Prontas para colar num board. Cada issue tem critérios de aceite e um gate — o comando ou a evidência que autoriza fechar. Issue sem gate verde não fecha.</p>
+    <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap">
+      <button class="copy" data-copy="all">Copiar as 21 issues</button>
+    </div>
+    <div class="issue-group"><div class="issue-head"><h3>Fase 0 — Entrada</h3><span class="count">3 issues</span><button class="copy" data-group="0">Copiar fase</button></div><ul class="issue-list"><li><span class="num">1</span><span>Abrir a ficha do projeto<i style="display:block;color:var(--ink-3);font-size:.83rem;font-style:normal;margin-top:2px">Gate: ficha revisada por quem pediu; &quot;para que serve&quot; cabe em uma frase (duas frases = dois projetos).</i></span></li><li><span class="num">2</span><span>Congelar a fonte canônica da copy<i style="display:block;color:var(--ink-3);font-size:.83rem;font-style:normal;margin-top:2px">Gate: `&lt;N&gt;` dobras e a contagem de CTAs conferidas à mão contra o arquivo.</i></span></li><li><span class="num">3</span><span>Escrever o brief com a regra inviolável<i style="display:block;color:var(--ink-3);font-size:.83rem;font-style:normal;margin-top:2px">Gate: brief lido e aceito por quem vai implementar.</i></span></li></ul></div>
+<div class="issue-group"><div class="issue-head"><h3>Fase 1 — Planejamento</h3><span class="count">3 issues</span><button class="copy" data-group="1">Copiar fase</button></div><ul class="issue-list"><li><span class="num">4</span><span>Levantar a direção visual e os assets<i style="display:block;color:var(--ink-3);font-size:.83rem;font-style:normal;margin-top:2px">Gate: todo asset citado no inventário existe no caminho indicado.</i></span></li><li><span class="num">5</span><span>Preencher a tabela de blocagem<i style="display:block;color:var(--ink-3);font-size:.83rem;font-style:normal;margin-top:2px">Gate: tabela revisada; nenhuma célula de blocagem genérica (&quot;grid de cards&quot;).</i></span></li><li><span class="num">6</span><span>Definir o contrato executável de copy<i style="display:block;color:var(--ink-3);font-size:.83rem;font-style:normal;margin-top:2px">Gate: cada trecho localizado no arquivo de copy por busca literal.</i></span></li></ul></div>
+<div class="issue-group"><div class="issue-head"><h3>Fase 2 — Fundações</h3><span class="count">5 issues</span><button class="copy" data-group="2">Copiar fase</button></div><ul class="issue-list"><li><span class="num">7</span><span>Criar a rota e o escopo da página<i style="display:block;color:var(--ink-3);font-size:.83rem;font-style:normal;margin-top:2px">Gate: `npm run typecheck` e lint verdes; nenhum 404 no console da rota.</i></span></li><li><span class="num">8</span><span>Montar o arquivo de tokens escopado<i style="display:block;color:var(--ink-3);font-size:.83rem;font-style:normal;margin-top:2px">Gate: busca por hex de marca fora do arquivo de tokens retorna vazio.</i></span></li><li><span class="num">9</span><span>Criar os primitivos e o hook de motion<i style="display:block;color:var(--ink-3);font-size:.83rem;font-style:normal;margin-top:2px">Gate: typecheck verde e uma seção piloto usando só primitivos.</i></span></li><li><span class="num">10</span><span>Ligar o pipeline de build e o verificador<i style="display:block;color:var(--ink-3);font-size:.83rem;font-style:normal;margin-top:2px">Gate: verificador roda e falha corretamente numa página ainda incompleta.</i></span></li><li><span class="num">11</span><span>Escrever os testes de contrato<i style="display:block;color:var(--ink-3);font-size:.83rem;font-style:normal;margin-top:2px">Gate: suíte verde contra o dev server.</i></span></li></ul></div>
+<div class="issue-group"><div class="issue-head"><h3>Fase 3 — Implementação</h3><span class="count">3 issues</span><button class="copy" data-group="3">Copiar fase</button></div><ul class="issue-list"><li><span class="num">12</span><span>Implementar as dobras em lotes<i style="display:block;color:var(--ink-3);font-size:.83rem;font-style:normal;margin-top:2px">Gate: por dobra, `npx tsc --noEmit` e lint escopado verdes.</i></span></li><li><span class="num">13</span><span>Implementar o rodapé e os destinos dos CTAs<i style="display:block;color:var(--ink-3);font-size:.83rem;font-style:normal;margin-top:2px">Gate: verificador acusa o placeholder como aviso no preview e como falha no catálogo.</i></span></li><li><span class="num">14</span><span>Fechar a primeira passada e tirar os prints<i style="display:block;color:var(--ink-3);font-size:.83rem;font-style:normal;margin-top:2px">Gate: suíte de contrato + build + verificador verdes.</i></span></li></ul></div>
+<div class="issue-group"><div class="issue-head"><h3>Fase 4 — Revisão</h3><span class="count">3 issues</span><button class="copy" data-group="4">Copiar fase</button></div><ul class="issue-list"><li><span class="num">15</span><span>Revisar por largura, com o olho<i style="display:block;color:var(--ink-3);font-size:.83rem;font-style:normal;margin-top:2px">Gate: overflow zero em todas as larguras e lista de achados fechada.</i></span></li><li><span class="num">16</span><span>Auditar acessibilidade e movimento reduzido<i style="display:block;color:var(--ink-3);font-size:.83rem;font-style:normal;margin-top:2px">Gate: teste de movimento reduzido verde; auditoria de acessibilidade sem falha bloqueante.</i></span></li><li><span class="num">17</span><span>Medir performance no artefato de produção<i style="display:block;color:var(--ink-3);font-size:.83rem;font-style:normal;margin-top:2px">Gate: deslocamento de layout zero e resultado registrado no checkpoint.</i></span></li></ul></div>
+<div class="issue-group"><div class="issue-head"><h3>Fase 5 — Rodadas com o cliente</h3><span class="count">2 issues</span><button class="copy" data-group="5">Copiar fase</button></div><ul class="issue-list"><li><span class="num">18</span><span>Rodar uma rodada de feedback<i style="display:block;color:var(--ink-3);font-size:.83rem;font-style:normal;margin-top:2px">Gate: gates fixos verdes e todos os pedidos da lista endereçados ou explicitamente adiados.</i></span></li><li><span class="num">19</span><span>Congelar o que foi aprovado<i style="display:block;color:var(--ink-3);font-size:.83rem;font-style:normal;margin-top:2px">Gate: checkpoint atualizado na mesma data.</i></span></li></ul></div>
+<div class="issue-group"><div class="issue-head"><h3>Fase 6 — Publicação</h3><span class="count">2 issues</span><button class="copy" data-group="6">Copiar fase</button></div><ul class="issue-list"><li><span class="num">20</span><span>Resolver as pendências que dependem do cliente<i style="display:block;color:var(--ink-3);font-size:.83rem;font-style:normal;margin-top:2px">Gate: `verify` do alvo de catálogo verde, sem avisos de placeholder nem de árvore suja.</i></span></li><li><span class="num">21</span><span>Publicar a versão e registrar a origem<i style="display:block;color:var(--ink-3);font-size:.83rem;font-style:normal;margin-top:2px">Gate: build do catálogo aprovado na verificação de nomes e merge feito por quem administra o repositório de páginas.</i></span></li></ul></div>
+<script type="text/plain" id="md-0">## Fase 0 — Entrada
+### 1. Abrir a ficha do projeto
+Registrar o pedido antes de escrever qualquer linha, no formato padrão do catálogo.
+- [ ] `SOLICITACAO.md` criado a partir de `assets/ficha-template.md`, com link, quem pediu, data, para que serve (uma frase), público, status e responsável técnico
+- [ ] Seção "O que não é óbvio" preenchida: destino dos CTAs, `basePath` obrigatório, dependências externas, se é `noindex`
+- [ ] Seção "Histórico" aberta com a data de hoje
+- **Gate:** ficha revisada por quem pediu; "para que serve" cabe em uma frase (duas frases = dois projetos).
+
+### 2. Congelar a fonte canônica da copy
+A copy vira arquivo versionado no repositório de código, com nome estável, e passa a ser a única referência.
+- [ ] Arquivo em `copies/<nome>.md`, commitado sem edições de conteúdo
+- [ ] Defeitos do export anotados: hierarquia inconsistente, marcadores de dobra, tabelas de Docs, repetições literais de CTA
+- [ ] Contagem de dobras e de ocorrências do rótulo de CTA registrada
+- **Gate:** `<N>` dobras e a contagem de CTAs conferidas à mão contra o arquivo.
+
+### 3. Escrever o brief com a regra inviolável
+O documento que todo implementador lê antes de abrir arquivo, com a fronteira do que pode mudar.
+- [ ] Regra "a copy não muda uma vírgula" transcrita com a fonte deste projeto
+- [ ] Lista explícita do que pode mudar (hierarquia, agrupamento, quebras, ênfase) e do que não pode
+- [ ] Regra das mini-UIs abstratas e da marcação editorial permitida
+- [ ] Conteúdo ausente listado como slot técnico pendente, com responsável
+- **Gate:** brief lido e aceito por quem vai implementar.</script>
+<script type="text/plain" id="md-1">## Fase 1 — Planejamento
+### 4. Levantar a direção visual e os assets
+Sem inventário, metade das dobras descobre na implementação que falta imagem.
+- [ ] Deck, style guide e tipografia extraídos da fonte de design
+- [ ] Inventário de assets com nome de arquivo, descrição real do conteúdo e uso sugerido
+- [ ] Assets com nome enganoso e assets proibidos (recortes de sangria, imagens com texto de deck) marcados
+- **Gate:** todo asset citado no inventário existe no caminho indicado.
+
+### 5. Preencher a tabela de blocagem
+Traduzir as `<N>` dobras em linhas antes de escrever componente (`references/blocagem.md`, template em `assets/blocagem-template.md`).
+- [ ] Uma linha por dobra: função, conceito, componente, ato, blocagem, motion, assets
+- [ ] Conceito de cada dobra nomeável em uma frase de cena
+- [ ] Ritmo de superfícies lido de cima a baixo, sem três atos iguais em sequência
+- [ ] Dobras que levam CTA listadas, fechando com a contagem da copy
+- **Gate:** tabela revisada; nenhuma célula de blocagem genérica ("grid de cards").
+
+### 6. Definir o contrato executável de copy
+Uma âncora literal por dobra mais a contagem de CTAs (ver `references/copy-contrato.md`).
+- [ ] Um trecho contíguo e característico escolhido por dobra, mais o rodapé
+- [ ] Trechos escolhidos evitando palavras candidatas a ênfase por `<span>`
+- [ ] Contagem esperada do rótulo de CTA e do atributo de CTA definida
+- **Gate:** cada trecho localizado no arquivo de copy por busca literal.</script>
+<script type="text/plain" id="md-2">## Fase 2 — Fundações
+### 7. Criar a rota e o escopo da página
+Rota isolada, sem herdar cabeçalho, rodapé ou preloads do site.
+- [ ] `<rota>` criada com layout próprio e fontes locais
+- [ ] Página marcada `noindex` enquanto não for pública
+- [ ] Chrome do site ignorando `<rota>`; nenhum preload de outra página vazando
+- **Gate:** `npm run typecheck` e lint verdes; nenhum 404 no console da rota.
+
+### 8. Montar o arquivo de tokens escopado
+Cor, tipografia, raios, sombras e semântica num só lugar, consumidos por classe de escopo.
+- [ ] Tokens de marca, superfícies clara/escura/deep, tipografia e raios definidos
+- [ ] Semântica de acento definida (positivo, negativo) e limitada a uso raro
+- [ ] Nenhum hex cru de marca nos componentes; alpha sobre token escrito como rgba literal
+- **Gate:** busca por hex de marca fora do arquivo de tokens retorna vazio.
+
+### 9. Criar os primitivos e o hook de motion
+O vocabulário compartilhado que impede `<N>` dialetos diferentes de animação.
+- [ ] Primitivos de UI criados (botão, card, chip, seção, revelação)
+- [ ] Hook de motion com contexto, `matchMedia` e limpeza no unmount
+- [ ] Tudo visível e estático sob `prefers-reduced-motion`
+- **Gate:** typecheck verde e uma seção piloto usando só primitivos.
+
+### 10. Ligar o pipeline de build e o verificador
+O gate que reprova o artefato precisa existir antes da primeira dobra pronta.
+- [ ] Script de build do artefato estático com `basePath` por variável de ambiente
+- [ ] Verificador com contrato de copy, contagem de CTAs, assets obrigatórios, prefixo de `basePath`, vazamento de escopo e placeholders (base em `scripts/verify-copy-contract.mjs`)
+- [ ] Manifesto de deploy gerado com branch, SHA completo, `basePath` e data
+- [ ] Scripts npm de preview e de catálogo registrados
+- **Gate:** verificador roda e falha corretamente numa página ainda incompleta.
+
+### 11. Escrever os testes de contrato
+O que a revisão visual não pega (ver `references/revisao-e-gates.md`).
+- [ ] `h1` único com a headline exata; `<N>` seções com id por dobra
+- [ ] Contagem de CTAs, altura mínima de toque e posição dentro da viewport
+- [ ] Sem overflow horizontal em 320/375/414/768
+- [ ] Passada de `prefers-reduced-motion` exigindo opacidade cheia em seções, títulos e parágrafos
+- **Gate:** suíte verde contra o dev server.</script>
+<script type="text/plain" id="md-3">## Fase 3 — Implementação
+### 12. Implementar as dobras em lotes
+Uma tarefa por dobra, cada uma dona de um único arquivo, para evitar conflito.
+- [ ] Briefing autocontido por dobra: copy da dobra, linha da blocagem, tokens, referência de vocabulário, proibições
+- [ ] Um arquivo por dobra; sub-componentes criados dentro do próprio arquivo
+- [ ] Um commit por dobra
+- **Gate:** por dobra, `npx tsc --noEmit` e lint escopado verdes.
+
+### 13. Implementar o rodapé e os destinos dos CTAs
+O que fecha a página e o que ela faz quando alguém clica.
+- [ ] Rodapé com a linha legal literal da copy
+- [ ] Destino dos CTAs centralizado em configuração, com placeholder marcado se ainda indefinido
+- [ ] Links legais sem URL renderizados como texto, não como âncora morta
+- **Gate:** verificador acusa o placeholder como aviso no preview e como falha no catálogo.
+
+### 14. Fechar a primeira passada e tirar os prints
+Página inteira de pé, antes de qualquer refinamento.
+- [ ] Todas as `<N>` dobras renderizando na ordem da copy
+- [ ] Prints de todas as dobras em desktop e celular, com movimento reduzido, em pasta versionada
+- **Gate:** suíte de contrato + build + verificador verdes.</script>
+<script type="text/plain" id="md-4">## Fase 4 — Revisão
+### 15. Revisar por largura, com o olho
+Medição pega overflow; o resto só aparece no print (ver `references/revisao-e-gates.md`).
+- [ ] Prints por dobra em 1440/1366/1280/1024/768 e em 390/320 (`scripts/audit-viewports.mjs`)
+- [ ] Achados registrados com severidade e arquivo
+- [ ] Separado o que foi corrigido do que depende de decisão de design
+- **Gate:** overflow zero em todas as larguras e lista de achados fechada.
+
+### 16. Auditar acessibilidade e movimento reduzido
+O scrollytelling não pode esconder conteúdo de quem desliga animação.
+- [ ] Nenhum bloco de copy preso em opacidade zero após rolagem real
+- [ ] Alvos de toque com pelo menos 44 px e foco visível em interativos
+- [ ] Contraste conferido nos textos pequenos das mini-UIs
+- [ ] Imagens decorativas marcadas como tal
+- **Gate:** teste de movimento reduzido verde; auditoria de acessibilidade sem falha bloqueante.
+
+### 17. Medir performance no artefato de produção
+Medição em dev não vale; buildar em cópia para não derrubar a sessão de revisão.
+- [ ] Artefato servido localmente e medido em celular e desktop
+- [ ] Elemento de maior pintura identificado e nunca nascendo transparente
+- [ ] Imagens fora do topo em carregamento preguiçoso, com dimensões declaradas
+- [ ] Resultado e próximos passos registrados
+- **Gate:** deslocamento de layout zero e resultado registrado no checkpoint.</script>
+<script type="text/plain" id="md-5">## Fase 5 — Rodadas com o cliente
+### 18. Rodar uma rodada de feedback
+Repetir esta issue por sessão de feedback, numerando a rodada.
+- [ ] Pedidos da sessão listados como itens individuais antes de começar
+- [ ] Cada pedido virando um commit identificável
+- [ ] Prints da rodada em pasta própria
+- [ ] Contrato de copy atualizado no mesmo commit, se a copy mudou
+- **Gate:** gates fixos verdes e todos os pedidos da lista endereçados ou explicitamente adiados.
+
+### 19. Congelar o que foi aprovado
+Sem marcação de aprovação, a rodada seguinte atropela o que já estava bom.
+- [ ] Dobras aprovadas marcadas com a convenção combinada, com a citação do cliente
+- [ ] Pedidos abertos listados na mesma seção
+- [ ] Status datado ao fim da seção, dizendo o que virou backlog
+- **Gate:** checkpoint atualizado na mesma data.</script>
+<script type="text/plain" id="md-6">## Fase 6 — Publicação
+### 20. Resolver as pendências que dependem do cliente
+O que o verificador segura de propósito até alguém de fora decidir.
+- [ ] Destino real dos CTAs substituindo o placeholder
+- [ ] URLs legais recebidas e aplicadas
+- [ ] Branch de trabalho mesclada na principal, árvore limpa
+- **Gate:** `verify` do alvo de catálogo verde, sem avisos de placeholder nem de árvore suja.
+
+### 21. Publicar a versão e registrar a origem
+Só o merge publica; o registro é o que liga o HTML no ar ao commit que o gerou.
+- [ ] Artefato buildado com `basePath` igual ao caminho do catálogo (`/<projeto>/<versao>`)
+- [ ] `NOTAS.md` da versão com repositório, branch, SHA completo, rota, `basePath`, artefato, comandos de build e verificação, o que mudou e como foi validado
+- [ ] Ficha do projeto atualizada no histórico; link estável apontado para a versão certa
+- [ ] Pull request aberto, preview conferido nas larguras de celular e tablet, CTAs e formulários testados
+- **Gate:** build do catálogo aprovado na verificação de nomes e merge feito por quem administra o repositório de páginas.</script>
+  </section>
+
+  <section id="scripts">
+    <h2>Os dois scripts</h2>
+    <p class="sub">A qualidade não pode depender de alguém lembrar da regra. Ambos foram validados contra a própria página que os originou.</p>
+    <div class="code">
+      <div class="code-row"><span class="what">Contrato de copy executável</span><button class="copy" data-src="c1">Copiar</button></div>
+      <pre id="c1">node scripts/verify-copy-contract.mjs out/index.html contratos.json</pre>
+    </div>
+    <div class="code">
+      <div class="code-row"><span class="what">Auditoria por viewport — overflow, texto preso, um print por seção</span><button class="copy" data-src="c2">Copiar</button></div>
+      <pre id="c2">node scripts/audit-viewports.mjs http://localhost:3000/sua-rota .audit 320,375,768,1280</pre>
+    </div>
+    <ul class="plain" style="margin-top:18px">
+      <li>O verificador falha o build se uma frase da copy sumir, se a contagem de CTAs mudar ou se sobrar placeholder — e distingue "a frase sumiu" de "a frase existe com aspas tipográficas diferentes", que é o erro mais comum de quem escreve o contrato à mão.</li>
+      <li>O auditor não acusa o que está invisível de propósito: estado de ciclo empilhado não é texto perdido. Essa distinção foi calibrada rodando contra a página real.</li>
+    </ul>
+  </section>
+
+  <section id="instalar">
+    <h2>Instalar</h2>
+    <p class="sub">Sem instalador: a skill é uma pasta. O Claude Code varre <code style="font-family:var(--mono);font-size:.85em">skills/</code>, encontra o <code style="font-family:var(--mono);font-size:.85em">SKILL.md</code> e carrega sozinho quando a conversa pede.</p>
+    <div class="code">
+      <div class="code-row"><span class="what">Global, todos os projetos</span><button class="copy" data-src="i1">Copiar</button></div>
+      <pre id="i1">git clone https://github.com/merencianno/scrollytelling-method.git
+cp -R scrollytelling-method ~/.claude/skills/</pre>
+    </div>
+    <div class="code">
+      <div class="code-row"><span class="what">Acompanhando o repositório</span><button class="copy" data-src="i2">Copiar</button></div>
+      <pre id="i2">git clone https://github.com/merencianno/scrollytelling-method.git ~/src/scrollytelling-method
+ln -s ~/src/scrollytelling-method ~/.claude/skills/scrollytelling-method</pre>
+    </div>
+    <ul class="plain" style="margin-top:18px">
+      <li>Depois de copiar, reiniciar a sessão. A skill dispara sozinha em pedidos como "transforma essa copy em página" ou "reimagina essa landing".</li>
+      <li>O método é agnóstico de framework. Só <code style="font-family:var(--mono);font-size:.85em">stacks/next-tailwind-gsap.md</code> assume uma stack — quem usa Astro, Vue ou HTML puro aproveita todo o resto.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <a href="https://github.com/merencianno/scrollytelling-method">github.com/merencianno/scrollytelling-method</a> · repositório privado · MIT<br>
+    Destilado de /vsl-pmv-bio e /ref · setembro de 2026
+  </footer>
+
+</div>
+
+<script>
+  const FALLBACK = "Não foi possível copiar — selecione o texto manualmente.";
+
+  async function copyText(text, btn) {
+    try {
+      await navigator.clipboard.writeText(text);
+      const original = btn.textContent;
+      btn.textContent = "Copiado";
+      btn.dataset.done = "1";
+      setTimeout(() => { btn.textContent = original; delete btn.dataset.done; }, 1600);
+    } catch {
+      btn.textContent = FALLBACK;
+      setTimeout(() => { btn.textContent = "Copiar"; }, 2600);
+    }
+  }
+
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest("button.copy");
+    if (!btn) return;
+
+    if (btn.dataset.src) {
+      const el = document.getElementById(btn.dataset.src);
+      if (el) copyText(el.textContent.trim(), btn);
+      return;
+    }
+    if (btn.dataset.group) {
+      const src = document.getElementById("md-" + btn.dataset.group);
+      if (src) copyText(src.textContent.trim(), btn);
+      return;
+    }
+    if (btn.dataset.copy === "all") {
+      const all = [...document.querySelectorAll('script[type="text/plain"][id^="md-"]')]
+        .map((s) => s.textContent.trim())
+        .join("\n\n");
+      copyText(all, btn);
+    }
+  });
+</script>

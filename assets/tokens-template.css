@@ -1,0 +1,206 @@
+/*
+ * Template de tokens — sistema visual de uma landing com scrollytelling.
+ *
+ * Copiar, trocar `brand` pelo prefixo do projeto (`one` na /ref) e substituir
+ * cada <PLACEHOLDER> pelo valor da marca. O que já vem resolvido é do *sistema*:
+ * hierarquia de raios, curvas, opacidades de vidro e estrutura das sombras são
+ * o que faz páginas diferentes parecerem do mesmo estúdio — mexer nesses
+ * números descaracteriza mais o resultado do que trocar a cor.
+ *
+ * Tudo dentro da classe de escopo, nada em `:root`: outras rotas do mesmo
+ * projeto têm outra identidade, e token global vaza para todas elas.
+ */
+
+.brand-scope {
+  /* Canvas e superfícies: pares escuro/claro, porque as dobras alternam de tom.
+     `-deep` é o fundo mais fechado, reservado ao fecho da página. */
+  --brand-canvas: <CANVAS-ESCURO>;               /* /ref: #000000 */
+  --brand-canvas-deep: <CANVAS-PROFUNDO>;        /* azul-noite do fecho · /ref: #04060c */
+  --brand-light-canvas: <CANVAS-CLARO>;          /* dobras claras · /ref: #f5f5f7 */
+  --brand-surface-dark: <SUPERFICIE-ESCURA>;     /* cartão sólido no escuro · /ref: #1b1b1b */
+  --brand-surface-light: #ffffff;
+  --brand-surface-light-2: <SUPERFICIE-CLARA-2>; /* cartão sobre o claro · /ref: #f0f0f0 */
+
+  /* Cor de marca: uma só, com derivados nomeados pelo papel. Escala 100–900 não
+     serve — é o nome que impede escolher o tom por hábito. */
+  --brand-deep: <MARCA-PROFUNDA>;    /* base do gradiente e do glow · /ref: <MARCA-PROFUNDA> */
+  --brand-core: <MARCA-NUCLEO>;      /* glow volumétrico · /ref: <MARCA-NUCLEO> */
+  --brand-bright: <MARCA-BRILHANTE>; /* CTA e traço aceso · /ref: <MARCA-BRILHANTE> */
+  --brand-mid: <MARCA-MEDIA>;        /* meio do gradiente, fio separador · /ref: <MARCA-MEDIA> */
+  --brand-ice: <MARCA-CLARA>;        /* texto em gradiente, borda de vidro · /ref: <MARCA-CLARA> */
+
+  /* Texto por alfa, não por cinza fixo: o mesmo token serve sobre canvas e cartão. */
+  --brand-text: #ffffff;
+  --brand-text-2: rgba(255, 255, 255, 0.82);
+  --brand-text-3: rgba(255, 255, 255, 0.6);
+  --brand-ink: <TINTA>;      /* texto sobre fundo claro · /ref: #1b1b1b */
+  --brand-ink-2: <TINTA-2>;  /* rótulos e legendas · /ref: #677489 */
+
+  /* Semânticos escassos: positivo (preço, economia, checks) e negativo (custo,
+     perda), em menos de 10% da tela. A marca continua sendo a cor principal.
+     Derivados saem da base por color-mix, para o hex aparecer uma vez só. */
+  --brand-success: <POSITIVO>;              /* verde-água · /ref: <POSITIVO> */
+  --brand-success-strong: <POSITIVO-FORTE>; /* /ref: <POSITIVO-FORTE> */
+  --brand-success-soft: color-mix(in srgb, var(--brand-success) 16%, transparent);
+  --brand-success-glow: color-mix(in srgb, var(--brand-success) 35%, transparent);
+  --brand-danger: <NEGATIVO>;               /* vermelho contido · /ref: <NEGATIVO> */
+  --brand-danger-strong: <NEGATIVO-FORTE>;  /* /ref: <NEGATIVO-FORTE> */
+  --brand-danger-soft: color-mix(in srgb, var(--brand-danger) 14%, transparent);
+  --brand-danger-glow: color-mix(in srgb, var(--brand-danger) 30%, transparent);
+
+  /* Vidro: translúcido o bastante para o glow atravessar, opaco o bastante para
+     o texto ficar legível. As opacidades são do sistema. */
+  --brand-glass-fill: rgba(255, 255, 255, 0.1);
+  --brand-glass-fill-strong: rgba(255, 255, 255, 0.16);
+  --brand-glass-border: rgba(255, 255, 255, 0.18);
+  --brand-glass-blur: 16px;
+  --brand-glass-light-fill: rgba(255, 255, 255, 0.72);
+  --brand-glass-light-border: rgba(115, 129, 171, 0.2);
+
+  /* Bordas: alfa baixíssimo no escuro (separa, não desenha) + realce do ativo. */
+  --brand-border-dark: rgba(255, 255, 255, 0.09);
+  --brand-border-dark-highlight: color-mix(in srgb, var(--brand-mid) 35%, transparent);
+  --brand-border-light: rgba(27, 27, 27, 0.08);
+
+  /* Gradientes. A posição do stop do meio (47%) é tão característica quanto os
+     hexadecimais. Os radiais são ambiente: luz que entra pela borda e morre
+     antes do centro oposto. */
+  --brand-gradient: linear-gradient(180deg, var(--brand-deep) 0%, var(--brand-mid) 47%, #ffffff 100%);
+  --brand-gradient-number: linear-gradient(180deg, #ffffff 0%, #ffffff 45%, color-mix(in srgb, var(--brand-ice) 75%, transparent) 100%);
+  --brand-radial-top: radial-gradient(70% 60% at 50% 0%, color-mix(in srgb, var(--brand-deep) 38%, transparent) 0%, transparent 100%);
+  --brand-radial-deep: radial-gradient(60% 55% at 50% 100%, color-mix(in srgb, var(--brand-deep) 42%, transparent) 0%, transparent 100%);
+
+  /* Raios: quatro degraus com papel fixo. A hierarquia é a assinatura, não o
+     valor absoluto — manter os degraus mesmo trocando de marca. */
+  --brand-radius-card-lg: 32px;
+  --brand-radius-card: 28px;
+  --brand-radius-tile: 18px;
+  --brand-radius-control: 12px;
+  --brand-radius-pill: 999px;
+
+  /* Profundidade vem de camadas com raios diferentes, não de uma sombra grande.
+     No escuro, uma camada longa com offset negativo. */
+  --brand-shadow-card: 0 10px 30px -4px rgba(0, 0, 0, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.04);
+  --brand-shadow-card-dark: 0 24px 60px -20px rgba(0, 0, 0, 0.7);
+  --brand-shadow-ambient: 0 0 30px color-mix(in srgb, var(--brand-mid) 56%, transparent);
+  --brand-shadow-icon-glow: 0 4px 72px 32px color-mix(in srgb, var(--brand-core) 42%, transparent);
+  --brand-shadow-cta: 0 12px 36px -8px color-mix(in srgb, var(--brand-bright) 55%, transparent);
+
+  /* Display para títulos e rótulos, corpo para texto e números. As variáveis de
+     arquivo vêm do carregador de fontes da rota, não daqui. */
+  --brand-font-display: var(--font-display-file), <FAMILIA-DISPLAY>, sans-serif; /* /ref: "<FONTE-DISPLAY>" */
+  --brand-font-body: var(--font-body-file), <FAMILIA-CORPO>, sans-serif;         /* /ref: "<FONTE-CORPO>" */
+
+  /* Três curvas, todas de saída: entrada rápida e chegada lenta é o que faz o
+     movimento parecer caro. Sem overshoot forte. */
+  --brand-ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+  --brand-ease-soft: cubic-bezier(0.33, 1, 0.68, 1);
+  --brand-ease-settle: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Sem tokens de espaçamento: ritmo é layout, e layout se resolve nos
+     utilitários do framework, que já respondem a breakpoint. */
+
+  background-color: var(--brand-canvas);
+  color: var(--brand-text);
+  font-family: var(--brand-font-body);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+.brand-scope h1, .brand-scope h2, .brand-scope h3 {
+  font-family: var(--brand-font-display);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+/* `pretty` aqui tem especificidade 0,1,1 e vence a utilitária de framework
+   (0,1,0): forçar `balance` num parágrafo exige seletor com id da seção. */
+.brand-scope p, .brand-scope li { text-wrap: pretty; }
+
+/* Números grandes animam; sem tabular eles tremem ao contar. */
+.brand-scope .brand-number { font-variant-numeric: tabular-nums; letter-spacing: -0.03em; }
+.brand-scope .brand-number-gradient {
+  background: var(--brand-gradient-number);
+  background-clip: text; -webkit-background-clip: text; color: transparent;
+}
+
+/* Ambiente da dobra escura: grade pontilhada mascarada no centro, textura sem
+   virar papel quadriculado. Camada absoluta, sem eventos de ponteiro. */
+.brand-scope .brand-ambient {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: radial-gradient(80% 80% at 50% 40%, #000 30%, transparent 100%);
+  -webkit-mask-image: radial-gradient(80% 80% at 50% 40%, #000 30%, transparent 100%);
+}
+
+/* Fio superior: separa dois blocos escuros sem desenhar uma linha dura. */
+.brand-scope .brand-thread {
+  height: 2px; opacity: 0.6;
+  background: linear-gradient(90deg, transparent, var(--brand-mid), transparent);
+}
+
+.brand-scope .brand-glass {
+  background: var(--brand-glass-fill);
+  border: 1px solid var(--brand-glass-border);
+  backdrop-filter: blur(var(--brand-glass-blur));
+  -webkit-backdrop-filter: blur(var(--brand-glass-blur));
+}
+
+.brand-scope .brand-glass-light {
+  background: var(--brand-glass-light-fill);
+  border: 1px solid var(--brand-glass-light-border);
+  backdrop-filter: blur(var(--brand-glass-blur));
+  -webkit-backdrop-filter: blur(var(--brand-glass-blur));
+}
+
+/* Vidro líquido: material neutro, sem cor própria — quem dá o tom é o que está
+   atrás. Blur com saturação, fio especular na borda de cima, luz vinda do fundo. */
+.brand-scope .brand-liquid {
+  position: relative; isolation: isolate;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.13) 0%, rgba(255, 255, 255, 0.05) 100%);
+  backdrop-filter: blur(28px) saturate(170%);
+  -webkit-backdrop-filter: blur(28px) saturate(170%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.42), inset 0 -1px 0 rgba(255, 255, 255, 0.05), 0 30px 80px -30px rgba(0, 0, 0, 0.85);
+}
+
+/* Loops de ambiente: aplicar a classe só quando o bloco entra na viewport
+   (toggleClass do ScrollTrigger). Fora da tela, nada anima. */
+@keyframes brand-breathe { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-10px) scale(1.015); } }
+@keyframes brand-halo    { 0%, 100% { opacity: 0.55; transform: scale(0.96); } 50% { opacity: 0.9; transform: scale(1.06); } }
+@keyframes brand-float   { 0%, 100% { transform: translate3d(0, 0, 0); } 50% { transform: translate3d(0, -8px, 0); } }
+@keyframes brand-rise-in { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+/* Pausa longa e varredura rápida: o brilho passa, não pisca. */
+@keyframes brand-shimmer { 0%, 70% { background-position: 200% 0, 0 0; } 100% { background-position: -200% 0, 0 0; } }
+/* A faixa é duplicada no HTML; -50% fecha o loop sem salto. */
+@keyframes brand-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+.brand-scope .brand-breathe { animation: brand-breathe 6s var(--brand-ease-soft) infinite; }
+.brand-scope .brand-halo    { animation: brand-halo 6s var(--brand-ease-soft) infinite; }
+.brand-scope .brand-float   { animation: brand-float 7s var(--brand-ease-soft) infinite; }
+.brand-scope .brand-marquee-track { animation: brand-marquee 48s linear infinite; }
+
+.brand-scope .brand-btn-primary {
+  background-image: linear-gradient(100deg, var(--brand-deep) 0%, var(--brand-bright) 55%, var(--brand-mid) 100%);
+  box-shadow: var(--brand-shadow-cta);
+}
+
+/* O shimmer é uma camada por cima do gradiente, não um gradiente novo. */
+.brand-scope .brand-btn-primary.brand-cta-shimmer {
+  background-image:
+    linear-gradient(105deg, transparent 42%, rgba(255, 255, 255, 0.28) 50%, transparent 58%),
+    linear-gradient(100deg, var(--brand-deep) 0%, var(--brand-bright) 55%, var(--brand-mid) 100%);
+  background-size: 200% 100%, 100% 100%;
+  background-position: 200% 0, 0 0;
+  animation: brand-shimmer 7s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-scope .brand-breathe,
+  .brand-scope .brand-halo,
+  .brand-scope .brand-float,
+  .brand-scope .brand-marquee-track,
+  .brand-scope .brand-cta-shimmer { animation: none; }
+}
