@@ -2,12 +2,48 @@
 
 A direção visual é **obrigatória e escrita**, exista Figma ou não. Ela vem
 antes de qualquer prompt de imagem-conceito e de qualquer `.tsx` — é a Fase
-0.5 do método, e foi o buraco número um da skill até 2026-09-21 (a Fase 2
-antiga era condicional e retroativa: "se houver Figma"). Dois ramos:
+0.5 do método, e foi o buraco número um da skill (a fase antiga era
+condicional e retroativa: "se houver Figma").
 
-- **já existe direção** (Figma, style guide, páginas no ar) → **extrair**
-  (§1–§4 abaixo);
-- **não existe** → **escrever** (§0), com referências reais.
+O projeto chega como **copy + direção visual livre**. "Livre" é literal: pode
+ser texto, imagens, pesquisa, um Figma, ou nada além da copy. A pergunta não é
+"existe direção?", é **"com que fidelidade ela chegou?"**
+
+| o que chega junto da copy | o que fazer com isso | onde |
+|---|---|---|
+| nada | escrever do zero, a partir da leitura da copy e de referência real | §0 |
+| texto solto, briefing falado | ler **intenção**, não instrução; o que for medida, perguntar | §0 |
+| imagens, moodboard | extrair paleta e vocabulário — **nunca layout** | §0 + §2 |
+| pesquisa + imagens + texto | material rico e ainda sem medida: vira direção escrita | §0 |
+| Figma de direção (paleta, marca, ícones) | extrair três coisas: paleta exata, assets exportáveis, frames como moodboard | §1–§4 |
+| Figma de página, golden master com medida | **modo executor**: medir e copiar, sem cromo a mais | §1–§4 + `medicao.md` |
+
+Tratar os dois últimos como o mesmo caso é o erro caro: extrair a árvore de
+nós de um arquivo de direção é trabalho jogado fora, e ler um moodboard como
+layout produz seção que não sustenta a copy.
+
+**Seja qual for a entrada, a saída é a mesma**: um documento escrito, com nome
+e prefixo de prompt colável.
+
+## A direção é entregável
+
+Ela é a primeira coisa que quem aprova vê, e é o que compra alinhamento antes
+de qualquer unidade ser desenhada. Duas densidades, conforme o prazo:
+
+- **Enxuta** — nome em uma frase, paleta com hex, tipografia, 3–5 referências,
+  o que não entra e por quê, o prefixo de prompt.
+- **Elaborada** — tudo isso, mais a leitura da copy, a tabela elemento → copy →
+  seções, a anatomia do objeto, duas linhas alternativas para escolher, e
+  **uma ou duas imagens-conceito de amostra** de uma unidade-chave.
+
+A amostra é o item de maior retorno da fase: direção lida como texto é
+aprovada por educação; direção com uma unidade já desenhada é aprovada ou
+vetada de verdade.
+
+**A direção carrega assets** — marcas exportadas, ícones, fotos, texturas
+viajam com ela. É o que faz peças irmãs do mesmo conjunto parecerem da mesma
+família sem serem iguais: a casa dá paleta e tipografia (`[casa]`), a direção
+dá o vocabulário do objeto (`[projeto]`).
 
 ## 0. Escrever a direção quando ela não existe
 

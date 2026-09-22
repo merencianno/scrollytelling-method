@@ -38,7 +38,14 @@ demais formatos seguem o mesmo mapeamento.
 | **1.5b · Camadas** | ficha de 7 camadas por unidade aprovada: fundo → seção → textos → estilo → cores → mockups → animações |
 | **3 · Implementação** | uma unidade por vez, em subagente de contexto limpo, um commit cada |
 | **4 · Verificação** | typecheck, contratos, print por unidade, auditoria de larguras, prova de carga fria |
-| **5 · Publicação** | artefato rastreável, gate herdado, comparação com o que já está no ar |
+| **5 · Registro e publicação** | artefato rastreável, gate herdado, comparação com o que já está no ar |
+| **6 · Fechamento** | exportação no formato do entregável: artefato web, `.pptx`/PDF, sequência de PNG, arquivo de imagem ou handoff |
+
+O projeto entra na Fase 0.5 como **copy + direção visual livre** — texto,
+imagens, pesquisa, um Figma ou nada. A fase converte qualquer uma dessas
+entradas no mesmo documento escrito, e o devolve como apresentação: enxuta ou
+elaborada, conforme o prazo. Sob prazo curto cortam-se **versões, nunca
+fases**.
 
 Entre 1.5a e 1.5b está o corte que faz o método funcionar: **a imagem decide
 composição e dispositivo; o código decide texto, token, semântica e

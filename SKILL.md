@@ -149,13 +149,68 @@ imagem-conceito, camadas, tangibilização.
 5. **Ritmo de superfícies**, quando o formato tem sequência longa. Escuro nos
    picos, claro nos respiros, escrito como string versionada (`1B 2C 3B 4E …`).
 
+### Quais condicionais valem para este formato
+
+Decidir agora, por escrito, e não descobrir na terceira unidade. O invariante
+nunca é condicional: formato e unidade, contrato de copy, tokens, direção
+visual escrita, blocagem, imagem-conceito, camadas, uma unidade por vez,
+gates, revisão e fechamento acontecem **sempre**.
+
+| condicional | entra quando | não entra em |
+|---|---|---|
+| ritmo de superfícies | a sequência é longa | criativo isolado, peça única |
+| motion | o formato tem eixo de tempo | criativo estático |
+| responsividade | o viewport varia | carrossel e criativo (dimensão fixa) |
+| performance | a peça carrega | o que é exportado como arquivo |
+| formato de exportação | **sempre** — muda o quê, nunca se pula | — |
+
 ## Fase 0.5 — Direção visual (obrigatória, escrita)
 
-Existe direção (Figma, style guide, páginas no ar)? **Extrair.** Não existe?
-**Escrever** — com nome, a leitura da copy que a sustenta, a tabela elemento →
-o que diz na copy → onde entra, paleta com hex, o que não entra e o **prefixo
-comum dos prompts**, colável. Template em `assets/direcao-visual-template.md`;
-regras em `references/direcao-visual.md` §0.
+O projeto chega como **copy + direção visual livre**: pode ser texto, imagens,
+pesquisa, um Figma, ou nada além da copy. A primeira pergunta não é "existe
+direção?", é **"com que fidelidade ela chegou?"** — é a mesma pergunta dos
+quatro modos, um andar acima.
+
+| o que chega junto da copy | o que fazer com isso |
+|---|---|
+| nada | escrever do zero, a partir da leitura da copy e de referência real do cliente |
+| texto solto, briefing falado | ler **intenção**, não instrução; o que for medida, perguntar |
+| imagens, moodboard | extrair paleta e vocabulário — **nunca layout** |
+| pesquisa + imagens + texto | material rico e ainda sem medida: vira direção escrita, não cópia |
+| Figma de direção (paleta, marca, ícones) | extrair só três coisas: paleta exata, assets exportáveis, frames como moodboard |
+| Figma de página, golden master com medida | **modo executor**: medir e copiar, sem cromo a mais |
+
+O erro caro é tratar os dois últimos como o mesmo caso. Extrair a árvore de
+nós de um arquivo de direção é trabalho jogado fora; ler um moodboard como
+layout produz seção que não faz sentido nenhum.
+
+Seja qual for a entrada, a saída é a mesma: um documento **escrito**, com
+nome, a leitura da copy que o sustenta, a tabela elemento → o que diz na copy
+→ onde entra, paleta com hex, o que não entra e o **prefixo comum dos
+prompts**, colável. Template em `assets/direcao-visual-template.md`; regras em
+`references/direcao-visual.md`.
+
+### A direção é entregável, não documento interno
+
+É a primeira coisa que quem aprova vê, e é o que compra alinhamento antes de
+qualquer unidade ser desenhada. Duas densidades, conforme o prazo:
+
+- **Enxuta** — nome da direção em uma frase, paleta com hex, tipografia, 3–5
+  referências, o que não entra e por quê, o prefixo de prompt.
+- **Elaborada** — tudo isso, mais a leitura da copy, a tabela elemento → copy
+  → seções, a anatomia do objeto, duas linhas alternativas (V1/V2) para
+  escolher, e **uma ou duas imagens-conceito de amostra** de uma unidade-chave.
+
+A amostra é o item de maior retorno: direção lida como texto o cliente aprova
+por educação; direção com uma unidade já desenhada ele aprova ou veta de
+verdade. É antecipar a Fase 1.5a numa unidade só para destravar o resto.
+
+### A direção carrega assets
+
+Marcas exportadas, ícones, fotos, texturas viajam junto dela. É o que faz
+peças irmãs de um mesmo conjunto parecerem da mesma família sem serem iguais,
+e encaixa nos prefixos de escopo do `taste.md`: **a casa dá paleta e
+tipografia (`[casa]`); a direção dá o vocabulário do objeto (`[projeto]`).**
 
 A direção nasce de referência real (a página do cliente, o app que o público
 usa), **nunca por inércia do projeto anterior** — foi assim que um funil
@@ -257,9 +312,51 @@ SHA, comando); gate copiado do alvo anterior, nunca afrouxado; **localhost
 mente** sobre `basePath`; a fonte de verdade de uma página publicada é o
 artefato no ar, e antes de regerar compara-se com ele.
 
+## Fase 6 — Fechamento e exportação
+
+Toda peça termina num arquivo, e o arquivo tem formato. Esta fase nunca se
+pula: o que muda é o entregável.
+
+| formato | o entregável | o que verificar antes de entregar |
+|---|---|---|
+| página, landing | artefato estático publicado | contrato de copy contra o HTML servido, auditoria de larguras, `basePath` |
+| deck | `.pptx` ou PDF | a copy de cada slide, fontes embutidas, o deck aberto na ferramenta de destino |
+| carrossel | sequência de PNG na dimensão da plataforma | ordem dos arquivos, dimensão exata, texto dentro da área segura |
+| criativo estático | PNG/JPG com orçamento de peso | dimensão, peso, a copy literal na peça |
+| UI de produto | código ou handoff | estados cobertos, tokens no lugar de valor cru, o que ficou como slot |
+
+Três regras que valem em qualquer um deles:
+
+- **A regra da copy continua; o verificador muda.** `verify-copy-contract.mjs`
+  lê HTML. Para peça exportada, a conferência é contra o texto da peça — e
+  precisa existir, mesmo que como checklist.
+- **O que sai é rastreável**: de que commit nasceu, com que comando, em que
+  versão da direção. Arquivo entregue sem origem volta como pergunta daqui a
+  três meses.
+- **Nunca editar o artefato exportado à mão** sem registrar. A próxima geração
+  apaga a edição em silêncio.
+
+Para publicação web, os detalhes estão em `references/publicacao.md`.
+
+## O dial de tempo
+
+O método não tem versão curta: tem versão com menos versões. Sob prazo, corta-se
+**quantidade, nunca fase**.
+
+| escala com o tempo disponível | não comprime, porque custa quase nada |
+|---|---|
+| imagens-conceito por unidade | o contrato de copy (é script) |
+| elaboração da apresentação de direção | a direção **com nome** |
+| linhas de direção oferecidas (V1, V2…) | o conceito nomeável por unidade |
+| rodadas de revisão | a ficha de camadas |
+
+Cortar a Fase 0.5 para ganhar tempo é economia negativa: foi assim que uma V1
+nasceu por inércia, saiu "com cara de IA" e custou exatamente a rodada que
+tentava poupar.
+
 ## Checklist de execução
 
-1. **Formato e unidade decididos**, com o eixo do tempo nomeado
+1. **Formato e unidade decididos**, com o eixo do tempo e os condicionais nomeados
 2. Ficha preenchida, uma frase de propósito (e o objeto da peça, num conjunto)
 3. **Modo identificado** — existe referência? tem número? é imagem-conceito? (refazer a cada entrega)
 4. Copy congelada, `contratos.json` escrito, buracos encaminhados
@@ -274,6 +371,7 @@ artefato no ar, e antes de regerar compara-se com ele.
 13. Gates verdes, prints por dobra em 1440/390 (e 320/375/768 na auditoria), prova de rolagem em carga fria
 14. Rodada registrada: checkpoint, sessão, "para o cliente ver ao vivo", ideias anotadas
 15. Publicação rastreável, comparada com o artefato no ar
+16. **Fechamento no formato de arquivo do entregável**, com a copy conferida nele
 
 ## O que esta skill não faz
 
