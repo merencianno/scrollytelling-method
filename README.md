@@ -1,178 +1,114 @@
 # scrollytelling-method
 
-Uma skill do [Claude Code](https://claude.com/claude-code) que transforma copy de
-página de vendas em landing com scrollytelling — o método, o gosto e as
-armadilhas, destilados de quatro páginas que existem em produção.
+Skill do [Claude Code](https://claude.com/claude-code) que transforma uma copy
+aprovada em interface que se conta sozinha.
 
-Não é um tema visual nem um pacote de componentes. É um processo com contratos
-verificáveis: a copy vira contrato executável, cada seção ganha um conceito
-nomeável que é **aprovado como imagem antes de virar código**, a animação segue
-cinco padrões conhecidos, e três scripts recusam o build quando uma frase da
-copy desaparece, quando a geometria foge do combinado ou quando uma dobra
-estoura a largura.
+**A tese.** Toda narrativa comercial é uma sequência de unidades. Cada unidade
+carrega **um conceito nomeável em uma frase**. O conceito é aprovado **como
+imagem antes de virar execução**. A copy é contrato congelado, verificado por
+script. Quem segue essa ordem entrega narrativa; quem pula entrega repaginação
+com cor nova.
 
-A landing é o caso provado, não o limite: o método organiza **qualquer
-narrativa quebrada em unidades** — deck, carrossel, criativo, tela de produto.
-Ver [Serve para qualquer coisa com narrativa](#serve-para-qualquer-coisa-com-narrativa).
+Não é tema visual nem biblioteca de componentes. É o processo, com contratos
+que o build reprova.
 
-## Instalação
+## O que dá para construir
 
-```bash
-git clone https://github.com/merencianno/scrollytelling-method.git
-cp -R scrollytelling-method ~/.claude/skills/
-```
+O eixo do tempo muda; o método não.
 
-Ou, para acompanhar as atualizações do repositório:
+| o que | a unidade | o eixo do tempo |
+|---|---|---|
+| página de vendas, landing | a dobra | o scroll |
+| apresentação, deck | o slide | o avanço |
+| carrossel de social | o card | o swipe |
+| criativo estático | a peça | não existe: resolve-se em composição |
+| UI de produto | a tela ou o estado | a interação de quem usa |
+
+Páginas de venda são o caso de origem e o que está executado em produção; os
+demais formatos seguem o mesmo mapeamento.
+
+## O método
+
+| fase | o que produz |
+|---|---|
+| **0 · Fundações** | ficha do projeto; copy congelada em `contratos.json`; tokens escopados; ritmo de superfícies como string |
+| **0.5 · Direção visual** | direção **escrita**, com nome, paleta em hex, o que não entra e o prefixo de prompt colável |
+| **1 · Blocagem** | uma linha por unidade: função narrativa → conceito → componente → ato → layout → motion → assets |
+| **1.5a · Imagem-conceito** | uma imagem 16:9 por unidade, gerada por prompt, com veredito do cliente antes de qualquer código |
+| **1.5b · Camadas** | ficha de 7 camadas por unidade aprovada: fundo → seção → textos → estilo → cores → mockups → animações |
+| **3 · Implementação** | uma unidade por vez, em subagente de contexto limpo, um commit cada |
+| **4 · Verificação** | typecheck, contratos, print por unidade, auditoria de larguras, prova de carga fria |
+| **5 · Publicação** | artefato rastreável, gate herdado, comparação com o que já está no ar |
+
+Entre 1.5a e 1.5b está o corte que faz o método funcionar: **a imagem decide
+composição e dispositivo; o código decide texto, token, semântica e
+movimento.** Pensar os dois juntos produz wireframe com cor.
+
+## As regras que definem o estilo
+
+- **Conceito nomeável por unidade.** Se não dá para nomear a cena, ela não foi
+  pensada. Se não dá para desenhar, não dá para implementar.
+- **Interface quando a copy tem objeto reconhecível.** A pergunta não é "o
+  produto tem software?", é "a copy tem um lugar onde a promessa acontece?".
+  Se tem, esse objeto vira mockup com anatomia real e **mock data plausível**.
+  Se não tem, diagrama conceitual.
+- **O limite do mockup é a afirmação, não o número.** Nada que se leia como
+  prova de resultado; nenhum número sai da tela para o texto.
+- **A biblioteca de animação faz entrada e scrub; o CSS faz todos os loops** —
+  pausados até a unidade entrar em cena. Fora da viewport, custo zero.
+- **Cada unidade entrega um mecanismo vivo** ligado ao que a copy diz, com
+  estado final definido antes de animar.
+- **A copy não muda uma palavra.** Mudam hierarquia, agrupamento e ênfase.
+- **Token-first.** Cor, tipo, raio, easing e duração saem de tokens escopados.
+
+## Os contratos executáveis
+
+| comando | reprova quando |
+|---|---|
+| `verify-copy-contract.mjs <artefato> <contratos.json>` | uma frase da copy sumiu, ou a contagem de CTAs mudou |
+| `verify-fidelidade.mjs <url> <contrato.json>` | a geometria divergiu do combinado (largura, altura, escala tipográfica, folga) |
+| `audit-viewports.mjs <url>` | há overflow horizontal em 320 / 375 / 768 / 1280 |
+| `shoot-dobra.mjs <url> <seletor> [largura]` | print da unidade sem reiniciar a animação, com `pageerror` junto |
+
+## Como usar
 
 ```bash
 git clone https://github.com/merencianno/scrollytelling-method.git ~/src/scrollytelling-method
 ln -s ~/src/scrollytelling-method ~/.claude/skills/scrollytelling-method
 ```
 
-Para instalar só num projeto, troque `~/.claude/skills/` por
-`<projeto>/.claude/skills/`. Reinicie a sessão do Claude Code depois de copiar.
+Para um projeto só, troque `~/.claude/skills/` por `<projeto>/.claude/skills/`.
+Reinicie a sessão depois de instalar. Funciona em qualquer ferramenta que leia
+o formato: é markdown, e `SKILL.md` é o ponto de entrada.
 
-Funciona também em qualquer ferramenta que leia o formato: o conteúdo é markdown,
-e `SKILL.md` é o ponto de entrada.
+A skill dispara sozinha em pedidos como *"transforma essa copy em página"*,
+*"reimagina essa landing"*, *"tangibiliza essa copy"*.
 
-## Como usar
-
-**Se você não programa e quer só aprovar as ideias das seções**, leia
-[`GUIA-IMAGENS.md`](GUIA-IMAGENS.md): é o passo a passo de gerar as imagens
-(à mão no navegador ou com o gerador que você tiver ligado ao Claude), salvar
-na pasta certa, dar o veredito e pedir versões até ficar satisfeito.
-
-Para o resto, basta pedir. A skill dispara sozinha em conversas como
-*"transforma essa copy em página"*, *"reimagina essa landing"*, *"página de
-vendas com scrollytelling"*.
-
-Para conduzir manualmente, o caminho é o do `SKILL.md`: ficha → contrato de copy
-→ tokens → direção visual escrita → blocagem → imagem-conceito por seção →
-camadas → uma seção por vez → gates → publicação.
-
-## Serve para qualquer coisa com narrativa
-
-O método foi destilado de páginas de venda e é nelas que está provado. Mas o
-que ele organiza não é scroll — é **uma narrativa quebrada em unidades, cada
-unidade com um conceito nomeável, aprovada como imagem antes de virar
-execução**. A página é um caso; o eixo do tempo é que muda.
-
-> **Honestidade sobre o que está testado:** as quatro páginas da linhagem são
-> web. Os outros formatos abaixo são extensão raciocinada, não executada. O
-> mapeamento é direto e a estrutura aguenta, mas trate como plano e não como
-> caminho batido — e, se rodar, o que aprender vira regra nova.
-
-| formato | a unidade | o eixo do tempo | o que muda |
-|---|---|---|---|
-| **página de vendas / landing** | a dobra | o scroll | — é o caso provado |
-| **apresentação / deck** | o slide | o avanço (seta, clique) | o scrub (padrão D) vira transição entre slides; o ritmo claro/escuro passa a marcar os atos do deck |
-| **carrossel de social** | o card | o swipe | quase não há motion: a "animação" é a diferença entre um card e o próximo, e o peso todo cai no card 1 |
-| **criativo estático** | a peça | não existe | tudo se resolve em composição — a imagem-conceito deixa de ser etapa e vira quase o entregável |
-| **UI de produto** | a tela ou o estado | a interação de quem usa | o ritmo de superfícies some; o mock data vira dado real; a copy vem do produto, não da oferta |
-
-### O que transfere inteiro
-
-Nada disto depende do formato:
-
-- **a copy como contrato inviolável**, com verificador que reprova o build;
-- **um conceito nomeável por unidade** — se não dá para nomear a cena, ainda é
-  repaginação disfarçada;
-- **a direção visual escrita antes de tudo**, com nome e prefixo de prompt colável;
-- **a imagem-conceito aprovada antes da execução** — é o que mais transfere,
-  porque não presume nem scroll nem código;
-- **a ficha de 7 camadas** como briefing (a camada 7 muda de conteúdo, não de papel);
-- **o `taste.md` com prefixos de escopo** — gosto de cliente não tem formato;
-- **o double-check em contexto limpo** e a orquestração "uma unidade por vez";
-- **a revisão por áudio** e o grill de perguntas antes de implementar;
-- **a medição** antes de dizer que está pronto;
-- **mock data plausível, nunca prova.**
-
-### O que não transfere e precisa ser trocado
-
-- **O padrão D (scrub).** Ele existe porque o leitor controla o tempo com o
-  dedo. Sem scroll, não há scrub — em deck vira transição, em UI vira estado.
-- **O ritmo de superfícies** (escuro nos picos, claro nos respiros) é uma
-  ferramenta de página longa. Num criativo isolado não se aplica; numa UI de
-  produto, a consistência vale mais que o contraste.
-- **Os gates de web.** Auditoria de viewport e contrato de copy contra o HTML
-  pressupõem artefato servido. Para peça exportada (PNG, PDF), o contrato de
-  copy precisa de outro verificador — a regra continua, o script não.
-- **`stacks/next-tailwind-gsap.md`** é o único arquivo que assume uma stack, e
-  é o primeiro a cair fora quando o formato muda.
-
-O `SKILL.md` já aponta uma skill irmã para a variante em deck. Este repositório
-é a variante em página — e a fonte do método, que é o que vale levar para os
-outros formatos.
+**Se você não programa e só vai aprovar as ideias**, o seu arquivo é
+[`GUIA-IMAGENS.md`](GUIA-IMAGENS.md): como gerar a imagem de cada unidade,
+onde salvar, como dar o veredito e como pedir versões até ficar satisfeito.
 
 ## O que tem dentro
 
 | | |
 |---|---|
-| `SKILL.md` | o método em fases (0 · 0.5 · 1 · 1.5a · 1.5b · 3 · 4 · 5); ponto de entrada |
-| `GUIA-IMAGENS.md` | o passo a passo de quem aprova as ideias e não programa |
-| `references/taste.md` | **template vazio** + as lições de ofício que se repetem em todo projeto (ver abaixo) |
-| `references/imagem-conceito.md` | a ideia antes do código: um prompt por seção, imagem 16:9 aprovada pelo cliente |
-| `references/camadas.md` | a ficha de 7 camadas que faz a ponte entre imagem e código |
-| `references/orquestracao.md` | uma seção por vez, átomos antes do loop, o template do subagente |
-| `references/revisao-por-audio.md` | transcrever antes de decidir; o grill de perguntas |
-| `references/medicao.md` | como medir protótipo, cor, tracejado e escala tipográfica antes de dizer que está pronto |
-| `references/conceitos-por-dobra.md` | conceito por função narrativa; a árvore "qual tela o item pede" |
-| `references/mecanismos.md` | catálogo de problema narrativo → solução visual |
-| `references/animacao.md` | os cinco padrões de movimento e o limite de falha do motor |
-| `references/armadilhas.md` | o que custou tempo real, para não custar de novo |
-| `references/copy-contrato.md` | como a copy vira contrato verificável; o limite do mockup é a afirmação |
+| `SKILL.md` | o método em fases; ponto de entrada |
+| `GUIA-IMAGENS.md` | o passo a passo de quem aprova as ideias |
+| `references/imagem-conceito.md` | o prompt por unidade, o double-check e o veredito |
+| `references/camadas.md` | a ficha de 7 camadas, da imagem ao código |
 | `references/direcao-visual.md` | escrever a direção quando não existe; extrair quando existe |
-| `references/blocagem.md` · `revisao-e-gates.md` · `assets-gerados.md` | planejar as dobras, fechar a rodada, gerar o asset que falta |
-| `references/publicacao.md` | o que só o artefato de produção revela |
-| `stacks/next-tailwind-gsap.md` | código colável para quem está nessa stack |
-| `assets/` | templates de ficha, direção, blocagem, prompt de seção, briefing de ideação, camadas, prompt de subagente, checkpoint, sessão, contratos, tokens |
-| `scripts/` | auditoria por viewport, contrato de copy, contrato de geometria e print por dobra |
-
-O método é agnóstico de framework; só o arquivo em `stacks/` assume uma stack
-específica. Quem usa Astro, Vue, Svelte ou HTML puro aproveita todo o resto.
-
-## Sobre o `taste.md` vazio
-
-Na versão interna desta skill, `references/taste.md` é o arquivo mais valioso:
-os vetos estéticos de um cliente real, cada um com a citação literal de quem
-reprovou e o motivo. É o que nenhum modelo tem sozinho.
-
-Aqui as duas seções de projeto vêm vazias **de propósito**. Gosto é de um
-cliente específico e não se transporta; o que se transporta é a **estrutura de
-capturá-lo** — incluindo o sistema de prefixos de escopo, que é o que impede
-tratar decisão de um projeto só como lei universal — e as lições de ofício que
-apareceram em todos os projetos, que já vêm escritas.
-
-Preencher esse arquivo com o seu cliente é a parte que faz diferença. O resto do
-método funciona sem ele; o resultado, não.
-
-## Manual em página
-
-`manual.html` abre no navegador e traz o método na versão de seis fases, em
-formato de consulta: as fases, o catálogo de mecanismos, a paleta e a escala
-tipográfica renderizadas, e as 21 issues do pipeline com botão de copiar. As
-fases 0.5 e 1.5, a orquestração e a publicação são posteriores a ele e vivem
-só no `SKILL.md` e em `references/`.
-
-## Requisitos dos scripts
-
-Os scripts em `scripts/` usam Node 18+. `audit-viewports.mjs`,
-`verify-fidelidade.mjs` e `shoot-dobra.mjs` precisam de
-[Playwright](https://playwright.dev) instalado no projeto onde rodam (rode-os
-de dentro do projeto). `verify-copy-contract.mjs` não tem dependência.
-
-## Linhagem
-
-Quatro páginas de venda em produção, cada uma incorporando o que a anterior
-aprendeu na prática: uma VSL (`/ref-vsl`), uma página de produto de software
-(`/ref`, seis versões num único dia), e dois funis de expert — o primeiro
-trouxe a direção visual escrita antes da blocagem e as regras de publicação
-(`/ref-funil-a`), o segundo trouxe a imagem-conceito por seção, a ficha de
-camadas, a revisão por áudio e a orquestração "uma seção por vez"
-(`/ref-funil-b`), em três sessões e quinze áudios de revisão.
-
-Boa parte do que está escrito aqui existe porque alguma dessas rodadas custou
-caro.
+| `references/blocagem.md` · `conceitos-por-dobra.md` · `mecanismos.md` | planejar as unidades e escolher o conceito de cada uma |
+| `references/animacao.md` | os cinco padrões de movimento e o limite de falha do motor |
+| `references/copy-contrato.md` | como a copy vira contrato verificável |
+| `references/orquestracao.md` | uma unidade por vez, átomos antes do lote, o prompt do subagente |
+| `references/revisao-por-audio.md` | transcrever antes de decidir; o grill de perguntas |
+| `references/medicao.md` | medir protótipo, cor, tracejado e escala tipográfica |
+| `references/armadilhas.md` · `revisao-e-gates.md` · `publicacao.md` | depurar, fechar a rodada, publicar |
+| `references/taste.md` | template do gosto do seu cliente + as lições que se repetem em todo projeto |
+| `stacks/next-tailwind-gsap.md` | o único arquivo que assume uma stack: código colável |
+| `assets/` | doze templates: ficha, direção, blocagem, prompt de unidade, camadas, subagente, checkpoint, contratos, tokens |
+| `scripts/` | os quatro contratos executáveis (Node 18+; três pedem Playwright no projeto) |
+| `manual.html` | o método em página de consulta, na versão de seis fases |
 
 ## Licença
 
