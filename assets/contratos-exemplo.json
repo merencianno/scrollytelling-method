@@ -1,0 +1,21 @@
+{
+  "_comentario": [
+    "Contratos de copy da página <rota>, para scripts/verify-copy-contract.mjs.",
+    "Uma frase literal e contígua por seção, escolhida SEM ênfase no meio — um <span> de cor",
+    "parte a string e o verificador não acha mais. Contrato que impede o acento numa headline",
+    "é informação de design: registre na ficha de camadas da seção.",
+    "Fonte: <caminho da copy canônica>.",
+    "Rodar: node scripts/verify-copy-contract.mjs <pasta do artefato> <este arquivo>",
+    "(se a rota principal esconde dobras atrás de uma trava, rode contra a rota liberada).",
+    "Estado <AAAA-MM-DD>: <quantas seções estão na página>."
+  ],
+  "frases": [
+    ["faixa de urgência", "<frase literal>"],
+    ["01 promessa", "<frase literal contígua da seção 01>"],
+    ["01 subheadline", "<…>"],
+    ["02 dor", "<…>"],
+    ["14 decisão", "<…>"],
+    ["rodapé", "<…>"]
+  ],
+  "cta": { "label": "<TEXTO DO CTA>", "minimo": 4, "atributo": "data-<projeto>-cta", "exato": 4 }
+}

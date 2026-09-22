@@ -40,7 +40,7 @@ tem 229 linhas e concentra os defeitos típicos do formato:
 - **Tabelas em sintaxe de Docs** (dobra 5 e rodapé), com `| :---- |` e
   células que carregam três frases coladas. O conteúdo é copy; o formato
   de tabela é acidente do export e pode virar dois cards.
-- **CTA repetido literal**, seis vezes, sempre `QUERO CONHECER O o projeto de referência`.
+- **CTA repetido literal**, seis vezes, sempre `QUERO CONHECER O PRODUTO`.
   Essa repetição é intencional e define quantos botões a página tem.
 - **Números escritos de duas formas** no mesmo documento ("o valor anual ao
   ano" e "o valor anual"). Ambas são copy; a página renderiza cada uma
@@ -48,9 +48,16 @@ tem 229 linhas e concentra os defeitos típicos do formato:
 
 ## Conteúdo ausente
 
+Conteúdo que falta tem **dois tratamentos, não um**: o **slot técnico**
+(marcado, contado pelo gate, avisa ou bloqueia a publicação) para o que é
+obrigatório — a foto do expert, o número de contato —, e o **fallback
+silencioso** (tenta o arquivo, cai para um tile de cor com frase curta) para
+o resto — as fotos ilustrativas dos mockups. Um slot marcado por página; o
+resto cai. **Falta de foto nunca bloqueia a seção.**
+
 O que a copy não menciona não entra por inferência: vira **slot técnico**,
 um valor de configuração explicitamente marcado como pendente, que falha
-no gate de publicação até alguém de fora decidir. Na o projeto de referência o número
+no gate de publicação até alguém de fora decidir. No projeto de referência o número
 comercial ficou como `TODO-PENDENTE` em `src/config/projeto-ref.ts`, e o verificador
 trata isso como aviso no preview local e como falha no alvo de catálogo —
 a página existe, roda e é revisável, mas não sobe com o placeholder. Links
@@ -59,24 +66,55 @@ inventar um telefone plausível, um título para uma seção sem título, um
 depoimento — passa despercebido na revisão visual e só aparece quando o
 cliente lê.
 
-## Mini-UIs são abstratas
+## Mini-UIs: o limite é a afirmação, não o número
 
 Uma landing de scrollytelling vive de tangibilizar o que a copy afirma:
-janelas de produto, kanbans, ledgers, checklists animados. Toda essa
-camada é ilustração, e ilustração não inventa texto. Skeleton bars,
-ícones, formas e rótulos oficiais dos assets, sim; números, métricas,
-percentuais e microcopy inventada, não. Número só aparece numa mini-UI se
-já existir na copy — o "48K" do card do hero do projeto de referência veio do asset de
-marca dos totens, e as cenas do deck que trazem texto renderizado entram
-como `aria-hidden`, decorativas, nunca posicionadas de modo a ler como
-afirmação da página.
+janelas de produto, kanbans, ledgers, telas de app. Essa camada é
+ilustração — e a regra antiga desta seção dizia que ilustração não escreve
+nada: skeleton bars no lugar de texto, traço no lugar de número. **A regra
+estava errada de categoria.** Aplicada à risca produziu mockups que o
+cliente chamou de "preguiçosos, extremamente toscos" e, num segundo projeto,
+foi revogada por pedido literal: *"queria os assets com dados mock data
+sabe? fotos, números, notificações pushes… use telas reais, interagíveis
+pelo usuário"*.
+
+O que ela protegia continua valendo, com a fronteira no lugar certo:
+
+- **Mock data plausível dentro do mockup, sim.** Números específicos e
+  imperfeitos ("2,4 mil curtidas", "36 novos seguidores"), usuário genérico
+  (`seuusuario`) ou o oficial da marca, legendas curtas, o texto real que o
+  app mostra ("curtiu sua publicação"), datas, horários. Skeleton só onde o
+  app real mostraria placeholder. A curva do dado tem de **dizer o que a
+  copy diz** — barras crescentes contradizem "meses sem resultado".
+- **Nada que se leia como prova de resultado, nunca.** Sem depoimento, sem
+  "fulano faturou X", sem nome real, sem valor em moeda, sem rosto. Mensagem
+  longa entra truncada com reticências para não virar depoimento.
+- **Número é UI dentro da tela, nunca argumento da página.** Nenhum número
+  do mockup migra para o texto; na ficha de camadas, copy e mock data ficam
+  em linhas separadas, o mock data rotulado "não é copy, não é prova".
+- **O destaque visual não cai sobre o que a oferta não promete.** Um
+  contador subindo é promessa implícita: se for preciso mostrar crescimento,
+  cresce o que o produto entrega (posts publicados, ideias), não o que ele
+  não garante (seguidores). *"O doodle no número de posts também, porque a
+  gente não quer dar a entender que a gente vai prometer seguidores."*
+- **Dado que o cliente ainda vai mandar** entra fictício e **rotulado** no
+  código (`// TODO(cliente): dados reais` + um atributo que o gate reporta
+  como aviso, `data-…-copy-suspeita`), nunca apresentado como definitivo.
+- **Mockup operável deixa de ser decorativo.** Enquanto é ilustração, é
+  `aria-hidden`; quando ganha botão de curtir, seguir, trocar aba ou
+  digitar, vira componente acessível: `<button>`, `aria-label`,
+  `aria-pressed`, teclado, foco visível, alvo ≥ 44 px.
+
+Emoji decorativo (que não é da copy) vive **fora** do elemento que carrega a
+frase-contrato, `aria-hidden` — dentro, ele parte a string contígua.
 
 ## Da regra ao contrato executável
 
 Regra escrita em brief não impede regressão: uma refatoração de seção
 apaga uma frase e ninguém percebe até o print. O que impede é um script
-que reprova o artefato — no projeto de referência o `scripts/verify-projeto-ref-preview.mjs`,
-generalizado nesta skill em `scripts/verify-copy-contract.mjs`. Dois
+que reprova o artefato — no projeto de referência era um verificador de
+preview escrito sob medida, generalizado nesta skill em
+`scripts/verify-copy-contract.mjs`. Dois
 mecanismos simples, ambos aplicados ao HTML pré-renderizado:
 
 1. **Uma frase literal e contígua por dobra.** Uma lista de pares
@@ -87,15 +125,16 @@ mecanismos simples, ambos aplicados ao HTML pré-renderizado:
    dobras e o rodapé. Não é verificação de copy inteira: é uma âncora por
    dobra, escolhida no trecho mais característico, o suficiente para que
    nenhuma dobra suma ou seja reescrita em silêncio.
-2. **A contagem exata de CTAs.** O rótulo `QUERO CONHECER O o projeto de referência`
-   precisa aparecer pelo menos 6 vezes e o atributo `data-brand-cta`
+2. **A contagem exata de CTAs.** O rótulo `QUERO CONHECER O PRODUTO`
+   precisa aparecer pelo menos 6 vezes e o atributo `data-projeto-cta`
    exatamente 6 — o rótulo com piso porque pode ser citado noutro lugar, o
    atributo com igualdade porque é o botão de verdade. Quando a rodada 5
    moveu o CTA do rodapé para dentro do box de oferta, o total continuou 6
    e o gate seguiu verde sem ajuste.
 
 Quando o cliente muda a copy — e ele muda —, o contrato muda junto, no
-mesmo commit. Na rodada 5 do projeto de referência a ênfase de preço passou de "o valor anual" para "12x R$ X /mês" e o contrato da 7ª dobra virou `"R$ X"`.
+mesmo commit. Na rodada 5 do projeto de referência a ênfase de preço passou do valor anual
+para o valor parcelado, e o contrato da 7ª dobra mudou junto.
 Contrato que não acompanha a copy vira ruído e acaba sendo desligado.
 
 ## A armadilha do `<span>`
@@ -116,3 +155,30 @@ Vale lembrar o limite do mecanismo: ele garante presença, não fidelidade
 palavra a palavra. Onde o risco de reescrita for alto, um teste de copy
 literal por AST do Markdown (via `remark`) cobre a fidelidade, e as
 âncoras por dobra continuam cobrindo a estrutura.
+
+## O arquivo de contratos
+
+O contrato vive num `contratos.json` versionado ao lado da blocagem (modelo
+em `assets/contratos-exemplo.json`), com um comentário de cabeçalho dizendo
+a fonte, o comando de execução e a data do estado. Rótulo = `NN <seção>`.
+Escolha a frase **sem ênfase no meio** — e quando o contrato impedir o
+acento numa headline, isso é informação de design: registre na ficha de
+camadas da seção, para o subagente não descobrir sozinho.
+
+Quando o cliente pede para tirar algo que **está** na copy (um glifo, uma
+palavra), o pedido não se executa em silêncio nem se recusa: volta como
+pergunta, com o risco medido nos contratos e testes, e a exceção fica
+escrita com escopo — ver `revisao-por-audio.md`. Precedente: o 🔷 saiu de
+duas seções por ser bullet decorativo; os ❌/✅ ficam porque codificam
+polaridade.
+
+## Buracos da copy: encaminhar, nunca corrigir
+
+Ao blocar, liste os buracos numa tabela **buraco → encaminhamento**: dobra
+sem headline, bônus sem autor, garantia sem canal de contato. Cada um recebe
+um destino — nada inventado / slot técnico / literal mesmo quebrado /
+pendência do cliente. Erro de export (negrito partido, tabela quebrada,
+aspas tipográficas, hífen escapado) é **leitura estrutural**, não licença
+para editar: o verificador compara o caractere exato. O double-check em
+contexto limpo (ver `imagem-conceito.md`) costuma achar buracos que a sessão
+longa não viu — peça a lista.

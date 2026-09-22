@@ -24,7 +24,7 @@ Explicitamente **não** usado, mesmo existindo no projeto:
 
 ## O hook de motion (único ponto de contato com o GSAP)
 
-`useBrandMotion.ts`, 75 linhas cobrindo as 14 seções.
+`useOneMotion.ts`, 75 linhas cobrindo as 14 seções.
 
 ```ts
 "use client";
@@ -42,7 +42,7 @@ export interface OneMotionContext {
   ScrollTrigger: typeof ScrollTrigger;
 }
 
-export function useBrandMotion(
+export function useOneMotion(
   scopeRef: RefObject<HTMLElement | null>,
   build: (ctx: OneMotionContext) => void,
 ) {
@@ -95,7 +95,7 @@ builder em vez de `window.innerWidth` lido na mão.
 
 ## O wrapper de seção
 
-`BrandSection.tsx` dá a cada dobra id, tom e ambiente — e é onde mora o
+`OneSection.tsx` dá a cada dobra id, tom e ambiente — e é onde mora o
 `overflow: clip`.
 
 ```tsx
@@ -104,7 +104,7 @@ interface OneSectionProps extends React.HTMLAttributes<HTMLElement> {
   tone: "dark" | "light" | "deep";      // ritmo claro/escuro da narrativa
   radial?: "top" | "bottom" | "none";   // de onde vem o halo azul
   thread?: boolean;                     // fio de 2px entre blocos escuros
-  sectionRef?: React.Ref<HTMLElement>;  // o scope do useBrandMotion
+  sectionRef?: React.Ref<HTMLElement>;  // o scope do useOneMotion
   innerClassName?: string;
 }
 
@@ -173,13 +173,13 @@ ${stageKeyframes()}
 export function FlowSection() {
   const scopeRef = useRef<HTMLElement>(null);
 
-  useBrandMotion(scopeRef, ({ scope, gsap, ScrollTrigger }) => {
-    gsap.from(scope.querySelectorAll("[data-one-flow-copy] > *"), {
+  useOneMotion(scopeRef, ({ scope, gsap, ScrollTrigger }) => {
+    gsap.from(scope.querySelectorAll("[data-brand-flow-copy] > *"), {
       opacity: 0, y: 26, duration: 0.8, stagger: 0.12, ease: "power3.out",
       scrollTrigger: { trigger: scope, start: "top 70%" },
     });
 
-    const stage = scope.querySelector("[data-one-flow-stage]");
+    const stage = scope.querySelector("[data-brand-flow-stage]");
     if (!stage) return;
     // Liga os loops uma vez só, no container da cena: todas as micro-ações
     // partem juntas e o ciclo de 12 s fica em fase.
@@ -190,10 +190,10 @@ export function FlowSection() {
   });
 
   return (
-    <BrandSection dobra="03" tone="dark" radial="top" thread sectionRef={scopeRef}>
+    <OneSection dobra="03" tone="dark" radial="top" thread sectionRef={scopeRef}>
       <style dangerouslySetInnerHTML={{ __html: FLOW_STYLE }} />
       {/* … cena: elementos com className="flow-anim flow-act flow-act-0" … */}
-    </BrandSection>
+    </OneSection>
   );
 }
 ```
@@ -212,8 +212,8 @@ import localFont from "next/font/local";
 
 const funnelDisplay = localFont({
   src: [  // um arquivo por peso estático
-    { path: "./fonts/FunnelDisplay-Light.woff2",   weight: "300", style: "normal" },
-    { path: "./fonts/FunnelDisplay-Regular.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/DisplayFont-Light.woff2",   weight: "300", style: "normal" },
+    { path: "./fonts/DisplayFont-Regular.woff2", weight: "400", style: "normal" },
     // … Medium 500, SemiBold 600
   ],
   variable: "--font-funnel-display",
@@ -237,8 +237,8 @@ de tokens traduz para os nomes genéricos que o Tailwind espera:
 
 ```css
 .brand-scope {
-  --brand-font-display: var(--font-funnel-display), "<FONTE-DISPLAY>", -apple-system, sans-serif;
-  --brand-font-body:    var(--font-google-sans-flex), "<FONTE-CORPO>", -apple-system, sans-serif;
+  --brand-font-display: var(--font-display-file), "<FONTE-DISPLAY>", -apple-system, sans-serif;
+  --brand-font-body:    var(--font-body-file), "<FONTE-CORPO>", -apple-system, sans-serif;
   --font-display: var(--brand-font-display);   /* ponte para o tailwind.config */
   --font-body:    var(--brand-font-body);
 }
@@ -256,3 +256,67 @@ fora dele. Nunca `@import` de fonte — é render-blocking.
 Arquivos em WOFF2 (TTF chegou a custar cerca de 1 s de LCP no celular),
 licenças guardadas junto deles, e o escopo `.brand-scope` aplicado no `<main>` da
 landing: todos os tokens `--brand-*` vivem dentro dele e nada vaza.
+
+## Revisão 2026-09-22 — limite de falha, `refresh` antes do builder, loops por IntersectionObserver
+
+O hook acima ganhou três camadas depois de um bug que derrubava a página
+inteira (raiz e diagnóstico em `references/animacao.md`). A versão de
+produção (`useBrandMotion`) fica assim no miolo do
+`mm.add`:
+
+```ts
+if (!motionOK) return;
+const scope = scopeRef.current;
+if (!scope) return;
+try {
+  // Raiz da corrida: triggers do lote inicial ainda sem `end` são forçados um a um
+  // pelo `refresh` do primeiro `create` desta seção, e um `once` que se mata nesse
+  // laço deixa a lista com um buraco. O refreshAll itera uma cópia e inicializa todos.
+  if (ScrollTrigger.getAll().some((t) => t.end === undefined)) {
+    ScrollTrigger.refresh();
+  }
+  build({ scope, desktop, gsap, ScrollTrigger });
+} catch (erro) {
+  // Limite de falha: animação que quebra degrada para conteúdo estático visível;
+  // um throw dentro do useEffect desmontaria a árvore inteira.
+  gsap.set(scope.querySelectorAll("[data-in], [data-hero-in]"), { clearProps: "all" });
+  requestAnimationFrame(() => ScrollTrigger.refresh());
+  if (process.env.NODE_ENV !== "production") {
+    console.warn("[useBrandMotion] builder falhou; seção segue estática", scope.id, erro);
+  }
+}
+```
+
+E `ligarLoops` deixa de criar um `ScrollTrigger` standalone:
+
+```ts
+/** Liga os loops CSS de uma cena quando ela entra em quadro, uma vez só. */
+export function ligarLoops(scope: HTMLElement) {
+  if (typeof IntersectionObserver === "undefined") {
+    scope.classList.add("brand-live");
+    return;
+  }
+  const observer = new IntersectionObserver(
+    (entries) => {
+      if (!entries.some((e) => e.isIntersecting)) return;
+      scope.classList.add("brand-live");
+      observer.disconnect();
+    },
+    // equivale ao antigo start "top 85%"
+    { rootMargin: "0px 0px -15% 0px", threshold: 0 },
+  );
+  observer.observe(scope);
+}
+```
+
+Prova: duas rodadas de carga fria rolando a página com motion ligado. Antes
+da raiz: 14 dobras, 0 erro, **1 aviso** dizendo qual seção estourava. Depois:
+0 erro, 0 aviso. O `try/catch` continua lá sem cobertura de teste — um teste
+que role a página inteira com motion permitido e exija N dobras e zero
+`pageerror` é a pendência registrada.
+
+## Print por dobra
+
+`scripts/shoot-dobra.mjs <url> "#dobra-NN" 1440` (e `390`) — roda de dentro
+do projeto, substitui qualquer captura com `fullPage` ou `locator.screenshot()`
+de elemento mais alto que o viewport.

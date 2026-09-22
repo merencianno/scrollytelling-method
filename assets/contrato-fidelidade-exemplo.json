@@ -1,0 +1,48 @@
+{
+  "_comentario": [
+    "Contrato de geometria de uma página, para scripts/verify-fidelidade.mjs.",
+    "Declara o que foi combinado com quem aprova: o que veio do golden master em",
+    "pixel, e a escala de títulos do design system. O que não está aqui não é",
+    "verificado — o contrato é curto de propósito, cobrindo o que já custou rodada.",
+    "",
+    "Rodar: node scripts/verify-fidelidade.mjs http://localhost:3000/pagina assets/contrato-fidelidade-exemplo.json",
+    "",
+    "tolerancia: folga em px por alvo (default 1). letterSpacing aceita px ou %.",
+    "Valor em lista = um esperado por elemento, na ordem do DOM."
+  ],
+  "largura": 1440,
+  "tolerancia": 1,
+  "alvos": [
+    {
+      "rotulo": "hero — logo 198x31",
+      "seletor": "#dobra-01 img[alt*='<ALT-DO-LOGO>']",
+      "width": 198,
+      "height": 31
+    },
+    {
+      "rotulo": "hero — h1 na escala de seção",
+      "seletor": "#dobra-01 h1",
+      "fontSize": 38,
+      "lineHeight": 38,
+      "letterSpacing": "-1%"
+    },
+    {
+      "rotulo": "dobra 2 — cards com largura própria (medidos no golden master)",
+      "seletor": "#dobra-02 [data-lista] li",
+      "quantidade": 4,
+      "width": [366, 270, 292, 312],
+      "height": 78
+    },
+    {
+      "rotulo": "dobra 2 — foto colada na base da seção",
+      "entre": ["#dobra-02 img[src*='<TRECHO-DO-NOME>']", "#dobra-02"],
+      "folgaInferior": 0
+    },
+    {
+      "rotulo": "dobra 10 — três cards de 324px",
+      "seletor": "#dobra-10 article > div:first-child",
+      "quantidade": 3,
+      "height": 324
+    }
+  ]
+}

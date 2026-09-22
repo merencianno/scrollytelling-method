@@ -163,3 +163,59 @@ escondido** — o estado base do CSS já é a cena completa e legível.
 - **Quando não usar.** Mais de uma por dobra; e nunca para preencher seção que
   ainda não tem conceito — respiro entre argumentos é pausa, entre vazios é
   enchimento.
+
+## Encenar um produto que o público já usa (anatomia real)
+
+- **Problema.** O produto da copy não é software, mas a promessa acontece
+  dentro de um app que o lead abre todo dia (rede social, agenda, planilha).
+  Wireframe genérico não convence; screenshot real não pode (marca, dado).
+- **Mecanismo.** Uma família de blocos que reproduz a **anatomia real** do
+  app — post, perfil/bio, grade, insights, notificação, barra inferior com
+  badges, DM, composer, notas, busca, anel de story — com mock data plausível
+  e sem nome, logotipo ou cor de marca do app. Cada bloco existe em dois
+  estados: **vazio** (cinza, sem foto, zero interação) e **com vida** (sinal
+  de terceiro reagindo).
+- **Construção.** Átomos compartilhados criados antes de tudo (barra
+  skeleton, traço, avatar circular, tela). Mockup comprimido: topo +
+  conteúdo + ações + barra inferior — corta-se o meio, nunca as
+  extremidades. Moldura de dispositivo (celular com ilha, laptop) em CSS,
+  quando a direção pedir. Controles reais são `<button>` acessíveis; o
+  bloco decorativo é `aria-hidden`. Texto interno ≥ 12 px. Cor de estado
+  (vermelho/verde) só como leitura — badge, doodle, "concluído" — com token
+  próprio e lista fechada de usos.
+- **Quando não usar.** Quando a copy não tem objeto reconhecível onde a
+  promessa acontece — aí é diagrama conceitual, não interface. E nunca como
+  prova: nenhum número do mockup vira argumento da página.
+
+## Mostrar "guardar", "perder" e "entregar" sem escrever
+
+- **Problema.** Verbos abstratos da copy (acervo, desperdício, entrega) sem
+  objeto visual.
+- **Mecanismo.** Contêiner em loop: uma pasta que **abre, mostra os rótulos,
+  fecha e reabre** diz acervo; uma caixa que **engole rótulos** um a um diz
+  desperdício; um **papel que amassa** no scroll até virar bola e
+  estacionar diz "começar do zero"; uma **stack de notificações-checklist**
+  que abre e muda para "concluído" em verde diz entrega.
+- **Construção.** Loops em CSS pausados até entrar (padrão B), com pausa
+  legível no estado aberto; o papel é scrub com estado final estável
+  (WebGL com fallback em HTML/SVG — dependência pesada é decisão do revisor,
+  proposta com o fallback junto). Rótulos internos são UI ilustrativa, não
+  copy.
+- **Quando não usar.** Dois contêineres na mesma seção competem; um por
+  seção, e o emoji decorativo que o acompanha fica fora do heading.
+
+## Apontar o que importa: o doodle e a assinatura
+
+- **Problema.** Chamar o olho para **um** número dentro de uma tela cheia, ou
+  dar peso a uma palavra que a copy chama de "assinatura".
+- **Mecanismo.** Traço à mão em SVG desenhado na entrada
+  (`stroke-dashoffset` → 0): a **elipse** que circula um número, o **traço
+  manuscrito** sobre uma linha. O cérebro associa linha + rabisco a
+  assinatura sem que ninguém escreva a palavra.
+- **Construção.** `preserveAspectRatio="none"` + `vector-effect:
+  non-scaling-stroke` para o traço sobreviver ao reflow; cor de estado só
+  aqui (vermelho no que está errado, verde no que está certo).
+- **Quando não usar.** Circular dois números destrói a leitura; circular o
+  número que a oferta não promete (seguidores) vira promessa implícita —
+  *"o doodle no número de posts também, porque a gente não quer dar a
+  entender que a gente vai prometer seguidores"*.

@@ -2,7 +2,7 @@
 
 Vinte e uma issues, da chegada da copy até a publicação, prontas para colar
 bloco a bloco num GitHub Projects, ClickUp ou similar. Trocar o que está
-entre `<colchetes angulares>`: `<projeto>` (slug em minúsculas, ex. `one`),
+entre `<colchetes angulares>`: `<projeto>` (slug em minúsculas, ex. `minha-landing`),
 `<rota>` (rota Next, ex. `/projeto-ref`), `<N>` (número de dobras da copy),
 `<versao>` (`v1`, `v2`…). A coluna **Gate** é o comando ou a evidência que
 autoriza fechar a issue — issue sem gate verde não fecha.

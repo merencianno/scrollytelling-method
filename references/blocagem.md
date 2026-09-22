@@ -2,7 +2,7 @@
 
 Entre receber a copy e abrir o primeiro arquivo de componente existe uma
 etapa de papel: transformar as dobras cruas numa tabela onde cada linha é
-uma seção e cada coluna é uma decisão já tomada. Na o projeto de referência isso é o
+uma seção e cada coluna é uma decisão já tomada. No projeto de referência isso é o
 `docs/projeto-ref/blocagem-copy.md` — 14 linhas mais o rodapé, escrito antes de
 qualquer `.tsx`. O template em branco está em `assets/blocagem-template.md`.
 
@@ -24,6 +24,16 @@ A tabela custa uma hora e economiza rodadas inteiras. Ela também é o
 briefing que se entrega a quem for implementar: cada linha é autocontida o
 bastante para virar a tarefa de uma pessoa ou de um subagente.
 
+## Antes da tabela: a leitura estrutural
+
+Uma linha por dobra **do documento da copy** dizendo o que ela traz, e as
+observações que decidem a blocagem: qual dobra carrega quatro coisas e vira
+três seções; onde o export do editor quebrou (tabela, negrito, aspas); que
+headings estão por tamanho e não por hierarquia; onde o preço se repete; o
+que a copy não tem (barra de navegação, título de uma dobra). A blocagem
+vira consequência dessa leitura, não invenção — e os buracos vão para a
+tabela de encaminhamento (`copy-contrato.md`).
+
 ## As colunas
 
 | Coluna | O que registra | Critério |
@@ -35,14 +45,14 @@ bastante para virar a tarefa de uma pessoa ou de um subagente.
 | **Ato** | A superfície: claro, escuro ou "deep" | Ver o ritmo, abaixo |
 | **Blocagem** | O layout em uma frase densa: o que ocupa a tela e em que arranjo | Precisa citar os elementos da copy daquela dobra, não um layout genérico |
 | **Motion** | O gesto, não a implementação | "trilho que preenche", "faturas empilhando", "anel que desenha" |
-| **Assets** | Os arquivos concretos que a dobra consome | Caminho ou nome real; vazio quando a dobra é só tipografia e CSS |
+| **Assets** | Os arquivos concretos que a dobra consome — e, quando o método usa imagem-conceito, a marca **IC** | Caminho ou nome real; vazio quando a dobra é só tipografia e CSS. "IC" diz que a seção passa pela Fase 1.5a antes do código |
 
 Uma linha do projeto de referência, para calibrar a densidade esperada (lá o conceito
 morava dentro da célula de blocagem; o template o separa em coluna própria,
 o que torna mais difícil deixar uma dobra sem cena):
 
 > `| 11 | Ancoragem | CostSection | escuro | H2 + parágrafo · ledger 6
-> linhas com barras proporcionais → "o total acumulado" · bloco o valor anual em mint
+> linhas com barras proporcionais → "R$ 200 mil" · bloco R$ 24 mil em mint
 > · parágrafo · bold · CTA | rows, bars scaleX, total, side | — |`
 
 Abaixo da tabela, duas notas curtas que valem para a página inteira: o que
@@ -91,3 +101,17 @@ O que não muda é a ordem das dobras nem a copy. Atualizar a tabela junto
 com o código mantém o documento utilizável como mapa por quem chegar
 depois; blocagem desatualizada é pior que blocagem inexistente, porque
 manda a pessoa para o arquivo errado.
+
+Vale também para a direção visual: quando ela muda (V1 → V2), **a blocagem
+é reescrita no mesmo commit** — os atos, as cores citadas na coluna de
+blocagem, os assets. Dois documentos de verdade divergentes fizeram três
+subagentes reportar o mesmo conflito numa rodada só.
+
+## Vizinhança
+
+Seções vizinhas não usam o mesmo dispositivo (dois perfis seguidos, dois
+Reels seguidos, duas janelas de app iguais). Ler a coluna **Conceito** de
+cima a baixo, como se lê a coluna Ato: repetição só vale como **eco
+declarado** — o mesmo objeto com um elemento trocado, lido como resposta da
+seção anterior, escrito como decisão. Colisão é acidente, e é o que o
+double-check em contexto limpo mais encontra.

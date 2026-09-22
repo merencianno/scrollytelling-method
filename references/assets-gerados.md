@@ -1,11 +1,21 @@
 # Assets gerados por IA
 
-> **Aviso, antes de qualquer coisa: nada deste arquivo foi executado na `/ref`.**
-> Os prompts abaixo foram escritos, revisados e ficaram como plano não gasto —
-> não havia ferramenta de geração de imagem configurada na máquina. A página foi
-> ao ar inteira sem um único asset gerado. Quem resolveu o problema de verdade
-> foi o **mockup de interface construído em HTML/CSS**. Ler este arquivo como
-> plano B documentado, não como etapa obrigatória do método.
+> **A geração de imagem entrou no método — como ferramenta de ideia, não de
+> asset.** Em 2026-09-21 catorze seções de um funil foram geradas como
+> imagens-conceito 16:9 e aprovadas antes do código (`imagem-conceito.md`).
+> Nenhuma dessas imagens foi ao ar: o que resolve a página continua sendo o
+> **mockup de interface construído em HTML/CSS**, e a copy só entra no código.
+> Este arquivo cobre o que sobra — o asset gerado que de fato entra na página
+> (cena fotográfica de respiro, composição que não cabe em HTML) — e as
+> regras de ferramenta que valem para os dois usos.
+>
+> O que a primeira execução real ensinou sobre ferramenta: cole **só o bloco
+> de prompt**, nunca o arquivo (o cabeçalho vira instrução); gere
+> **individualmente** (modo lista piora); mude **uma variável por vez**;
+> para interface, GPT Image 2.5 e Seedream 5 Pro (pelo Magnific) foram os
+> melhores nos testes da casa, Nano Banana serviu, Mystic não; prompt
+> longo faz o modelo ignorar proibições — aceitável na imagem-conceito,
+> nunca copiado no código.
 
 ## Antes de gerar: o mockup em HTML/CSS resolve quase sempre
 
@@ -35,10 +45,11 @@ combinados com assets exportados do Figma (ícones de vidro, cards, app icon).
 
 Todo prompt começa pela mesma direção — é ela que faz peças geradas em sessões
 diferentes parecerem da mesma família. O texto usado na `/ref`
-(`o-repositório/docs/projeto-ref/prompts-geracao.md`) é:
+(`docs/projeto-ref/prompts-geracao.md`) era, com os hex da marca trocados
+por marcadores:
 
 > Premium, minimalist tech brand. Deep blue radial light (<MARCA-PROFUNDA>) over pure
-> black (#000000), soft volumetric glow (#0083E8), frosted glass surfaces
+> black (#000000), soft volumetric glow (<MARCA-NUCLEO>), frosted glass surfaces
 > (white 10–18% + blur), glossy translucent blue glass 3D objects, four-point
 > sparkle accent. No text, no watermark, no lens flare, no vignette. Studio
 > product photography, 8k, clean edges, transparent or black background.

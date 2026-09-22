@@ -1,7 +1,7 @@
 /*
  * Template de tokens — sistema visual de uma landing com scrollytelling.
  *
- * Copiar, trocar `brand` pelo prefixo do projeto (`one` na /ref) e substituir
+ * Copiar, trocar `brand` pelo prefixo do projeto (`projeto` na /ref) e substituir
  * cada <PLACEHOLDER> pelo valor da marca. O que já vem resolvido é do *sistema*:
  * hierarquia de raios, curvas, opacidades de vidro e estrutura das sombras são
  * o que faz páginas diferentes parecerem do mesmo estúdio — mexer nesses

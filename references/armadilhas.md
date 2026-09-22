@@ -33,7 +33,7 @@ compilador, então a classe inteira é descartada.
 
 **Correção.** Alpha sobre token vira rgba literal: `bg-[rgba(88,172,225,0.14)]`.
 Se o valor precisa viver como token, declarar o token já com o alpha embutido
-(`--brand-success-soft: rgba(95,211,179,0.16)`) e usá-lo sem modificador.
+(`--brand-success-soft: rgba(<POSITIVO-RGB>,0.16)`) e usá-lo sem modificador.
 
 ## `overflow: hidden` num ancestral mata `position: sticky`
 
@@ -132,3 +132,86 @@ para `whitespace-nowrap` aplicado a um pedaço do texto.
   depois de `document.fonts.ready`, todo `start`/`end` calculado antes da troca
   de fonte fica alguns pixels fora — o suficiente para uma entrada disparar
   cedo demais ou nunca.
+
+## Crase dentro de `<style>{`...`}</style>` fecha o template literal
+
+Comentário de CSS com nome de classe entre crases — `/* `.scope h2` vence */` —
+encerra a string do template e o arquivo passa a ser JSX inválido. O erro que
+aparece é `TS1381: Unexpected token`, apontando para uma chave dezenas de linhas
+depois, o que manda a investigação para o lugar errado. Dentro de um bloco de
+`<style>` em JSX, escrever nome de seletor sem crase.
+
+## Contar linhas por `altura / line-height` mente quando há fonte secundária
+
+Um título com um trecho em serif itálica tem caixa de linha maior que o resto, e
+a altura total do bloco passa do múltiplo do `line-height`. Três linhas de 52 px
+mediram 187 px e a conta deu 3,6 — arredondado para 4, o que levou a alargar a
+coluna atrás de um problema que não existia. O número certo vem de
+`document.createRange().selectNodeContents(el).getClientRects().length`, ou de
+olhar o print.
+
+## `querySelector` de seção pega o primeiro de vários
+
+`#dobra-02 h2` devolveu o h2 do cabeçalho, não o da cena que estava sendo
+medida, e a medição inteira descreveu o elemento errado. Em dobra com mais de um
+título, medir por classe própria.
+
+## `fullPage` reinicia a animação no instante do print
+
+Segunda porta da mesma armadilha do print que mente: `page.screenshot({
+fullPage: true })` redimensiona o viewport durante a captura, o `matchMedia`
+roda de novo e o `gsap.from` reinicia — a seção sai vazia com `opacity: 1`
+no `getComputedStyle`. Receita certa (`scripts/shoot-dobra.mjs`): medir a
+altura da dobra, **reabrir com viewport ≥ dobra antes do `goto`**, rolar em
+passos até ela, esperar o GSAP assentar, rolar por dentro (exercita os
+scrubs), voltar, capturar com `clip`. Nunca `fullPage`. Se o
+`getComputedStyle` está certo, conserte a ferramenta, não o componente.
+
+## `throw` dentro de `useEffect` derruba a página inteira
+
+Um erro no builder de animação desmonta a árvore React. Cerque o builder
+com `try/catch` + `console.warn`; a seção fica estática e a página vive. O
+aviso diz qual seção estourou. Detalhes e a raiz (`ScrollTrigger` lendo
+`.end` de trigger morto no `refresh`) em `animacao.md`.
+
+## Bug de motion não aparece na suíte
+
+O teste que rola a página roda sob reduced-motion, e sob reduced-motion o
+builder não roda. A corrida do `refresh` só aparece com motion ligado, página
+já rolada e hidratação tardia — e é intermitente: 300 px a cada 70 ms
+reproduz, 200 px a cada 90 ms não. Prova de rolagem em **carga fria** (dev
+derrubado, subido limpo, rolar, contar dobras, capturar `pageerror` **e**
+`console.warn`), duas vezes, a cada rodada.
+
+## Dois agentes criam o mesmo arquivo
+
+Lotes paralelos que precisam do mesmo átomo (primitives de UI) o criam ao
+mesmo tempo, e o último a gravar vence em silêncio. O orquestrador cria os
+átomos compartilhados **antes** de disparar os lotes; se ainda assim colidir,
+o arquivo é reescrito como superconjunto das duas APIs. E cada agente
+paralelo recebe a lista de arquivos que o outro está mexendo — sem isso o
+relatório volta com "há arquivos modificados, não fui eu".
+
+## `pkill -f` mata o próprio shell
+
+`pkill -f "next dev"` casa com a linha de comando da própria ferramenta e
+derruba a sessão (saída 144). Dev server em background, parada pelo id da
+tarefa. `sleep` em primeiro plano também é bloqueado: espere com um laço
+`until <checagem>; do sleep 2; done`.
+
+## Localhost mente sobre `basePath`
+
+`/assets/…` cru funciona no dev (`basePath` vazio) e dá 404 no ar. Todo
+caminho de asset passa pelo helper — inclusive dentro de blocos de UI que
+montam `src` por string. Um funil inteiro foi ao ar sem imagem; o gate
+herdado pegou a repetição no funil seguinte. A família inteira de defeitos
+que só o artefato revela está em `publicacao.md`.
+
+## Regra que o próprio orquestrador escreveu e o cliente nunca pediu
+
+O briefing de um funil proibia número, texto e moldura dentro de mockup. O
+cliente nunca pediu isso — era generalização de "não inventar prova" —, e
+reprovou o resultado. Três subagentes tinham reportado *"a regra X me impediu
+de fazer Y que o briefing cita"* e ninguém tratou como defeito do contrato.
+Quando um subagente reporta conflito entre regra dura e briefing, é o
+contrato que está errado, não a dúvida.

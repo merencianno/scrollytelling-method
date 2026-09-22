@@ -1,7 +1,29 @@
-# Animação — os quatro padrões
+# Animação — os cinco padrões
 
 Agnóstico de stack: aqui ficam o padrão e o porquê. A implementação colável
 está em `stacks/next-tailwind-gsap.md`.
+
+## O critério — que tipo de cena é esta
+
+Antes de escolher padrão, classificar a cena. Uma frase resolve:
+
+> **Se a cena tem um fim, ela se conta sozinha ao entrar em quadro. Se o leitor é
+> a variável, é scrub. Se não tem começo nem fim, é loop pausado.**
+
+| a cena… | padrão | exemplo |
+|---|---|---|
+| tem desfecho, e o leitor só assiste | **E** — dispara no viewport | um trilho de dias que termina em X |
+| tem desfecho, e o leitor **produz** o efeito | **D** — scrub | uma bateria drenando, um mostrador enchendo |
+| não tem começo nem fim | **B** — loop pausado | uma janela de app trabalhando, pills flutuando |
+| é um bloco chegando | **A** — entrada | título, card, lista |
+| são N estados no mesmo espaço | **C** — ciclo multi-estado | o hero que troca de ferramenta |
+
+Pular esta pergunta custa caro. Um mesmo asset de seis passos foi implementado
+**três vezes** antes de acertar: loop em CSS (no meio do ciclo metade dos passos
+está invisível, e quem chega ali vê um desenho furado), depois scrub (a cena tem
+desfecho, e amarrá-la ao dedo do leitor faz dela um controle deslizante), e só
+então timeline disparada ao entrar em quadro. A pergunta de uma linha teria
+resolvido na primeira.
 
 ## A divisão de trabalho
 
@@ -125,6 +147,84 @@ efeito.
 Fora disso, preferir entrada pontual: scrub em texto obriga a rolar para
 terminar de ler.
 
+## Padrão E — cena disparada no viewport
+
+Para cena **com desfecho em que o leitor só assiste**: uma sequência que começa,
+acontece e termina sozinha, uma vez, quando a seção aparece.
+
+O padrão A anima **um bloco chegando**; o E anima **uma história curta
+acontecendo**. Se a cena tem mais de dois passos encadeados e um estado final
+que significa alguma coisa, é E.
+
+### Não use ScrollTrigger aqui, nem com `once: true`
+
+Esta é a armadilha que ninguém espera. **`ScrollTrigger` responde a *cruzar uma
+linha*; `IntersectionObserver` responde a *estar visível*.** Não são a mesma
+coisa:
+
+- quem chega por âncora (`/pagina#dobra-07`) aterrissa depois da linha sem
+  cruzá-la;
+- quem recarrega a página já rolada idem;
+- quem dá um salto de teclado ou um scroll muito rápido pode pular o trigger.
+
+Em todos esses casos a cena **fica parada para sempre**. `once: true` não corrige
+— ele só garante que, se cruzar, dispara uma vez. Trocar scrub por `once: true`
+achando que atende ao pedido "acontece quando o usuário entra na seção" é um erro
+de leitura, não de técnica, e foi mais caro que as duas tentativas anteriores
+somadas.
+
+```js
+const tl = gsap.timeline({ defaults: { ease: "power2.out" }, paused: true });
+// ...monta a timeline com posições explícitas...
+
+const olho = new IntersectionObserver(
+  (entradas) => {
+    if (entradas.some((e) => e.isIntersecting)) {
+      tl.play();
+      olho.disconnect();   // uma vez só
+    }
+  },
+  { threshold: 0.35 },
+);
+olho.observe(el);
+
+return () => { olho.disconnect(); tl.kill(); };
+```
+
+O `threshold` de ~0.35 evita disparar com a seção só espiando na borda. E o
+`disconnect` no primeiro disparo é o equivalente honesto do `once`.
+
+Sob `prefers-reduced-motion` o builder não roda, a timeline nunca é construída e
+o HTML servido **já é o estado final** — mesma arquitetura de `from` dos outros
+padrões.
+
+### Posição explícita, nunca encadeamento
+
+Encadear por `"<"` ou por append faz a duração de cada tween **empurrar o
+seguinte**. Com halos e overshoots no meio, uma cena de seis passos passa de
+**sete segundos** — termina depois de o leitor já ter rolado para longe.
+
+```js
+const PASSO = 0.3;                    // ritmo da cena, decidido uma vez
+passos.forEach((passo, i) => {
+  const t = i * PASSO;                // posição absoluta, não relativa
+  tl.fromTo(trecho, { scaleX: 0 }, { scaleX: 1, duration: 0.28 }, t);
+  tl.fromTo(marca, { opacity: 0, scale: 0.55 }, { opacity: 1, scale: 1 }, t + 0.2);
+});
+```
+
+A mesma cena fecha em **2,6 s**. A regra: em cena sequencial, todo tween recebe
+posição absoluta; a duração de um passo nunca decide quando o próximo começa.
+
+### O pisco ao pousar
+
+Cada elemento que entra precisa **mudar de estado ao chegar** — um flash de cor
+que assenta na cor final, um overshoot curto. Sem isso a sequência lê como uma
+lista que aparece e some, não como algo acontecendo.
+
+Duas cores servem: a de confirmação para o que dá certo, a de alerta para o que
+falha. O flash dura ~0.6 s e assenta; o que fica é a cor da superfície.
+
 ## Sticky é CSS, nunca pin
 
 Todo painel que acompanha o scroll usa `position: sticky` nativo. O pin da
@@ -175,3 +275,52 @@ isso vive no builder de motion, não no render. Vale para `path`, `line` e
 `polyline`. Beats da narrativa (nós que acendem conforme a linha passa) são
 posições absolutas na mesma timeline, não triggers separados: a sincronia
 sobrevive a qualquer mudança de duração.
+
+## Toda seção entrega um mecanismo vivo
+
+A imagem-conceito não mostra movimento; a camada 7 da ficha é onde ele
+nasce, e é obrigatória. **Seção sem micro-interação ligada ao que a copy diz
+está incompleta**, mesmo com a composição aprovada — coração que enche,
+contador que sobe, anel que acende, grade em loop, gráfico no scrub, stack
+que abre. *"A vida mesmo vai ser nas micro-interações, nas animações, nos
+scrolls."*
+
+Três regras de cena que o revisor repetiu em quinze áudios:
+
+- **Defina o estado final antes de animar.** Cena de fracasso termina no
+  impasse (o loading que não resolve, o badge zerado, o papel amassado que
+  estaciona); cena de conquista termina no entregável. Animação sem estado
+  final é decoração. Scrub que **para** em definitivo — o leitor não desfaz
+  o desfecho rolando de volta — é um caso novo do padrão D.
+- **Loop tem que dar tempo de leitura.** Abre, pausa legível, fecha, repete.
+  O que divide duas seções (um marquee de tags) se move devagar e **não muda
+  de cor** — loop que pisca ou cicla cor foi vetado.
+- **Citação de UI real reproduz também o movimento dela.** Um anel de story
+  com o gradiente do app pede a animação de preenchimento que o app tem;
+  meia-citação (forma sem movimento, forma com cor errada) lê como cópia
+  malfeita.
+
+## O motor de motion tem limite de falha
+
+Um `throw` dentro de `useEffect` **desmonta a árvore React inteira**. Numa
+página já rolada com uma seção hidratando tarde, o `ScrollTrigger` leu
+`.end` de um trigger `once` já morto durante o `refresh` interno e a página
+virou branco. Três camadas no hook (código em `stacks/next-tailwind-gsap.md`):
+
+1. **Loops se ligam por `IntersectionObserver`, não por `ScrollTrigger`
+   standalone.** Um `ScrollTrigger.create` isolado inicializa na hora e força
+   o `refresh` dos triggers pendentes do mesmo tick; um `once` que se mata
+   nesse laço deixa a lista com um buraco.
+2. **`ScrollTrigger.refresh()` antes do builder** quando há trigger do lote
+   inicial ainda sem `end` — o `refreshAll` itera uma cópia da lista e
+   inicializa todos antes. É a raiz.
+3. **`try/catch` em volta do builder, com `console.warn`.** Animação que
+   falha degrada para o estado estático visível (`clearProps` nos elementos
+   de entrada); a página vive. O aviso é também o instrumento de
+   diagnóstico: com ele ligado, a carga fria disse *qual* seção estourava, e
+   foi isso que levou à raiz. **Degradar com aviso é melhor que engolir o
+   erro.**
+
+A suíte não pegava: o teste que rola a página roda sob reduced-motion, e sob
+reduced-motion o builder não roda. Toda rodada precisa de uma **prova de
+rolagem em carga fria com motion ligado** (ver `revisao-e-gates.md`).

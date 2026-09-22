@@ -1,6 +1,57 @@
-# Direção visual: do Figma aos tokens
+# Direção visual: escrever ou extrair, sempre antes da blocagem produzir imagem
 
-## 1. Antes de extrair, classificar o papel do Figma
+A direção visual é **obrigatória e escrita**, exista Figma ou não. Ela vem
+antes de qualquer prompt de imagem-conceito e de qualquer `.tsx` — é a Fase
+0.5 do método, e foi o buraco número um da skill até 2026-09-21 (a Fase 2
+antiga era condicional e retroativa: "se houver Figma"). Dois ramos:
+
+- **já existe direção** (Figma, style guide, páginas no ar) → **extrair**
+  (§1–§4 abaixo);
+- **não existe** → **escrever** (§0), com referências reais.
+
+## 0. Escrever a direção quando ela não existe
+
+Template em `assets/direcao-visual-template.md`. O documento precisa de:
+
+1. **Um nome** em uma frase — "o feed da rede social", "o traço e a régua". Direção
+   sem nome não se cobra em revisão.
+2. **A leitura da copy que a sustenta**: o que a copy fala o tempo todo, e a
+   tabela **elemento visual → o que ele diz na copy → em que seções entra**.
+   Elemento que não preenche a coluna do meio não entra. É o que impede a
+   direção de virar coleção de enfeites.
+3. **A tradução para a marca**: paleta com hex exatos, tipografia, forma,
+   ícones, base de componentes existente, movimento.
+4. **O que não entra**, com o motivo de cada item.
+5. **O prefixo comum dos prompts**, colável, em inglês (ver
+   `imagem-conceito.md`).
+6. **Referências de código já existentes na casa** que o projeto deve ler
+   antes de criar bloco novo.
+
+Regras que a primeira execução ensinou:
+
+- **Direção nasce de referência real, não de neutralidade.** A V1 de um
+  funil saiu "com cara de IA" porque pedia "vocabulário de rede social
+  genérico"; a V2, aprovada, pedia a anatomia real do app que o público usa.
+  Específico vence neutro.
+- **Nunca por inércia do projeto anterior.** A mesma V1 trouxe a cor auxiliar de
+  outro expert porque ele estava na folha de estilo da marca mãe como se
+  fosse estrutura. Antes de herdar uma cor, um efeito ou uma regra, ler o
+  prefixo de escopo no `taste.md`: `[projeto]` não se transporta.
+- **Sem Figma, extraia dos artefatos que existem**: `curl` na página de
+  referência do cliente para pegar os hex reais; ler o CSS publicado. Não
+  invente cor.
+- **Quando o público conhece o produto que a página encena** (um app, uma
+  ferramenta), escreva **a anatomia dele** na direção — o que existe em cada
+  tela e em que proporção. Sem essa lista o resultado sai em nível de
+  wireframe.
+- **Numere as versões** (V1, V2…) e guarde a anterior ao lado, com a fala
+  literal que a substituiu. Quando a direção mudar, a blocagem é reescrita no
+  mesmo commit.
+- A diferenciação entre projetos irmãos da mesma casa é **por expert**: a
+  casa dá a base (paleta, tipografia), e o vocabulário do nicho do expert é o
+  que identifica a página. Cor auxiliar de um expert é dele.
+
+## 1. Já existe Figma: antes de extrair, classificar o papel dele
 
 A decisão que mais economiza tempo é descobrir, logo no primeiro olhar, **o que o
 arquivo do Figma é**:
@@ -124,7 +175,7 @@ celular normalmente já foi aprovado com `pretty`.
 
 Todo o sistema vive dentro de um seletor de escopo — `.brand-scope` na `/ref` — e
 nada fica em `:root`. Cada regra utilitária também é escrita escopada
-(`.brand-scope .one-glass`, e não `.one-glass`). A razão é concreta: o mesmo
+(`.brand-scope .brand-glass`, e não `.brand-glass`). A razão é concreta: o mesmo
 projeto hospeda outras páginas com outra identidade, e um token global vaza para
 todas elas. O escopo também torna a identidade descartável — remover a classe do
 wrapper devolve a página ao design system neutro, sem caçar overrides.

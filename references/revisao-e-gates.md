@@ -2,7 +2,7 @@
 
 Uma rodada é o intervalo entre duas sessões de feedback do cliente: começa
 com uma lista de pedidos, termina com gates verdes e um registro do que foi
-aprovado. A o projeto de referência fez seis rodadas em cerca de doze horas — o que
+aprovado. O projeto de referência fez seis rodadas em cerca de doze horas — o que
 sustentou esse ritmo não foi velocidade de implementação, foi o fechamento
 ser sempre o mesmo e sempre barato.
 
@@ -94,6 +94,62 @@ viewport maior que a seção, relógio real, nada de seek. Se o
 - **Pedidos abertos ficam listados junto**, na mesma seção, e a rodada
   seguinte começa por eles. O checkpoint termina com um status datado
   dizendo quais foram entregues e quais viraram backlog do cliente.
+
+## Fecho de uma rodada de revisão por seção
+
+Quando a rodada foi "uma seção por vez" com o dev server aberto para o
+cliente (ver `orquestracao.md`), a verificação de integração fica toda para
+o fecho, com o dev **fechado**. Nesta ordem, nada pulado:
+
+1. Suíte de contrato do alvo.
+2. `build` + `verify` de **cada** alvo (a rota com trava e a liberada).
+3. Contrato de copy contra o artefato da rota **sem trava** (a travada
+   esconde as dobras do HTML).
+4. **Prova de rolagem em carga fria**: dev derrubado, subido limpo, rolar a
+   página inteira com motion ligado, contar as dobras e capturar `pageerror`
+   **e** `console.warn` — duas vezes. É o único teste que vê bug do motor de
+   motion (ver `armadilhas.md`).
+5. SDD: ficha de cada seção, checkpoint novo, registro de sessão, estado no
+   README do projeto, prompt de retomada, changelog **com os números da
+   verificação**.
+6. A branch fica local até o cliente aprovar ao vivo. Diga as duas opções
+   (push da branch / fast-forward) e espere.
+
+Gate de alvo novo: **copiar** o verificador do alvo anterior e trocar só a
+tabela de contratos. As regras do que nunca chega ao ar se herdam inteiras
+(`publicacao.md`). Rodar o `verify` **cedo**, na primeira seção pronta, não
+só no fecho: defeitos pré-existentes ficam invisíveis até o alvo passar pelo
+gate uma vez.
+
+## Checkpoint × sessão × retomada
+
+Três documentos, três perguntas:
+
+- **Checkpoint** (`assets/checkpoint-template.md`) responde *"onde
+  estamos"*: estado por seção em tabela, verificação com números, **"para
+  o cliente ver ao vivo"**, ideias anotadas, pendências do cliente, lições
+  para o método.
+- **Sessão** (`assets/sessao-template.md`) responde *"o que se perde quando
+  a conversa acaba"*: a frase que organizou a rodada, a fonte do briefing,
+  o bug que ninguém via, o print que mentiu, vetos com escopo. É o registro
+  do que a sessão **aprendeu**, não do que ela fez. Misturar os dois faz o
+  segundo desaparecer.
+- **Prompt de retomada**: bloco colável para a sessão seguinte, com a
+  **ordem de leitura** em links. Quem chega amanhã não escolhe por onde
+  começar. Documento superado leva aviso no topo dizendo o que vale no lugar
+  — não se ajusta um documento vetado.
+
+Duas listas curtas fecham toda rodada e evitam a reclamação seguinte:
+**"para o cliente ver ao vivo"** — escolhas de execução que só se julgam na
+tela (vão vazio num card, tamanho relativo de dois assets, sobreposição
+intencional); não são bugs, não conserte por conta própria — e **"ideias
+anotadas"** — o que o cliente narrou como "guarda essa ideia", com motivo e
+dependência, nunca executado "de bônus" nem esquecido.
+
+Aprovação e crítica são **granulares**: registre no nível do componente,
+não do asset. *"Gostei muito do asset que você criou, mas só do botão dele —
+o resto pode jogar fora."* A peça elogiada dentro de um asset reprovado vai
+para estoque nomeado e reservado.
 
 ## Registro e rastreabilidade
 
