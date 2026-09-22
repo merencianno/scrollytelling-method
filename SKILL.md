@@ -1,21 +1,49 @@
 ---
 name: scrollytelling-method
-description: Transformar uma copy de página de vendas em landing com scrollytelling — direção visual escrita antes de tudo, imagem-conceito aprovada por seção antes do código, ficha de 7 camadas como briefing, mockup de interface com mock data (nunca prova) no lugar de screenshot, loops em CSS pausados até entrar em cena, identidade token-first, copy inviolável verificada por script e orquestração "uma seção por vez" em subagentes. Use sempre que o usuário pedir "página de vendas", "landing com scrollytelling", "transformar essa copy em página", "reimaginar a landing", "tangibilizar a copy", "imagem-conceito por seção", "revisão por áudio", ou quando existir um arquivo de copy dividido em dobras esperando virar página. Cobre o pipeline inteiro, da ficha do projeto à publicação. A skill irmã slides-scrollytelling faz a variante em deck; esta faz páginas.
+description: Transformar uma copy aprovada em interface narrativa — landing com scrollytelling, deck de slides, carrossel de social, criativo estático ou tela de produto. Direção visual escrita antes de tudo, imagem-conceito aprovada por unidade antes do código, ficha de 7 camadas como briefing, mockup de interface com mock data (nunca prova) no lugar de screenshot, loops em CSS pausados até entrar em cena, identidade token-first, copy inviolável verificada por script e orquestração "uma unidade por vez" em subagentes. Use sempre que o usuário pedir "página de vendas", "landing com scrollytelling", "transformar essa copy em página", "reimaginar a landing", "transformar essa copy em slides", "deck", "apresentação", "carrossel", "criativo", "tela de produto", "tangibilizar a copy", "imagem-conceito por seção", "revisão por áudio", ou quando existir uma copy dividida em blocos esperando virar interface. Cobre o pipeline inteiro, da ficha do projeto à publicação.
 license: MIT
 ---
 
 # scrollytelling-method
 
-Método para transformar copy comercial em página que se conta sozinha durante o
-scroll. Destilado de quatro páginas que existem em produção — uma VSL, uma
-página de produto de software refeita seis vezes em doze horas, e dois funis
-de expert, o último deles o primeiro a usar imagem-conceito por seção e
-revisão por áudio — e das armadilhas que todas custaram. Aqui elas aparecem
-como `/ref-vsl`, `/ref`, `/ref-funil-a` e `/ref-funil-b`.
+Método para transformar copy comercial em interface que se conta sozinha.
+Destilado de quatro páginas que existem em produção, aqui chamadas `/ref-vsl`,
+`/ref`, `/ref-funil-a` e `/ref-funil-b`, e das armadilhas que todas custaram.
 
 Não é um tema visual: é um processo com contratos verificáveis. Trocar cor e
 fonte numa estrutura existente é maquiagem, e vai ser rejeitado na primeira
 revisão.
+
+## O formato e a unidade
+
+O método organiza **uma narrativa quebrada em unidades**. O que muda de um
+formato para outro é o eixo do tempo; o pipeline é o mesmo.
+
+| formato | a unidade | o eixo do tempo |
+|---|---|---|
+| página de vendas, landing | a dobra | o scroll |
+| apresentação, deck | o slide | o avanço |
+| carrossel de social | o card | o swipe |
+| criativo estático | a peça | não existe: resolve-se em composição |
+| UI de produto | a tela ou o estado | a interação de quem usa |
+
+**Identifique o formato na Fase 0** e leia "dobra" e "seção", no resto destes
+arquivos, como *a unidade daquele formato* — o vocabulário vem do caso de
+origem, que é a página.
+
+O que muda fora da página, e só isto:
+
+- **O padrão D (scrub) não existe sem scroll.** Em deck ele vira transição
+  entre slides; em UI de produto, transição de estado. Os padrões A, B, C e E
+  seguem iguais.
+- **O ritmo de superfícies** (escuro nos picos, claro nos respiros) é
+  ferramenta de página longa. Em deck marca os atos; em criativo isolado não
+  se aplica; em UI de produto a consistência vale mais que o contraste.
+- **Os gates pressupõem artefato servido.** Para peça exportada (PNG, PDF), a
+  regra da copy continua e o verificador precisa ser outro — conferência
+  contra o texto da peça, não contra HTML.
+- **Em UI de produto, mock data vira dado real** e a copy vem do produto, não
+  da oferta. O limite da afirmação continua valendo.
 
 ## Arquivos de apoio
 
@@ -106,17 +134,20 @@ imagem-conceito, camadas, tangibilização.
 
 ## Fase 0 — Fundações
 
-1. **Ficha do projeto.** Quem pediu, para que serve em uma frase, público, e o
-   que não é óbvio. Template em `assets/ficha-template.md`. Num funil com
-   várias páginas, cada página tem **um objeto próprio** que a distingue das
-   irmãs — a imagem-conceito é por seção; o objeto é por página.
-2. **Contrato de copy.** Fonte canônica congelada. Nenhuma palavra, acento,
+1. **Formato e unidade.** Página, deck, carrossel, criativo ou UI? Qual é a
+   unidade e qual é o eixo do tempo? Decidido aqui, não descoberto na terceira
+   unidade. Ver a tabela acima.
+2. **Ficha do projeto.** Quem pediu, para que serve em uma frase, público, e o
+   que não é óbvio. Template em `assets/ficha-template.md`. Num conjunto com
+   várias peças, cada peça tem **um objeto próprio** que a distingue das
+   irmãs — a imagem-conceito é por unidade; o objeto é por peça.
+3. **Contrato de copy.** Fonte canônica congelada. Nenhuma palavra, acento,
    número, caixa, emoji ou ordem muda. Hierarquia, agrupamento e ênfase, sim.
    `contratos.json` versionado (`assets/contratos-exemplo.json`), e a tabela de
    **buracos da copy → encaminhamento**. Ver `references/copy-contrato.md`.
-3. **Tokens antes de componentes**, escopados por classe. `assets/tokens-template.css`.
-4. **Ritmo de superfícies.** Escuro nos picos, claro nos respiros, escrito
-   como string versionada (`1B 2C 3B 4E …`).
+4. **Tokens antes de componentes**, escopados por classe. `assets/tokens-template.css`.
+5. **Ritmo de superfícies**, quando o formato tem sequência longa. Escuro nos
+   picos, claro nos respiros, escrito como string versionada (`1B 2C 3B 4E …`).
 
 ## Fase 0.5 — Direção visual (obrigatória, escrita)
 
@@ -228,37 +259,39 @@ artefato no ar, e antes de regerar compara-se com ele.
 
 ## Checklist de execução
 
-1. Ficha preenchida, uma frase de propósito (e o objeto da página, num funil)
-2. **Modo identificado** — existe referência? tem número? é imagem-conceito? (refazer a cada entrega)
-3. Copy congelada, `contratos.json` escrito, buracos encaminhados
-4. Tokens escopados, ritmo de superfícies como string
-5. **Direção visual escrita**, com nome e prefixo comum colável
-6. `references/taste.md` lido antes do primeiro conceito — com os prefixos de escopo
-7. Blocagem em tabela, conceito nomeado em cada dobra, sem dispositivo repetido em vizinhas
-8. **Double-check das ideias** em subagentes de contexto limpo
-9. **Imagens-conceito geradas e aprovadas** pelo cliente
-10. **Fichas de 7 camadas** escritas, antes do código
-11. Átomos compartilhados commitados; seções implementadas (lotes na construção, uma por vez na revisão), um commit cada
-12. Gates verdes, prints por dobra em 1440/390 (e 320/375/768 na auditoria), prova de rolagem em carga fria
-13. Rodada registrada: checkpoint, sessão, "para o cliente ver ao vivo", ideias anotadas
-14. Publicação rastreável, comparada com o artefato no ar
+1. **Formato e unidade decididos**, com o eixo do tempo nomeado
+2. Ficha preenchida, uma frase de propósito (e o objeto da peça, num conjunto)
+3. **Modo identificado** — existe referência? tem número? é imagem-conceito? (refazer a cada entrega)
+4. Copy congelada, `contratos.json` escrito, buracos encaminhados
+5. Tokens escopados, ritmo de superfícies como string
+6. **Direção visual escrita**, com nome e prefixo comum colável
+7. `references/taste.md` lido antes do primeiro conceito — com os prefixos de escopo
+8. Blocagem em tabela, conceito nomeado em cada dobra, sem dispositivo repetido em vizinhas
+9. **Double-check das ideias** em subagentes de contexto limpo
+10. **Imagens-conceito geradas e aprovadas** pelo cliente
+11. **Fichas de 7 camadas** escritas, antes do código
+12. Átomos compartilhados commitados; seções implementadas (lotes na construção, uma por vez na revisão), um commit cada
+13. Gates verdes, prints por dobra em 1440/390 (e 320/375/768 na auditoria), prova de rolagem em carga fria
+14. Rodada registrada: checkpoint, sessão, "para o cliente ver ao vivo", ideias anotadas
+15. Publicação rastreável, comparada com o artefato no ar
 
 ## O que esta skill não faz
 
 - Não escreve copy. A copy chega pronta e é inviolável.
-- Não faz deck de slides — isso é `slides-scrollytelling`.
-- Não traduz um arquivo de Figma inteiro em tela, pixel a pixel — isso é
-  `figma-translate`. Reproduzir um golden master de uma seção é o modo executor
-  e está no escopo.
+- Não traduz um arquivo de Figma inteiro em tela, pixel a pixel. Reproduzir um
+  golden master de uma unidade é o modo executor e está no escopo.
 - Não decide oferta, preço ou posicionamento. Regra comercial de um projeto
   (`[projeto]` no `taste.md`) não se transporta: a copy do projeto vence.
 - Não gera o asset final por IA. A imagem gerada é ideia; o que vai ao ar é HTML/CSS.
 
 ## Limitações conhecidas
 
-- O método produz páginas **pesadas**: muitas seções com mockup em HTML e SVG
-  inline; WebGL entra só por decisão do cliente e com fallback. Medir cedo se
-  o público for majoritariamente móvel.
+- Em web, o método produz páginas **pesadas**: muitas unidades com mockup em
+  HTML e SVG inline; WebGL entra só por decisão do cliente e com fallback.
+  Medir cedo se o público for majoritariamente móvel.
+- Fora da página, o pipeline está mapeado mas os gates não: o verificador de
+  copy e a auditoria de larguras pressupõem artefato servido. Em peça
+  exportada, a regra vale e o script precisa ser escrito.
 - A geração de imagem foi executada como **ideação** (14 seções, 2026-09-21),
   manualmente no navegador do cliente. Geração por CLI depende de crédito e
   workspace; não prometer automação sem confirmar.
