@@ -14,7 +14,7 @@ Copy não muda. <O que mais não muda.>
 2. `<pasta>/components/sections/<Componente>.tsx` inteiro (o que existe; <o que sai>).
 3. Blocos prontos em `<pasta>/components/ui/`: <lista com props relevantes>.
 4. `<pasta>/sdd/camadas.md` — ficha "Seção NN" (você a reescreve, 7 camadas, ANTES do código).
-5. `<pasta>/dv/secoes/NN-slug/imagem-*.png` (abra com Read) + o `prompt-vK-NN.md` que a gerou.
+5. `secoes/NN-slug/imagem-*.png` (abra com Read) + o `prompt-vK.md` que a gerou.
    A imagem vale como composição; se divergir da revisão escrita, **a revisão vence** — registre.
 6. `<motor de motion>.ts`.
 

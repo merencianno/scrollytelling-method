@@ -2,7 +2,8 @@
 
 > **A geração de imagem entrou no método — como ferramenta de ideia, não de
 > asset.** Em 2026-09-21 catorze seções de um funil foram geradas como
-> imagens-conceito 16:9 e aprovadas antes do código (`imagem-conceito.md`).
+> imagens-conceito na proporção do formato, aprovadas antes do código
+> (`imagem-conceito.md`).
 > Nenhuma dessas imagens foi ao ar: o que resolve a página continua sendo o
 > **mockup de interface construído em HTML/CSS**, e a copy só entra no código.
 > Este arquivo cobre o que sobra — o asset gerado que de fato entra na página

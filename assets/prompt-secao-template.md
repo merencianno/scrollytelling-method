@@ -1,8 +1,9 @@
 # NN — <Função narrativa> · "<conceito nomeável em uma frase>"
 
-<!-- Arquivo: <projeto>/dv/secoes/NN-slug/prompt-vK-NN.md — K = geração do prompt, NN = seção.
+<!-- Arquivo: secoes/NN-slug/prompt-vK.md — K = geração do prompt, NN = seção.
      O cliente precisa saber qual é qual sem abrir o arquivo. -->
 
+**Proporção:** <a do `projeto.md` — 16:9, 1:1, 4:5, 9:16>.
 **Ato:** claro (<hex>) ou escuro (<hex>), conforme a blocagem.
 **Elemento visual:** <qual anatomia real entra e o que ela diz da copy desta seção>.
 

@@ -32,7 +32,7 @@ gradiente — só quando é citação literal de UI de terceiro; rosto — prova
 ## Prefixo comum dos prompts (linha V<K>, padrão desde <data>)
 
 <Colável, em inglês, igual em todos os prompts de imagem-conceito. Cobre: formato (screenshot de
-seção real, 1440 px, 16:9, export de Figma, não ilustração), paleta com hex, tipografia, anatomia real
+unidade real, na proporção do projeto, export de Figma, não ilustração), paleta com hex, tipografia, anatomia real
 do vocabulário permitido, proibições, e a nota "texto na imagem é placeholder".>
 
 ```text
@@ -42,7 +42,7 @@ do vocabulário permitido, proibições, e a nota "texto na imagem é placeholde
 ## Por que a V<K> virou o padrão (<data>)
 
 <A fala literal do cliente que substituiu a versão anterior, e o que mudou. A anterior fica em
-dv/historico/. Versão nova nasce ao lado, nunca sobrescreve.>
+historico/. Versão nova nasce ao lado, nunca sobrescreve.>
 
 ## Referências de código já existentes na casa
 

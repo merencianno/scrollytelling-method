@@ -7,7 +7,8 @@ pasta certa e diz o que achou.
 ## O que é isso
 
 Antes de existir qualquer código, cada seção da página vira **uma imagem de
-computador, formato 16:9**, gerada por IA a partir de um texto (o "prompt")
+imagem na proporção da sua peça**, gerada por IA a partir de um texto (o
+"prompt")
 que o Claude escreve. A imagem é uma **ideia**, não a seção final: ela mostra
 o arranjo, qual tela ou objeto aparece, onde fica o destaque de cor. Texto,
 números e detalhes dentro dela são enfeite do gerador — a página de verdade
@@ -22,8 +23,8 @@ Peça ao Claude: *"gera os prompts de imagem-conceito das seções"*. Ele cria
 uma pasta por seção:
 
 ```text
-<projeto>/dv/secoes/01-promessa/prompt-v1-01.md
-<projeto>/dv/secoes/02-dor/prompt-v1-02.md
+meu-projeto/secoes/01-promessa/prompt-v1.md
+meu-projeto/secoes/02-dor/prompt-v1.md
 …
 ```
 
@@ -40,7 +41,8 @@ saiu uma imagem com o nome de outro projeto por causa do cabeçalho.
 Cole no gerador que você tiver:
 
 - **No navegador, à mão** (ChatGPT, Gemini, Magnific, Higgsfield…). Formato
-  16:9, uma imagem por vez — o modo "lista" ou "lote" piora o resultado.
+  na proporção do seu projeto, **uma imagem por vez** — o modo "lista" ou
+  "lote" piora o resultado.
 - **Pelo Claude**, se você tiver um gerador ligado a ele (MCP do Higgsfield,
   do Magnific…): peça *"gera a imagem da seção 03 com o prompt v1"*. Confirme
   antes que há crédito.
@@ -58,8 +60,8 @@ Isso **não vai para o código**. Julgue a ideia, não o acabamento.
 Salve a imagem dentro da pasta da seção, com a versão e o modelo no nome:
 
 ```text
-<projeto>/dv/secoes/03-desejo/imagem-v1-gpt25.png
-<projeto>/dv/secoes/03-desejo/imagem-v1-seedream.png
+meu-projeto/secoes/03-desejo/imagem-v1-gpt25.png
+meu-projeto/secoes/03-desejo/imagem-v1-seedream.png
 ```
 
 Pode gerar a mesma seção em dois modelos e guardar as duas.
@@ -79,9 +81,9 @@ usar parte: a coluna da esquerda vale; a direita troca por uma notificação
 
 Você não precisa aceitar a primeira ideia. Peça variações: *"me dá outra
 ideia para a seção 05, menos literal"*, *"e se a 08 fosse um papel amassando?"*.
-O Claude escreve `prompt-v2-05.md` **ao lado** do v1 (nunca por cima), você
+O Claude escreve `prompt-v2.md` **ao lado** do v1 (nunca por cima), você
 gera, compara, anota no veredito o que cada versão acertou. Tudo fica
-guardado em `dv/historico/`; nada se apaga.
+guardado em `historico/`; nada se apaga.
 
 Enquanto olha as imagens, confira também **a distribuição da copy**: aquela
 frase está na seção certa? Duas seções estão dizendo a mesma coisa? Esta é a

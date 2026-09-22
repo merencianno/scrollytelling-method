@@ -131,7 +131,7 @@ sem reler código.
 Antes de tocar em código: **escreva a mudança no briefing**, numa seção nova
 e datada, dizendo em voz alta **o que ela revoga**, com as palavras do cliente
 citadas, o limite que continua valendo, a ordem de execução pedida e o que
-ficou como backlog. Guarde a referência visual em `dv/referencias/` com data
+ficou como backlog. Guarde a referência visual em `referencias/` com data
 no nome. Só então dispare os agentes — e mande cada um ler a seção nova
 **primeiro**, com a frase "ela REVOGA as regras de …".
 

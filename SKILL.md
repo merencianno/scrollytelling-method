@@ -1,76 +1,39 @@
 ---
 name: scrollytelling-method
-description: Transformar uma copy aprovada em interface narrativa — landing com scrollytelling, deck de slides, carrossel de social, criativo estático ou tela de produto. Direção visual escrita antes de tudo, imagem-conceito aprovada por unidade antes do código, ficha de 7 camadas como briefing, mockup de interface com mock data (nunca prova) no lugar de screenshot, loops em CSS pausados até entrar em cena, identidade token-first, copy inviolável verificada por script e orquestração "uma unidade por vez" em subagentes. Use sempre que o usuário pedir "página de vendas", "landing com scrollytelling", "transformar essa copy em página", "reimaginar a landing", "transformar essa copy em slides", "deck", "apresentação", "carrossel", "criativo", "tela de produto", "tangibilizar a copy", "imagem-conceito por seção", "revisão por áudio", ou quando existir uma copy dividida em blocos esperando virar interface. Cobre o pipeline inteiro, da ficha do projeto à publicação.
+description: Transformar uma copy aprovada em telas — landing com scrollytelling, deck de slides, carrossel, criativo de social ou UI de produto. Cobre a parte criativa, da copy à peça final: blocagem que trata texto e composição juntos, prompt de imagem-conceito por unidade na proporção do formato, veredito de quem aprova antes de qualquer código, wireframe e layout em ficha de 7 camadas, mockup de interface com mock data (nunca prova), loops pausados até entrar em cena e copy inviolável. Use sempre que o usuário pedir "página de vendas", "landing com scrollytelling", "transformar essa copy em página", "reimaginar a landing", "transformar essa copy em slides", "deck", "apresentação", "carrossel", "criativo", "tela de produto", "tangibilizar a copy", "imagem-conceito por seção", ou quando existir uma copy dividida em blocos esperando virar tela. Não cobre build, teste, deploy nem gate de publicação.
 license: MIT
 ---
 
 # scrollytelling-method
 
-Método para transformar copy comercial em interface que se conta sozinha.
-Destilado de quatro páginas que existem em produção, aqui chamadas `/ref-vsl`,
-`/ref`, `/ref-funil-a` e `/ref-funil-b`, e das armadilhas que todas custaram.
+Método para transformar uma copy aprovada em **telas**. Cobre a parte criativa
+inteira: da copy à peça final exportada.
 
-Não é um tema visual: é um processo com contratos verificáveis. Trocar cor e
-fonte numa estrutura existente é maquiagem, e vai ser rejeitado na primeira
-revisão.
+Não é um tema visual: é um processo. Trocar cor e fonte numa estrutura
+existente é maquiagem, e vai ser rejeitado na primeira revisão.
 
-## O formato e a unidade
+O que vem depois da peça pronta — build, teste, deploy, gate de publicação —
+está fora do escopo. Ver "O que fica fora", no fim.
 
-O método organiza **uma narrativa quebrada em unidades**. O que muda de um
-formato para outro é o eixo do tempo; o pipeline é o mesmo.
+## O formato decide três coisas
 
-| formato | a unidade | o eixo do tempo |
-|---|---|---|
-| página de vendas, landing | a dobra | o scroll |
-| apresentação, deck | o slide | o avanço |
-| carrossel de social | o card | o swipe |
-| criativo estático | a peça | não existe: resolve-se em composição |
-| UI de produto | a tela ou o estado | a interação de quem usa |
+A unidade, o eixo do tempo e **a proporção da imagem**. O resto do método não
+muda.
 
-**Identifique o formato na Fase 0** e leia "dobra" e "seção", no resto destes
-arquivos, como *a unidade daquele formato* — o vocabulário vem do caso de
-origem, que é a página.
+| formato | a unidade | o eixo do tempo | proporção | a peça final |
+|---|---|---|---|---|
+| landing, página de vendas | a dobra | o scroll | 16:9, mais 9:16 quando o mobile muda a cena | HTML/CSS, Next |
+| deck, apresentação | o slide | o avanço | 16:9 | `.pptx`, PDF, HTML/Next, ou Figma pelo MCP |
+| carrossel de social | o card | o swipe | 1:1 ou 4:5 | PNG em sequência, na ordem |
+| story, reels estático | a peça | — | 9:16 | PNG |
+| criativo de feed | a peça | — | 1:1 ou 4:5 | PNG (CSS → export) ou Figma pelo MCP |
+| UI de produto | a tela ou o estado | a interação | a do dispositivo | código ou Figma pelo MCP |
 
-O que muda fora da página, e só isto:
+**A proporção é parâmetro, não constante.** Decida no Passo 0, escreva no
+`projeto.md`, e todo prompt de imagem herda dela.
 
-- **O padrão D (scrub) não existe sem scroll.** Em deck ele vira transição
-  entre slides; em UI de produto, transição de estado. Os padrões A, B, C e E
-  seguem iguais.
-- **O ritmo de superfícies** (escuro nos picos, claro nos respiros) é
-  ferramenta de página longa. Em deck marca os atos; em criativo isolado não
-  se aplica; em UI de produto a consistência vale mais que o contraste.
-- **Os gates pressupõem artefato servido.** Para peça exportada (PNG, PDF), a
-  regra da copy continua e o verificador precisa ser outro — conferência
-  contra o texto da peça, não contra HTML.
-- **Em UI de produto, mock data vira dado real** e a copy vem do produto, não
-  da oferta. O limite da afirmação continua valendo.
-
-## Arquivos de apoio
-
-Abrir conforme a fase — nenhum precisa ser lido de antemão, e ler todos de uma
-vez desperdiça contexto.
-
-| Arquivo | Quando abrir |
-|---|---|
-| `references/taste.md` | **Antes de propor qualquer conceito.** O que é vetado e o que já foi aprovado, com prefixo de escopo. É o que separa este estilo do visual genérico de IA |
-| `references/copy-contrato.md` | Ao receber a copy, antes de escrever a primeira seção |
-| `references/direcao-visual.md` | **Fase 0.5, obrigatória.** Escrever a direção quando não existe; extrair quando existe |
-| `references/blocagem.md` | Na hora de planejar as dobras, antes de codar |
-| `references/imagem-conceito.md` | **Fase 1.5a.** Como cada seção vira uma imagem aprovada antes do código |
-| `references/camadas.md` | **Fase 1.5b.** A ficha de 7 camadas que faz a ponte entre a imagem e o código |
-| `references/medicao.md` | **Sempre que houver referência com medida.** Como medir protótipo, cor, tracejado e fotografar uma dobra animada |
-| `references/conceitos-por-dobra.md` | Ao inventar o conceito de cada seção — inclui a árvore "qual tela o item pede" |
-| `references/mecanismos.md` | Quando souber o que a seção precisa dizer mas não como mostrar |
-| `references/animacao.md` | **Antes de escrever a primeira linha de animação.** Os cinco padrões e o limite de falha do motor |
-| `references/orquestracao.md` | **Antes de disparar o primeiro subagente.** Uma seção por vez, átomos antes do loop, o template do prompt |
-| `references/revisao-por-audio.md` | Quando o feedback chegar em áudio — e o grill de perguntas antes de implementar |
-| `references/armadilhas.md` | Antes de depurar qualquer coisa que "deveria funcionar" |
-| `references/assets-gerados.md` | Para o asset gerado que de fato entra na página (a imagem-conceito não entra) |
-| `references/revisao-e-gates.md` | Ao fechar cada rodada |
-| `references/publicacao.md` | Antes de publicar — o que só o artefato de produção revela |
-| `stacks/next-tailwind-gsap.md` | Se o projeto for Next + Tailwind + GSAP: o código colável |
-| `assets/` | Templates: ficha, direção visual, blocagem, prompt de seção, briefing de ideação, camadas, prompt de subagente, checkpoint, sessão, contratos, tokens |
-| `scripts/` | `audit-viewports`, `verify-copy-contract`, `verify-fidelidade`, `shoot-dobra` |
+Leia "dobra" e "seção", no resto destes arquivos, como **a unidade do seu
+formato** — o vocabulário vem do caso de origem, que é a página.
 
 ## A regra de ouro
 
@@ -132,211 +95,210 @@ número, logotipo, cor que escapou da proibição.
 Vale o método inteiro: direção escrita, conceito nomeável por seção,
 imagem-conceito, camadas, tangibilização.
 
-## Fase 0 — Fundações
+## O que você prepara antes de chamar a skill
 
-1. **Formato e unidade.** Página, deck, carrossel, criativo ou UI? Qual é a
-   unidade e qual é o eixo do tempo? Decidido aqui, não descoberto na terceira
-   unidade. Ver a tabela acima.
-2. **Ficha do projeto.** Quem pediu, para que serve em uma frase, público, e o
-   que não é óbvio. Template em `assets/ficha-template.md`. Num conjunto com
-   várias peças, cada peça tem **um objeto próprio** que a distingue das
-   irmãs — a imagem-conceito é por unidade; o objeto é por peça.
-3. **Contrato de copy.** Fonte canônica congelada. Nenhuma palavra, acento,
-   número, caixa, emoji ou ordem muda. Hierarquia, agrupamento e ênfase, sim.
-   `contratos.json` versionado (`assets/contratos-exemplo.json`), e a tabela de
-   **buracos da copy → encaminhamento**. Ver `references/copy-contrato.md`.
-4. **Tokens antes de componentes**, escopados por classe. `assets/tokens-template.css`.
-5. **Ritmo de superfícies**, quando o formato tem sequência longa. Escuro nos
-   picos, claro nos respiros, escrito como string versionada (`1B 2C 3B 4E …`).
+Duas coisas: **a copy** e **a direção visual**. O resto a skill cria.
 
-### Quais condicionais valem para este formato
+```text
+meu-projeto/
+├─ projeto.md              formato, unidade, proporção, prazo — dez linhas
+├─ copy/
+│  └─ copy.md              a copy aprovada, um título por bloco. É inviolável.
+├─ direcao-visual.md       a direção a ser seguida — ou a matéria-prima dela
+└─ referencias/            imagens, prints, pesquisa, moodboard que você trouxe
+```
 
-Decidir agora, por escrito, e não descobrir na terceira unidade. O invariante
-nunca é condicional: formato e unidade, contrato de copy, tokens, direção
-visual escrita, blocagem, imagem-conceito, camadas, uma unidade por vez,
-gates, revisão e fechamento acontecem **sempre**.
+**`projeto.md`** — formato e unidade, a proporção da imagem, o formato do
+arquivo final, quem aprova, o prazo, e quais condicionais valem (ritmo de
+superfícies, motion, responsividade, performance). Dez linhas resolvem, é o
+primeiro arquivo que a skill lê, e o template está em
+`assets/projeto-template.md`.
 
-| condicional | entra quando | não entra em |
-|---|---|---|
-| ritmo de superfícies | a sequência é longa | criativo isolado, peça única |
-| motion | o formato tem eixo de tempo | criativo estático |
-| responsividade | o viewport varia | carrossel e criativo (dimensão fixa) |
-| performance | a peça carrega | o que é exportado como arquivo |
-| formato de exportação | **sempre** — muda o quê, nunca se pula | — |
+**`copy/copy.md`** — a copy aprovada, dividida em blocos, com um título por
+bloco. Nenhuma palavra, acento, número, caixa, emoji ou ordem muda depois.
+Mudam hierarquia, agrupamento e ênfase.
 
-## Fase 0.5 — Direção visual (obrigatória, escrita)
+**`direcao-visual.md`** — chega na fidelidade que você tiver. A skill converte
+qualquer uma destas entradas no mesmo documento escrito:
 
-O projeto chega como **copy + direção visual livre**: pode ser texto, imagens,
-pesquisa, um Figma, ou nada além da copy. A primeira pergunta não é "existe
-direção?", é **"com que fidelidade ela chegou?"** — é a mesma pergunta dos
-quatro modos, um andar acima.
-
-| o que chega junto da copy | o que fazer com isso |
+| o que você tem | o que a skill faz com isso |
 |---|---|
-| nada | escrever do zero, a partir da leitura da copy e de referência real do cliente |
-| texto solto, briefing falado | ler **intenção**, não instrução; o que for medida, perguntar |
-| imagens, moodboard | extrair paleta e vocabulário — **nunca layout** |
-| pesquisa + imagens + texto | material rico e ainda sem medida: vira direção escrita, não cópia |
-| Figma de direção (paleta, marca, ícones) | extrair só três coisas: paleta exata, assets exportáveis, frames como moodboard |
-| Figma de página, golden master com medida | **modo executor**: medir e copiar, sem cromo a mais |
+| nada | escreve do zero, a partir da leitura da copy e de referência real |
+| texto solto, briefing falado | lê **intenção**, não instrução; o que for medida, pergunta |
+| imagens, moodboard | extrai paleta e vocabulário — **nunca layout** |
+| pesquisa + imagens + texto | vira direção escrita, não cópia |
+| Figma de direção (paleta, marca, ícones) | extrai três coisas: paleta exata, assets exportáveis, frames como moodboard |
+| Figma de página, com medida | **modo executor**: mede e copia, sem cromo a mais |
 
-O erro caro é tratar os dois últimos como o mesmo caso. Extrair a árvore de
-nós de um arquivo de direção é trabalho jogado fora; ler um moodboard como
-layout produz seção que não faz sentido nenhum.
+Aí é só pedir: *"roda a skill nesse projeto"*.
 
-Seja qual for a entrada, a saída é a mesma: um documento **escrito**, com
-nome, a leitura da copy que o sustenta, a tabela elemento → o que diz na copy
-→ onde entra, paleta com hex, o que não entra e o **prefixo comum dos
-prompts**, colável. Template em `assets/direcao-visual-template.md`; regras em
-`references/direcao-visual.md`.
+## O que a skill cria
 
-### A direção é entregável, não documento interno
+```text
+meu-projeto/
+├─ direcao-visual.md       ← reescrito: com nome, paleta em hex, o que não entra,
+│                             e o PREFIXO COMUM dos prompts, colável
+├─ blocagem.md             ← uma linha por unidade
+├─ secoes/
+│  ├─ 01-<slug>/
+│  │  ├─ prompt-v1.md         o prompt da unidade 01, versão 1
+│  │  ├─ prompt-v2.md         versão nova nasce AO LADO, nunca por cima
+│  │  ├─ imagem-v1-<modelo>.png   ← você gera e salva aqui
+│  │  ├─ imagem-v2-<modelo>.png
+│  │  ├─ veredito.md             ← aprovada | refazer: … | usar parte: …
+│  │  └─ camadas.md              ← wireframe (1–3) e layout (4–7)
+│  ├─ 02-<slug>/
+│  └─ …
+├─ saida/                  a peça final, no formato do projeto.md
+└─ historico/              nada se apaga: versão substituída vive aqui
+```
 
-É a primeira coisa que quem aprova vê, e é o que compra alinhamento antes de
-qualquer unidade ser desenhada. Duas densidades, conforme o prazo:
+Uma pasta por unidade, e o nome do arquivo carrega a versão e o modelo. É o
+que permite empilhar tentativas sem perder nenhuma.
 
-- **Enxuta** — nome da direção em uma frase, paleta com hex, tipografia, 3–5
-  referências, o que não entra e por quê, o prefixo de prompt.
-- **Elaborada** — tudo isso, mais a leitura da copy, a tabela elemento → copy
-  → seções, a anatomia do objeto, duas linhas alternativas (V1/V2) para
-  escolher, e **uma ou duas imagens-conceito de amostra** de uma unidade-chave.
+## O fluxo, em seis passos
 
-A amostra é o item de maior retorno: direção lida como texto o cliente aprova
-por educação; direção com uma unidade já desenhada ele aprova ou veta de
-verdade. É antecipar a Fase 1.5a numa unidade só para destravar o resto.
+| passo | o que produz | quem faz |
+|---|---|---|
+| **0 · Pasta e direção** | `projeto.md`, `direcao-visual.md` reescrito com nome e prefixo | você prepara, a skill reescreve |
+| **1 · Blocagem** | `blocagem.md` — texto **e** composição, juntos | a skill |
+| **2 · Prompts** | `secoes/NN-slug/prompt-v1.md`, um por unidade | a skill |
+| **3 · Imagens e veredito** | as imagens e o `veredito.md` de cada unidade | **você** |
+| **4 · Wireframe** | camadas 1–3: fundo, estrutura, texto no lugar | a skill |
+| **5 · Layout** | camadas 4–7: estilo, cor, mockup, movimento | a skill |
+| **6 · Peça final** | `saida/`, no formato do `projeto.md` | a skill |
 
-### A direção carrega assets
+### Passo 0 — A direção, escrita e apresentada
 
-Marcas exportadas, ícones, fotos, texturas viajam junto dela. É o que faz
-peças irmãs de um mesmo conjunto parecerem da mesma família sem serem iguais,
-e encaixa nos prefixos de escopo do `taste.md`: **a casa dá paleta e
-tipografia (`[casa]`); a direção dá o vocabulário do objeto (`[projeto]`).**
+A direção visual é **obrigatória e escrita**, exista Figma ou não. Ela vem
+antes de qualquer prompt. Saída: nome em uma frase, a leitura da copy que a
+sustenta, a tabela elemento → o que diz na copy → onde entra, paleta com hex,
+o que não entra, e o **prefixo comum dos prompts**, colável. Template em
+`assets/direcao-visual-template.md`; regras em `references/direcao-visual.md`.
 
-A direção nasce de referência real (a página do cliente, o app que o público
-usa), **nunca por inércia do projeto anterior** — foi assim que um funil
-herdou a cor de outro e perdeu uma rodada. Antes de herdar qualquer regra do
-`taste.md`, ler o prefixo de escopo.
+Ela é **entregável**, não documento interno — é a primeira coisa que quem
+aprova vê. Enxuta ou elaborada conforme o prazo; a versão elaborada traz duas
+linhas alternativas e **uma imagem-conceito de amostra** de uma unidade-chave.
+Direção lida como texto é aprovada por educação; direção com uma unidade já
+desenhada é aprovada ou vetada de verdade.
 
-## Fase 1 — Blocagem
+A direção **carrega assets** (marcas, ícones, fotos, texturas) e nasce de
+referência real, **nunca por inércia do projeto anterior**.
 
-Leitura estrutural da copy primeiro; depois a tabela: dobra → função narrativa
-→ conceito → componente → ato → blocagem → motion → assets (com a marca **IC**
-quando a seção passa por imagem-conceito). Uma linha por dobra, conceito
-nomeado em cada, **sem repetir dispositivo em seções vizinhas**. Template em
-`assets/blocagem-template.md`, critérios em `references/blocagem.md`. Quando a
-direção mudar, a blocagem é reescrita no mesmo commit.
+### Passo 1 — Blocagem é diagramação E composição
 
-## Fase 1.5a — Imagem-conceito por seção
+Uma linha por unidade: função narrativa → conceito nomeável → ato claro/escuro
+→ disposição → motion → assets. Template em `assets/blocagem-template.md`,
+critérios em `references/blocagem.md`.
 
-Entre a blocagem e o código, cada seção vira **uma imagem 16:9 de desktop**
-que o cliente aprova. Um prompt por seção (`assets/prompt-secao-template.md`):
-prefixo comum inalterado + `LAYOUT.` + a cena, com o double-check (a–d)
-respondido por **subagentes de contexto limpo** antes de gerar. A imagem é
-ferramenta de pensamento e de aprovação — **não é asset**: o que vai ao ar
-nasce em HTML/CSS e a copy só entra no código. Veredito do cliente por seção:
-`aprovada` / `refazer:` / `usar parte:`. Ele pode empilhar versões de prompt e
-testar modelos; **só se avança quando ele estiver satisfeito com a ideia de
-cada seção e com a distribuição da copy** — uma ideia por seção no fim, o
-histórico inteiro guardado. Guia para quem não programa em `GUIA-IMAGENS.md`.
-Tudo em `references/imagem-conceito.md`.
+**A regra que organiza esta fase: nunca trate a unidade como só texto.** Copy
+densa tenta você a resolver primeiro a disposição do texto e encaixar imagem
+depois — e o resultado é uma peça que já nasceu sem lugar para a cena. A
+blocagem decide, na mesma linha, **onde o texto fica e o que mais está ali**.
 
-Separa o que custava contexto junto: a imagem decide composição e dispositivo;
-o código decide texto, token, semântica e movimento.
+A ordem padrão é blocagem antes dos prompts, porque a disposição precisa estar
+decidida antes de descrever a cena. A ordem inversa — gerar imagem primeiro e
+blocar depois — é legítima e vale testar em copy curta; o que não se faz é
+blocar como se fosse só texto.
 
-## Fase 1.5b — Camadas
+### Passo 2 — Um prompt de imagem por unidade
 
-Por seção aprovada, uma ficha em **sete camadas**, escrita antes do componente:
-fundo da página → fundo da seção → textos (copy literal; mock data listado à
-parte) → estilo dos textos → cores → imagens e mockups → animações e
-micro-interações. A ficha é o briefing de implementação. A camada 7 é onde
-entra o que a imagem não mostra — e onde a página ganha vida. Template em
-`assets/camadas-template.md`, regras em `references/camadas.md`.
+Cada unidade vira **uma imagem na proporção do formato**, que quem aprova vê
+antes de existir qualquer código. Estrutura do arquivo em
+`assets/prompt-secao-template.md`: prefixo comum inalterado + `LAYOUT.` + a
+cena, com o double-check (a–d) respondido antes de gerar.
 
-## Fase 3 — Implementação seção a seção
+A cena descreve **lugar e peso** do texto, nunca a frase — o gerador escreve
+errado, e a copy só existe na peça final. Um dispositivo por unidade, nunca o
+mesmo em vizinhas. Cor de ação em até três pontos.
 
-Duas regras que definem o estilo, ambas em `references/animacao.md`:
+Regras completas em `references/imagem-conceito.md`; o passo a passo de quem
+só aprova, em `GUIA-IMAGENS.md`.
+
+### Passo 3 — Gerar, comparar, aprovar
+
+Você gera (no navegador ou por um gerador ligado ao Claude), salva na pasta da
+unidade com versão e modelo no nome, e escreve uma linha no `veredito.md`:
+`aprovada`, `refazer: <o quê>` ou `usar parte: <qual>`.
+
+**O gate é a sua satisfação com as ideias, não a primeira imagem.** Peça
+variações, empilhe `prompt-v2`, `prompt-v3` ao lado do v1, teste modelos. Só
+se avança quando você estiver satisfeito com a ideia de cada unidade **e com a
+distribuição da copy entre elas** — mover uma frase de unidade custa barato
+aqui e custa uma rodada depois.
+
+No fim, **uma ideia por unidade**, com o histórico inteiro preservado.
+
+### Passos 4 e 5 — Wireframe, depois layout
+
+A imagem aprovada é composição, não peça. Ela vira estrutura em duas etapas,
+escritas na ficha de **sete camadas** da unidade (`references/camadas.md`,
+template em `assets/camadas-template.md`):
+
+| etapa | camadas | o que decide |
+|---|---|---|
+| **wireframe** | 1 fundo da página · 2 fundo da seção · 3 textos | o esqueleto: o que é bloco de texto, onde o mockup entra, que espaço ele ocupa |
+| **layout** | 4 estilo · 5 cores · 6 mockups · 7 animações | o acabamento: escala tipográfica, onde cai a cor de ação, a anatomia de cada mockup, e o que se move |
+
+A camada 7 é onde entra tudo o que a imagem não mostra — e é obrigatória:
+**unidade sem mecanismo vivo ligado ao que a copy diz está incompleta**, mesmo
+com a composição aprovada.
+
+Implemente com a imagem **aberta ao lado**; ao refazer, com a imagem **e o
+print atual** lado a lado.
+
+### Passo 6 — A peça final
+
+| formato | o que sai | o que conferir antes de entregar |
+|---|---|---|
+| landing | HTML/CSS ou Next | a copy literal na página renderizada; sem overflow em 320/375/414/768 |
+| deck | `.pptx`, PDF, HTML/Next ou Figma pelo MCP | a copy de cada slide; fontes embutidas; o deck aberto na ferramenta de destino |
+| carrossel | PNG em sequência | ordem dos arquivos, dimensão exata, texto dentro da área segura |
+| criativo | PNG exportado do CSS, ou Figma pelo MCP | dimensão, peso, a copy literal na peça |
+| UI de produto | código ou Figma pelo MCP | estados cobertos, tokens no lugar de valor cru, o que ficou como slot |
+
+Duas regras em qualquer um deles: **o que sai é rastreável** (de que versão da
+direção e de que prompt nasceu) e **artefato exportado não se edita à mão** sem
+registrar — a próxima geração apaga a edição em silêncio.
+
+## As regras que definem o estilo
 
 - **Interface quando a copy tem objeto reconhecível.** A pergunta não é "o
   produto tem software?", é **"a copy tem um objeto onde a promessa
   acontece?"** — um post, um perfil, uma planilha. Se tem, a interface desse
-  objeto serve como prova, com **anatomia real e mock data plausível**; se não
-  tem (emoção, decisão), diagrama conceitual. O limite do mockup é a
-  **afirmação**, não o número: nada que se leia como prova de resultado, nenhum
-  número sai da tela para o texto (`references/copy-contrato.md`). Mockup
-  operável é componente acessível, não `aria-hidden`.
-- **GSAP faz entrada, CSS faz loop.** Loops nascem pausados e ligam ao entrar
-  em cena. Toda seção entrega **pelo menos um mecanismo vivo** ligado ao que a
-  copy diz, com estado final definido antes de animar.
+  objeto entra com **anatomia real e mock data plausível**; se não tem (emoção,
+  decisão), diagrama conceitual.
+- **O limite do mockup é a afirmação, não o número.** Nada que se leia como
+  prova de resultado; nenhum número sai da tela para o texto da peça.
+- **Quando há movimento: a biblioteca faz entrada e scrub, o CSS faz os
+  loops** — pausados até a unidade entrar em cena. Estado final definido antes
+  de animar. Os cinco padrões estão em `references/animacao.md`.
+- **A copy não muda uma palavra.** Mudam hierarquia, agrupamento e ênfase.
+- **Token-first.** Cor, tipo, raio, easing e duração saem de tokens escopados
+  (`assets/tokens-template.css`).
+- **Antes do primeiro conceito, ler `references/taste.md`** — com os prefixos
+  de escopo. É o que separa este estilo do visual genérico de IA.
 
-Orquestração (`references/orquestracao.md`): **janela de contexto é rainha.**
-Átomos compartilhados criados e commitados **antes** de qualquer lote. Lotes de
-3–4 seções em paralelo servem para construir do zero; **revisão é uma seção por
-subagente, sequencial** — hand-back ≤ 25 linhas, `tsc`, print em 1440 e 390,
-commit, próxima. O orquestrador nunca lê um componente inteiro. Prompt em
-`assets/prompt-subagente-secao.md`.
+## Uma unidade por vez
 
-Feedback do cliente em áudio: **transcrever antes de decidir**
-(`references/revisao-por-audio.md`), traduzir em bloco por seção no briefing,
-fazer o grill de perguntas, e **pedido que contraria regra escrita volta como
-pergunta** — nunca se executa em silêncio, nunca se recusa.
+Janela de contexto é rainha. Na construção do zero, lotes de 3–4 unidades em
+paralelo funcionam — desde que os blocos compartilhados existam **antes** do
+primeiro lote. **Na revisão, é uma unidade por vez**: cada uma vira asset novo
+e precisa ser vista antes da próxima. Regras e o prompt do subagente em
+`references/orquestracao.md` e `assets/prompt-subagente-secao.md`.
 
-## Fase 4 — Verificação
+## Revisão
 
-Nunca rodar build com o dev server aberto. A cada rodada: typecheck, lint,
-testes de contrato, build do artefato, verificador de copy, auditoria de
-viewports, **print por dobra sem reiniciar animação**
-(`scripts/shoot-dobra.mjs`) e **prova de rolagem em carga fria com motion
-ligado** — a suíte roda sob reduced-motion e não vê bug do motor. Detalhes em
-`references/revisao-e-gates.md`.
-
-Três contratos executáveis:
-
-- `node scripts/verify-copy-contract.mjs <artefato> <contratos.json>` — frase
-  sumiu ou contagem de CTA mudou.
-- `node scripts/verify-fidelidade.mjs <url> <contrato.json>` — geometria
-  divergiu do combinado (tolerância de `letterSpacing` separada e pequena).
-- `node scripts/shoot-dobra.mjs <url> <seletor> [largura]` — print da dobra +
-  overflow-x + `pageerror`, sem `fullPage`.
-
-## Fase 5 — Registro e publicação
-
-Três documentos, três perguntas: **checkpoint** (onde estamos),
-**sessão** (o que se perde quando a conversa acaba — o aprendizado, não o
-feito) e **prompt de retomada** (a ordem de leitura). Templates em `assets/`.
-Toda rodada fecha com "para o cliente ver ao vivo" e "ideias anotadas".
-Changelog no mesmo commit; decisão difícil de reverter vira registro datado
-citando o pedido literal.
-
-Publicação (`references/publicacao.md`): rastreável (repositório, branch,
-SHA, comando); gate copiado do alvo anterior, nunca afrouxado; **localhost
-mente** sobre `basePath`; a fonte de verdade de uma página publicada é o
-artefato no ar, e antes de regerar compara-se com ele.
-
-## Fase 6 — Fechamento e exportação
-
-Toda peça termina num arquivo, e o arquivo tem formato. Esta fase nunca se
-pula: o que muda é o entregável.
-
-| formato | o entregável | o que verificar antes de entregar |
-|---|---|---|
-| página, landing | artefato estático publicado | contrato de copy contra o HTML servido, auditoria de larguras, `basePath` |
-| deck | `.pptx` ou PDF | a copy de cada slide, fontes embutidas, o deck aberto na ferramenta de destino |
-| carrossel | sequência de PNG na dimensão da plataforma | ordem dos arquivos, dimensão exata, texto dentro da área segura |
-| criativo estático | PNG/JPG com orçamento de peso | dimensão, peso, a copy literal na peça |
-| UI de produto | código ou handoff | estados cobertos, tokens no lugar de valor cru, o que ficou como slot |
-
-Três regras que valem em qualquer um deles:
-
-- **A regra da copy continua; o verificador muda.** `verify-copy-contract.mjs`
-  lê HTML. Para peça exportada, a conferência é contra o texto da peça — e
-  precisa existir, mesmo que como checklist.
-- **O que sai é rastreável**: de que commit nasceu, com que comando, em que
-  versão da direção. Arquivo entregue sem origem volta como pergunta daqui a
-  três meses.
-- **Nunca editar o artefato exportado à mão** sem registrar. A próxima geração
-  apaga a edição em silêncio.
-
-Para publicação web, os detalhes estão em `references/publicacao.md`.
+- **Olhe a peça, não a descrição.** Print de cada unidade, lado a lado com a
+  imagem-conceito aprovada.
+- **Confira a copy literal** na peça renderizada, palavra por palavra.
+- Feedback em áudio: **transcrever antes de decidir**
+  (`references/revisao-por-audio.md`) e fazer o grill de perguntas antes de
+  implementar.
+- **Pedido que contraria regra escrita volta como pergunta** — nunca se executa
+  em silêncio, nunca se recusa.
+- Medir antes de dizer que está pronto: protótipo, cor, tracejado e escala
+  tipográfica em `references/medicao.md`.
 
 ## O dial de tempo
 
@@ -354,24 +316,38 @@ Cortar a Fase 0.5 para ganhar tempo é economia negativa: foi assim que uma V1
 nasceu por inércia, saiu "com cara de IA" e custou exatamente a rodada que
 tentava poupar.
 
-## Checklist de execução
+## Checklist
 
-1. **Formato e unidade decididos**, com o eixo do tempo e os condicionais nomeados
-2. Ficha preenchida, uma frase de propósito (e o objeto da peça, num conjunto)
-3. **Modo identificado** — existe referência? tem número? é imagem-conceito? (refazer a cada entrega)
-4. Copy congelada, `contratos.json` escrito, buracos encaminhados
-5. Tokens escopados, ritmo de superfícies como string
-6. **Direção visual escrita**, com nome e prefixo comum colável
-7. `references/taste.md` lido antes do primeiro conceito — com os prefixos de escopo
-8. Blocagem em tabela, conceito nomeado em cada dobra, sem dispositivo repetido em vizinhas
-9. **Double-check das ideias** em subagentes de contexto limpo
-10. **Imagens-conceito geradas e aprovadas** pelo cliente
-11. **Fichas de 7 camadas** escritas, antes do código
-12. Átomos compartilhados commitados; seções implementadas (lotes na construção, uma por vez na revisão), um commit cada
-13. Gates verdes, prints por dobra em 1440/390 (e 320/375/768 na auditoria), prova de rolagem em carga fria
-14. Rodada registrada: checkpoint, sessão, "para o cliente ver ao vivo", ideias anotadas
-15. Publicação rastreável, comparada com o artefato no ar
-16. **Fechamento no formato de arquivo do entregável**, com a copy conferida nele
+1. `projeto.md` escrito: formato, unidade, **proporção**, arquivo final, prazo
+2. Copy dividida em blocos e congelada
+3. **Direção visual escrita**, com nome e prefixo comum colável — e apresentada
+4. `references/taste.md` lido antes do primeiro conceito
+5. **Modo identificado** — existe referência? tem medida? é imagem-conceito? (refazer a cada entrega)
+6. Blocagem em tabela, conceito nomeado em cada unidade, **texto e composição juntos**, sem dispositivo repetido em vizinhas
+7. Prompts escritos, um por unidade, na proporção do formato
+8. Imagens geradas, comparadas e **aprovadas por quem decide**, com a distribuição da copy conferida
+9. Fichas de camadas: wireframe (1–3), depois layout (4–7)
+10. Unidades implementadas, uma por vez na revisão
+11. Prints comparados com as imagens-conceito; copy literal conferida na peça
+12. Peça final exportada no formato do `projeto.md`, rastreável
+
+## O que fica fora deste escopo
+
+Esta skill vai da copy à peça final. O que vem depois — build, teste
+automatizado, gate de publicação, deploy, rastreabilidade de release — não é
+assunto dela.
+
+Os arquivos continuam no repositório para quem leva uma peça **web** a
+produção, e só nesse caso:
+
+- `references/revisao-e-gates.md` — fechar rodada num projeto de código
+- `references/publicacao.md` — o que só o artefato de produção revela
+- `scripts/` — contrato de copy, contrato de geometria, print por unidade,
+  auditoria de larguras
+
+Para carrossel, criativo ou deck, nada disso se aplica: a conferência da copy
+é contra o texto da peça, e a "auditoria de larguras" é a dimensão exigida
+pela plataforma.
 
 ## O que esta skill não faz
 
@@ -380,24 +356,18 @@ tentava poupar.
   golden master de uma unidade é o modo executor e está no escopo.
 - Não decide oferta, preço ou posicionamento. Regra comercial de um projeto
   (`[projeto]` no `taste.md`) não se transporta: a copy do projeto vence.
-- Não gera o asset final por IA. A imagem gerada é ideia; o que vai ao ar é HTML/CSS.
+- Não gera o asset final por IA. A imagem gerada é ideia; o que vai na peça
+  nasce em HTML/CSS, ou no Figma.
 
 ## Limitações conhecidas
 
+- O que está executado em produção são **páginas**. Deck, carrossel, criativo
+  e UI de produto seguem o mesmo pipeline com a proporção e a exportação
+  trocadas, mas ainda não passaram por uma rodada real.
 - Em web, o método produz páginas **pesadas**: muitas unidades com mockup em
-  HTML e SVG inline; WebGL entra só por decisão do cliente e com fallback.
-  Medir cedo se o público for majoritariamente móvel.
-- Fora da página, o pipeline está mapeado mas os gates não: o verificador de
-  copy e a auditoria de larguras pressupõem artefato servido. Em peça
-  exportada, a regra vale e o script precisa ser escrito.
-- A geração de imagem foi executada como **ideação** (14 seções, 2026-09-21),
-  manualmente no navegador do cliente. Geração por CLI depende de crédito e
-  workspace; não prometer automação sem confirmar.
-- A ficha de camadas tende a virar documentação a posteriori se o mesmo
-  agente escreve ficha e código. Se a separação importa, exigir a ficha como
-  primeira entrega.
+  HTML e SVG inline. Medir cedo se o público for majoritariamente móvel.
+- A ficha de camadas tende a virar documentação a posteriori se o mesmo agente
+  escreve ficha e código. Se a separação importa, exija a ficha como primeira
+  entrega.
 - O gosto em `references/taste.md` é de um cliente específico, com prefixo de
-  escopo por regra. Serve de ponto de partida e de exemplo de como capturar
-  gosto — não de lei universal.
-- O `try/catch` do motor de motion não tem teste automatizado; o teste que
-  rola a página com motion ligado continua sendo pendência aberta.
+  escopo por regra. Ponto de partida, não lei universal.

@@ -1,7 +1,7 @@
 # Imagem-conceito por seção: a ideia antes do código
 
 > Fase 1.5a do método. Entre a blocagem e o primeiro `.tsx`, cada seção vira
-> **uma imagem 16:9 de desktop** que o cliente aprova. A imagem é ferramenta
+> **uma imagem na proporção do formato** que o cliente aprova. A imagem é ferramenta
 > de pensamento e de aprovação — **não é asset da página**. O que vai ao ar
 > continua nascendo em HTML/CSS, e a copy literal só entra no código.
 
@@ -41,20 +41,28 @@ Fase 3    Implementação por seção (references/orquestracao.md)
 ## Os artefatos e onde ficam
 
 ```text
-<projeto>/sdd/direcao-visual.md      direção nomeada + paleta + o que não entra + PREFIXO COMUM colável
-<projeto>/sdd/blocagem-copy.md       coluna Assets: "IC" + asset final
-<projeto>/dv/README.md               fluxo, formato dos arquivos, estado por seção, aprendizados de geração
-<projeto>/dv/BRIEFING-SUBAGENTE.md   briefing autocontido para o double-check (assets/briefing-subagente-ideacao.md)
-<projeto>/dv/secoes/NN-slug/
-   prompt-vK-NN.md                   K = geração do prompt, NN = seção — o nome carrega os dois
-   imagem-vN-<origem>.png            16:9; o nome diz a versão e de onde veio (modelo, modo)
-   veredito.md                       aprovada | refazer: … | usar parte: …  (uma linha)
-<projeto>/dv/referencias/            imagens que o cliente traz no meio da rodada, com data no nome
-<projeto>/dv/historico/laboratorio/  versões substituídas — nada se apaga
+meu-projeto/
+├─ projeto.md              formato, unidade, PROPORÇÃO, arquivo final, prazo
+├─ copy/copy.md            a copy aprovada, dividida em blocos — inviolável
+├─ direcao-visual.md       direção nomeada + paleta + o que não entra + PREFIXO COMUM colável
+├─ blocagem.md             uma linha por unidade; marca "IC" nas que passam por imagem-conceito
+├─ BRIEFING-IDEACAO.md     briefing autocontido do double-check (assets/briefing-subagente-ideacao.md)
+├─ secoes/
+│  └─ NN-slug/
+│     ├─ prompt-v1.md      versão nova nasce AO LADO (prompt-v2.md), nunca por cima
+│     ├─ imagem-v1-<modelo>.png   na proporção do projeto; o nome diz versão e origem
+│     ├─ veredito.md       aprovada | refazer: … | usar parte: …   (uma linha)
+│     └─ camadas.md        wireframe (camadas 1–3) e layout (camadas 4–7)
+├─ referencias/            imagens que o cliente traz no meio da rodada, com data no nome
+├─ saida/                  a peça final, no formato do projeto.md
+└─ historico/              versões substituídas — nada se apaga
 ```
 
-`dv/` fica **fora de `public/`**, e o gate do projeto reprova qualquer `.md`
-ou `.png` de trabalho no artefato publicado.
+Uma pasta por unidade. O nome do arquivo carrega **a versão e o modelo**, que é
+o que permite empilhar tentativas sem perder nenhuma e comparar geradores.
+
+Num projeto de código, essa árvore fica **fora da pasta publicada**, e o gate
+reprova qualquer `.md` ou `.png` de trabalho dentro do artefato.
 
 ## O prompt de uma seção
 
@@ -73,7 +81,7 @@ Template em `assets/prompt-secao-template.md`. Estrutura, nesta ordem:
 
 **O prefixo comum** vive na direção visual e é colado igual em todas as
 seções. Ele fixa: formato ("screenshot de uma seção de site real, 1440 px,
-16:9, export de Figma, não ilustração"), paleta com hex estritos, tipografia,
+a proporção do projeto, export de Figma, não ilustração"), paleta com hex, tipografia,
 a anatomia real do vocabulário escolhido, e as proibições (cores, logotipos,
 rostos, números, molduras, glow, fade). Termina dizendo que o texto na imagem
 é placeholder.
@@ -119,7 +127,7 @@ Regras de operação que fizeram o gate funcionar:
   curto que aponta para o `BRIEFING-SUBAGENTE.md` (autocontido, com os vetos
   **e o motivo de cada um** — veto sem motivo vira superstição);
 - todos recebem a **tabela de blocagem inteira**, para julgar vizinhança;
-- proibidos de ler `dv/historico/` — o julgamento tem de ser limpo;
+- proibidos de ler `historico/` — o julgamento tem de ser limpo;
 - relatório de até 3 linhas por seção **mais a lista de buracos de copy**
   notados, sem corrigir a copy;
 - o orquestrador valida mecanicamente depois: prefixo íntegro (`diff` contra
@@ -147,7 +155,7 @@ em imagem perdida:
   Nano Banana (Gemini) serviu; Mystic não serve para UI. O cliente fica à
   vontade para testar outros — anote o modelo no nome da imagem
   (`imagem-v2-gpt25.png`) e no veredito. Quando um modelo vencer 3–4 seções
-  seguidas, vira o padrão do projeto e é registrado no `dv/README.md`.
+  seguidas, vira o padrão do projeto e é registrado no `projeto.md`.
 - **Com ou sem MCP, o fluxo é o mesmo.** Quem tem um servidor de geração
   ligado ao Claude (Higgsfield, Magnific…) pode pedir ao Claude para gerar;
   quem não tem cola o bloco de prompt no navegador. A qualidade depende do
@@ -157,7 +165,10 @@ em imagem perdida:
   — confirme antes. Sem isso o entregável é o `.md`, e o cliente gera no
   navegador e sobe a imagem na pasta. Foi assim que a primeira rodada
   aconteceu, e foi o que permitiu testar modelos.
-- Uma imagem por seção, **16:9 desktop**. O mobile nasce nas camadas.
+- Uma imagem por unidade, **na proporção declarada no `projeto.md`**. Numa
+  landing é 16:9 de desktop e o mobile nasce nas camadas; num carrossel é 1:1
+  ou 4:5; num story, 9:16. A proporção entra no prefixo comum e não muda no
+  meio do projeto — trocá-la invalida a comparação entre unidades.
 - **Prompt longo faz o modelo ignorar proibições** (wordmark, moldura de
   celular, cor vetada). Na imagem-conceito não importa: é lixo do gerador.
   Importa **não copiar isso no código** — diga no briefing de implementação:
@@ -173,13 +184,13 @@ que vier, mas escreva.
 
 **O gate é a satisfação com as ideias, não a primeira imagem.** O cliente
 pode pedir variações e **empilhar versões do prompt** de uma seção
-(`prompt-v2-NN.md`, `prompt-v3-NN.md`…), gerar cada uma, guardar todas na
+(`prompt-v2.md`, `prompt-v3.md`…), gerar cada uma, guardar todas na
 pasta da seção e escrever no veredito o que cada versão acertou. Só se avança
 para as camadas e o código quando ele estiver satisfeito **com a ideia de cada
 seção e com a distribuição da copy entre as seções** — se uma frase parece
 estar na seção errada, é aqui que se corrige, reescrevendo a blocagem, não
 depois no código. **No fim, uma ideia por seção**, com o histórico inteiro
-preservado em `dv/historico/`.
+preservado em `historico/`.
 
 **A imagem aprovada é ideia, não seção final.** O que se aprova é a
 composição e o dispositivo; texto, cor exata e movimento vêm do código. Ao
@@ -196,7 +207,7 @@ leitura livre dela.
 - Quando a direção mudar, **reescreva a blocagem no mesmo commit**. Dois
   documentos de verdade divergentes fizeram três subagentes reportar o mesmo
   conflito.
-- Nada se apaga: `dv/historico/laboratorio/`.
+- Nada se apaga: `historico/`.
 
 ## O que a primeira execução ensinou
 

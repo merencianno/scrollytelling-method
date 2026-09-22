@@ -6,7 +6,8 @@
 ## 1. O que é a tarefa
 
 Estamos entre a **blocagem** e o **código**. Cada seção vira primeiro **uma
-imagem 16:9 de desktop**, gerada por IA a partir do seu prompt, que o cliente
+imagem na proporção declarada no `projeto.md`**, gerada por IA a partir do
+seu prompt, que o cliente
 aprova antes de qualquer wireframe. A imagem é **ferramenta de pensamento**,
 não asset da página. O cliente gera no navegador colando o seu prompt — ele
 precisa funcionar sozinho, em inglês, sem contexto.
@@ -65,7 +66,7 @@ de todas as seções — use-a para não colidir.
 
 ## 7. Formato exato do arquivo final
 
-Grave em `<projeto>/dv/secoes/NN-slug/prompt-vK-NN.md`, na estrutura de
+Grave em `secoes/NN-slug/prompt-vK.md`, na estrutura de
 `assets/prompt-secao-template.md`.
 
 ## 8. Regras de coerência
@@ -74,7 +75,7 @@ Grave em `<projeto>/dv/secoes/NN-slug/prompt-vK-NN.md`, na estrutura de
 - Ato certo por seção, conforme a blocagem.
 - Um único `h1` na página; as demais headlines são `h2`.
 - Não repita o mesmo dispositivo em seções vizinhas.
-- **Não leia `dv/historico/`** — o julgamento tem de ser limpo.
+- **Não leia `historico/`** — o julgamento tem de ser limpo.
 - Não toque em nada fora das pastas das suas seções.
 
 ## 9. O que devolver
