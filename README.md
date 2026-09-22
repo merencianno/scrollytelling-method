@@ -11,6 +11,10 @@ cinco padrões conhecidos, e três scripts recusam o build quando uma frase da
 copy desaparece, quando a geometria foge do combinado ou quando uma dobra
 estoura a largura.
 
+A landing é o caso provado, não o limite: o método organiza **qualquer
+narrativa quebrada em unidades** — deck, carrossel, criativo, tela de produto.
+Ver [Serve para qualquer coisa com narrativa](#serve-para-qualquer-coisa-com-narrativa).
+
 ## Instalação
 
 ```bash
@@ -45,6 +49,60 @@ vendas com scrollytelling"*.
 Para conduzir manualmente, o caminho é o do `SKILL.md`: ficha → contrato de copy
 → tokens → direção visual escrita → blocagem → imagem-conceito por seção →
 camadas → uma seção por vez → gates → publicação.
+
+## Serve para qualquer coisa com narrativa
+
+O método foi destilado de páginas de venda e é nelas que está provado. Mas o
+que ele organiza não é scroll — é **uma narrativa quebrada em unidades, cada
+unidade com um conceito nomeável, aprovada como imagem antes de virar
+execução**. A página é um caso; o eixo do tempo é que muda.
+
+> **Honestidade sobre o que está testado:** as quatro páginas da linhagem são
+> web. Os outros formatos abaixo são extensão raciocinada, não executada. O
+> mapeamento é direto e a estrutura aguenta, mas trate como plano e não como
+> caminho batido — e, se rodar, o que aprender vira regra nova.
+
+| formato | a unidade | o eixo do tempo | o que muda |
+|---|---|---|---|
+| **página de vendas / landing** | a dobra | o scroll | — é o caso provado |
+| **apresentação / deck** | o slide | o avanço (seta, clique) | o scrub (padrão D) vira transição entre slides; o ritmo claro/escuro passa a marcar os atos do deck |
+| **carrossel de social** | o card | o swipe | quase não há motion: a "animação" é a diferença entre um card e o próximo, e o peso todo cai no card 1 |
+| **criativo estático** | a peça | não existe | tudo se resolve em composição — a imagem-conceito deixa de ser etapa e vira quase o entregável |
+| **UI de produto** | a tela ou o estado | a interação de quem usa | o ritmo de superfícies some; o mock data vira dado real; a copy vem do produto, não da oferta |
+
+### O que transfere inteiro
+
+Nada disto depende do formato:
+
+- **a copy como contrato inviolável**, com verificador que reprova o build;
+- **um conceito nomeável por unidade** — se não dá para nomear a cena, ainda é
+  repaginação disfarçada;
+- **a direção visual escrita antes de tudo**, com nome e prefixo de prompt colável;
+- **a imagem-conceito aprovada antes da execução** — é o que mais transfere,
+  porque não presume nem scroll nem código;
+- **a ficha de 7 camadas** como briefing (a camada 7 muda de conteúdo, não de papel);
+- **o `taste.md` com prefixos de escopo** — gosto de cliente não tem formato;
+- **o double-check em contexto limpo** e a orquestração "uma unidade por vez";
+- **a revisão por áudio** e o grill de perguntas antes de implementar;
+- **a medição** antes de dizer que está pronto;
+- **mock data plausível, nunca prova.**
+
+### O que não transfere e precisa ser trocado
+
+- **O padrão D (scrub).** Ele existe porque o leitor controla o tempo com o
+  dedo. Sem scroll, não há scrub — em deck vira transição, em UI vira estado.
+- **O ritmo de superfícies** (escuro nos picos, claro nos respiros) é uma
+  ferramenta de página longa. Num criativo isolado não se aplica; numa UI de
+  produto, a consistência vale mais que o contraste.
+- **Os gates de web.** Auditoria de viewport e contrato de copy contra o HTML
+  pressupõem artefato servido. Para peça exportada (PNG, PDF), o contrato de
+  copy precisa de outro verificador — a regra continua, o script não.
+- **`stacks/next-tailwind-gsap.md`** é o único arquivo que assume uma stack, e
+  é o primeiro a cair fora quando o formato muda.
+
+O `SKILL.md` já aponta uma skill irmã para a variante em deck. Este repositório
+é a variante em página — e a fonte do método, que é o que vale levar para os
+outros formatos.
 
 ## O que tem dentro
 
