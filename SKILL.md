@@ -156,7 +156,7 @@ meu-projeto/
 Uma pasta por unidade, e o nome do arquivo carrega a versão e o modelo. É o
 que permite empilhar tentativas sem perder nenhuma.
 
-## O fluxo, em seis passos
+## O fluxo, em oito passos
 
 | passo | o que produz | quem faz |
 |---|---|---|
@@ -166,7 +166,12 @@ que permite empilhar tentativas sem perder nenhuma.
 | **3 · Imagens e veredito** | as imagens e o `veredito.md` de cada unidade | **você** |
 | **4 · Wireframe** | camadas 1–3: fundo, estrutura, texto no lugar | a skill |
 | **5 · Layout** | camadas 4–7: estilo, cor, mockup, movimento | a skill |
-| **6 · Peça final** | `saida/`, no formato do `projeto.md` | a skill |
+| **6 · Refinamento e revisão** | a peça fiel à imagem, e as aprovações congeladas | a skill refina, **você aprova** |
+| **7 · Peça final** | `saida/`, no formato do `projeto.md` | a skill |
+
+**Nada se exporta antes do passo 6.** Depois da exportação o custo de mudar
+multiplica: são N PNGs para regerar, um `.pptx` para refazer, uma página para
+republicar. O passo 6 é o último lugar barato.
 
 ### Passo 0 — A direção, escrita e apresentada
 
@@ -247,7 +252,39 @@ com a composição aprovada.
 Implemente com a imagem **aberta ao lado**; ao refazer, com a imagem **e o
 print atual** lado a lado.
 
-### Passo 6 — A peça final
+### Passo 6 — Refinamento e revisão
+
+São **dois loops diferentes**, nesta ordem, e pular o primeiro faz o segundo
+gastar o tempo de quem aprova com coisa que você mesmo pegaria.
+
+**Refinamento — você conferindo o próprio resultado.** Print de cada unidade
+ao lado da imagem-conceito aprovada, iterando até ficar fiel; print também na
+largura real do mockup, não só da unidade. Copy literal conferida na peça
+renderizada, palavra por palavra. Medir em vez de estimar: vãos, escala
+tipográfica, cor e tracejado em `references/medicao.md`. E os condicionais do
+`projeto.md` — responsividade e performance, se o formato os tiver.
+
+**Revisão — quem aprova vendo a peça.** Ao vivo, com a peça aberta ao lado:
+quase todo feedback que muda uma peça vem de sessão ao vivo, não de print
+enviado. **Uma unidade por vez** — cada uma vira asset novo e precisa ser vista
+antes da próxima. Feedback em áudio: **transcrever antes de decidir**
+(`references/revisao-por-audio.md`) e fazer o grill de perguntas antes de
+implementar. **Pedido que contraria regra escrita volta como pergunta** — nunca
+se executa em silêncio, nunca se recusa.
+
+**É aqui que o `taste.md` se preenche**, e é o que faz a próxima peça começar
+melhor: cada veto guardado **com o motivo ao lado**, cada aprovação com a
+citação literal de quem aprovou. Marcar o aprovado e congelar — o que está
+congelado vira vocabulário de referência para as unidades seguintes.
+
+**O que a revisão nunca menciona e você tem de checar sozinho:**
+acessibilidade, teclado, contraste, `prefers-reduced-motion`, breakpoints. Em
+quarenta minutos de áudio de revisão nenhuma dessas palavras apareceu uma vez.
+
+Sai do passo 6 quando as aprovações estão congeladas e a lista de pedidos
+abertos está vazia — ou escrita, se alguma ficou para depois.
+
+### Passo 7 — A peça final
 
 | formato | o que sai | o que conferir antes de entregar |
 |---|---|---|
@@ -287,19 +324,6 @@ primeiro lote. **Na revisão, é uma unidade por vez**: cada uma vira asset novo
 e precisa ser vista antes da próxima. Regras e o prompt do subagente em
 `references/orquestracao.md` e `assets/prompt-subagente-secao.md`.
 
-## Revisão
-
-- **Olhe a peça, não a descrição.** Print de cada unidade, lado a lado com a
-  imagem-conceito aprovada.
-- **Confira a copy literal** na peça renderizada, palavra por palavra.
-- Feedback em áudio: **transcrever antes de decidir**
-  (`references/revisao-por-audio.md`) e fazer o grill de perguntas antes de
-  implementar.
-- **Pedido que contraria regra escrita volta como pergunta** — nunca se executa
-  em silêncio, nunca se recusa.
-- Medir antes de dizer que está pronto: protótipo, cor, tracejado e escala
-  tipográfica em `references/medicao.md`.
-
 ## O dial de tempo
 
 O método não tem versão curta: tem versão com menos versões. Sob prazo, corta-se
@@ -328,8 +352,11 @@ tentava poupar.
 8. Imagens geradas, comparadas e **aprovadas por quem decide**, com a distribuição da copy conferida
 9. Fichas de camadas: wireframe (1–3), depois layout (4–7)
 10. Unidades implementadas, uma por vez na revisão
-11. Prints comparados com as imagens-conceito; copy literal conferida na peça
-12. Peça final exportada no formato do `projeto.md`, rastreável
+11. **Refinamento**: prints comparados com as imagens-conceito, copy literal
+    conferida na peça, medidas conferidas em vez de estimadas
+12. **Revisão ao vivo**, uma unidade por vez; áudio transcrito antes de decidir
+13. Aprovações congeladas e vetos registrados no `taste.md`, com o motivo
+14. Peça final exportada no formato do `projeto.md`, rastreável
 
 ## O que fica fora deste escopo
 

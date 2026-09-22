@@ -51,7 +51,14 @@ Aí é só pedir: *"roda a skill nesse projeto"*.
 | **3 · Imagens e veredito** | as imagens e o `veredito.md` de cada unidade | **você** |
 | **4 · Wireframe** | camadas 1–3: fundo, estrutura, texto no lugar | a skill |
 | **5 · Layout** | camadas 4–7: estilo, cor, mockup, movimento | a skill |
-| **6 · Peça final** | a exportação no formato do `projeto.md` | a skill |
+| **6 · Refinamento e revisão** | a peça fiel à imagem, e as aprovações congeladas | a skill refina, **você aprova** |
+| **7 · Peça final** | a exportação no formato do `projeto.md` | a skill |
+
+**Nada se exporta antes do passo 6** — depois dele o custo de mudar multiplica.
+São dois loops: o refinamento é você conferindo o próprio resultado (print ao
+lado da imagem-conceito, copy literal, medida em vez de estimativa); a revisão
+é quem aprova vendo a peça ao vivo, uma unidade por vez. É na revisão que o
+`taste.md` se preenche, e é o que faz a próxima peça começar melhor.
 
 E a skill cria, por unidade:
 
@@ -114,7 +121,7 @@ salvar, como dar o veredito e como pedir versões até ficar satisfeito.
 | `references/copy-contrato.md` | como congelar a copy e o que o mockup não pode afirmar |
 | `references/orquestracao.md` | uma unidade por vez, átomos antes do lote, o prompt do subagente |
 | `references/revisao-por-audio.md` | transcrever antes de decidir; o grill de perguntas |
-| `references/medicao.md` | medir protótipo, cor, tracejado e escala tipográfica |
+| `references/medicao.md` | medir protótipo, cor, tracejado e escala tipográfica antes de dizer que está pronto |
 | `references/armadilhas.md` | o que custou tempo real, para não custar de novo |
 | `references/taste.md` | template do gosto do seu cliente + as lições que se repetem |
 | `stacks/next-tailwind-gsap.md` | o único arquivo que assume uma stack: código colável |
