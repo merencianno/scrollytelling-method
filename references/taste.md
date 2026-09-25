@@ -10,7 +10,10 @@ O que se transporta são três coisas, e elas estão aqui inteiras:
 2. as **lições de ofício** que se repetiram em todos os projetos até aqui;
 3. o **método de capturar** o gosto de um cliente novo.
 
-Preencha as seções "deste projeto" com o seu. Comece lendo o escopo.
+Preencha as seções "deste projeto" com o seu — num projeto montado com o kit
+(`assets/sdd-kit/`), elas vivem no `taste.md` da peça
+(`pecas/<peça>/taste.md`), que nasce vazio e herda daqui só as lições de
+ofício. Comece lendo o escopo.
 
 ---
 
@@ -176,7 +179,66 @@ regra.
 **Componente citado por site (bibliotecas de efeitos prontos) é referência de
 comportamento: reimplementa-se.** Sem dependência nova, sem código copiado.
 Dependência pesada de runtime é **decisão de quem aprova**, proposta com o
-fallback junto.
+fallback junto. **A exceção é o link com a palavra "exato"**: componente
+citado com o link e "quero exatamente esse" é portado — o código do link, com
+o cabeçalho de licença. *"A gente precisa da ideia original, não é só que
+você estilizou."* Sem link, reimplementa-se a mecânica; código atrás de login
+vira standby rotulado.
+
+**Mock data de plataforma encenada é conteúdo real por link de quem aprova.**
+Tile de cor com frase no lugar da mídia *"ficou bem feio"*; perfil adivinhado
+custou uma rodada. Sem link, o genérico de `copy-contrato.md`; terceiros
+nunca.
+
+**Não envolver em card o que já é card.** Nada de anel ou borda em volta de
+thumbnail real, nem card em volta de post. *"Não gostei desse border."*
+
+**Anatomia do objeto encenado é constante numérica** — post 4:5 ou 1:1,
+story 9:16, laptop 16:10, celular 9:19,5 —, com largura mínima legível.
+*"Os posts estão retangulares e o feed é quadrado."* Quando quem aprova diz o
+número errado e descreve o objeto certo, vale o objeto.
+
+**Dispositivo tem proporção fixa.** A tela entra no tamanho nativo, reduzida
+por `scale()` medido, e o excesso é cortado pela borda — nunca esticada.
+*"O notebook tá zoado, esticado."*
+
+**Quando a oferta é produto com interface, o produto aparece**, com a tela
+real, não diagrama. *"As cenas viraram diagramas"* foi o diagnóstico da
+página fraca. Releia o que **esta** peça vende antes de herdar regra de peça
+irmã.
+
+## Conceito e aprovação
+
+**"Bonito" não aprova.** *"Tá bonito mas não sei se tangibiliza bem a
+mensagem."* A pergunta é se o objeto torna óbvia a frase da copy, sem
+legenda. *"Não fede nem cheira, tá ok"* é recusa, não aprovação.
+
+**Sem comparativo como padrão.** Objeto único que se transforma; no máximo um
+par por peça, e só onde a copy é literalmente um par. *"Pare de ficar
+repetindo comparativos toda hora."* Comparativo vira tique antes de virar
+estilo.
+
+**Um dispositivo por seção, sem repetir na peça inteira** — não só entre
+vizinhas; o maior aparelho vai onde o conteúdo pede escala. *"Tem muito
+mockup de celular… pode ser tablet."*
+
+**Formato nativo da plataforma = frase da copy.** Duas escolhas → enquete;
+sete dias → story de sete segmentos. As seções aprovadas de primeira foram as
+que acharam o formato em que a copy cabia literal.
+
+**Timeline ou fluxograma de nós rotulados não tangibiliza.** *"Essa
+timeline… ficou feia."* Vira cards revelados ou o objeto mudando de estado.
+
+**Bloco de oferta é convenção, não palco.** Preço centralizado num card —
+*"eu nunca gosto de oferta alinhada à esquerda"* —, hierarquia parcela > de >
+à vista > botão > pagamento seguro; a ideia criativa vai para o lado.
+
+**Aprovação de ideia cujo valor é o movimento é hipótese até rodar.** Um
+letreiro aprovado em imagem foi implementado, visto animado e descartado.
+Mostre o movimento cedo.
+
+**Entredobra tipográfica com conteúdo real serve de respiro** entre
+argumentos densos. *"Fez tipo respiro, da hora."*
 
 ## Cor e glifo
 
@@ -227,6 +289,9 @@ resolvem: display / seção / par / card. Rodar a auditoria de escala ao fim de
 `.escopo h1, h2, h3` vence qualquer utilitária do framework, e `leading`/
 `tracking` aplicados por utilitária são descartados em silêncio.
 
+**Serif itálica dentro de título sans ganha +1–2 px** para parecer do mesmo
+tamanho. Título em desktop e tablet em até 3 linhas; no celular, em até 4.
+
 **Quebra de linha se fixa com `white-space: nowrap` num trecho, nunca editando o
 texto.** Entre o protótipo e o navegador há pixels de diferença de métrica, o
 bastante para uma palavra mudar de linha.
@@ -275,6 +340,19 @@ os dois casos é a presença de medida explícita. Na dúvida, perguntar.
 
 **Elogio e veto são granulares.** *"Gostei muito do asset que você criou, mas só
 do botão dele."* Registrar no nível do componente; a peça boa vai para estoque.
+
+**Diagnóstico é ordem; sugestão com "não sei" é hipótese.** O incômodo
+concreto ("achatado", "não centralizado") se resolve; a solução dita com
+"talvez" vira opção mostrada, não execução. *"Prefiro que volte do jeito que
+tava… era só pra deixar mais largo."* Aplique a menor correção que resolve o
+incômodo.
+
+**Nenhuma frase para o lead fora da copy, nem em estado de interação** —
+feedback de clique, toast, vazio, sucesso. String nativa do app pode
+("Seguir", "curtiu"). Não se pergunta: omite-se. *"Se você inventou essa
+copy, você tá chapando."*
+
+**Página de venda sem cursor custom e sem loader de entrada.**
 
 **Cuidado com o que a documentação do projeto afirma sobre gosto.** Uma
 avaliação sua ("foi o que ficou melhor na página") registrada como se fosse do
@@ -356,6 +434,12 @@ vocabulário girava em torno de redes sociais — o seu vai ser outro.
 | IA slop | títulos intercambiáveis, genéricos | sinal de que a seção não tem conceito |
 | papel amassado / caixa / pastinha | contêiner que amassa, engole, abre-fecha | loop B; scrub D com estado final |
 | selo | ícone central com texto circular | `textPath` |
+| composição (no veredito) | a ideia e o arranjo valem; refaz-se o acabamento | nova geração da mesma ideia, mesmo `LAYOUT.` |
+| voltar às ideias | a seção volta ao Passo 2 | nova leva em `ideias.md`, sem imagem |
+| "exato" + link do componente | a ideia original, não uma estilização | portar o código com cabeçalho de licença |
+| componente citado sem link | referência de comportamento | reimplementar a mecânica |
+| esdrúxulo | fora de proporção | refazer convencional, proporção nativa do objeto |
+| "não fede nem cheira, tá ok" | recusa morna | ideia nova, não ajuste |
 | alinhados em bottom | bases na mesma linha, alturas diferentes | `align-items: flex-end` |
 | "mais tech" | precisão mecânica, sem easing definido | **perguntar** |
 | "sessão" | seção (falha recorrente de transcrição) | — |

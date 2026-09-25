@@ -1,6 +1,6 @@
 ---
 name: scrollytelling-method
-description: Transformar uma copy aprovada em telas — landing com scrollytelling, deck de slides, carrossel, criativo de social ou UI de produto. Cobre a parte criativa, da copy à peça final: blocagem que trata texto e composição juntos, prompt de imagem-conceito por unidade na proporção do formato, veredito de quem aprova antes de qualquer código, wireframe e layout em ficha de 7 camadas, mockup de interface com mock data (nunca prova), loops pausados até entrar em cena e copy inviolável. Use sempre que o usuário pedir "página de vendas", "landing com scrollytelling", "transformar essa copy em página", "reimaginar a landing", "transformar essa copy em slides", "deck", "apresentação", "carrossel", "criativo", "tela de produto", "tangibilizar a copy", "imagem-conceito por seção", ou quando existir uma copy dividida em blocos esperando virar tela. Não cobre build, teste, deploy nem gate de publicação.
+description: Transformar uma copy aprovada em telas — landing com scrollytelling, deck de slides, carrossel, criativo de social ou UI de produto. Cobre a parte criativa, da copy à peça final: blocagem que trata texto e composição juntos, ideias por unidade em texto com esboço ASCII escolhidas pelo dono antes de qualquer imagem, prompt de imagem-conceito só das escolhidas na proporção do formato, veredito de quem aprova antes de qualquer código, três portões do dono (ideia, imagem, pronto), wireframe e layout em ficha de 7 camadas, mockup de interface com mock data (nunca prova), loops pausados até entrar em cena e copy inviolável. Inclui o roteiro de projeto novo com kit de SDD (log literal de pedidos, gestão com entregável, specs, changelog, checkpoint, prompt de retomada). Use sempre que o usuário pedir "página de vendas", "landing com scrollytelling", "transformar essa copy em página", "reimaginar a landing", "transformar essa copy em slides", "deck", "apresentação", "carrossel", "criativo", "tela de produto", "tangibilizar a copy", "ideias em ASCII", "imagem-conceito por seção", "projeto novo com a skill", ou quando existir uma copy dividida em blocos esperando virar tela. Não cobre build, teste, deploy nem gate de publicação.
 license: MIT
 ---
 
@@ -35,6 +35,34 @@ muda.
 Leia "dobra" e "seção", no resto destes arquivos, como **a unidade do seu
 formato** — o vocabulário vem do caso de origem, que é a página.
 
+## Arquivos de apoio
+
+Abrir conforme o passo — nenhum precisa ser lido de antemão, e ler todos de
+uma vez desperdiça contexto.
+
+| Arquivo | Quando abrir |
+|---|---|
+| `references/principios-de-trabalho.md` | **Antes de tudo, em qualquer cliente.** Conduta: portões, log literal, decidir o óbvio, anotar não é fazer, dois trilhos |
+| `references/bootstrap.md` | Projeto novo, máquina nova: instalação, intake, grill, estrutura, o que registrar onde |
+| `references/taste.md` | **Antes do primeiro conceito.** Sistema de escopo, lições de ofício, como capturar o gosto do cliente |
+| `references/direcao-visual.md` | Passo 0: escrever a direção quando não existe; extrair quando existe |
+| `references/copy-contrato.md` | Ao receber a copy; o que o mockup não pode afirmar |
+| `references/blocagem.md` · `conceitos-por-dobra.md` · `mecanismos.md` | Passo 1: planejar as unidades e escolher o conceito de cada uma |
+| `references/ideias-ascii.md` | **Passo 2.** 3–5 ideias em texto com esboço ASCII por unidade; o dono escolhe antes de qualquer imagem |
+| `references/imagem-conceito.md` | Passos 3 e 4: o prompt só das escolhidas, o double-check, a geração e o veredito |
+| `references/camadas.md` | Passos 5 e 6: a ficha de 7 camadas, wireframe e layout |
+| `references/animacao.md` | Antes da primeira linha de animação, se o formato tem eixo de tempo |
+| `references/orquestracao.md` | Antes do primeiro subagente: uma unidade por vez, dois trilhos, refino em fila |
+| `references/medicao.md` · `armadilhas.md` | Passo 7: medir em vez de estimar; o que já custou tempo real |
+| `references/revisao-por-audio.md` | Quando o feedback chegar em áudio — e o grill de perguntas |
+| `GUIA-IMAGENS.md` | Para quem aprova sem programar, e para o agente que gera por MCP |
+| `assets/` | Templates: `projeto-template.md`, direção, blocagem, prompt de seção, briefing de ideação, camadas, subagente, checkpoint, tokens |
+| `assets/sdd-kit/` | O esqueleto do projeto novo (`CLAUDE.md`, `docs/sdd/`, `pecas/_modelo/`, `/ctxt-full`), copiado no bootstrap |
+| `INICIAR-PROJETO.md` | A ordem de serviço do projeto novo: o dono copia para a pasta e manda ler; grill em quatro pedidos, um por vez |
+| `assets/prompt-novo-projeto.md` | O prompt colável que instala a skill e conduz o projeto novo |
+| `companions/` | Skills companheiras que viajam junto (`tangibilizacao-css`: mini-UIs 100% CSS) |
+| `stacks/next-tailwind-gsap.md` | Só se a peça for Next + Tailwind + GSAP: código colável |
+
 ## A regra de ouro
 
 Cada seção precisa de um **conceito nomeável em uma frase**. "O placar dos dois
@@ -57,8 +85,8 @@ desenhar qualquer coisa, responder:
 | referência **de composição** (a imagem-conceito aprovada) | **fidelidade** | reproduzir arranjo, dispositivo e lugar do acento; texto, cor exata e movimento vêm do código |
 | não existe referência | **autor** | aí sim conceito nomeável e reimaginação |
 
-O quarto modo é novo: a referência é **criada pelo próprio pipeline** (Fase
-1.5a) e obriga fidelidade de arranjo sem obrigar fidelidade de pixel. Se a
+O quarto modo é novo: a referência é **criada pelo próprio pipeline** (Passos
+3 e 4) e obriga fidelidade de arranjo sem obrigar fidelidade de pixel. Se a
 imagem divergir de uma revisão escrita posterior, a revisão vence.
 
 **Quando a casa tem designer própria, o modo executor é o caso comum, não a
@@ -97,15 +125,20 @@ imagem-conceito, camadas, tangibilização.
 
 ## O que você prepara antes de chamar a skill
 
-Duas coisas: **a copy** e **a direção visual**. O resto a skill cria.
+Duas coisas: **a copy** e **a direção visual**. O resto a skill cria. Cada
+peça tem a sua pasta, em `pecas/<peça>/` — a mesma árvore do kit de projeto
+novo (`assets/sdd-kit/`), que acrescenta em volta dela a camada do projeto
+(`CLAUDE.md`, `docs/sdd/`, `briefing/`, `marca/`). Todo caminho de peça
+citado nestes arquivos (`secoes/…`, `copy/…`) é relativo a essa pasta.
 
 ```text
 meu-projeto/
-├─ projeto.md              formato, unidade, proporção, prazo — dez linhas
-├─ copy/
-│  └─ copy.md              a copy aprovada, um título por bloco. É inviolável.
-├─ direcao-visual.md       a direção a ser seguida — ou a matéria-prima dela
-└─ referencias/            imagens, prints, pesquisa, moodboard que você trouxe
+└─ pecas/<peça>/
+   ├─ projeto.md              formato, unidade, proporção, prazo — dez linhas
+   ├─ copy/
+   │  └─ copy.md              a copy aprovada, um título por bloco. É inviolável.
+   ├─ direcao-visual.md       a direção a ser seguida — ou a matéria-prima dela
+   └─ referencias/            imagens, prints, pesquisa, moodboard que você trouxe
 ```
 
 **`projeto.md`** — formato e unidade, a proporção da imagem, o formato do
@@ -135,43 +168,54 @@ Aí é só pedir: *"roda a skill nesse projeto"*.
 ## O que a skill cria
 
 ```text
-meu-projeto/
+pecas/<peça>/
 ├─ direcao-visual.md       ← reescrito: com nome, paleta em hex, o que não entra,
 │                             e o PREFIXO COMUM dos prompts, colável
 ├─ blocagem.md             ← uma linha por unidade
+├─ taste.md                ← vetos e aprovados deste cliente, com o motivo; nasce vazio
+├─ subagentes/             ← briefings autocontidos de ideação, implementação, refino
 ├─ secoes/
+│  ├─ README.md            ← estado por unidade, modelo e custo, dispositivos já usados
 │  ├─ 01-<slug>/
-│  │  ├─ prompt-v1.md         o prompt da unidade 01, versão 1
-│  │  ├─ prompt-v2.md         versão nova nasce AO LADO, nunca por cima
-│  │  ├─ imagem-v1-<modelo>.png   ← você gera e salva aqui
-│  │  ├─ imagem-v2-<modelo>.png
-│  │  ├─ veredito.md             ← aprovada | refazer: … | usar parte: …
-│  │  └─ camadas.md              ← wireframe (1–3) e layout (4–7)
+│  │  ├─ ideias.md                  3–5 ideias em texto com esboço ASCII; levas datadas
+│  │  ├─ prompt-v1.md               o prompt da ideia escolhida, versão 1
+│  │  ├─ prompt-v2.md               versão nova nasce AO LADO, nunca por cima
+│  │  ├─ ideia-v1-<modelo>.png      ← gerada pelo prompt 1; você ou o agente salva aqui
+│  │  ├─ ideia-v2-aprovada-<modelo>.png   a escolhida, renomeada; as outras ficam ao lado
+│  │  ├─ veredito.md                ← log datado: escolha da ideia, veredito da imagem
+│  │  └─ camadas.md                 ← wireframe (1–3) e layout (4–7)
 │  ├─ 02-<slug>/
 │  └─ …
 ├─ saida/                  a peça final, no formato do projeto.md
-└─ historico/              nada se apaga: versão substituída vive aqui
+└─ historico/              direção e briefings substituídos; nada se apaga
 ```
 
-Uma pasta por unidade, e o nome do arquivo carrega a versão e o modelo. É o
-que permite empilhar tentativas sem perder nenhuma.
+Uma pasta por unidade, e o nome do arquivo carrega o número do prompt e o
+modelo. É o que permite empilhar tentativas sem perder nenhuma — as versões
+ficam lado a lado, visíveis, na pasta da unidade.
 
-## O fluxo, em oito passos
+## O fluxo, em nove passos e três portões
 
 | passo | o que produz | quem faz |
 |---|---|---|
 | **0 · Pasta e direção** | `projeto.md`, `direcao-visual.md` reescrito com nome e prefixo | você prepara, a skill reescreve |
 | **1 · Blocagem** | `blocagem.md` — texto **e** composição, juntos | a skill |
-| **2 · Prompts** | `secoes/NN-slug/prompt-v1.md`, um por unidade | a skill |
-| **3 · Imagens e veredito** | as imagens e o `veredito.md` de cada unidade | **você** |
-| **4 · Wireframe** | camadas 1–3: fundo, estrutura, texto no lugar | a skill |
-| **5 · Layout** | camadas 4–7: estilo, cor, mockup, movimento | a skill |
-| **6 · Refinamento e revisão** | a peça fiel à imagem, e as aprovações congeladas | a skill refina, **você aprova** |
-| **7 · Peça final** | `saida/`, no formato do `projeto.md` | a skill |
+| **2 · Ideias em texto** | `secoes/NN-slug/ideias.md`: 3–5 ideias com esboço ASCII e uma recomendação | a skill propõe, **você escolhe** (portão 1) |
+| **3 · Prompts** | `secoes/NN-slug/prompt-vK.md`, só das ideias escolhidas | a skill |
+| **4 · Imagens e veredito** | as imagens e o `veredito.md` de cada unidade | **você** (ou o agente, por MCP) gera; **você aprova** (portão 2) |
+| **5 · Wireframe** | camadas 1–3: fundo, estrutura, texto no lugar | a skill |
+| **6 · Layout** | camadas 4–7: estilo, cor, mockup, movimento | a skill |
+| **7 · Refinamento e revisão** | a peça fiel à imagem, a copy conferida e as aprovações congeladas | a skill refina, **você revisa** |
+| **8 · Peça final** | `saida/`, no formato do `projeto.md` | a skill exporta **quando você declara pronto** (portão 3) |
 
-**Nada se exporta antes do passo 6.** Depois da exportação o custo de mudar
+**Você decide três coisas por unidade: qual ideia, qual imagem, e se está
+pronta.** Todo o resto é trabalho da máquina, conduzido com autonomia entre um
+portão e o próximo. "Pronto" é da peça: pode ser declarado com uma unidade
+ainda aberta, e a ressalva fica escrita.
+
+**Nada se exporta antes do passo 7.** Depois da exportação o custo de mudar
 multiplica: são N PNGs para regerar, um `.pptx` para refazer, uma página para
-republicar. O passo 6 é o último lugar barato.
+republicar. O passo 7 é o último lugar barato.
 
 ### Passo 0 — A direção, escrita e apresentada
 
@@ -206,35 +250,62 @@ decidida antes de descrever a cena. A ordem inversa — gerar imagem primeiro e
 blocar depois — é legítima e vale testar em copy curta; o que não se faz é
 blocar como se fosse só texto.
 
-### Passo 2 — Um prompt de imagem por unidade
+### Passo 2 — Ideias em texto, com esboço ASCII
 
-Cada unidade vira **uma imagem na proporção do formato**, que quem aprova vê
-antes de existir qualquer código. Estrutura do arquivo em
-`assets/prompt-secao-template.md`: prefixo comum inalterado + `LAYOUT.` + a
-cena, com o double-check (a–d) respondido antes de gerar.
+Entre a blocagem e qualquer imagem, cada unidade ganha **3–5 ideias em
+texto**, cada uma com: **nome curto**, **leitura da copy** (que frase o objeto
+torna óbvia, sem legenda), **mecanismo vivo** em uma linha, **esboço ASCII**
+na proporção da unidade (só o objeto e onde a copy mora nele; sem emoji) e,
+quando houver biblioteca, **blocos de origem**. A leva fecha com **uma
+recomendação** e o porquê, e vai para `secoes/NN-slug/ideias.md`, uma seção
+datada por leva.
+
+**Portão 1: você escolhe 1–2 ideias por unidade** (entrada datada no
+`veredito.md`); só essas viram imagem. Imagem recusada custa crédito e não diz
+por que falhou; texto recusado custa um minuto e diz. Regras de conceito:
+objeto único que se transforma; no máximo um par por peça, e só onde a copy é
+literalmente um par; um dispositivo por unidade, sem repetir na peça inteira.
+Formato, exemplo e a tabela de dimensão por proporção em
+`references/ideias-ascii.md`.
+
+### Passo 3 — Um prompt de imagem por ideia escolhida
+
+Cada ideia escolhida vira **uma imagem na proporção do formato**, que quem
+aprova vê antes de existir qualquer código. Estrutura do arquivo em
+`assets/prompt-secao-template.md`: prefixo comum inalterado + `LAYOUT.` com o
+**esboço ASCII escolhido colado** + a cena, com o double-check (a–d)
+respondido por subagente de contexto limpo antes de gerar.
 
 A cena descreve **lugar e peso** do texto, nunca a frase — o gerador escreve
-errado, e a copy só existe na peça final. Um dispositivo por unidade, nunca o
-mesmo em vizinhas. Cor de ação em até três pontos.
+errado, e a copy só existe na peça final. Um dispositivo por unidade, nunca
+repetido na peça. Quando a unidade não mostra o produto, dizer isso no
+`LAYOUT.`. Cor de ação em até três pontos.
 
 Regras completas em `references/imagem-conceito.md`; o passo a passo de quem
 só aprova, em `GUIA-IMAGENS.md`.
 
-### Passo 3 — Gerar, comparar, aprovar
+### Passo 4 — Gerar, comparar, aprovar
 
-Você gera (no navegador ou por um gerador ligado ao Claude), salva na pasta da
-unidade com versão e modelo no nome, e escreve uma linha no `veredito.md`:
-`aprovada`, `refazer: <o quê>` ou `usar parte: <qual>`.
+Você gera no navegador, ou o agente gera por um gerador ligado ao Claude
+(MCP), e a imagem é salva na pasta da unidade como `ideia-vK-<modelo>.png` (K
+= número do prompt). O modelo não é fixo: um **bake-off** nas três primeiras
+unidades decide o padrão do projeto, com o custo anotado.
 
-**O gate é a sua satisfação com as ideias, não a primeira imagem.** Peça
-variações, empilhe `prompt-v2`, `prompt-v3` ao lado do v1, teste modelos. Só
-se avança quando você estiver satisfeito com a ideia de cada unidade **e com a
-distribuição da copy entre elas** — mover uma frase de unidade custa barato
-aqui e custa uma rodada depois.
+**Portão 2: você aprova a imagem.** O `veredito.md` é log datado, append-only,
+com a sua fala literal e o arquivo escolhido, renomeado
+`ideia-vK-aprovada-<modelo>.png`; `aprovada`, `composição`, `refazer`, `usar
+parte` e `voltar às ideias` são o vocabulário de estado dentro de cada
+entrada.
 
-No fim, **uma ideia por unidade**, com o histórico inteiro preservado.
+**No máximo duas gerações por ideia; recusada duas vezes, volta ao Passo 2**
+— o problema é o conceito, não o acabamento. Anunciar a última leva dá uma
+escolha finita. Só se avança quando você estiver satisfeito com a ideia de
+cada unidade **e com a distribuição da copy entre elas** — mover uma frase de
+unidade custa barato aqui e custa uma rodada depois.
 
-### Passos 4 e 5 — Wireframe, depois layout
+No fim, **uma ideia por unidade**, com todas as versões lado a lado.
+
+### Passos 5 e 6 — Wireframe, depois layout
 
 A imagem aprovada é composição, não peça. Ela vira estrutura em duas etapas,
 escritas na ficha de **sete camadas** da unidade (`references/camadas.md`,
@@ -252,7 +323,7 @@ com a composição aprovada.
 Implemente com a imagem **aberta ao lado**; ao refazer, com a imagem **e o
 print atual** lado a lado.
 
-### Passo 6 — Refinamento e revisão
+### Passo 7 — Refinamento e revisão
 
 São **dois loops diferentes**, nesta ordem, e pular o primeiro faz o segundo
 gastar o tempo de quem aprova com coisa que você mesmo pegaria.
@@ -262,7 +333,15 @@ ao lado da imagem-conceito aprovada, iterando até ficar fiel; print também na
 largura real do mockup, não só da unidade. Copy literal conferida na peça
 renderizada, palavra por palavra. Medir em vez de estimar: vãos, escala
 tipográfica, cor e tracejado em `references/medicao.md`. E os condicionais do
-`projeto.md` — responsividade e performance, se o formato os tiver.
+`projeto.md` — responsividade e performance, se o formato os tiver. Numa
+página, a auditoria é numa matriz de janelas reais, **largura × altura**
+(`sticky` que não cabe na altura da janela esconde a copy), e correção
+responsiva vive só em `@media`, com as medidas antes e depois.
+
+**Check final da copy**, antes do portão 3: conferência literal contra
+`copy/copy.md` (numa página, também a ordem no DOM), nenhum texto coberto em
+nenhum tamanho, CTA em uma linha contando linhas de texto e, se houver
+movimento, a animação filmada em 10–12 quadros.
 
 **Revisão — quem aprova vendo a peça.** Ao vivo, com a peça aberta ao lado:
 quase todo feedback que muda uma peça vem de sessão ao vivo, não de print
@@ -272,7 +351,7 @@ antes da próxima. Feedback em áudio: **transcrever antes de decidir**
 implementar. **Pedido que contraria regra escrita volta como pergunta** — nunca
 se executa em silêncio, nunca se recusa.
 
-**É aqui que o `taste.md` se preenche**, e é o que faz a próxima peça começar
+**É aqui que o `taste.md` da peça se preenche**, e é o que faz a próxima peça começar
 melhor: cada veto guardado **com o motivo ao lado**, cada aprovação com a
 citação literal de quem aprovou. Marcar o aprovado e congelar — o que está
 congelado vira vocabulário de referência para as unidades seguintes.
@@ -281,10 +360,14 @@ congelado vira vocabulário de referência para as unidades seguintes.
 acessibilidade, teclado, contraste, `prefers-reduced-motion`, breakpoints. Em
 quarenta minutos de áudio de revisão nenhuma dessas palavras apareceu uma vez.
 
-Sai do passo 6 quando as aprovações estão congeladas e a lista de pedidos
+Sai do passo 7 quando as aprovações estão congeladas e a lista de pedidos
 abertos está vazia — ou escrita, se alguma ficou para depois.
 
-### Passo 7 — A peça final
+### Passo 8 — A peça final
+
+**Portão 3: você declara pronto.** Gates verdes, commit ou elogio não são
+aprovação; "manter por ora" também não. Só então a peça é exportada.
+
 
 | formato | o que sai | o que conferir antes de entregar |
 |---|---|---|
@@ -321,8 +404,13 @@ registrar — a próxima geração apaga a edição em silêncio.
 Janela de contexto é rainha. Na construção do zero, lotes de 3–4 unidades em
 paralelo funcionam — desde que os blocos compartilhados existam **antes** do
 primeiro lote. **Na revisão, é uma unidade por vez**: cada uma vira asset novo
-e precisa ser vista antes da próxima. Regras e o prompt do subagente em
-`references/orquestracao.md` e `assets/prompt-subagente-secao.md`.
+e precisa ser vista antes da próxima. Com as unidades já aprovadas em imagem
+e o dono fora da revisão, o refino pode ir em fila, com arquivos disjuntos.
+**Dois trilhos, ditos em voz alta:** correção com referência que o dono deu
+segue sem imagem; ideia ou unidade nova espera imagem aprovada. Mudança de
+muitas unidades nasce ao lado (`-v2`), com a versão atual intacta até o dono
+comparar. Regras e o prompt do subagente em `references/orquestracao.md` e
+`assets/prompt-subagente-secao.md`.
 
 ## O dial de tempo
 
@@ -331,32 +419,48 @@ O método não tem versão curta: tem versão com menos versões. Sob prazo, cor
 
 | escala com o tempo disponível | não comprime, porque custa quase nada |
 |---|---|
-| imagens-conceito por unidade | o contrato de copy (é script) |
+| imagens-conceito por unidade (as ideias em texto não se cortam) | o contrato de copy (é script) |
 | elaboração da apresentação de direção | a direção **com nome** |
 | linhas de direção oferecidas (V1, V2…) | o conceito nomeável por unidade |
 | rodadas de revisão | a ficha de camadas |
 
-Cortar a Fase 0.5 para ganhar tempo é economia negativa: foi assim que uma V1
+Cortar o Passo 0 para ganhar tempo é economia negativa: foi assim que uma V1
 nasceu por inércia, saiu "com cara de IA" e custou exatamente a rodada que
 tentava poupar.
 
 ## Checklist
 
-1. `projeto.md` escrito: formato, unidade, **proporção**, arquivo final, prazo
-2. Copy dividida em blocos e congelada
-3. **Direção visual escrita**, com nome e prefixo comum colável — e apresentada
-4. `references/taste.md` lido antes do primeiro conceito
-5. **Modo identificado** — existe referência? tem medida? é imagem-conceito? (refazer a cada entrega)
-6. Blocagem em tabela, conceito nomeado em cada unidade, **texto e composição juntos**, sem dispositivo repetido em vizinhas
-7. Prompts escritos, um por unidade, na proporção do formato
-8. Imagens geradas, comparadas e **aprovadas por quem decide**, com a distribuição da copy conferida
-9. Fichas de camadas: wireframe (1–3), depois layout (4–7)
-10. Unidades implementadas, uma por vez na revisão
-11. **Refinamento**: prints comparados com as imagens-conceito, copy literal
-    conferida na peça, medidas conferidas em vez de estimadas
-12. **Revisão ao vivo**, uma unidade por vez; áudio transcrito antes de decidir
-13. Aprovações congeladas e vetos registrados no `taste.md`, com o motivo
-14. Peça final exportada no formato do `projeto.md`, rastreável
+1. **Projeto novo?** `references/bootstrap.md` seguido, `assets/sdd-kit/` copiado; intake e grill registrados no log
+2. `projeto.md` escrito: formato, unidade, **proporção**, arquivo final, prazo
+3. Copy dividida em blocos e congelada
+4. **Direção visual escrita**, com nome e prefixo comum colável — e apresentada
+5. `references/taste.md` lido antes do primeiro conceito (em cliente novo, só as lições de ofício)
+6. **Modo identificado** — existe referência? tem medida? é imagem-conceito? (refazer a cada entrega)
+7. Blocagem em tabela, conceito nomeado em cada unidade, **texto e composição juntos**, sem dispositivo repetido na peça
+8. **Ideias em texto com esboço ASCII**, 3–5 por unidade, com recomendação — **você escolheu** (portão 1)
+9. Double-check em contexto limpo antes de gerar; prompts só das escolhidas, com o ASCII no `LAYOUT.`
+10. Imagens geradas e **aprovadas por quem decide** (portão 2) — ≤ 2 gerações por ideia, veredito datado, distribuição da copy conferida
+11. Fichas de camadas: wireframe (1–3), depois layout (4–7)
+12. Unidades implementadas, uma por vez na revisão, um commit por unidade
+13. **Refinamento**: prints comparados com as imagens-conceito, medidas conferidas em vez de estimadas; **check final da copy**
+14. **Revisão ao vivo**, uma unidade por vez; áudio transcrito antes de decidir
+15. Aprovações congeladas e vetos registrados no `taste.md` da peça, com o motivo
+16. Rodada registrada: log de pedidos, gestão, checkpoint, prompt de retomada (`/ctxt-full`)
+17. **Você declarou pronto** (portão 3); peça final exportada no formato do `projeto.md`, rastreável
+
+## Projeto novo
+
+- O roteiro do primeiro dia (instalação, intake, grill, estrutura, o que
+  registrar onde) está em `references/bootstrap.md`; o prompt colável, em
+  `assets/prompt-novo-projeto.md`; o esqueleto do projeto, em
+  `assets/sdd-kit/`.
+- A conduta vale inteira em qualquer cliente:
+  `references/principios-de-trabalho.md`.
+- Do gosto, só as lições de ofício de `references/taste.md` transportam; o
+  `taste.md` da peça nasce vazio e captura o gosto do dono daquele cliente.
+- Modelo de imagem, custo e modo de trabalho (executor, autor…) são dados do
+  intake, não herança.
+- Nunca citar outro cliente ou projeto, nem na conversa nem na peça.
 
 ## O que fica fora deste escopo
 
@@ -396,5 +500,6 @@ pela plataforma.
 - A ficha de camadas tende a virar documentação a posteriori se o mesmo agente
   escreve ficha e código. Se a separação importa, exija a ficha como primeira
   entrega.
-- O gosto em `references/taste.md` é de um cliente específico, com prefixo de
-  escopo por regra. Ponto de partida, não lei universal.
+- As lições de ofício em `references/taste.md` vieram de poucos clientes, com
+  prefixo de escopo por regra. Ponto de partida, não lei universal; o gosto de
+  cada cliente vive no `taste.md` da peça.

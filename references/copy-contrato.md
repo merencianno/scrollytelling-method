@@ -7,18 +7,20 @@ transformar essa fronteira em algo que um script consegue reprovar.
 
 ## A regra, literal
 
-Escrita assim no brief da segunda passada do projeto de referência
-(`docs/projeto-ref/brief-v2-reimaginacao.md`):
+Na forma genérica, para colar no brief de cada peça:
 
-> **A copy não muda uma vírgula.** Fonte: `copies/<ARQUIVO-DA-COPY>.md`.
-> Pode mudar: distribuição, hierarquia (h2/h3/p/strong),
-> agrupamento, quebras controladas, ênfase por cor/peso dentro da frase,
-> ordem visual dos blocos dentro da dobra desde que a leitura linear
-> continue a mesma. Não pode: reescrever, resumir, trocar
-> acento/pontuação/caixa, inventar rótulos, números, métricas, depoimentos,
-> microcopy. Mini-UIs são abstratas (skeleton bars, ícones, chips com
-> rótulos oficiais dos assets: "Lead captado", "Call agendada", "Call
-> realizada", "Fechado"). Numerais "01–14" são marcação editorial permitida.
+> **A copy não muda uma vírgula.** Fonte: `copy/copy.md`. Pode mudar:
+> distribuição, hierarquia (h2/h3/p/strong), agrupamento, quebras
+> controladas, ênfase por cor/peso dentro da frase, ordem visual dos blocos
+> dentro da dobra desde que a leitura linear — **a ordem no DOM** — continue
+> a mesma. Não pode: reescrever, resumir, trocar acento/pontuação/caixa,
+> inventar rótulos, números, métricas, depoimentos, microcopy. Chips e
+> rótulos de mini-UI usam os **rótulos oficiais dos assets do cliente**.
+> Numerais de seção ("01–14") são marcação editorial permitida.
+
+A regra nasceu no brief da segunda passada do projeto de referência (a versão
+original ainda dizia "mini-UIs são abstratas" — revogado abaixo, em
+"Mini-UIs").
 
 Vale a pena copiar essa regra para o brief de cada projeto novo, com a
 fonte trocada. Ela resolve sozinha a maior parte das discussões de rodada.
@@ -53,7 +55,13 @@ Conteúdo que falta tem **dois tratamentos, não um**: o **slot técnico**
 obrigatório — a foto do expert, o número de contato —, e o **fallback
 silencioso** (tenta o arquivo, cai para um tile de cor com frase curta) para
 o resto — as fotos ilustrativas dos mockups. Um slot marcado por página; o
-resto cai. **Falta de foto nunca bloqueia a seção.**
+resto cai. **Falta de foto nunca bloqueia a seção.** O tile de cor é
+fallback de carregamento, não mídia de mockup: onde o dono indicou material
+real, ele entra (ver "Mini-UIs").
+
+**Asset que falta vira placeholder visível e rotulado, mais um pedido ao
+dono** na lista única de decisões pendentes — nunca um asset inventado que
+passe por real.
 
 O que a copy não menciona não entra por inferência: vira **slot técnico**,
 um valor de configuração explicitamente marcado como pendente, que falha
@@ -80,12 +88,29 @@ pelo usuário"*.
 
 O que ela protegia continua valendo, com a fronteira no lugar certo:
 
+- **Real por link, genérico sem link, nunca adivinhado.** Quando o dono
+  indica perfis, páginas ou acervos (link ou arquivo), a mídia do mockup é o
+  conteúdo real deles, com curadoria registrada em `marca/README.md` ou
+  `pecas/<peça>/referencias/README.md` (o que foi excluído e por quê: post político,
+  criança, o que contradiz a copy). Sem indicação, usuário genérico
+  (`seuusuario`) e avatar neutro. Terceiros nunca. O lado negativo também é
+  real, ou gerado como amador de verdade — nunca tile de cor com frase:
+  tile foi reprovado como "feio, quero coisas reais" e perfil adivinhado
+  custou rodada.
 - **Mock data plausível dentro do mockup, sim.** Números específicos e
-  imperfeitos ("2,4 mil curtidas", "36 novos seguidores"), usuário genérico
-  (`seuusuario`) ou o oficial da marca, legendas curtas, o texto real que o
+  imperfeitos ("2,4 mil curtidas", "36 novos seguidores"), o usuário da
+  regra acima ou o oficial da marca, legendas curtas, o texto real que o
   app mostra ("curtiu sua publicação"), datas, horários. Skeleton só onde o
   app real mostraria placeholder. A curva do dado tem de **dizer o que a
   copy diz** — barras crescentes contradizem "meses sem resultado".
+- **Mock data usa a taxonomia real do produto** quando ela existe:
+  categorias, fileiras e títulos conferidos contra a imagem do produto, não
+  inventados (fileiras com títulos inventados voltaram com "pode
+  fazer algo melhor").
+- **Nenhuma frase para o lead fora da copy, nem em estado de interação** —
+  feedback de clique, toast, vazio, sucesso. String nativa do app pode
+  ("Seguir", "curtiu"). Não perguntar: omitir ("se
+  você inventou essa copy aí você tá chapando").
 - **Nada que se leia como prova de resultado, nunca.** Sem depoimento, sem
   "fulano faturou X", sem nome real, sem valor em moeda, sem rosto. Mensagem
   longa entra truncada com reticências para não virar depoimento.
@@ -120,7 +145,7 @@ mecanismos simples, ambos aplicados ao HTML pré-renderizado:
 1. **Uma frase literal e contígua por dobra.** Uma lista de pares
    `[rótulo, trecho]` — `["3ª dobra", "Marketing, vendas e operação
    conectados do início ao fim."]`, `["13ª dobra", "devolvemos todo o seu
-   dinheiro."]`, `["rodapé", "© 2026 O Novo Mercado"]` — e um
+   dinheiro."]`, `["rodapé", "© 2026 <Marca>"]` — e um
    `index.includes(contract)` para cada. Quinze contratos cobrem as 14
    dobras e o rodapé. Não é verificação de copy inteira: é uma âncora por
    dobra, escolhida no trecho mais característico, o suficiente para que
@@ -181,4 +206,6 @@ pendência do cliente. Erro de export (negrito partido, tabela quebrada,
 aspas tipográficas, hífen escapado) é **leitura estrutural**, não licença
 para editar: o verificador compara o caractere exato. O double-check em
 contexto limpo (ver `imagem-conceito.md`) costuma achar buracos que a sessão
-longa não viu — peça a lista.
+longa não viu — peça a lista. O double-check da leva de ideias em texto
+(Fase 1.2, `ideias-ascii.md`) também devolve buracos, mais cedo e mais
+barato.

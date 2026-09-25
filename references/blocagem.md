@@ -45,7 +45,7 @@ tabela de encaminhamento (`copy-contrato.md`).
 | **Ato** | A superfície: claro, escuro ou "deep" | Ver o ritmo, abaixo |
 | **Blocagem** | O layout em uma frase densa: o que ocupa a tela e em que arranjo | Precisa citar os elementos da copy daquela dobra, não um layout genérico |
 | **Motion** | O gesto, não a implementação | "trilho que preenche", "faturas empilhando", "anel que desenha" |
-| **Assets** | Os arquivos concretos que a dobra consome — e, quando o método usa imagem-conceito, a marca **IC** | Caminho ou nome real; vazio quando a dobra é só tipografia e CSS. "IC" diz que a seção passa pela Fase 1.5a antes do código |
+| **Assets** | Os arquivos concretos que a dobra consome — e, quando o método usa imagem-conceito, a marca **IC** | Caminho ou nome real; vazio quando a dobra é só tipografia e CSS. "IC" diz que a seção passa pelas ideias em texto e pela imagem-conceito (Passos 2–4) antes do código |
 
 Uma linha do projeto de referência, para calibrar a densidade esperada (lá o conceito
 morava dentro da célula de blocagem; o template o separa em coluna própria,

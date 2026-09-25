@@ -1,6 +1,6 @@
 # Revisão e gates: como uma rodada fecha
 
-Uma rodada é o intervalo entre duas sessões de feedback do cliente: começa
+Uma rodada é o intervalo entre duas sessões de feedback do dono: começa
 com uma lista de pedidos, termina com gates verdes e um registro do que foi
 aprovado. O projeto de referência fez seis rodadas em cerca de doze horas — o que
 sustentou esse ritmo não foi velocidade de implementação, foi o fechamento
@@ -56,6 +56,24 @@ imagem por dobra (`.export-shots/shoot-widths.mjs <dir> <larguras>
 [dobras]`). As larguras que pegaram problemas reais no projeto de referência:
 1440 / 1366 / 1280 / 1024 / 768, mais 390 e 320 no celular.
 
+**Largura não basta: a janela tem altura.** Audite numa matriz de janelas
+reais, largura × altura:
+
+| faixa | janelas |
+|---|---|
+| notebook | 1280×720 · 1366×768 · 1440×900 · 1536×864 |
+| tablet | 768×1024 · 820×1180 · 1024×768 · 1024×1366 |
+| celular | 320×568 · 360×740 · 375×667 · 390×844 · 414×896 |
+
+Todo `sticky` cabe em `innerHeight` ou deixa de grudar abaixo de ~700 px de
+altura; um palco grudado mais alto que a janela esconde a própria copy.
+
+**Correção responsiva só em `@media`, com diff medido.** Ajuste de celular
+vive em `@media (max-width: …)`; nunca se move um utilitário com breakpoint
+para a regra base. Meça os elementos tocados em todos os tamanhos **antes e
+depois** e compare o diff — uma largura corrigida para o celular vazou para
+o desktop e só a medição mostrou.
+
 **Medição não substitui olhar o print.** O que só apareceu no olho, numa
 revisão de 70 imagens: grade de quatro colunas colapsando em 2×2 no
 tablet, fecho quebrando no hífen ("fazê-/las"), janelas com faixa morta
@@ -76,14 +94,14 @@ páginas em paralelo no mesmo browser também. Regra: uma página por vez,
 viewport maior que a seção, relógio real, nada de seek. Se o
 `getComputedStyle` está certo, o CSS está certo — o print é que mente.
 
-## O ciclo com o cliente
+## O ciclo com o dono
 
 - **Uma rodada por sessão de feedback.** Acumular pedidos de duas sessões
   numa entrega só faz perder a rastreabilidade de qual pedido gerou qual
-  mudança, e o cliente revisa como se fosse página nova.
+  mudança, e o dono revisa como se fosse página nova.
 - **O feedback vira commit.** Cada pedido é uma mudança identificável,
   idealmente um commit por seção, para que o rollback seja cirúrgico
-  quando o cliente voltar atrás — e ele volta: no projeto de referência um preço à vista
+  quando o dono voltar atrás — e ele volta: no projeto de referência um preço à vista
   foi cogitado e revogado na mesma hora.
 - **Marcar o que foi aprovado, para congelar.** A convenção do projeto de referência é
   uma seção de aprovações no checkpoint, com `**!**` = gostou, manter:
@@ -93,12 +111,22 @@ viewport maior que a seção, relógio real, nada de seek. Se o
   atropela o que já estava aprovado e a rodada seguinte volta atrás.
 - **Pedidos abertos ficam listados junto**, na mesma seção, e a rodada
   seguinte começa por eles. O checkpoint termina com um status datado
-  dizendo quais foram entregues e quais viraram backlog do cliente.
+  dizendo quais foram entregues e quais viraram backlog do dono.
+- **Checklist vivo da rodada.** Uma linha por unidade com a recomendação
+  (aprovar / composição / refazer / voltar às ideias), o problema, as
+  decisões que só o dono toma e os ajustes empilhados por pedido
+  (⬜ 🟨 ✅ + commit). O dono dita solto; o orquestrador empilha e não
+  executa até ele liberar. Decisões só-do-dono vão
+  numa **lista única no fim**, com recomendação em cada uma.
+- **Pronto é o dono quem diz.** Gates verdes, commit, "ficou ótimo" ou
+  "manter por ora" não são aprovação de peça. A lista das peças declaradas
+  prontas, com ressalvas, vive na gestão do projeto; pronto não exige toda
+  unidade resolvida.
 
 ## Fecho de uma rodada de revisão por seção
 
 Quando a rodada foi "uma seção por vez" com o dev server aberto para o
-cliente (ver `orquestracao.md`), a verificação de integração fica toda para
+dono (ver `orquestracao.md`), a verificação de integração fica toda para
 o fecho, com o dev **fechado**. Nesta ordem, nada pulado:
 
 1. Suíte de contrato do alvo.
@@ -112,7 +140,7 @@ o fecho, com o dev **fechado**. Nesta ordem, nada pulado:
 5. SDD: ficha de cada seção, checkpoint novo, registro de sessão, estado no
    README do projeto, prompt de retomada, changelog **com os números da
    verificação**.
-6. A branch fica local até o cliente aprovar ao vivo. Diga as duas opções
+6. A branch fica local até o dono aprovar ao vivo. Diga as duas opções
    (push da branch / fast-forward) e espere.
 
 Gate de alvo novo: **copiar** o verificador do alvo anterior e trocar só a
@@ -123,13 +151,17 @@ gate uma vez.
 
 ## Checkpoint × sessão × retomada
 
-Três documentos, três perguntas:
+Dois documentos obrigatórios e um opcional. O fechamento inteiro (log,
+changelog, gestão, checkpoint, prompt de retomada, commit) é executado pela
+skill de projeto `/ctxt-full` do kit (`assets/sdd-kit/.claude/skills/`).
 
-- **Checkpoint** (`assets/checkpoint-template.md`) responde *"onde
-  estamos"*: estado por seção em tabela, verificação com números, **"para
-  o cliente ver ao vivo"**, ideias anotadas, pendências do cliente, lições
-  para o método.
-- **Sessão** (`assets/sessao-template.md`) responde *"o que se perde quando
+- **Checkpoint** (`assets/checkpoint-template.md`, template único) responde
+  *"onde estamos"*: estado em uma frase, git, o que foi feito por unidade
+  com commits, o que está pela metade e como retomar, decisões do dono com
+  as palavras dele, decisões pendentes com recomendação, imagens à espera
+  de veredito, **"para o dono ver ao vivo"**, ideias anotadas, próximos
+  passos, lições para o método.
+- **Sessão** (`assets/sessao-template.md`, **opcional**) responde *"o que se perde quando
   a conversa acaba"*: a frase que organizou a rodada, a fonte do briefing,
   o bug que ninguém via, o print que mentiu, vetos com escopo. É o registro
   do que a sessão **aprendeu**, não do que ela fez. Misturar os dois faz o
@@ -140,10 +172,10 @@ Três documentos, três perguntas:
   — não se ajusta um documento vetado.
 
 Duas listas curtas fecham toda rodada e evitam a reclamação seguinte:
-**"para o cliente ver ao vivo"** — escolhas de execução que só se julgam na
+**"para o dono ver ao vivo"** — escolhas de execução que só se julgam na
 tela (vão vazio num card, tamanho relativo de dois assets, sobreposição
 intencional); não são bugs, não conserte por conta própria — e **"ideias
-anotadas"** — o que o cliente narrou como "guarda essa ideia", com motivo e
+anotadas"** — o que o dono narrou como "guarda essa ideia", com motivo e
 dependência, nunca executado "de bônus" nem esquecido.
 
 Aprovação e crítica são **granulares**: registre no nível do componente,
@@ -159,10 +191,13 @@ retomar sem perguntar nada. Três artefatos:
 1. **Checkpoint da data** — um arquivo por dia de trabalho intenso, com
    uma seção por rodada: o que foi construído, o que mudou por dobra com o
    arquivo correspondente, os gates rodados, as armadilhas descobertas, as
-   pendências que dependem do cliente e as aprovações. É o documento que
+   pendências que dependem do dono e as aprovações. É o documento que
    se lê primeiro ao continuar em outro chat.
-2. **Prints por rodada**, em pastas versionadas (`review-v1/` … `review-v5/`),
-   que permitem comparar antes e depois sem reconstruir a página.
+2. **Prints por rodada**, **fora da pasta de ideias** — em
+   `arquivo-local/prints-teste/<peça>/<seção>/`, ignorado pelo git, com uma
+   subpasta por rodada (`review-v1/` … `review-v5/`) para comparar antes e
+   depois sem reconstruir a página. A pasta da seção é do dono: só
+   `ideias.md`, prompts, imagens-conceito, `veredito.md` e `camadas.md`.
 3. **Bloco de origem na publicação** — no repositório de páginas, cada
    versão leva um `NOTAS.md` com repositório, branch, SHA completo, rota,
    `basePath`, artefato, comandos de build e verificação, mais o que mudou

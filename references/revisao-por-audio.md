@@ -1,6 +1,6 @@
 # Revisão por áudio: transcrever antes de decidir
 
-O cliente grava áudios revisando a página, seção por seção. A regra que
+O dono grava áudios revisando a página, seção por seção. A regra que
 organiza tudo: **nenhuma decisão de código antes de a transcrição literal
 existir.** A transcrição é a fonte; o briefing aponta e traduz.
 
@@ -17,9 +17,9 @@ resumo teria engolido os dois.
 - Custo medido: **2,5–3,4 s de CPU por segundo de áudio, por worker.** Rode N
   workers em paralelo (4 numa máquina de 16 threads); 40 min de áudio levam
   ~25 min de relógio. Um processo só demora quatro vezes mais e mede errado.
-- Meça a duração antes e dê a estimativa ao cliente com o ritmo medido.
+- Meça a duração antes e dê a estimativa ao dono com o ritmo medido.
 - Trocar para modelo menor acelera três vezes e erra mais em palavra solta —
-  é decisão do cliente, não do executor.
+  é decisão do dono, não do executor.
 
 ## Montar o documento
 
@@ -49,22 +49,26 @@ implementaria "um divisor da sessão" em vez de "no marquee".
 
 - Escreva uma **seção nova no briefing existente**, datada, "vale daqui em
   diante" — não um documento novo, não um plano de tarefas.
-- Formato por seção: **citação literal do cliente** (recortada da
+- Formato por seção: **citação literal do dono** (recortada da
   transcrição, com as correções de reconhecimento aplicadas dentro da
   citação) → 3–6 bullets do que muda, sempre dizendo o que **sai**.
 - Declare no topo as regras de tradução:
-  - componente citado por nome de site (21st, React Bits, Aceternity…) entra
-    como **implementação nossa** em CSS/SVG/GLSL — nada copiado, nenhuma
-    dependência nova sem decisão explícita do cliente;
+  - componente citado **com link e a palavra "exato"** (ou equivalente) é
+    portado: o código do link, com o cabeçalho de licença; componente citado
+    **de memória ou por nome de site, sem link** (21st, React Bits,
+    Aceternity…) entra como **implementação nossa** da mecânica, em
+    CSS/SVG/GLSL. Código atrás de login vira standby rotulado. Em qualquer
+    caso, nenhuma dependência nova de runtime sem decisão explícita do
+    dono;
   - rede social citada pela marca vira tela **genérica**; o nome não aparece
-    no texto renderizado nem em `aria-*` (o cliente nomeia apps para se fazer
+    no texto renderizado nem em `aria-*` (o dono nomeia apps para se fazer
     entender, a página não);
   - número dentro de mockup é UI ilustrativa, nunca prova.
 - Um parágrafo **"Exceções decididas nesta rodada"** e um bloco final
-  **"Ideias anotadas (não executar agora)"** para o que o cliente narrou como
+  **"Ideias anotadas (não executar agora)"** para o que o dono narrou como
   "vamos guardar essa ideia" / "não é a ideia principal".
 - Cada subagente lê o bloco da sua seção como **item 1** da lista de leitura,
-  rotulado "é o contrato". Ele lê a fala do cliente, não a paráfrase do
+  rotulado "é o contrato". Ele lê a fala do dono, não a paráfrase do
   orquestrador.
 
 ## Quando o áudio contraria uma regra dura
@@ -90,11 +94,24 @@ em `taste.md`.
 - **Composição espacial** ("duas para cima e duas para baixo", "à direita
   inferior", "num cantinho") — a fala não resolve; o print resolve. Prever
   uma iteração de print para cada instrução espacial.
-- **Números** — o cliente hesita ("36… 43… 47… um número mais baixo ainda").
+- **Números** — o dono hesita ("36… 43… 47… um número mais baixo ainda").
   Cravar o valor é pergunta, não escolha.
 - **Qualidade de movimento** ("mais tech") — sem definição de easing. Perguntar.
 - **Ordem interna** (mockup acima ou abaixo da lista) — foi corrigido depois
   de implementado; perguntar antes economiza a rodada.
+- **Diagnóstico × sugestão.** O incômodo concreto ("achatado", "não
+  centralizado") é ordem; a solução dita com "não sei, talvez" é hipótese —
+  aplique a menor correção que resolve o incômodo e mostre a hipótese como
+  opção. Uma sugestão executada ao pé da letra voltou com "prefiro que volte
+  do jeito que tava… era só pra deixar mais largo".
+
+## Veredito de imagem por áudio
+
+Quando o veredito de uma imagem-conceito chega por áudio, transcreva o
+trecho e registre-o **literal e datado** no `veredito.md` da seção, com o
+nome do arquivo escolhido. Troca posterior é **entrada nova**; a anterior
+fica. O estado (aprovada / composição / refazer / voltar às ideias) vai
+dentro da entrada — ver `imagem-conceito.md` §Aprovação.
 
 ## Grill de perguntas antes de implementar
 
@@ -122,7 +139,7 @@ as que se aplicam **antes** de disparar o primeiro subagente:
 
 **Escopo e conflito**
 14. Este pedido contraria uma regra escrita (copy literal / paleta / prova). É exceção desta seção ou muda a regra da página?
-15. Você citou um componente de biblioteca: quero a mecânica reimplementada por nós, certo? Posso trazer dependência nova, ou só CSS/SVG?
+15. Você citou um componente de biblioteca: tem o link e quer **exatamente** aquele (porto o código com a licença), ou é a mecânica que eu reimplemento? Posso trazer dependência nova, ou só CSS/SVG?
 
 **Para fechar a rodada**
 16. Dessa peça que você elogiou, o elogio é do asset inteiro ou de um pedaço? (Uma vez era só o botão.)

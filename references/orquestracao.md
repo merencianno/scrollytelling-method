@@ -7,20 +7,33 @@ arquivo existe para que o orquestrador **nunca leia um componente inteiro**:
 ele lê relatórios curtos, prints e o resultado do `tsc`. Foi isso que deixou
 espaço, na mesma sessão, para achar e corrigir um bug fora do plano.
 
-## Construção × revisão: dois regimes
+## Construção × revisão × refino: três regimes
 
-| | Construção do zero | Revisão com o cliente |
-|---|---|---|
-| unidade | lote de 3–4 seções por subagente, em paralelo | **uma seção por subagente, sequencial** |
-| quando | as seções ainda não existem; arquivos disjuntos por natureza | cada seção vira asset novo e precisa ser vista antes da próxima |
-| risco | colisão em arquivo compartilhado | volume de mudança que o cliente não consegue revisar |
-| commit | por lote, antes do build | **por seção, antes de lançar a próxima** |
+| | Construção do zero | Revisão ao vivo com o dono | Refino em fila (sem o dono olhando) |
+|---|---|---|---|
+| unidade | lote de 3–4 seções por subagente, em paralelo | **uma seção por subagente, sequencial** | 3–4 subagentes em paralelo, uma seção cada |
+| quando | as seções ainda não existem; arquivos disjuntos por natureza | cada seção vira asset novo e precisa ser vista antes da próxima | seções já aprovadas em imagem e o dono pediu para não provar uma por uma |
+| risco | colisão em arquivo compartilhado | volume de mudança que o dono não consegue revisar | dois processos no mesmo servidor ou navegador; trabalho perdido na interrupção |
+| condição | átomos criados antes | o dono olhando | arquivos disjuntos, **um** dev server, **um** navegador por vez, parcial em disco |
+| commit | por lote, antes do build | **por seção, antes de lançar a próxima** | **por seção**, cada uma vista antes de fechar |
 
-O cliente interrompeu um "três agentes em paralelo" e repetiu duas vezes
-*"uma por vez"*. A leitura: lotes paralelos servem para construir; revisão
-pede unidade fechada. Paralelismo em revisão só quando os conjuntos de
-arquivos são **disjuntos** — e mesmo assim lançando a N+1 enquanto se olha o
-print da N, não três de uma vez.
+O invariante é **um commit por seção, vista antes da próxima**. O dono
+interrompeu um "três agentes em paralelo" enquanto revisava ao vivo e
+repetiu duas vezes *"uma por vez"*; revisão ao vivo continua sequencial,
+lançando no máximo a N+1 enquanto se olha o print da N. Depois, com as
+seções já aprovadas em imagem, ele mesmo pediu para "deixar rodar" sem
+provar uma por uma — e o refino em fila, com arquivos disjuntos, funcionou.
+
+**Dois trilhos.** Correção com referência que o dono deu (componente, link,
+número, print) segue sem imagem-conceito; ideia ou seção nova espera imagem
+aprovada. Cada job declara em qual trilho está, no prompt e no relatório —
+nada se implementa "sem avisar".
+
+**Refino em dois tempos.** Primeiro 3–4 seções ao vivo com o dono; as lições
+dessa conversa (mockup não estica, animação filmada, CTA em uma linha…)
+viram o `subagentes/BRIEFING-REFINO.md` da peça; depois, o resto vai por subagente em
+fila, com a frase "o seu critério é o do dono: esta é a lista de vetos e
+aprovações desta peça".
 
 ## O ciclo de uma seção (invariante)
 
@@ -52,7 +65,10 @@ próxima
 - o **arquivo de átomos compartilhados** (primitives: barra skeleton, traço,
   avatar, tela) — mesmo que vazio, com a API declarada;
 - o esqueleto do arquivo de fichas;
-- o mapa copy → seção, resolvido linha a linha.
+- o mapa copy → seção, resolvido linha a linha;
+- o **catálogo de assets reais** com os títulos conferidos contra a imagem;
+- o **device com proporção fixa** (tela nativa reduzida por `scale()`) e a
+  **janela do produto**, quando a peça mostra o produto.
 
 Dois lotes que precisam do mesmo átomo vão criá-lo ao mesmo tempo e o último
 a gravar vence em silêncio. Aconteceu: dois lotes criaram o mesmo
@@ -88,7 +104,7 @@ opcional:
    junto com o prompt que a gerou; quando há revisão escrita posterior, **a
    revisão vence a imagem** e o agente registra a divergência.
 3. **"O que fazer"** — instrução espacial concreta, com a **citação do
-   cliente embutida** onde ela justifica a escolha. Nomeie **o que sai**
+   dono embutida** onde ela justifica a escolha. Nomeie **o que sai**
    (blocos locais mortos, imports), não só o que entra.
 4. **Motion** — padrão de entrada, o que é loop, o que é scrub, e o estado sob
    reduced-motion (sempre: tudo visível, no estado final).
@@ -97,7 +113,7 @@ opcional:
    sem `transition` em elemento do GSAP; comentário em `<style>` público e
    sem crase; responsivo em 320/375/414/768; alvos ≥ 44 px; a **lista nominal
    de arquivos proibidos**; `tsc` verde rodado por ele; e, quando há dev
-   server aberto para o cliente, "não rode build, teste nem outro dev".
+   server aberto para o dono, "não rode build, teste nem outro dev".
 6. **"Entrega (≤ 25 linhas, sem código)"** — arquivos criados/alterados,
    anatomia do mockup, mecanismo e duração de cada loop, mock data usada, o
    que removeu, resultado do `tsc`, **e dúvidas**.
@@ -106,7 +122,7 @@ O bloco de dúvidas é obrigatório e é o mais valioso: foi lá que apareceram 
 bug do motor de motion, um cast de tipo indevido e uma falha de gate.
 Quando um subagente reporta *"a regra X me impediu de fazer Y que o briefing
 cita"*, isso é **defeito do contrato**, não dúvida de implementação — três
-subagentes reportaram o mesmo conflito e ninguém tratou até o cliente reprovar.
+subagentes reportaram o mesmo conflito e ninguém tratou até o dono reprovar.
 
 ### Loop de auto-verificação visual
 
@@ -126,24 +142,31 @@ numeradas; (5) slots de asset esperados. Fechar com `tsc`/`lint` e "sem
 commits". É esse relatório que permite fundir as fichas e montar a página
 sem reler código.
 
-## Quando o cliente inverte uma regra no meio da rodada
+## Quando o dono inverte uma regra no meio da rodada
 
 Antes de tocar em código: **escreva a mudança no briefing**, numa seção nova
-e datada, dizendo em voz alta **o que ela revoga**, com as palavras do cliente
+e datada, dizendo em voz alta **o que ela revoga**, com as palavras do dono
 citadas, o limite que continua valendo, a ordem de execução pedida e o que
-ficou como backlog. Guarde a referência visual em `referencias/` com data
-no nome. Só então dispare os agentes — e mande cada um ler a seção nova
+ficou como backlog. Guarde a referência visual em `pecas/<peça>/referencias/`
+com data no nome.
+
+O inverso também vale: **antes de herdar uma regra de peça irmã, releia o
+que esta peça vende.** Uma regra de página ("nenhuma oferta é software")
+aplicada à irmã cuja oferta era uma plataforma tirou o produto da página.
+Só então dispare os agentes — e mande cada um ler a seção nova
 **primeiro**, com a frase "ela REVOGA as regras de …".
 
 ## Ordem de fechamento da rodada
 
 `tsc` → `lint` → montar a landing → suíte → **commitar** → `build` + `verify`
 de cada alvo → contrato de copy contra o artefato → auditoria de viewports →
-prints por dobra → **prova de rolagem em carga fria** → fundir fichas →
-SDD (checkpoint, sessão, changelog) → push só com aprovação.
+prints por dobra → **prova de rolagem em carga fria** → diff de medidas
+responsivas (quando houve correção de largura) → fundir fichas → **log de
+pedidos e gestão atualizados** → SDD (checkpoint, changelog; sessão
+opcional) → push só com aprovação.
 
 O gate recusa artefato de **árvore suja**: commitar vem antes de buildar.
-**Um processo Next por vez** — se o dev está aberto para o cliente revisar,
+**Um processo Next por vez** — se o dev está aberto para o dono revisar,
 não rode build nem teste; anote a dívida e abra o prompt de retomada com ela.
 
 ## Ambiente
@@ -157,3 +180,7 @@ não rode build nem teste; anote a dívida e abra o prompt de retomada com ela.
   parada pelo id da tarefa.
 - Scripts ad-hoc que usam dependências do projeto (Playwright) rodam **de
   dentro do repositório**, não do scratchpad — lá `node_modules` não resolve.
+- Worktree exige **um servidor por árvore**. `Ctrl+C` mata subagentes em voo:
+  eles escrevem o parcial em disco antes de reportar, e a retomada lê o
+  parcial.
+- O modelo dos subagentes é parâmetro do projeto, registrado no checkpoint.

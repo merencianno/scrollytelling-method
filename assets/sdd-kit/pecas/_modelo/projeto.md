@@ -1,9 +1,16 @@
-# <NOME-DO-PROJETO>
+# <NOME-DA-PEÇA>
 
-<!-- Dez linhas. É o primeiro arquivo que a skill lê, e o que decide
-     proporção da imagem, o que se verifica e como a peça é exportada.
-     Vive em pecas/<peça>/projeto.md; o kit de projeto novo traz uma cópia
-     em assets/sdd-kit/pecas/_modelo/projeto.md. -->
+<!-- A ficha da peça: o primeiro arquivo que a skill lê, e o que decide a
+     proporção da imagem, o que se confere e como a peça é exportada.
+     Mesmo conteúdo de <caminho-da-skill>/assets/projeto-template.md.
+     Esta pasta vira pecas/<peca>/ (cp -R pecas/_modelo pecas/<peca>).
+     Nascem depois, a partir dos templates da skill:
+       direcao-visual.md             ← assets/direcao-visual-template.md (Passo 0)
+       blocagem.md                   ← assets/blocagem-template.md (Passo 1)
+       subagentes/BRIEFING-IDEACAO.md ← assets/briefing-subagente-ideacao.md (Passo 2)
+       secoes/NN-slug/camadas.md     ← assets/camadas-template.md (Passos 5–6)
+     Já estão aqui: taste.md, subagentes/BRIEFING-IMPLEMENTACAO.md,
+     subagentes/BRIEFING-REFINO.md, secoes/README.md e secoes/NN-slug/. -->
 
 | | |
 |---|---|
@@ -17,10 +24,12 @@
 | Copy | `copy/copy.md` — congelada em <AAAA-MM-DD> |
 | Direção visual | `direcao-visual.md` — linha V<K> |
 | Modelo de imagem | <definido no bake-off; custo em `secoes/README.md`> |
+| Spec | `docs/sdd/specs/<peca>.md` |
+| Status | <rascunho · ideias · imagens · implementação · refino · pronta (declarada pelo dono) · entregue> |
 
 ## Para que serve, em uma frase
 
-<Se precisar de duas frases, provavelmente são dois projetos.>
+<Se precisar de duas frases, provavelmente são duas peças.>
 
 ## Público
 
@@ -29,8 +38,8 @@
 ## Condicionais que valem aqui
 
 <!-- Marque só o que se aplica ao formato. O invariante — copy congelada,
-     direção escrita, blocagem, ideias em texto, imagem-conceito, camadas, uma unidade por vez,
-     revisão, fechamento — acontece sempre. -->
+     direção escrita, blocagem, ideias em texto, imagem-conceito, camadas,
+     uma unidade por vez, revisão, fechamento — acontece sempre. -->
 
 - [ ] ritmo de superfícies (a sequência é longa)
 - [ ] motion (o formato tem eixo de tempo)

@@ -1,7 +1,7 @@
 # Imagem-conceito por seção: a ideia antes do código
 
-> Fase 1.5a do método. Entre a blocagem e o primeiro `.tsx`, cada seção vira
-> **uma imagem na proporção do formato** que o cliente aprova. A imagem é ferramenta
+> Passos 3 e 4 do método. Entre as ideias escolhidas e o primeiro `.tsx`, cada
+> seção vira **uma imagem na proporção do formato** que o dono aprova. A imagem é ferramenta
 > de pensamento e de aprovação — **não é asset da página**. O que vai ao ar
 > continua nascendo em HTML/CSS, e a copy literal só entra no código.
 
@@ -30,36 +30,58 @@ os dois juntos custa contexto e produz seções que são wireframe com cor.
 ## Onde entra no pipeline
 
 ```text
-Fase 0    Fundações (ficha, contrato de copy, tokens, ritmo de superfícies)
-Fase 0.5  Direção visual — ESCRITA e obrigatória (references/direcao-visual.md §0)
-Fase 1    Blocagem (coluna Assets ganha "IC" = imagem-conceito)
-Fase 1.5a ► IMAGEM-CONCEITO: prompt por seção → double-check → imagem → veredito
-Fase 1.5b ► CAMADAS: ficha de 7 camadas por seção aprovada (references/camadas.md)
-Fase 3    Implementação por seção (references/orquestracao.md)
+Passo 0    Pasta e direção — projeto.md, copy congelada, direção ESCRITA (references/direcao-visual.md §0)
+Passo 1    Blocagem (coluna Assets ganha "IC" = imagem-conceito)
+Passo 2    ► IDEIAS EM TEXTO com esboço ASCII (references/ideias-ascii.md) → portão 1: o dono escolhe 1–2
+Passo 3    ► PROMPTS só das escolhidas: double-check → prompt com o ASCII no LAYOUT.
+Passo 4    ► IMAGEM → veredito datado (portão 2)
+Passos 5–6 CAMADAS: wireframe (1–3) e layout (4–7) por seção aprovada (references/camadas.md)
+Passo 7    Refinamento e revisão (references/orquestracao.md)
 ```
 
 ## Os artefatos e onde ficam
 
+Tudo vive na pasta da peça (`pecas/<peça>/`, ver `SKILL.md`):
+
 ```text
-meu-projeto/
+pecas/<peça>/
 ├─ projeto.md              formato, unidade, PROPORÇÃO, arquivo final, prazo
 ├─ copy/copy.md            a copy aprovada, dividida em blocos — inviolável
 ├─ direcao-visual.md       direção nomeada + paleta + o que não entra + PREFIXO COMUM colável
 ├─ blocagem.md             uma linha por unidade; marca "IC" nas que passam por imagem-conceito
-├─ BRIEFING-IDEACAO.md     briefing autocontido do double-check (assets/briefing-subagente-ideacao.md)
+├─ subagentes/
+│  └─ BRIEFING-IDEACAO.md  briefing autocontido do double-check (assets/briefing-subagente-ideacao.md)
 ├─ secoes/
+│  ├─ README.md            estado por seção, modelo padrão e custo, dispositivos já usados
 │  └─ NN-slug/
-│     ├─ prompt-v1.md      versão nova nasce AO LADO (prompt-v2.md), nunca por cima
-│     ├─ imagem-v1-<modelo>.png   na proporção do projeto; o nome diz versão e origem
-│     ├─ veredito.md       aprovada | refazer: … | usar parte: …   (uma linha)
-│     └─ camadas.md        wireframe (camadas 1–3) e layout (camadas 4–7)
-├─ referencias/            imagens que o cliente traz no meio da rodada, com data no nome
+│     ├─ ideias.md                       levas de ideias em texto com esboço ASCII (references/ideias-ascii.md)
+│     ├─ prompt-vK.md                    K = número do prompt; versão nova nasce AO LADO, nunca por cima
+│     ├─ ideia-vK-<modelo>.png           gerada pelo prompt K; o modelo vai só no sufixo
+│     ├─ ideia-vK-aprovada-<modelo>.png  a escolhida, renomeada; as outras ficam ao lado
+│     ├─ veredito.md                     log datado, append-only, com a citação literal do dono
+│     └─ camadas.md                      wireframe (camadas 1–3) e layout (camadas 4–7)
+├─ referencias/            imagens que o dono traz no meio da rodada, com data no nome
 ├─ saida/                  a peça final, no formato do projeto.md
-└─ historico/              versões substituídas — nada se apaga
+└─ historico/              direção visual e briefings substituídos — nada se apaga
 ```
 
-Uma pasta por unidade. O nome do arquivo carrega **a versão e o modelo**, que é
-o que permite empilhar tentativas sem perder nenhuma e comparar geradores.
+Uma pasta por unidade. O nome do arquivo carrega **o número do prompt e o
+modelo**, que é o que permite empilhar tentativas sem perder nenhuma e
+comparar geradores. **As versões ficam lado a lado na pasta da seção**,
+visíveis no editor — nunca cópia em pasta ignorada; `historico/` não recebe
+imagens. Variação nomeada do mesmo K é permitida: `prompt-vK-<nome>.md` →
+`ideia-vK-<nome>-<modelo>.png`.
+
+Sufixos de modelo (fixos, para ordenar e comparar):
+
+| sufixo | modelo |
+|---|---|
+| `gpt25` | GPT Image 2.5 |
+| `seedream5pro` | Seedream 5 Pro |
+| `nanobanana` | Nano Banana (Gemini) |
+| `mystic` | Mystic |
+| `flux` | Flux |
+| `outro-<nome>` | qualquer outro |
 
 Num projeto de código, essa árvore fica **fora da pasta publicada**, e o gate
 reprova qualquer `.md` ou `.png` de trabalho dentro do artefato.
@@ -68,11 +90,13 @@ reprova qualquer `.md` ou `.png` de trabalho dentro do artefato.
 
 Template em `assets/prompt-secao-template.md`. Estrutura, nesta ordem:
 
-1. **Título** `NN — <Função> · "<conceito nomeável>"`.
+1. **Título** `NN — <Função> · "<conceito nomeável>"`, e logo abaixo
+   **Ideia:** `<nome escolhido na leva de ideias.md>` — o mesmo nome no
+   prompt, no arquivo e no commit.
 2. **Ato** (claro/escuro, conforme a blocagem) e **elemento visual**: qual
    anatomia entra e **o que ela diz da copy**.
 3. **Double-check** (a–d, abaixo).
-4. **Copy literal da seção** em blockquote — para o cliente ler ao lado da
+4. **Copy literal da seção** em blockquote — para o dono ler ao lado da
    imagem, nunca para entrar na imagem.
 5. **O prompt**: prefixo comum **inalterado** + linha em branco + `LAYOUT.` +
    a cena.
@@ -92,6 +116,12 @@ linhas, lista de quatro itens — **nunca a frase**), onde entra o mockup e o
 que ele mostra, e **onde estão os pontos da cor de ação**, numerados e no
 máximo três.
 
+**O esboço ASCII escolhido vai dentro do `LAYOUT.`** como descrição de
+layout, antes da descrição coluna a coluna. Quando a seção **não** mostra o
+produto, diga isso no `LAYOUT.` — o prefixo comum puxa o produto sozinho
+(numa rodada real, uma imagem saiu com a plataforma numa seção que não a
+pedia).
+
 ### Regras da cena
 
 - Peça o **lugar e o peso** do texto, nunca a frase exata. O gerador escreve
@@ -100,9 +130,12 @@ máximo três.
   leia como prova, nome, depoimento, print de resultado. Pessoa real citada
   na copy entra só como texto. Na imagem, todo número vira um traço e todo
   rosto vira um círculo cinza.
-- **Um dispositivo por seção e nunca o mesmo em seções vizinhas.** Dois perfis
-  seguidos ou dois Reels seguidos são colisão; repetição só vale como eco
-  declarado (ver `conceitos-por-dobra.md`).
+- **Um dispositivo por seção e nunca repetido na peça** — não só entre
+  vizinhas. Dois perfis ou dois Reels na mesma página são colisão; repetição
+  só vale como eco declarado (ver `conceitos-por-dobra.md`).
+- **O conceito pode inventar a interface; a implementação usa só asset
+  real**, ou componente criado sobre ele, ou placeholder rotulado com pedido
+  ao dono. A imagem decide composição; o real vem do código.
 - Nomeie a **anatomia real** do que está citando (barra de ações, avatar,
   estatísticas, bio, abas, grade), não "um card de rede social". Sem essa
   lista o resultado sai em nível de wireframe.
@@ -110,8 +143,11 @@ máximo três.
 
 ## Double-check em contexto limpo (gate da fase)
 
-Antes de gerar — e de novo antes de implementar — subagentes com **contexto
-limpo** julgam cada ideia por escrito, dentro do próprio arquivo da seção:
+É **obrigatório antes de gerar imagem**, sobre as ideias escolhidas no
+portão 1, e de novo antes de implementar. Sobre a leva em texto (Passo 2,
+`ideias-ascii.md`), antes de o dono escolher, é opcional e barato.
+Subagentes com **contexto limpo** julgam cada ideia por escrito, dentro do
+próprio arquivo da seção:
 
 - **(a) Função.** A ideia sustenta a função narrativa da copy nesta seção?
 - **(b) Nomeável e única.** Cabe em uma frase e não repete o dispositivo de
@@ -124,10 +160,14 @@ limpo** julgam cada ideia por escrito, dentro do próprio arquivo da seção:
 Regras de operação que fizeram o gate funcionar:
 
 - lotes de **3–4 seções** por subagente, em paralelo, disparados por um prompt
-  curto que aponta para o `BRIEFING-SUBAGENTE.md` (autocontido, com os vetos
-  **e o motivo de cada um** — veto sem motivo vira superstição);
-- todos recebem a **tabela de blocagem inteira**, para julgar vizinhança;
-- proibidos de ler `historico/` — o julgamento tem de ser limpo;
+  curto que aponta para o `subagentes/BRIEFING-IDEACAO.md` (autocontido, com
+  os vetos e as regras do dono **com o motivo de cada um** — veto sem motivo
+  vira superstição);
+- todos recebem a **tabela de blocagem inteira**, para julgar vizinhança, e
+  **a tabela de dispositivos já testados e vistos pelo dono** (seção →
+  dispositivo → versão), para não repetir na peça;
+- proibidos de ler os vereditos de outras seções antes de escrever a sua — o
+  julgamento tem de ser limpo;
 - relatório de até 3 linhas por seção **mais a lista de buracos de copy**
   notados, sem corrigir a copy;
 - o orquestrador valida mecanicamente depois: prefixo íntegro (`diff` contra
@@ -150,19 +190,33 @@ em imagem perdida:
 - **Gere individualmente.** Modo lista/lote piora o resultado e não avisa.
 - **Mude uma variável por vez.** Prompt, modelo e modo de geração nunca mudam
   juntos — três mudaram de uma vez e o teste ficou inconclusivo.
-- Modelos, pelo resultado dos testes da casa (2026-09-21/22): os melhores
-  para interface foram **GPT Image 2.5** e **Seedream 5 Pro pelo Magnific**;
-  Nano Banana (Gemini) serviu; Mystic não serve para UI. O cliente fica à
-  vontade para testar outros — anote o modelo no nome da imagem
-  (`imagem-v2-gpt25.png`) e no veredito. Quando um modelo vencer 3–4 seções
-  seguidas, vira o padrão do projeto e é registrado no `projeto.md`.
+- **A skill não fixa modelo; o bake-off decide.** Nas três primeiras seções,
+  mesmo prompt e mesma referência em dois modelos (uma variável por vez); o
+  dono escolhe, e pode preferir o caro. O vencedor vira o padrão do projeto,
+  registrado no `projeto.md`, e o custo observado por modelo fica no
+  `secoes/README.md` da peça. Anote o modelo no nome (`ideia-v2-gpt25.png`) e
+  no veredito. Como dado histórico, não como padrão: nos testes que deram
+  origem a esta skill os melhores para interface foram GPT Image 2.5 e
+  Seedream 5 Pro; Nano Banana serviu; Mystic não serviu para UI; e numa
+  rodada o modelo mais caro venceu todas as seções apesar de custar 6–8×
+  mais.
+- **No máximo duas gerações por ideia.** A segunda só se o essencial saiu
+  errado (dispositivo trocado, comparativo, cor proibida). Recusada duas
+  vezes, volta às ideias em texto (Passo 2), não a outra imagem.
+- **Referências sobem uma vez** e são reutilizadas pelo identificador que o
+  gerador devolve. **Catálogo grande vira folha de contato** (uma imagem com
+  a fileira inteira de thumbs), não dez uploads.
+- **Quando o dono descreve a solução**, gere a dele **e** pelo menos uma sem
+  viés — na rodada em que isso foi feito, a escolhida foi uma sem viés.
+- **Seção que não se gera se explica** antes de o dono perguntar: toda
+  unidade da leva aparece no checklist, gerada ou com "não gerei porque X".
 - **Com ou sem MCP, o fluxo é o mesmo.** Quem tem um servidor de geração
   ligado ao Claude (Higgsfield, Magnific…) pode pedir ao Claude para gerar;
   quem não tem cola o bloco de prompt no navegador. A qualidade depende do
   modelo, não do caminho — só não prometa automação sem confirmar crédito e
   workspace.
 - CLI de geração só é promessa quando há crédito **e workspace selecionado**
-  — confirme antes. Sem isso o entregável é o `.md`, e o cliente gera no
+  — confirme antes. Sem isso o entregável é o `.md`, e o dono gera no
   navegador e sobe a imagem na pasta. Foi assim que a primeira rodada
   aconteceu, e foi o que permitiu testar modelos.
 - Uma imagem por unidade, **na proporção declarada no `projeto.md`**. Numa
@@ -176,21 +230,37 @@ em imagem perdida:
 
 ## Aprovação
 
-O cliente vê a imagem e responde com uma linha: `aprovada`,
-`refazer: <o quê>` ou `usar parte: <qual>`. No arquivo `veredito.md` ou no
-chat — se for no chat, **registre você**. Na primeira execução o arquivo foi
-especificado duas vezes e nunca criado; a aprovação veio em bloco. Aceite o
-que vier, mas escreva.
+O dono vê a imagem e responde — no chat, por áudio ou no arquivo. Quem
+registra é você: **`veredito.md` é log datado, append-only**, uma entrada
+por veredito, com **a citação literal do dono** e o nome do arquivo
+escolhido (`ideia-vK-aprovada-<modelo>.png`). Troca posterior é entrada
+nova; a anterior nunca se sobrescreve. `aprovada`, `composição (refaz o
+acabamento)`, `refazer: <o quê>`, `usar parte: <qual>` e `voltar às ideias`
+são o **vocabulário de estado** dentro de cada entrada, não o formato do
+arquivo. O arquivo existe mesmo com veredito pendente. Na primeira execução
+ele foi especificado duas vezes e nunca criado; a aprovação veio em bloco.
+Aceite o que vier, mas escreva.
 
-**O gate é a satisfação com as ideias, não a primeira imagem.** O cliente
-pode pedir variações e **empilhar versões do prompt** de uma seção
-(`prompt-v2.md`, `prompt-v3.md`…), gerar cada uma, guardar todas na
-pasta da seção e escrever no veredito o que cada versão acertou. Só se avança
-para as camadas e o código quando ele estiver satisfeito **com a ideia de cada
-seção e com a distribuição da copy entre as seções** — se uma frase parece
-estar na seção errada, é aqui que se corrige, reescrevendo a blocagem, não
-depois no código. **No fim, uma ideia por seção**, com o histórico inteiro
-preservado em `historico/`.
+**O gate é a satisfação com as ideias, não a primeira imagem.** Regras de
+fechamento:
+
+- **no máximo duas gerações por ideia**, e a leva seguinte só depois do
+  veredito da anterior;
+- **recusada duas vezes → volta às ideias em texto** (Passo 2), não a outra
+  imagem — numa rodada real, quatro imagens recusadas seguidas na mesma
+  seção custaram milhares de créditos antes de oito ideias em texto
+  resolverem;
+- **anuncie a última leva** ("a última; depois o veredito e implementamos"):
+  dá ao dono uma escolha finita;
+- **aprovação de ideia cujo valor é o movimento é hipótese até rodar** —
+  diga isso e mostre o movimento cedo (um letreiro aprovado em imagem foi
+  implementado, visto animado e descartado).
+
+Só se avança para as camadas e o código quando o dono estiver satisfeito
+**com a ideia de cada seção e com a distribuição da copy entre as seções** —
+se uma frase parece estar na seção errada, é aqui que se corrige,
+reescrevendo a blocagem, não depois no código. **No fim, uma ideia por
+seção**, com todas as versões preservadas ao lado, na pasta da seção.
 
 **A imagem aprovada é ideia, não seção final.** O que se aprova é a
 composição e o dispositivo; texto, cor exata e movimento vêm do código. Ao
@@ -202,12 +272,16 @@ leitura livre dela.
 
 - Numere as linhas de direção (V1, V2, V3…) e guarde a anterior ao lado como
   registro, com a fala literal que a substituiu.
-- **Versão nova nasce ao lado, nunca sobrescreve** — o cliente pode estar
-  testando a anterior neste momento.
+- **Versão nova nasce ao lado, nunca sobrescreve** — o dono pode estar
+  testando a anterior neste momento. Vale também para a peça inteira:
+  mudança de muitas unidades nasce em **rota ou arquivo `-v2`** ao lado da
+  versão atual, com escopo próprio; a atual fica intacta até o dono comparar
+  e escolher.
 - Quando a direção mudar, **reescreva a blocagem no mesmo commit**. Dois
   documentos de verdade divergentes fizeram três subagentes reportar o mesmo
   conflito.
-- Nada se apaga: `historico/`.
+- Nada se apaga: imagens ficam lado a lado na pasta da seção; direção e
+  briefing substituídos vão para `historico/`.
 
 ## O que a primeira execução ensinou
 
@@ -225,3 +299,14 @@ leitura livre dela.
   ficha entregue **antes** do primeiro `.tsx` (ver `camadas.md`).
 - A imagem decide pouco e decide bem: **arranjo, dispositivo, hierarquia e o
   lugar do acento de cor — e mais nada.** Tudo o mais nasce depois.
+
+Lições das rodadas seguintes:
+
+- **O prefixo comum se confere contra a referência real** no double-check:
+  um prefixo herdado dizia "janela escura" onde a interface real era clara, e
+  só o contexto limpo notou.
+- **Laptop com tela esticada** foi reprovado: o dispositivo tem proporção
+  fixa; a interface entra no tamanho nativo, reduzida por `scale()` medido,
+  e o excesso é cortado pela borda.
+- **Imagem aprovada sem ver a animação** foi descartada depois de
+  implementada. Ideia que vive do movimento se prova rodando, não na imagem.

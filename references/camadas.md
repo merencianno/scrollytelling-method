@@ -1,6 +1,6 @@
 # Camadas: a ponte entre a imagem aprovada e o código
 
-> Fase 1.5b. Por seção aprovada, uma ficha em sete camadas, escrita **antes**
+> Passos 5 e 6. Por seção aprovada, uma ficha em sete camadas, escrita **antes**
 > do componente. A ficha é o briefing de implementação; o código é a
 > consequência dela. Template em `assets/camadas-template.md`.
 

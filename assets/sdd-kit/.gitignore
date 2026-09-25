@@ -1,0 +1,36 @@
+# Dependências
+node_modules/
+
+# Builds e exportações
+.next/
+out/
+out*/
+dist/
+build/
+exports/
+
+# Ambiente e segredos (credencial nunca entra no git)
+.env
+.env.*
+!.env.example
+.secrets/
+
+# Resultados de teste
+test-results/
+playwright-report/
+coverage/
+
+# Logs
+*.log
+
+# Saídas locais: prints de teste (prints-teste/<peca>/<secao>/), saídas antigas
+arquivo-local/
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Imagens-conceito FORA do git (quem escolheu não versionar, sem LFS):
+# descomente a linha abaixo e apague as linhas LFS do .gitattributes.
+# A decisão fica escrita em docs/sdd/README.md.
+# pecas/**/secoes/**/*.png

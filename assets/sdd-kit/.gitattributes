@@ -1,0 +1,12 @@
+# Imagens-conceito e assets de marca em Git LFS.
+# - Exige `git lfs install` na máquina ANTES do clone; sem isso o clone traz
+#   ponteiros de texto no lugar das imagens.
+# - Depois de migrar ou clonar: `git lfs pull` e conferir o tipo do arquivo
+#   (`file <arquivo>.png` deve dizer PNG) antes de mostrar a imagem ao dono;
+#   ponteiro não abre.
+# - Imagem-conceito nunca vira WebP com perda antes do veredito. Em produção,
+#   WebP q88 com o original preservado.
+# - Quem escolheu não versionar imagens: apague estas linhas e descomente a
+#   linha de PNG no .gitignore.
+pecas/**/secoes/**/*.png filter=lfs diff=lfs merge=lfs -text
+marca/**/*.png filter=lfs diff=lfs merge=lfs -text

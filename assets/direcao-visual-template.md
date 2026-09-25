@@ -1,6 +1,6 @@
 # Direção visual — <nome da direção em uma frase>
 
-<!-- Fase 0.5. Obrigatória e escrita ANTES de a blocagem produzir qualquer prompt ou código.
+<!-- Passo 0. Obrigatória e escrita ANTES de a blocagem produzir qualquer prompt ou código.
      Direção sem nome não se cobra em revisão. Exemplo real: "o feed da rede social". -->
 
 ## A leitura da copy que sustenta a direção
