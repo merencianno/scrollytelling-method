@@ -10,8 +10,8 @@ com um esboço em ASCII, e uma recomendação. O dono escolhe uma ou duas, e só
 essas viram imagem.
 
 A etapa nasceu de uma rodada real: numa mesma seção, quatro imagens foram
-recusadas seguidas, sempre pelo mesmo motivo ("tá bonito mas não sei se
-tangibiliza bem a mensagem"), e gastaram milhares de créditos. Depois de
+recusadas seguidas, sempre pelo mesmo motivo (bonito, mas sem
+tangibilizar a mensagem), e gastaram milhares de créditos. Depois de
 oito ideias em texto, três imagens bastaram. Quem aprovava pediu o formato
 de volta já na primeira leva ("gostei desse formato de me trazer ideias,
 traga mais cinco assim").
@@ -50,7 +50,7 @@ Nesta ordem, sempre:
    no commit; é por ele que o dono se refere à ideia.
 2. **Leitura da copy** — qual frase da copy o objeto torna óbvia e por que
    alguém entende sem legenda, em 1–2 frases. É o teste "tangibiliza?":
-   "bonito" não aprova, e "não fede nem cheira, tá ok" é recusa.
+   "bonito" não aprova, e um "ok" morno é recusa.
 3. **Mecanismo vivo** — uma linha: o que se move e quando (rolagem, entrada,
    clique). Em formato sem eixo de tempo (deck exportado, carrossel,
    criativo), "estático" ou a transição entre unidades.
@@ -155,7 +155,7 @@ No fim, `### Recomendação` e `### Escolha do dono` (data e citação literal).
   ficou feia".
 - **Quando a oferta é um produto com interface, o produto aparece**, com a
   tela real, não diagrama; reler o que **esta** peça vende antes de herdar
-  regra de peça irmã. Motivo: "as cenas viraram diagramas" foi o diagnóstico
+  regra de outra peça. Motivo: "as cenas viraram diagramas" foi o diagnóstico
   da peça fraca.
 - **Bloco de oferta é convenção, não palco**: preço centralizado num card,
   hierarquia parcela > de > à vista > botão > pagamento seguro; a ideia
@@ -185,6 +185,11 @@ No fim, `### Recomendação` e `### Escolha do dono` (data e citação literal).
 - **O ASCII escolhido vai colado no `LAYOUT.` do prompt** como descrição de
   layout. Quando a seção **não** mostra o produto, dizer isso no LAYOUT: o
   prefixo de direção puxa o produto sozinho.
+- **O esboço leva a frase real; o prompt nunca.** Aqui, em `ideias.md`, o
+  esboço traz a frase da copy para o dono ler. Ao colar no `LAYOUT.`, cada
+  frase vira marcador de lugar e peso — `<headline, 2 linhas>`,
+  `<lista de 3 itens>`, `<CTA>` —, porque o gerador escreve na imagem o que
+  lê no prompt.
 
 ## Registro
 
@@ -195,14 +200,13 @@ imagem que ela gerar (`ideia-vK-<modelo>.png`, ver `imagem-conceito.md`).
 
 ## Double-check sobre o texto
 
-O double-check (a–d) do `imagem-conceito.md`, por subagente de contexto
-limpo, é:
-
-- **opcional sobre a leva em texto**, antes da escolha do dono: conferir
-  contra a copy, os vetos com motivo, a tabela de dispositivos e a direção é
-  muito mais barato num esboço de 12 linhas do que numa imagem gerada;
-- **obrigatório antes de gerar imagem** (Passo 3), sobre as ideias
-  escolhidas no portão 1, mesmo que a leva já tenha passado por ele.
+A leva em texto é escrita pelo **agente principal**; subagente de ideação é
+opcional, só para peça longa (`assets/briefing-subagente-ideacao.md`). O
+double-check (a–d) do `imagem-conceito.md`, por subagente de contexto limpo,
+roda **depois da escolha do dono** (portão 1) e **antes de gerar imagem**
+(Passo 3), só sobre as ideias escolhidas: conferir contra a copy, os vetos
+com motivo, a tabela de dispositivos e a direção custa muito menos num
+esboço de 12 linhas do que numa imagem gerada.
 
 Buracos da copy que o esboço revelar voltam ao dono pela lista única de
 decisões, não viram invenção.

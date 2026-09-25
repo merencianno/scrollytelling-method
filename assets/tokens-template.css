@@ -1,7 +1,7 @@
 /*
  * Template de tokens — sistema visual de uma landing com scrollytelling.
  *
- * Copiar, trocar `brand` pelo prefixo do projeto (`projeto` na /ref) e substituir
+ * Copiar, trocar `brand` pelo prefixo do projeto (`projeto` na página de referência) e substituir
  * cada <PLACEHOLDER> pelo valor da marca. O que já vem resolvido é do *sistema*:
  * hierarquia de raios, curvas, opacidades de vidro e estrutura das sombras são
  * o que faz páginas diferentes parecerem do mesmo estúdio — mexer nesses
@@ -14,37 +14,37 @@
 .brand-scope {
   /* Canvas e superfícies: pares escuro/claro, porque as dobras alternam de tom.
      `-deep` é o fundo mais fechado, reservado ao fecho da página. */
-  --brand-canvas: <CANVAS-ESCURO>;               /* /ref: #000000 */
-  --brand-canvas-deep: <CANVAS-PROFUNDO>;        /* azul-noite do fecho · /ref: #04060c */
-  --brand-light-canvas: <CANVAS-CLARO>;          /* dobras claras · /ref: #f5f5f7 */
-  --brand-surface-dark: <SUPERFICIE-ESCURA>;     /* cartão sólido no escuro · /ref: #1b1b1b */
+  --brand-canvas: <CANVAS-ESCURO>;               /* ref.: #000000 */
+  --brand-canvas-deep: <CANVAS-PROFUNDO>;        /* azul-noite do fecho · ref.: #04060c */
+  --brand-light-canvas: <CANVAS-CLARO>;          /* dobras claras · ref.: #f5f5f7 */
+  --brand-surface-dark: <SUPERFICIE-ESCURA>;     /* cartão sólido no escuro · ref.: #1b1b1b */
   --brand-surface-light: #ffffff;
-  --brand-surface-light-2: <SUPERFICIE-CLARA-2>; /* cartão sobre o claro · /ref: #f0f0f0 */
+  --brand-surface-light-2: <SUPERFICIE-CLARA-2>; /* cartão sobre o claro · ref.: #f0f0f0 */
 
   /* Cor de marca: uma só, com derivados nomeados pelo papel. Escala 100–900 não
      serve — é o nome que impede escolher o tom por hábito. */
-  --brand-deep: <MARCA-PROFUNDA>;    /* base do gradiente e do glow · /ref: <MARCA-PROFUNDA> */
-  --brand-core: <MARCA-NUCLEO>;      /* glow volumétrico · /ref: <MARCA-NUCLEO> */
-  --brand-bright: <MARCA-BRILHANTE>; /* CTA e traço aceso · /ref: <MARCA-BRILHANTE> */
-  --brand-mid: <MARCA-MEDIA>;        /* meio do gradiente, fio separador · /ref: <MARCA-MEDIA> */
-  --brand-ice: <MARCA-CLARA>;        /* texto em gradiente, borda de vidro · /ref: <MARCA-CLARA> */
+  --brand-deep: <MARCA-PROFUNDA>;    /* base do gradiente e do glow · ref.: <MARCA-PROFUNDA> */
+  --brand-core: <MARCA-NUCLEO>;      /* glow volumétrico · ref.: <MARCA-NUCLEO> */
+  --brand-bright: <MARCA-BRILHANTE>; /* CTA e traço aceso · ref.: <MARCA-BRILHANTE> */
+  --brand-mid: <MARCA-MEDIA>;        /* meio do gradiente, fio separador · ref.: <MARCA-MEDIA> */
+  --brand-ice: <MARCA-CLARA>;        /* texto em gradiente, borda de vidro · ref.: <MARCA-CLARA> */
 
   /* Texto por alfa, não por cinza fixo: o mesmo token serve sobre canvas e cartão. */
   --brand-text: #ffffff;
   --brand-text-2: rgba(255, 255, 255, 0.82);
   --brand-text-3: rgba(255, 255, 255, 0.6);
-  --brand-ink: <TINTA>;      /* texto sobre fundo claro · /ref: #1b1b1b */
-  --brand-ink-2: <TINTA-2>;  /* rótulos e legendas · /ref: #677489 */
+  --brand-ink: <TINTA>;      /* texto sobre fundo claro · ref.: #1b1b1b */
+  --brand-ink-2: <TINTA-2>;  /* rótulos e legendas · ref.: #677489 */
 
   /* Semânticos escassos: positivo (preço, economia, checks) e negativo (custo,
      perda), em menos de 10% da tela. A marca continua sendo a cor principal.
      Derivados saem da base por color-mix, para o hex aparecer uma vez só. */
-  --brand-success: <POSITIVO>;              /* verde-água · /ref: <POSITIVO> */
-  --brand-success-strong: <POSITIVO-FORTE>; /* /ref: <POSITIVO-FORTE> */
+  --brand-success: <POSITIVO>;              /* verde-água · ref.: <POSITIVO> */
+  --brand-success-strong: <POSITIVO-FORTE>; /* ref.: <POSITIVO-FORTE> */
   --brand-success-soft: color-mix(in srgb, var(--brand-success) 16%, transparent);
   --brand-success-glow: color-mix(in srgb, var(--brand-success) 35%, transparent);
-  --brand-danger: <NEGATIVO>;               /* vermelho contido · /ref: <NEGATIVO> */
-  --brand-danger-strong: <NEGATIVO-FORTE>;  /* /ref: <NEGATIVO-FORTE> */
+  --brand-danger: <NEGATIVO>;               /* vermelho contido · ref.: <NEGATIVO> */
+  --brand-danger-strong: <NEGATIVO-FORTE>;  /* ref.: <NEGATIVO-FORTE> */
   --brand-danger-soft: color-mix(in srgb, var(--brand-danger) 14%, transparent);
   --brand-danger-glow: color-mix(in srgb, var(--brand-danger) 30%, transparent);
 
@@ -88,8 +88,8 @@
 
   /* Display para títulos e rótulos, corpo para texto e números. As variáveis de
      arquivo vêm do carregador de fontes da rota, não daqui. */
-  --brand-font-display: var(--font-display-file), <FAMILIA-DISPLAY>, sans-serif; /* /ref: "<FONTE-DISPLAY>" */
-  --brand-font-body: var(--font-body-file), <FAMILIA-CORPO>, sans-serif;         /* /ref: "<FONTE-CORPO>" */
+  --brand-font-display: var(--font-display-file), <FAMILIA-DISPLAY>, sans-serif; /* ref.: "<FONTE-DISPLAY>" */
+  --brand-font-body: var(--font-body-file), <FAMILIA-CORPO>, sans-serif;         /* ref.: "<FONTE-CORPO>" */
 
   /* Três curvas, todas de saída: entrada rápida e chegada lenta é o que faz o
      movimento parecer caro. Sem overshoot forte. */

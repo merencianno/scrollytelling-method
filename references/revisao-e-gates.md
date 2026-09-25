@@ -101,8 +101,8 @@ viewport maior que a seção, relógio real, nada de seek. Se o
   mudança, e o dono revisa como se fosse página nova.
 - **O feedback vira commit.** Cada pedido é uma mudança identificável,
   idealmente um commit por seção, para que o rollback seja cirúrgico
-  quando o dono voltar atrás — e ele volta: no projeto de referência um preço à vista
-  foi cogitado e revogado na mesma hora.
+  quando o dono voltar atrás — e ele volta: um preço já foi cogitado e
+  revogado na mesma hora.
 - **Marcar o que foi aprovado, para congelar.** A convenção do projeto de referência é
   uma seção de aprovações no checkpoint, com `**!**` = gostou, manter:
   "**!** Dobra 8 — bento das 10 soluções ('você matou, ficou muito boa,

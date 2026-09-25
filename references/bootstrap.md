@@ -75,7 +75,12 @@ confirmar ou corrigir, e só pede o que está em `<…>` ou falta na lista.
    `.pptx`, PNG, Figma), para onde ela vai, versionar imagens-conceito (LFS)
    ou não, idioma do dono.
 
-- **Registrar:** `briefing/intake-AAAA-MM-DD.md` com as respostas literais;
+O intake pode vir de dois jeitos, e os dois valem: **uma leva só**, pelo
+prompt de abertura (`assets/prompt-novo-projeto.md`), ou **quatro pedidos em
+sequência**, um por mensagem (copy → peças e formatos → briefing → direção),
+pelo `INICIAR-PROJETO.md`. O conteúdo é o mesmo; muda o ritmo.
+
+- **Registrar:** `briefing/AAAA-MM-DD-briefing.md` com as respostas literais;
   `docs/sdd/log-de-prompts.md` com o pedido inicial, literal.
 - **Perguntar:** a lista acima (confirmando o que o prompt trouxe), e nada
   mais até ela voltar.
@@ -86,7 +91,7 @@ Uma leva só, com as perguntas que o intake **não** respondeu. Depois dela,
 execução autônoma até o próximo portão.
 
 - Qual peça primeiro, e qual é o objeto próprio dela (o que a distingue das
-  irmãs)?
+  outras)?
 - Existe direção visual? Com que fidelidade chegou: nada, texto, moodboard,
   Figma de direção, Figma de página com medida? (Define o modo — "Em que modo
   você está", no `SKILL.md`.)
@@ -170,49 +175,59 @@ Regras de nome, fixadas aqui e escritas no `docs/sdd/README.md`:
 
 - Ordem de preenchimento: `CLAUDE.md` (a seção "Comandos" conforme o
   formato: página ou peça exportada) → `docs/sdd/README.md` → gestão.
-- LFS: se sim, `git lfs install` e manter o `.gitattributes`; se não, apagar
+- LFS: se sim, `git lfs install --local` e manter o `.gitattributes`; se não, apagar
   as linhas LFS do `.gitattributes` e descomentar a linha de PNG no
   `.gitignore`. A decisão fica escrita no `docs/sdd/README.md`.
 - **Registrar:** `docs/sdd/README.md` (tabela de peças, decisões de ambiente);
-  primeiro commit `chore: estrutura do projeto com SDD`.
+  primeiro commit `chore: estrutura do projeto a partir do kit`.
 - **Perguntar:** nada.
 
 ## Etapa 4 — Pasta e direção (Passo 0 do `SKILL.md`)
 
 - **Abrir:** `SKILL.md` (agora inteiro), `references/copy-contrato.md`,
-  `references/direcao-visual.md` e `references/taste.md` — este **antes do
-  primeiro conceito**, com os prefixos de escopo; do gosto, só as "Lições de
-  ofício" valem para o cliente novo.
+  `references/direcao-visual.md`, `assets/direcao-visual-template.md` e
+  `references/taste.md` — este **antes do primeiro conceito**, com os
+  prefixos de escopo; do gosto, só as "Lições de ofício" valem para o
+  cliente novo.
 - **Fazer:** `projeto.md` da peça (formato, unidade, **proporção**, peça
   final, prazo, condicionais); copy congelada em `copy/copy.md`; direção
   visual escrita (obrigatória), com nome e o prefixo comum colável, e
   apresentada ao dono; `taste.md` da peça aberto **vazio**.
 - **Registrar:** spec da peça em `docs/sdd/specs/<peça>.md` (do `_modelo.md`),
-  com escopo e critérios; tarefa na gestão com entregável.
+  com escopo e critérios; tarefa na gestão com entregável. A aprovação da
+  direção fica no log (o pedido) e no topo do `direcao-visual.md`:
+  `Aprovada em AAAA-MM-DD: "<fala do dono>"`.
 - **Perguntar:** só o que for conceito, copy, preço ou gosto entre
   alternativas equivalentes — com imagem.
 
 ## Etapa 5 — Blocagem → ideias em texto → portão 1 (Passos 1 e 2)
 
 - **Abrir:** `references/blocagem.md`, `references/conceitos-por-dobra.md`,
-  `references/ideias-ascii.md`.
+  `references/ideias-ascii.md`, `assets/blocagem-template.md` (a blocagem
+  segue o template).
 - **Fazer:** blocagem; antes, listar por unidade o que **esta** peça vende.
   Depois, 3–5 ideias por unidade em texto com esboço ASCII e uma
-  recomendação. O double-check por subagente de contexto limpo é opcional
-  sobre a leva em texto.
+  recomendação. A leva é escrita pelo agente principal; subagente de ideação
+  só para peça longa (`subagentes/BRIEFING-IDEACAO.md`, a partir de
+  `assets/briefing-subagente-ideacao.md`). O double-check vem depois da
+  escolha (Etapa 6).
 - **Registrar:** `secoes/NN-slug/ideias.md` (uma seção datada por leva);
   escolha do dono em `veredito.md`; pedido no log.
 - **Perguntar (portão 1):** qual ideia (1–2 por unidade).
 
 ## Etapa 6 — Prompts e imagens → portão 2 (Passos 3 e 4)
 
-- **Abrir:** `references/imagem-conceito.md`; `GUIA-IMAGENS.md` (na raiz da
-  skill), para quem gera; `references/revisao-por-audio.md` se o veredito
-  vier por áudio.
+- **Abrir:** `references/imagem-conceito.md`, `assets/prompt-secao-template.md`;
+  `GUIA-IMAGENS.md` (na raiz da skill), para quem gera;
+  `references/revisao-por-audio.md` se o veredito vier por áudio.
 - **Fazer:** double-check (a–d) por subagente de contexto limpo sobre as
-  ideias escolhidas, **obrigatório antes de gerar**; prompt só delas, com o
-  ASCII escolhido no `LAYOUT.`; no máximo duas gerações por ideia; recusada
+  ideias escolhidas, **depois da escolha e obrigatório antes de gerar**;
+  prompt só delas, com o ASCII escolhido no `LAYOUT.` e cada frase da copy
+  trocada por marcador de lugar e peso (`<headline, 2 linhas>`, `<CTA>`) — a
+  frase nunca vai ao prompt; no máximo duas gerações por ideia; recusada
   duas vezes, volta à Etapa 5, não a outra imagem; anunciar a última leva.
+  Sufixo do arquivo: o nome curto do modelo que o dono diz que usou
+  (`chatgpt` se ele não souber a versão).
   Se quem gera é o agente (MCP): procedimento de `GUIA-IMAGENS.md`, "Pelo
   agente (MCP)". Se é o dono: ele salva na pasta da seção com o nome da
   convenção (`ideia-vK-<modelo>.png`; aprovada →
@@ -223,7 +238,8 @@ Regras de nome, fixadas aqui e escritas no `docs/sdd/README.md`:
 
 ## Etapa 7 — Wireframe e layout (Passos 5 e 6)
 
-- **Abrir:** `references/camadas.md`, `references/orquestracao.md`,
+- **Abrir:** `references/camadas.md`, `assets/camadas-template.md`,
+  `references/orquestracao.md`,
   `references/animacao.md` (se o formato tem eixo de tempo),
   `references/mecanismos.md`; `stacks/next-tailwind-gsap.md` se for essa a
   stack.

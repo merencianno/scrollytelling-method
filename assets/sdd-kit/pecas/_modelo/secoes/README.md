@@ -38,8 +38,13 @@ Cada seção em `secoes/NN-slug/`:
 As versões ficam lado a lado na pasta; nada vai para pasta escondida. Prints
 de teste não entram aqui (vão para `arquivo-local/prints-teste/`).
 
+O sufixo é o nome curto do modelo **que o dono diz que usou**: se disser só
+"ChatGPT", `chatgpt`; se souber a versão, `gpt25` etc. Não souber o gerador,
+pergunte antes de nomear o arquivo.
+
 | Sufixo | Modelo |
 |---|---|
+| `chatgpt` | ChatGPT, versão não informada |
 | `gpt25` | GPT Image 2.5 |
 | `seedream5pro` | Seedream 5 Pro |
 | `nanobanana` | Nano Banana |

@@ -15,8 +15,8 @@
 
 ## O objeto próprio da peça
 
-<!-- O que esta peça vende, por unidade, e o que a distingue das irmãs.
-     Regra de peça irmã não se herda sem reler isto. -->
+<!-- O que esta peça vende, por unidade, e o que a distingue das outras peças.
+     Regra de outra peça não se herda sem reler isto. -->
 
 ## O que já existe
 

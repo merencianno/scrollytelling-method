@@ -21,7 +21,7 @@ mexer em qualquer peça. Cada item com data e, quando houver, o pedido do log.
 
 ## 4. Respostas do grill inicial
 
-<!-- As respostas do Passo 2 do bootstrap, com o número do pedido no log. -->
+<!-- As respostas da Etapa 2 do bootstrap, com o número do pedido no log. -->
 
 ## 5. Armadilhas já pagas
 

@@ -30,8 +30,9 @@ e prefixo de prompt colável.
 Ela é a primeira coisa que quem aprova vê, e é o que compra alinhamento antes
 de qualquer unidade ser desenhada. Duas densidades, conforme o prazo:
 
-- **Enxuta** — nome em uma frase, paleta com hex, tipografia, 3–5 referências,
-  o que não entra e por quê, o prefixo de prompt.
+- **Enxuta** — nome em uma frase, paleta com hex, tipografia, 3–5 referências
+  quando houver (sem referência, a direção nasce da leitura da copy e diz
+  isso), o que não entra e por quê, o prefixo de prompt.
 - **Elaborada** — tudo isso, mais a leitura da copy, a tabela elemento → copy →
   seções, a anatomia do objeto, duas linhas alternativas para escolher, e
   **uma ou duas imagens-conceito de amostra** de uma unidade-chave.
@@ -41,7 +42,7 @@ aprovada por educação; direção com uma unidade já desenhada é aprovada ou
 vetada de verdade.
 
 **A direção carrega assets** — marcas exportadas, ícones, fotos, texturas
-viajam com ela. É o que faz peças irmãs do mesmo conjunto parecerem da mesma
+viajam com ela. É o que faz peças diferentes do mesmo cliente parecerem da mesma
 família sem serem iguais: a casa dá paleta e tipografia (`[casa]`), a direção
 dá o vocabulário do objeto (`[projeto]`).
 
@@ -65,12 +66,12 @@ Template em `assets/direcao-visual-template.md`. O documento precisa de:
 
 Regras que a primeira execução ensinou:
 
-- **Direção nasce de referência real, não de neutralidade.** A V1 de um
-  funil saiu "com cara de IA" porque pedia "vocabulário de rede social
+- **Direção nasce de referência real, não de neutralidade.** A V1 de uma
+  peça saiu "com cara de IA" porque pedia "vocabulário de rede social
   genérico"; a V2, aprovada, pedia a anatomia real do app que o público usa.
   Específico vence neutro.
 - **Nunca por inércia do projeto anterior.** A mesma V1 trouxe a cor auxiliar de
-  outro expert porque ele estava na folha de estilo da marca mãe como se
+  outra marca porque ela estava na folha de estilo comum como se
   fosse estrutura. Antes de herdar uma cor, um efeito ou uma regra, ler o
   prefixo de escopo no `taste.md`: `[projeto]` não se transporta.
 - **Sem Figma, extraia dos artefatos que existem**: `curl` na página de
@@ -83,9 +84,10 @@ Regras que a primeira execução ensinou:
 - **Numere as versões** (V1, V2…) e guarde a anterior ao lado, com a fala
   literal que a substituiu. Quando a direção mudar, a blocagem é reescrita no
   mesmo commit.
-- A diferenciação entre projetos irmãos da mesma casa é **por expert**: a
-  casa dá a base (paleta, tipografia), e o vocabulário do nicho do expert é o
-  que identifica a página. Cor auxiliar de um expert é dele.
+- A diferenciação entre peças diferentes do mesmo cliente, ou entre marcas
+  diferentes da mesma casa, é **pelo nicho de cada uma**: a casa dá a base
+  (paleta, tipografia), e o vocabulário do nicho é o que identifica a página.
+  Cor auxiliar de uma marca é dela.
 
 ## 1. Já existe Figma: antes de extrair, classificar o papel dele
 
@@ -95,14 +97,14 @@ arquivo do Figma é**:
 - **Página desenhada (layout).** Existem frames que correspondem a seções reais,
   com hierarquia, larguras e espaçamentos pensados para virar tela. Aí o dump
   completo de nós vale cada linha: posições, autolayout, tamanhos de fonte,
-  constraints. Esse caso tem skill dedicada — `figma-translate` traduz o dump em
-  código pixel-perfect, e `figma-dump` cuida da extração.
+  constraints. Se você tiver uma ferramenta de extração de Figma, é o caso de usá-la
+  para traduzir o dump em código com medida.
 - **Direção visual (paleta, marca, ícones, sem página).** O arquivo é um deck ou
   um style guide: slides conceituais, uma prancha de paleta, o símbolo em
   variações, a família de ícones. Nada ali é layout de página — é vocabulário.
 
-No caso da `/ref`, o arquivo era o segundo tipo, e o dump de propriedades
-(`docs/projeto-ref/figma-dump/nodes-key-summary.txt`) ficou com 334 linhas de
+No caso da página de referência, o arquivo era o segundo tipo, e o dump de
+propriedades ficou com 334 linhas de
 tipografia por nó, fills ordenados por frequência, raios com sete casas decimais
 e efeitos `GLASS`. Dessas 334 linhas, praticamente nada virou código: a página
 não tem nenhum frame do Figma como referência de layout. O que sustenta a página
@@ -112,7 +114,7 @@ WebP) e **a paleta com os valores exatos**.
 Quando o Figma for direção visual, extrair só três coisas:
 
 1. **A paleta, com os hexadecimais exatos** e os gradientes com seus stops. O
-   gradiente da marca da `/ref` aparece repetido em quase todos os frames —
+   gradiente da marca da página de referência aparece repetido em quase todos os frames —
    `<MARCA-PROFUNDA> 0% → <MARCA-MEDIA> 47% → #FFFFFF 100%` — e essa repetição é justamente o
    sinal de que ele é canônico. Fills que aparecem uma vez só são acidente de
    slide, não sistema.
@@ -121,7 +123,7 @@ Quando o Figma for direção visual, extrair só três coisas:
    produto, cenas conceituais). Exportar em dois tamanhos e converter para WebP.
 3. **Os frames renderizados em PNG**, todos, como moodboard de consulta. Custam
    pouco e respondem "o gosto é esse?" mais rápido que qualquer tabela de
-   propriedades. Na `/ref` foram 31 slides do deck e 19 pranchas do style guide.
+   propriedades. Na página de referência foram 31 slides do deck e 19 pranchas do style guide.
 
 O dump de nós, nesse cenário, serve como confirmação e não como fonte: dezenas de
 efeitos `GLASS` confirmam que vidro é vocabulário central; cinco `DROP_SHADOW`
@@ -145,7 +147,7 @@ O esqueleto está em `assets/tokens-template.css`, pronto para copiar. As decis�
 por trás dele:
 
 **Uma cor de marca única, com derivados nomeados por função.** Não uma escala
-100–900. A `/ref` tem um azul-profundo, um azul-núcleo, um azul-brilhante e
+100–900. A página de referência tem um azul-profundo, um azul-núcleo, um azul-brilhante e
 variações claras (mid, glow, ice, pale) — cada um existe porque tem trabalho
 próprio: o profundo é fundo de gradiente, o núcleo é glow, o brilhante é CTA, os
 claros são texto em gradiente e borda de vidro. Nomear pelo papel evita o hábito
@@ -209,7 +211,7 @@ celular normalmente já foi aprovado com `pretty`.
 
 ## 4. Escopo por classe
 
-Todo o sistema vive dentro de um seletor de escopo — `.brand-scope` na `/ref` — e
+Todo o sistema vive dentro de um seletor de escopo — `.brand-scope` na página de referência — e
 nada fica em `:root`. Cada regra utilitária também é escrita escopada
 (`.brand-scope .brand-glass`, e não `.brand-glass`). A razão é concreta: o mesmo
 projeto hospeda outras páginas com outra identidade, e um token global vaza para

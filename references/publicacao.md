@@ -1,7 +1,7 @@
 # Publicação: o que só o artefato de produção revela
 
 A Fase 5 do método tinha quatro linhas até que uma sessão inteira de
-publicação (funil de quatro páginas, 2026-09-17) produziu quinze regras que
+publicação (uma sequência de quatro páginas) produziu quinze regras que
 não tinham casa. Todas nascem do mesmo fato: **localhost mente**. O que
 funciona no dev server pode quebrar sob o `basePath` real, e o defeito só
 aparece no artefato servido.
@@ -11,8 +11,8 @@ aparece no artefato servido.
 1. **Asset com caminho cru.** `/assets/…` funciona em localhost porque lá o
    `basePath` é vazio, e dá 404 no ar. Todo caminho de asset passa pelo
    helper de `basePath` — inclusive dentro de blocos de UI que montam `src`
-   por string. Custou um funil inteiro sem imagem em produção; o gate herdado
-   pegou a repetição no funil seguinte.
+   por string. Custou uma sequência inteira de páginas sem imagem em produção; o gate
+   herdado pegou a repetição na sequência seguinte.
 2. **Chrome do site vazando para a página de venda.** Header e rodapé do
    repositório entraram em três páginas porque a lista de rotas "sem chrome"
    era enumerada rota a rota. Excluir **por prefixo**, para que rota nova
@@ -95,7 +95,7 @@ rodadas; a chamada de API que mostrava `push: true` custou dez segundos.
 
 ## Duas rotas, uma trava
 
-Padrão de funil que se repetiu em três projetos seguidos: a
+Padrão de sequência de páginas que se repetiu em três projetos seguidos: a
 mesma página publicada em duas rotas — uma com trava de revelação (o fecho
 aparece depois de N minutos de vídeo) e uma **liberada** para link de bio.
 Consequências operacionais:

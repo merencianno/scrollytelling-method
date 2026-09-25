@@ -102,8 +102,8 @@ em `taste.md`.
 - **Diagnóstico × sugestão.** O incômodo concreto ("achatado", "não
   centralizado") é ordem; a solução dita com "não sei, talvez" é hipótese —
   aplique a menor correção que resolve o incômodo e mostre a hipótese como
-  opção. Uma sugestão executada ao pé da letra voltou com "prefiro que volte
-  do jeito que tava… era só pra deixar mais largo".
+  opção. Uma sugestão executada ao pé da letra teve de voltar ao que
+  era: o pedido era só deixar mais largo.
 
 ## Veredito de imagem por áudio
 

@@ -100,7 +100,7 @@ Todas as micro-ações partem no mesmo instante e ficam em fase — um ciclo de
   componente (número de estações, duração do ciclo), o CSS precisa ser gerado
   por função no mesmo módulo; folha estática não conseguiria.
 
-O preço é HTML maior (na `/ref`, os 14 blocos inline foram parte de ~260 KB,
+O preço é HTML maior (na página de referência, os 14 blocos inline foram parte de ~260 KB,
 que o gzip reduz a ~40 KB). Vale para uma landing; num app com muitas rotas,
 mover para uma folha por rota.
 
@@ -123,7 +123,7 @@ Dois relógios convivem: um ciclo longo decide **qual** estado está em cena
 
 **Ancorar `0%` e `100%`.** Todo keyframe gerado precisa declarar o valor nos
 dois extremos. Sem isso o navegador interpola do primeiro quadro declarado até
-o último, atravessando o ciclo inteiro: na `/ref`, um card ficava acinzentado
+o último, atravessando o ciclo inteiro: na página de referência, um card ficava acinzentado
 o tempo todo porque a opacidade não tinha quadro em `0%` — um apagar de 2 s
 virou um fade de 10 s. A forma segura é sempre
 `0%, X% { inicial } … Y%, 100% { inicial }`, com os estados no meio.

@@ -42,14 +42,13 @@ aconteceu quatro vezes em quatro projetos:
    venceu.
 2. **"Interface no lugar de imagem"** foi destilada de duas páginas de produto
    digital e aplicada a um produto sobre comportamento. Os mockups saíram como
-   wireframe: *"achei os seus assets muito preguiçosos, extremamente toscos."*
+   wireframe e foram recusados como preguiçosos.
 3. **"Verde e vermelho não existem nesta marca"** fez converter os ❌ e ✅
    **literais da copy** em anéis neutros. O cliente reverteu — os glifos estão
    escritos no documento, e a regra vale para superfície e composição, não para
    glifo que a copy escreve.
 4. **Generalizar uma cor de apoio** para todo cinza estrutural da página foi
-   recusado: *"eu falei pontualmente onde eu queria colocar, e é só isso que eu
-   quero."* Extrapolar um pedido pontual para regra geral é decidir no lugar de
+   recusado: o pedido tinha lugar certo e só valia ali. Extrapolar um pedido pontual para regra geral é decidir no lugar de
    quem aprova.
 
 Nos quatro casos a regra estava escrita corretamente. O que faltava era **dizer
@@ -114,8 +113,7 @@ exige decodificar) e ótimo quando o assunto *é* tempo.
 todos alinham pela base. Grade igual só quando os itens têm o mesmo peso.
 
 **A imagem antes da lista.** Em coluna comparativa o mockup fica **acima** dos
-argumentos: *"tem que vir em cima pra pessoa visualizar o que aquele caminho
-traz pra ela."* Foi corrigido depois de implementado embaixo.
+argumentos, para que a pessoa veja primeiro o que aquele caminho traz. Foi corrigido depois de implementado embaixo.
 
 **Memorável em um segundo, no mobile, item por item.** A dualidade que o desktop
 mostra lado a lado tem de existir dentro de cada card isolado — no mobile a
@@ -181,56 +179,56 @@ comportamento: reimplementa-se.** Sem dependência nova, sem código copiado.
 Dependência pesada de runtime é **decisão de quem aprova**, proposta com o
 fallback junto. **A exceção é o link com a palavra "exato"**: componente
 citado com o link e "quero exatamente esse" é portado — o código do link, com
-o cabeçalho de licença. *"A gente precisa da ideia original, não é só que
-você estilizou."* Sem link, reimplementa-se a mecânica; código atrás de login
+o cabeçalho de licença. O pedido, nesse caso, é a ideia original, não uma
+versão estilizada dela. Sem link, reimplementa-se a mecânica; código atrás de login
 vira standby rotulado.
 
 **Mock data de plataforma encenada é conteúdo real por link de quem aprova.**
-Tile de cor com frase no lugar da mídia *"ficou bem feio"*; perfil adivinhado
+Tile de cor com frase no lugar da mídia foi recusado; perfil adivinhado
 custou uma rodada. Sem link, o genérico de `copy-contrato.md`; terceiros
 nunca.
 
 **Não envolver em card o que já é card.** Nada de anel ou borda em volta de
-thumbnail real, nem card em volta de post. *"Não gostei desse border."*
+thumbnail real, nem card em volta de post. A borda extra foi vetada.
 
 **Anatomia do objeto encenado é constante numérica** — post 4:5 ou 1:1,
 story 9:16, laptop 16:10, celular 9:19,5 —, com largura mínima legível.
-*"Os posts estão retangulares e o feed é quadrado."* Quando quem aprova diz o
+Post retangular num feed quadrado é apontado na hora. Quando quem aprova diz o
 número errado e descreve o objeto certo, vale o objeto.
 
 **Dispositivo tem proporção fixa.** A tela entra no tamanho nativo, reduzida
 por `scale()` medido, e o excesso é cortado pela borda — nunca esticada.
-*"O notebook tá zoado, esticado."*
+Notebook esticado foi recusado.
 
 **Quando a oferta é produto com interface, o produto aparece**, com a tela
 real, não diagrama. *"As cenas viraram diagramas"* foi o diagnóstico da
-página fraca. Releia o que **esta** peça vende antes de herdar regra de peça
-irmã.
+página fraca. Releia o que **esta** peça vende antes de herdar regra de outra
+peça.
 
 ## Conceito e aprovação
 
-**"Bonito" não aprova.** *"Tá bonito mas não sei se tangibiliza bem a
-mensagem."* A pergunta é se o objeto torna óbvia a frase da copy, sem
-legenda. *"Não fede nem cheira, tá ok"* é recusa, não aprovação.
+**"Bonito" não aprova.** Bonito sem tangibilizar a mensagem volta. A
+pergunta é se o objeto torna óbvia a frase da copy, sem legenda. Um "ok"
+morno, sem entusiasmo, é recusa, não aprovação.
 
 **Sem comparativo como padrão.** Objeto único que se transforma; no máximo um
-par por peça, e só onde a copy é literalmente um par. *"Pare de ficar
-repetindo comparativos toda hora."* Comparativo vira tique antes de virar
+par por peça, e só onde a copy é literalmente um par. A repetição de
+comparativos foi apontada como vício. Comparativo vira tique antes de virar
 estilo.
 
 **Um dispositivo por seção, sem repetir na peça inteira** — não só entre
-vizinhas; o maior aparelho vai onde o conteúdo pede escala. *"Tem muito
-mockup de celular… pode ser tablet."*
+vizinhas; o maior aparelho vai onde o conteúdo pede escala. Celulares
+demais na mesma página levaram à troca de um deles por tablet.
 
 **Formato nativo da plataforma = frase da copy.** Duas escolhas → enquete;
 sete dias → story de sete segmentos. As seções aprovadas de primeira foram as
 que acharam o formato em que a copy cabia literal.
 
-**Timeline ou fluxograma de nós rotulados não tangibiliza.** *"Essa
-timeline… ficou feia."* Vira cards revelados ou o objeto mudando de estado.
+**Timeline ou fluxograma de nós rotulados não tangibiliza.** A timeline foi
+recusada. Vira cards revelados ou o objeto mudando de estado.
 
 **Bloco de oferta é convenção, não palco.** Preço centralizado num card —
-*"eu nunca gosto de oferta alinhada à esquerda"* —, hierarquia parcela > de >
+oferta alinhada à esquerda é recusada de saída —, hierarquia parcela > de >
 à vista > botão > pagamento seguro; a ideia criativa vai para o lado.
 
 **Aprovação de ideia cujo valor é o movimento é hipótese até rodar.** Um
@@ -238,7 +236,7 @@ letreiro aprovado em imagem foi implementado, visto animado e descartado.
 Mostre o movimento cedo.
 
 **Entredobra tipográfica com conteúdo real serve de respiro** entre
-argumentos densos. *"Fez tipo respiro, da hora."*
+argumentos densos. Foi aprovada justamente como respiro.
 
 ## Cor e glifo
 
@@ -334,23 +332,23 @@ aconteceu de um item ser pedido explicitamente, executado ao pé da letra e
 rejeitado ao ser visto — porque o pedido descrevia a intenção, não a solução.
 
 **Protótipo com número é medida; protótipo rascunhado é intenção.** O mesmo
-cliente disse *"quero idêntico, pixel perfect"* e, dois pedidos depois, *"é
-óbvio que é pra centralizar, estava assim porque era rudimentar"*. O que separa
+cliente pediu fidelidade total a um protótipo e, dois pedidos depois, tratou
+outro como rascunho óbvio a corrigir (centralizar). O que separa
 os dois casos é a presença de medida explícita. Na dúvida, perguntar.
 
-**Elogio e veto são granulares.** *"Gostei muito do asset que você criou, mas só
-do botão dele."* Registrar no nível do componente; a peça boa vai para estoque.
+**Elogio e veto são granulares.** Um asset inteiro pode ser recusado e só o
+botão dele, aprovado. Registrar no nível do componente; a peça boa vai para estoque.
 
 **Diagnóstico é ordem; sugestão com "não sei" é hipótese.** O incômodo
 concreto ("achatado", "não centralizado") se resolve; a solução dita com
-"talvez" vira opção mostrada, não execução. *"Prefiro que volte do jeito que
-tava… era só pra deixar mais largo."* Aplique a menor correção que resolve o
+"talvez" vira opção mostrada, não execução. Um pedido de "mais largo" que virou redesenho teve de voltar ao
+que era. Aplique a menor correção que resolve o
 incômodo.
 
 **Nenhuma frase para o lead fora da copy, nem em estado de interação** —
 feedback de clique, toast, vazio, sucesso. String nativa do app pode
-("Seguir", "curtiu"). Não se pergunta: omite-se. *"Se você inventou essa
-copy, você tá chapando."*
+("Seguir", "curtiu"). Não se pergunta: omite-se. Frase inventada fora da
+copy foi recusada com dureza.
 
 **Página de venda sem cursor custom e sem loader de entrada.**
 
@@ -406,7 +404,7 @@ componente pode virar o vocabulário de cinco seções.
 **Guardar cada veto com o motivo ao lado.** É o que impede que ele volte.
 
 **Separar "em avaliação" de "aprovado".** O que o cliente narrou como ideia solta
-(*"não sei, só tô jogando ideias aqui"*) não é decisão — vai para uma seção
+("estou só jogando ideias") não é decisão — vai para uma seção
 própria e não se implementa sem confirmar.
 
 ---
@@ -439,7 +437,7 @@ vocabulário girava em torno de redes sociais — o seu vai ser outro.
 | "exato" + link do componente | a ideia original, não uma estilização | portar o código com cabeçalho de licença |
 | componente citado sem link | referência de comportamento | reimplementar a mecânica |
 | esdrúxulo | fora de proporção | refazer convencional, proporção nativa do objeto |
-| "não fede nem cheira, tá ok" | recusa morna | ideia nova, não ajuste |
+| "ok" morno, sem entusiasmo | recusa morna | ideia nova, não ajuste |
 | alinhados em bottom | bases na mesma linha, alturas diferentes | `align-items: flex-end` |
 | "mais tech" | precisão mecânica, sem easing definido | **perguntar** |
 | "sessão" | seção (falha recorrente de transcrição) | — |

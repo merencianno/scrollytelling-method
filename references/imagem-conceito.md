@@ -7,21 +7,14 @@
 
 ## Por que existe
 
-Nas palavras de quem pediu a etapa (2026-09-21):
+O pedido que criou a etapa, em paráfrase: sair da blocagem direto para o
+layout mistura ideia e implementação; gerar primeiro uma imagem por seção
+libera a imaginação, e só em cima da imagem aprovada se destrincha em camadas.
 
-> "Você vai logo da blocagem a pensar no layout. Eu queria uma etapa extra de,
-> em cima da blocagem, pensar em ideias de seções gerando um prompt de imagem
-> dessa seção. Você é muito mais criativo imaginando com uma skill de imagem.
-> Aí em cima da imagem que você gerar, aí sim você destrincha em camadas. Você
-> não vai pensar em implementação e ideia juntos — isso te dá muito mais
-> liberdade de contexto."
-
-E, depois de ver as catorze imagens:
-
-> "Como ideias de seções tá perfeito. A vida mesmo vai ser nas micro
-> interações, nas animações, nos scrolls. Se você olhar pelas imagens são
-> seções relativamente simples, mas eu tendo o olhar de design eu sei o que
-> você quis fazer ali."
+Depois de ver as catorze imagens, o veredito foi: como ideias de seção,
+aprovadas; a vida vai estar nas microinterações, nas animações e na rolagem —
+as imagens são simples, mas quem tem olhar de design lê nelas o que a seção
+quer fazer.
 
 O ganho é de **separação**: a imagem decide composição, dispositivo e lugar
 do acento de cor; o código decide texto, token, semântica e movimento. Pensar
@@ -72,10 +65,13 @@ visíveis no editor — nunca cópia em pasta ignorada; `historico/` não recebe
 imagens. Variação nomeada do mesmo K é permitida: `prompt-vK-<nome>.md` →
 `ideia-vK-<nome>-<modelo>.png`.
 
-Sufixos de modelo (fixos, para ordenar e comparar):
+Sufixos de modelo (fixos, para ordenar e comparar). O sufixo é o nome curto
+do modelo **que o dono diz que usou**: disse só "ChatGPT", `chatgpt`; sabe a
+versão, `gpt25` etc.
 
 | sufixo | modelo |
 |---|---|
+| `chatgpt` | ChatGPT, versão não informada |
 | `gpt25` | GPT Image 2.5 |
 | `seedream5pro` | Seedream 5 Pro |
 | `nanobanana` | Nano Banana (Gemini) |
@@ -117,7 +113,10 @@ que ele mostra, e **onde estão os pontos da cor de ação**, numerados e no
 máximo três.
 
 **O esboço ASCII escolhido vai dentro do `LAYOUT.`** como descrição de
-layout, antes da descrição coluna a coluna. Quando a seção **não** mostra o
+layout, antes da descrição coluna a coluna. **O esboço leva a frase real da
+copy; o prompt nunca.** Ao colar o esboço no `LAYOUT.`, cada frase vira
+marcador de lugar e peso — `<headline, 2 linhas>`, `<lista de 3 itens>`,
+`<CTA>` —, porque o gerador escreve na imagem o que lê no prompt. Quando a seção **não** mostra o
 produto, diga isso no `LAYOUT.` — o prefixo comum puxa o produto sozinho
 (numa rodada real, uma imagem saiu com a plataforma numa seção que não a
 pedia).
@@ -143,10 +142,13 @@ pedia).
 
 ## Double-check em contexto limpo (gate da fase)
 
-É **obrigatório antes de gerar imagem**, sobre as ideias escolhidas no
-portão 1, e de novo antes de implementar. Sobre a leva em texto (Passo 2,
-`ideias-ascii.md`), antes de o dono escolher, é opcional e barato.
-Subagentes com **contexto limpo** julgam cada ideia por escrito, dentro do
+A ordem é fixa: o **agente principal** escreve a leva de ideias em texto
+(Passo 2) → o dono escolhe (portão 1) → **só então** o double-check, por
+subagente de contexto limpo, sobre as escolhidas → prompt → imagem. É
+**obrigatório depois da escolha do dono e antes de gerar imagem**, e de novo
+antes de implementar. Subagente de ideação escrevendo a leva é opcional, para
+peça longa (ver `assets/briefing-subagente-ideacao.md`). Subagentes com
+**contexto limpo** julgam cada ideia por escrito, dentro do
 próprio arquivo da seção:
 
 - **(a) Função.** A ideia sustenta a função narrativa da copy nesta seção?

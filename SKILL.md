@@ -106,8 +106,8 @@ estimar** (`references/medicao.md`).
 
 Ler o que a referência quer dizer. Alinhamento, espaçamento e quebra de linha
 num protótipo rudimentar são acidente do desenho rápido, não instrução. O mesmo
-cliente disse "quero idêntico, pixel perfect" e "é óbvio que é pra centralizar,
-estava assim no protótipo porque era rudimentar" — **o que separa os dois casos
+cliente pediu fidelidade total a um protótipo e, noutro, tratou o desalinhamento
+como rascunho óbvio a corrigir — **o que separa os dois casos
 é a presença de medida.** Na dúvida, perguntar.
 
 ### Fidelidade — existe imagem-conceito aprovada
@@ -156,12 +156,17 @@ qualquer uma destas entradas no mesmo documento escrito:
 
 | o que você tem | o que a skill faz com isso |
 |---|---|
-| nada | escreve do zero, a partir da leitura da copy e de referência real |
+| nada | escreve do zero, a partir da leitura da copy (e de 3–5 referências reais, quando houver; sem referência, a direção diz isso) |
 | texto solto, briefing falado | lê **intenção**, não instrução; o que for medida, pergunta |
 | imagens, moodboard | extrai paleta e vocabulário — **nunca layout** |
 | pesquisa + imagens + texto | vira direção escrita, não cópia |
 | Figma de direção (paleta, marca, ícones) | extrai três coisas: paleta exata, assets exportáveis, frames como moodboard |
 | Figma de página, com medida | **modo executor**: mede e copia, sem cromo a mais |
+
+Esta tabela decide como a **direção** é escrita; a dos quatro modos ("Em que
+modo você está") decide cada **seção**. Direção só em texto ⇒ o agente escreve
+a direção lendo intenção, e as seções seguem em modo **autor** até existir
+imagem-conceito aprovada — daí em diante, **fidelidade**.
 
 Aí é só pedir: *"roda a skill nesse projeto"*.
 
@@ -232,7 +237,8 @@ Direção lida como texto é aprovada por educação; direção com uma unidade 
 desenhada é aprovada ou vetada de verdade.
 
 A direção **carrega assets** (marcas, ícones, fotos, texturas) e nasce de
-referência real, **nunca por inércia do projeto anterior**.
+3–5 referências reais quando houver — sem referência, da leitura da copy, e
+diz isso —, **nunca por inércia do projeto anterior**.
 
 ### Passo 1 — Blocagem é diagramação E composição
 
@@ -258,7 +264,8 @@ torna óbvia, sem legenda), **mecanismo vivo** em uma linha, **esboço ASCII**
 na proporção da unidade (só o objeto e onde a copy mora nele; sem emoji) e,
 quando houver biblioteca, **blocos de origem**. A leva fecha com **uma
 recomendação** e o porquê, e vai para `secoes/NN-slug/ideias.md`, uma seção
-datada por leva.
+datada por leva. Quem escreve a leva é o agente principal; subagente de
+ideação é opcional, para peça longa.
 
 **Portão 1: você escolhe 1–2 ideias por unidade** (entrada datada no
 `veredito.md`); só essas viram imagem. Imagem recusada custa crédito e não diz
@@ -274,10 +281,13 @@ Cada ideia escolhida vira **uma imagem na proporção do formato**, que quem
 aprova vê antes de existir qualquer código. Estrutura do arquivo em
 `assets/prompt-secao-template.md`: prefixo comum inalterado + `LAYOUT.` com o
 **esboço ASCII escolhido colado** + a cena, com o double-check (a–d)
-respondido por subagente de contexto limpo antes de gerar.
+respondido por subagente de contexto limpo depois da sua escolha e antes de
+gerar.
 
 A cena descreve **lugar e peso** do texto, nunca a frase — o gerador escreve
-errado, e a copy só existe na peça final. Um dispositivo por unidade, nunca
+errado, e a copy só existe na peça final. O esboço ASCII leva a frase real;
+ao colá-lo no `LAYOUT.`, cada frase vira marcador (`<headline, 2 linhas>`,
+`<lista de 3 itens>`, `<CTA>`). Um dispositivo por unidade, nunca
 repetido na peça. Quando a unidade não mostra o produto, dizer isso no
 `LAYOUT.`. Cor de ação em até três pontos.
 

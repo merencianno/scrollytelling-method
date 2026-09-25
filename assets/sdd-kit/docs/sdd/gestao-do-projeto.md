@@ -6,7 +6,7 @@ vira ✅ quando o entregável existe e foi verificado. Anotar aqui não é fazer
 Legenda: ⬜ a fazer · 🟨 em andamento / aguardando decisão · ✅ feito · ⏸️ manter como está
 
 <!-- Como preencher:
-     - Uma frente por peça, com o prefixo definido no Passo 3 do bootstrap:
+     - Uma frente por peça, com o prefixo definido na Etapa 3 do bootstrap:
        2–3 letras maiúsculas da peça + número de dois dígitos (CAR-01);
        GER-01… para o que é geral.
      - Status com data e commit: "✅ AAAA-MM-DD (`hash`)".
@@ -37,4 +37,4 @@ commit ou elogio não bastam; "manter por ora" também não.
 
 | # | Tarefa | Entregável | Status |
 |---|---|---|---|
-| GER-01 | Estrutura do projeto com SDD | `sdd-kit` copiado, `CLAUDE.md` e `docs/sdd/README.md` preenchidos, commit `chore: estrutura do projeto com SDD` | ⬜ |
+| GER-01 | Estrutura do projeto com SDD | `sdd-kit` copiado, `CLAUDE.md` e `docs/sdd/README.md` preenchidos, commit `chore: estrutura do projeto a partir do kit` | ⬜ |

@@ -12,8 +12,8 @@
  *   node audit-viewports.mjs <url> [dir-de-saida] [larguras] [seletor-de-secao]
  *
  * Ex.:
- *   node audit-viewports.mjs http://localhost:3000/ref
- *   node audit-viewports.mjs http://localhost:3000/ref .audit 320,768,1280 "[data-dobra]"
+ *   node audit-viewports.mjs http://localhost:3000/minha-pagina
+ *   node audit-viewports.mjs http://localhost:3000/minha-pagina .audit 320,768,1280 "[data-dobra]"
  *
  * Requer Playwright instalado no projeto; rode a partir da raiz do repositório.
  */

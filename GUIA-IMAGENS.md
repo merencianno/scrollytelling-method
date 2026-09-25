@@ -99,8 +99,9 @@ pecas/<peça>/secoes/03-desejo/ideia-v1-seedream5pro.png
 
 Pode gerar a mesma ideia em dois modelos e guardar as duas. A escolhida é
 renomeada para `ideia-v1-aprovada-gpt25.png`; **as outras ficam ao lado**,
-na mesma pasta — nada vai para pasta escondida. Sufixos: `gpt25`,
-`seedream5pro`, `nanobanana`, `mystic`, `flux`, `outro-<nome>`.
+na mesma pasta — nada vai para pasta escondida. Sufixos: `chatgpt`
+(se você não souber a versão), `gpt25`, `seedream5pro`, `nanobanana`,
+`mystic`, `flux`, `outro-<nome>`.
 
 ## Passo 4 — Dar o veredito
 

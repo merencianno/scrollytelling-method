@@ -1,7 +1,7 @@
 # Stack: Next 15 + React 19 + Tailwind 3 + GSAP
 
 Apêndice de implementação. Os princípios estão em `references/animacao.md` e
-`references/armadilhas.md`; aqui está o código real da `/ref`, colável.
+`references/armadilhas.md`; aqui está o código real da página de referência, colável.
 
 ## Dependências
 

@@ -52,7 +52,7 @@ tem 229 linhas e concentra os defeitos típicos do formato:
 
 Conteúdo que falta tem **dois tratamentos, não um**: o **slot técnico**
 (marcado, contado pelo gate, avisa ou bloqueia a publicação) para o que é
-obrigatório — a foto do expert, o número de contato —, e o **fallback
+obrigatório — a foto do autor, o número de contato —, e o **fallback
 silencioso** (tenta o arquivo, cai para um tile de cor com frase curta) para
 o resto — as fotos ilustrativas dos mockups. Um slot marcado por página; o
 resto cai. **Falta de foto nunca bloqueia a seção.** O tile de cor é
@@ -66,7 +66,7 @@ passe por real.
 O que a copy não menciona não entra por inferência: vira **slot técnico**,
 um valor de configuração explicitamente marcado como pendente, que falha
 no gate de publicação até alguém de fora decidir. No projeto de referência o número
-comercial ficou como `TODO-PENDENTE` em `src/config/projeto-ref.ts`, e o verificador
+comercial ficou como `TODO-PENDENTE` num arquivo de configuração, e o verificador
 trata isso como aviso no preview local e como falha no alvo de catálogo —
 a página existe, roda e é revisável, mas não sobe com o placeholder. Links
 legais sem URL renderizam como texto, não como âncora morta. O oposto —
@@ -81,10 +81,9 @@ janelas de produto, kanbans, ledgers, telas de app. Essa camada é
 ilustração — e a regra antiga desta seção dizia que ilustração não escreve
 nada: skeleton bars no lugar de texto, traço no lugar de número. **A regra
 estava errada de categoria.** Aplicada à risca produziu mockups que o
-cliente chamou de "preguiçosos, extremamente toscos" e, num segundo projeto,
-foi revogada por pedido literal: *"queria os assets com dados mock data
-sabe? fotos, números, notificações pushes… use telas reais, interagíveis
-pelo usuário"*.
+cliente recusou como preguiçosos e, num segundo projeto, foi revogada por
+pedido explícito: mock data com fotos, números e notificações, em telas reais
+e interagíveis.
 
 O que ela protegia continua valendo, com a fronteira no lugar certo:
 
@@ -109,8 +108,8 @@ O que ela protegia continua valendo, com a fronteira no lugar certo:
   fazer algo melhor").
 - **Nenhuma frase para o lead fora da copy, nem em estado de interação** —
   feedback de clique, toast, vazio, sucesso. String nativa do app pode
-  ("Seguir", "curtiu"). Não perguntar: omitir ("se
-  você inventou essa copy aí você tá chapando").
+  ("Seguir", "curtiu"). Não perguntar: omitir (frase inventada
+  fora da copy foi recusada com dureza).
 - **Nada que se leia como prova de resultado, nunca.** Sem depoimento, sem
   "fulano faturou X", sem nome real, sem valor em moeda, sem rosto. Mensagem
   longa entra truncada com reticências para não virar depoimento.
@@ -120,8 +119,8 @@ O que ela protegia continua valendo, com a fronteira no lugar certo:
 - **O destaque visual não cai sobre o que a oferta não promete.** Um
   contador subindo é promessa implícita: se for preciso mostrar crescimento,
   cresce o que o produto entrega (posts publicados, ideias), não o que ele
-  não garante (seguidores). *"O doodle no número de posts também, porque a
-  gente não quer dar a entender que a gente vai prometer seguidores."*
+  não garante (seguidores). O traço de destaque foi para o número de posts
+  justamente para não sugerir promessa de seguidores.
 - **Dado que o cliente ainda vai mandar** entra fictício e **rotulado** no
   código (`// TODO(cliente): dados reais` + um atributo que o gate reporta
   como aviso, `data-…-copy-suspeita`), nunca apresentado como definitivo.

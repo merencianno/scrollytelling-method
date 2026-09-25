@@ -150,9 +150,9 @@ citadas, o limite que continua valendo, a ordem de execução pedida e o que
 ficou como backlog. Guarde a referência visual em `pecas/<peça>/referencias/`
 com data no nome.
 
-O inverso também vale: **antes de herdar uma regra de peça irmã, releia o
+O inverso também vale: **antes de herdar uma regra de outra peça, releia o
 que esta peça vende.** Uma regra de página ("nenhuma oferta é software")
-aplicada à irmã cuja oferta era uma plataforma tirou o produto da página.
+aplicada a outra peça cuja oferta era uma plataforma tirou o produto da página.
 Só então dispare os agentes — e mande cada um ler a seção nova
 **primeiro**, com a frase "ela REVOGA as regras de …".
 

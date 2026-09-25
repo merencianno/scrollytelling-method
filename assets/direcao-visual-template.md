@@ -3,6 +3,9 @@
 <!-- Passo 0. Obrigatória e escrita ANTES de a blocagem produzir qualquer prompt ou código.
      Direção sem nome não se cobra em revisão. Exemplo real: "o feed da rede social". -->
 
+Aprovada em AAAA-MM-DD: "<fala literal do dono>"
+<!-- Preencher quando o dono aprovar; o mesmo pedido vai para docs/sdd/log-de-prompts.md. -->
+
 ## A leitura da copy que sustenta a direção
 
 <Duas ou três frases: o que a copy fala o tempo todo, qual objeto reconhecível aparece nela,
@@ -14,6 +17,11 @@ que promessa acontece em que lugar. É daqui que sai o vocabulário visual — n
 | … | … | … |
 
 <Elemento que não preenche a coluna do meio não entra. É o que impede a direção de virar coleção de enfeites.>
+
+## Referências
+
+<3–5 referências quando houver, cada uma com o que ela empresta (e onde está: marca/ ou
+referencias/). Sem referência, escrever: "sem referência; a direção nasce da leitura da copy".>
 
 ## Tradução para a marca
 

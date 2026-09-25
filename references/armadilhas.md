@@ -1,6 +1,6 @@
 # Armadilhas verificadas
 
-Tudo aqui aconteceu de verdade na construção da `/ref` e custou tempo. Cada
+Tudo aqui aconteceu de verdade na construção da página de referência e custou tempo. Cada
 entrada traz o sintoma (como o problema aparece), a causa e a correção.
 
 ## `[text-wrap:balance]` morre em silêncio dentro de parágrafos
@@ -203,13 +203,13 @@ tarefa. `sleep` em primeiro plano também é bloqueado: espere com um laço
 
 `/assets/…` cru funciona no dev (`basePath` vazio) e dá 404 no ar. Todo
 caminho de asset passa pelo helper — inclusive dentro de blocos de UI que
-montam `src` por string. Um funil inteiro foi ao ar sem imagem; o gate
-herdado pegou a repetição no funil seguinte. A família inteira de defeitos
+montam `src` por string. Uma sequência inteira de páginas foi ao ar sem imagem; o gate
+herdado pegou a repetição na sequência seguinte. A família inteira de defeitos
 que só o artefato revela está em `publicacao.md`.
 
 ## Regra que o próprio orquestrador escreveu e o cliente nunca pediu
 
-O briefing de um funil proibia número, texto e moldura dentro de mockup. O
+O briefing de uma sequência de páginas proibia número, texto e moldura dentro de mockup. O
 cliente nunca pediu isso — era generalização de "não inventar prova" —, e
 reprovou o resultado. Três subagentes tinham reportado *"a regra X me impediu
 de fazer Y que o briefing cita"* e ninguém tratou como defeito do contrato.

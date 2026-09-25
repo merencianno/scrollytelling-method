@@ -6,8 +6,8 @@
 O catálogo está organizado por **função narrativa**, não por número: a mesma
 copy pode ter 9 ou 20 dobras, mas as funções se repetem em toda página de
 direct response. Para cada função: o tipo de conceito que funciona, a
-superfície que costuma servir e um exemplo nomeado, já aprovado, da `/ref` ou
-da `/ref-vsl`.
+superfície que costuma servir e um exemplo nomeado, já aprovado, da página de referência ou
+da primeira página que deu origem ao método.
 
 Antes de desenhar, perguntar o que a dobra **afirma** e desenhar a cena que
 prova a afirmação antes da leitura linha a linha.
@@ -19,20 +19,20 @@ cardápio.
 
 | Função | Que conceito funciona | Superfície | Exemplo nomeado |
 |---|---|---|---|
-| Promessa | O produto funcionando, não a promessa ilustrada: uma micro-ação reconhecível acontecendo dentro da UI | escuro | "O produto funcionando" — janela única alternando CRM → Tasks → Chat → VSL, lead arrastado pelo cursor (`/ref` 01) |
-| Dor | Uma cena curta por frase da copy, com o objeto do desejo presente e apagado | claro | "Os quatro *ainda*" — um card por frase, ícone da solução apagado, mini-UI que nunca fecha (`/ref` 02) |
-| Mecanismo | Estações ligadas por um conector que acende na ordem; cada estação numa ferramenta diferente | escuro | "O fluxo em quatro estações" — pulso descendo pelo conector, micro-ação por janela (`/ref` 03) |
-| Diagnóstico | Sistema de partes interdependentes, com a falha encenada no fim do ciclo em vez de explicada | claro | "O stepper que apaga na quinta" — a estação apaga em vermelho contido e o ciclo seguinte restabelece (`/ref` 04) |
-| Armadilha | Um objeto que muda de estado (o mesmo recipiente enchendo e esvaziando); o par só quando a copy é par — e conta como o único da peça; assimetria só quando existe lado vencedor | escuro | "Paga duas vezes" — pilha de faturas × fileira de rostos virando "+" (`/ref` 05); "o placar dos dois caminhos" (ref-vsl) |
-| Virada | Mostrar a decisão sendo tomada diante do leitor (escolher 3 entre 10), não anunciá-la | deep | "A mesa de diagnóstico" — varredura, escolha, linha de soluções, em três janelas (`/ref` 06) |
-| Oferta | Esquema numérico fora do card + um único objeto iluminado com o preço | escuro | "3 + 10" — ícones empilhados acima, card branco limpo abaixo (`/ref` 07) |
-| Produto | Catálogo com uma peça por item, cada uma com vida própria; tamanhos desiguais | claro | "O bento de 10 janelas" — mockup específico em loop por solução (`/ref` 08) |
-| Prova / como funciona | Passagem de posse: a peça sai de um lugar, atravessa e pousa em outro | escuro | "A cópia que vira sua" — o produto → janela da ferramenta parceira → sua conta (`/ref` 09) |
-| Serviço | Gente trabalhando dentro da UI — avatares marcando frentes, progresso avançando | claro | "A instalação, uma por vez" — uma solução pousa a cada 6 s e o time marca as quatro frentes (`/ref` 10) |
-| Ancoragem de preço | A conta do outro lado somando à vista e sem sair da tela enquanto a oferta cresce | escuro | "O placar" + "The Stack" — ledger fixo à esquerda, pilha acumulando à direita (`/ref` 11) |
-| Qualificação | Spec sheet de uma folha, mais uma grade curta de perfis com ícone próprio por item | claro | "A lista do que vem na caixa" (`/ref` 12) |
-| Garantia | Um objeto só, reconhecível, em metal da cor da marca, sem metáfora extra | escuro | "A medalha em cromo azul" (`/ref` 13); "selos carimbados" (ref-vsl) |
-| Decisão | O card de oferta repetido por inteiro, com a imagem-síntese como cabeçalho; ou o formato nativo em que a escolha é literal (enquete votável quando a copy diz "duas escolhas") | deep | "O card de oferta" — cena All in One, itens, preço, próximo passo, CTA (`/ref` 14) |
+| Promessa | O produto funcionando, não a promessa ilustrada: uma micro-ação reconhecível acontecendo dentro da UI | escuro | "O produto funcionando" — janela única alternando ferramentas, lead arrastado pelo cursor (ref. 01) |
+| Dor | Uma cena curta por frase da copy, com o objeto do desejo presente e apagado | claro | "Os quatro *ainda*" — um card por frase, ícone da solução apagado, mini-UI que nunca fecha (ref. 02) |
+| Mecanismo | Estações ligadas por um conector que acende na ordem; cada estação numa ferramenta diferente | escuro | "O fluxo em quatro estações" — pulso descendo pelo conector, micro-ação por janela (ref. 03) |
+| Diagnóstico | Sistema de partes interdependentes, com a falha encenada no fim do ciclo em vez de explicada | claro | "O stepper que apaga na quinta" — a estação apaga em vermelho contido e o ciclo seguinte restabelece (ref. 04) |
+| Armadilha | Um objeto que muda de estado (o mesmo recipiente enchendo e esvaziando); o par só quando a copy é par — e conta como o único da peça; assimetria só quando existe lado vencedor | escuro | "Paga duas vezes" — pilha de faturas × fileira de rostos virando "+" (ref. 05); "o placar dos dois caminhos" (primeira página) |
+| Virada | Mostrar a decisão sendo tomada diante do leitor (escolher 3 entre 10), não anunciá-la | deep | "A mesa de diagnóstico" — varredura, escolha, linha de soluções, em três janelas (ref. 06) |
+| Oferta | Esquema numérico fora do card + um único objeto iluminado com o preço | escuro | "3 + 10" — ícones empilhados acima, card branco limpo abaixo (ref. 07) |
+| Produto | Catálogo com uma peça por item, cada uma com vida própria; tamanhos desiguais | claro | "O bento de 10 janelas" — mockup específico em loop por solução (ref. 08) |
+| Prova / como funciona | Passagem de posse: a peça sai de um lugar, atravessa e pousa em outro | escuro | "A cópia que vira sua" — o produto → janela de outra ferramenta → sua conta (ref. 09) |
+| Serviço | Gente trabalhando dentro da UI — avatares marcando frentes, progresso avançando | claro | "A instalação, uma por vez" — uma solução pousa a cada 6 s e o time marca as quatro frentes (ref. 10) |
+| Ancoragem de preço | A conta do outro lado somando à vista e sem sair da tela enquanto a oferta cresce | escuro | "O placar" + "The Stack" — ledger fixo à esquerda, pilha acumulando à direita (ref. 11) |
+| Qualificação | Spec sheet de uma folha, mais uma grade curta de perfis com ícone próprio por item | claro | "A lista do que vem na caixa" (ref. 12) |
+| Garantia | Um objeto só, reconhecível, em metal da cor da marca, sem metáfora extra | escuro | "A medalha em cromo azul" (ref. 13); "selos carimbados" (primeira página) |
+| Decisão | O card de oferta repetido por inteiro, com a imagem-síntese como cabeçalho; ou o formato nativo em que a escolha é literal (enquete votável quando a copy diz "duas escolhas") | deep | "O card de oferta" — cena-síntese da oferta, itens, preço, próximo passo, CTA (ref. 14) |
 
 ## Princípios
 
@@ -65,8 +65,8 @@ como prova, mesmo que o produto seja um método e não um app. Se não tem
 (emoção, decisão, sentir), a resposta é o diagrama conceitual. Um produto
 sobre produção de conteúdo, sem software, foi inteiro em interface porque o
 objeto era o conteúdo publicado. E **se a oferta é um produto com interface,
-o produto aparece com a tela real**, não diagrama: uma regra herdada de peça
-irmã ("nenhuma oferta é software") tirou a plataforma de uma página e "as
+o produto aparece com a tela real**, não diagrama: uma regra herdada de outra
+peça ("nenhuma oferta é software") tirou a plataforma de uma página e "as
 cenas viraram diagramas". Reler o que **esta** peça
 vende antes de herdar regra.
 
@@ -79,8 +79,8 @@ acidente. Ver `blocagem.md`.
 **Sem comparativo como padrão.** Objeto único que se transforma; no máximo
 **um par por peça**, e só onde a copy é literalmente um par (a tabela ❌/✅
 da copy, "duas escolhas"). Mesmo aí, procurar primeiro o objeto que muda de
-estado. Quatro dobras em A × B foram vetadas de uma vez ("pare de ficar
-repetindo comparativos toda hora"); numa peça aprovada depois, o único par
+estado. Quatro dobras em A × B foram vetadas de uma vez (a repetição de
+comparativos foi apontada como vício); numa peça aprovada depois, o único par
 foi o de dois posts reais, onde a copy era par.
 
 **Formato nativo da plataforma = frase da copy.** Procurar o formato em que
@@ -104,17 +104,17 @@ acender conquista, apagar denuncia a falha.
 no mesmo nível de energia lê como monotonia, mesmo com tudo aprovado
 individualmente.
 
-## O que muda em relação à `/ref-vsl`
+## O que muda em relação à primeira página
 
-A "voz humana" da ref-vsl era o traço à mão (oval, risco, sublinhado, seta em
+A "voz humana" da primeira página era o traço à mão (oval, risco, sublinhado, seta em
 SVG) sobre um layout limpo. Aqui o produto é software, então a prova é a
 própria UI: a janela de app ocupou esse papel e o traço à mão não aparece.
 
 A assimetria vencedor/perdedor, que sustentou a armadilha e o fechamento da
-ref-vsl, continua valendo no meio da página, mas foi reprovada no fechamento:
+primeira página, continua valendo no meio da página, mas foi reprovada no fechamento:
 numa página de produto o último bloco é a oferta, não o diagrama da escolha.
 
-## Como o revisor escolhe a tela (funil de conteúdo, 2026-09-22)
+## Como o revisor escolhe a tela (numa sequência de páginas de conteúdo)
 
 A pergunta que ele faz a cada item da copy, em três tempos: **"o que isso
 está me dizendo?"** (reduzir à afirmação nua) → **"onde isso acontece na

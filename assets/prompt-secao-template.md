@@ -31,6 +31,9 @@
 
 LAYOUT.
 <Cole aqui o esboço ASCII escolhido em ideias.md, como descrição do layout.
+ Cada frase da copy que o esboço traz vira marcador de lugar e peso:
+ <headline, 2 linhas>, <lista de 3 itens>, <CTA>. A frase real nunca entra
+ no prompt: o gerador escreve na imagem o que lê aqui.
  Se a seção não mostra o produto, diga: "this section does not show the product".
  Depois, a cena, coluna a coluna, de cima para baixo, com porcentagens de largura.
  O que é cada bloco de texto (headline de duas linhas, lista de quatro itens) — nunca a frase.

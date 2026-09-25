@@ -1,7 +1,7 @@
 # Assets gerados por IA
 
 > **A geração de imagem entrou no método — como ferramenta de ideia, não de
-> asset.** Em 2026-09-21 catorze seções de um funil foram geradas como
+> asset.** Numa sequência de páginas, catorze seções foram geradas como
 > imagens-conceito na proporção do formato, aprovadas antes do código
 > (`imagem-conceito.md`).
 > Nenhuma dessas imagens foi ao ar: o que resolve a página continua sendo o
@@ -36,7 +36,7 @@ As razões são práticas:
 - **Texto legível.** Geradores escrevem texto errado, e numa página onde a copy é
   contratual isso é risco direto. No HTML, o texto é o texto.
 
-Na `/ref`, o hero, a seção de fluxo, o bento de soluções e a seção de
+Na página de referência, o hero, a seção de fluxo, o bento de soluções e a seção de
 implementação são todos mockups em HTML dentro de uma primitiva de janela,
 combinados com assets exportados do Figma (ícones de vidro, cards, app icon).
 
@@ -45,8 +45,8 @@ combinados com assets exportados do Figma (ícones de vidro, cards, app icon).
 ### Direção comum, colável como prefixo
 
 Todo prompt começa pela mesma direção — é ela que faz peças geradas em sessões
-diferentes parecerem da mesma família. O texto usado na `/ref`
-(`docs/projeto-ref/prompts-geracao.md`) era, com os hex da marca trocados
+diferentes parecerem da mesma família. O texto usado na página de referência
+era, com os hex da marca trocados
 por marcadores:
 
 > Premium, minimalist tech brand. Deep blue radial light (<MARCA-PROFUNDA>) over pure
@@ -76,7 +76,7 @@ luz, fundo, proibições, acabamento.
   HTML; texto na imagem compete com ela, erra acentuação e não é revisável.
 - **Nunca gerar rostos.** Quando a marca já tem pessoas fotografadas, use-as; um
   rosto sintético destoa e cria problema de direito de imagem sem necessidade.
-- **Nunca entregar imagem com fade, blur de borda ou moldura embutida.** Na `/ref`
+- **Nunca entregar imagem com fade, blur de borda ou moldura embutida.** Na página de referência
   o feedback ao vivo foi exatamente esse — "imagens com blur branco e cortadas".
   O respiro vem do espaço em volta da imagem, não de um degradê dentro dela.
 
@@ -113,6 +113,6 @@ blocos de argumento, não como ilustração de parágrafo. O tratamento é fixo:
 renderizado** — o título do slide, um número de destaque. Esse texto é imagem de
 marca, não copy da página, e vai competir com a headline ao lado ou, pior, ler
 como afirmação da página. Antes de escolher a cena, abrir o PNG e olhar. Na
-`/ref` havia uma cena inteira (`crm-perspective`) inutilizável como respiro por
+página de referência havia uma cena inteira (`crm-perspective`) inutilizável como respiro por
 conter o texto de um slide, e os nomes de arquivo do inventário estavam trocados
 entre si por herança histórica — conferir o conteúdo, nunca o nome.

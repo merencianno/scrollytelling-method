@@ -3,12 +3,15 @@
 Uma linha por dobra, preenchida **antes** de escrever componente. O conceito
 precisa caber numa frase nomeável; se não couber, a dobra ainda não está pensada.
 
-| # | Função narrativa | Conceito (nomeável) | Componente | Ato | Blocagem | Motion | Assets |
+| # | Função narrativa | Conceito (nomeável) | Componente / elemento | Ato | Blocagem | Motion | Assets |
 |---|---|---|---|---|---|---|---|
 | 01 | promessa | <"a janela que troca de ferramenta sozinha"> | `<Hero>` | escuro | <headline, CTA, palco à direita> | <entrada + ciclo de 32 s> | <wordmark> |
 | 02 | dor | <> | `<>` | claro | <> | <> | <> |
 | 03 | mecanismo | <> | `<>` | escuro | <> | <> | <> |
 | … | | | | | | | |
+
+**Componente / elemento**: numa página, o componente que vai existir; numa
+peça exportada (card, slide, story), o elemento principal da unidade.
 
 **Ato** é a superfície: escuro nos picos emocionais (dor, armadilha, oferta,
 fechamento), claro nos respiros (mecanismo, prova, qualificação, garantia). O

@@ -2,8 +2,8 @@
 
 Entre receber a copy e abrir o primeiro arquivo de componente existe uma
 etapa de papel: transformar as dobras cruas numa tabela onde cada linha é
-uma seção e cada coluna é uma decisão já tomada. No projeto de referência isso é o
-`docs/projeto-ref/blocagem-copy.md` — 14 linhas mais o rodapé, escrito antes de
+uma seção e cada coluna é uma decisão já tomada. No projeto de referência isso foi
+um arquivo de blocagem com 14 linhas mais o rodapé, escrito antes de
 qualquer `.tsx`. O template em branco está em `assets/blocagem-template.md`.
 
 ## Por que antes
@@ -14,8 +14,8 @@ inteira. Três efeitos previsíveis:
 
 - **Ritmo acidental.** Três dobras escuras seguidas, ou a página inteira
   clara, só aparecem quando já existe código para jogar fora.
-- **Assets descobertos tarde.** A dobra 9 precisa do logo oficial do
-  a ferramenta parceira; a 6 precisa do logo 3D. Listar isso na tabela revela o que
+- **Assets descobertos tarde.** A dobra 9 precisa do logo oficial de
+  uma ferramenta de terceiro; a 6 precisa do logo 3D. Listar isso na tabela revela o que
   falta enquanto ainda dá tempo de exportar, gerar ou pedir.
 - **Retrabalho de escopo.** Sem a coluna de componente decidida, dois
   agentes (ou duas sessões) mexem no mesmo arquivo.
@@ -41,7 +41,7 @@ tabela de encaminhamento (`copy-contrato.md`).
 | **#** | O número da dobra na copy | A ordem da copy não se altera |
 | **Função narrativa** | O papel da dobra em uma palavra | Promessa, Dor, Mecanismo, Diagnóstico, Armadilha, Virada, Oferta, Produto, Serviço, Ancoragem, Qualificação, Garantia, Decisão |
 | **Conceito** | A cena, nomeada numa frase | Ver o critério do conceito nomeável, abaixo |
-| **Componente** | O nome do arquivo que vai existir | Um arquivo por dobra, nome derivado da função (`TrapSection`, `CostSection`), nunca do número |
+| **Componente / elemento** | O nome do arquivo que vai existir (numa peça exportada, o elemento principal da unidade) | Um arquivo por dobra, nome derivado da função (`TrapSection`, `CostSection`), nunca do número |
 | **Ato** | A superfície: claro, escuro ou "deep" | Ver o ritmo, abaixo |
 | **Blocagem** | O layout em uma frase densa: o que ocupa a tela e em que arranjo | Precisa citar os elementos da copy daquela dobra, não um layout genérico |
 | **Motion** | O gesto, não a implementação | "trilho que preenche", "faturas empilhando", "anel que desenha" |
@@ -52,7 +52,7 @@ morava dentro da célula de blocagem; o template o separa em coluna própria,
 o que torna mais difícil deixar uma dobra sem cena):
 
 > `| 11 | Ancoragem | CostSection | escuro | H2 + parágrafo · ledger 6
-> linhas com barras proporcionais → "R$ 200 mil" · bloco R$ 24 mil em mint
+> linhas com barras proporcionais → "<valor A>" · bloco <valor B> em mint
 > · parágrafo · bold · CTA | rows, bars scaleX, total, side | — |`
 
 Abaixo da tabela, duas notas curtas que valem para a página inteira: o que
@@ -64,7 +64,7 @@ de navegação), e a lista das dobras que levam CTA — no projeto de referênci
 
 Superfície é decisão narrativa, não estética. Escuro nos picos emocionais
 — problema, armadilha, oferta, garantia, fechamento; claro nos respiros —
-explicação, listas, currículo de entregáveis, qualificação. O contraste
+explicação, listas, lista de entregáveis, qualificação. O contraste
 entre seções é parte do efeito: uma página toda escura cansa e uma página
 toda clara não tem clímax.
 
@@ -82,7 +82,7 @@ errado ou duas dobras vizinhas estão contando a mesma coisa.
 
 A coluna de blocagem só está pronta quando o conceito da dobra cabe numa
 frase que descreve uma cena: "o placar dos dois caminhos", "o cofre
-aberto", "a bifurcação final", "a janela da ferramenta parceira instalando na sua
+aberto", "a bifurcação final", "a janela da ferramenta instalando na sua
 conta". Se a frase que sai for "grid de cards com ícones", ainda é
 repaginação — troca de cor e fonte sobre uma estrutura qualquer — e vai
 ser rejeitada na primeira revisão com o cliente.

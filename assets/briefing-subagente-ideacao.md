@@ -2,12 +2,23 @@
 
 <!-- Autocontido: o subagente lê este arquivo inteiro antes de qualquer outro.
      O prompt de disparo é curto e aponta para cá. Um lote = 3 a 4 seções.
-     No projeto, este arquivo vive em pecas/<peça>/subagentes/BRIEFING-IDEACAO.md. -->
+     No projeto, este arquivo vive em pecas/<peça>/subagentes/BRIEFING-IDEACAO.md,
+     criado a partir deste asset quando a peça usar subagente. -->
+
+## 0. Quem faz o quê
+
+- **A leva de ideias em texto é do agente principal.** Subagente de ideação
+  é **opcional**, para peça longa: aí ele escreve a leva de um lote (§1).
+- **O double-check (a–d) é sempre de um subagente de contexto limpo** e roda
+  **depois** da escolha do dono (portão 1) e **antes** de gerar imagem (§6).
+- Ordem: leva em texto → o dono escolhe → double-check → prompt → imagem.
+
+O prompt de disparo diz qual dos dois papéis é o seu.
 
 ## 1. O que é a tarefa
 
-Estamos entre a **blocagem** e o **código**. O seu entregável primeiro é
-**a leva em texto**: para cada seção do lote, `ideias.md` com 3–5 ideias no
+Estamos entre a **blocagem** e o **código**. No papel de ideação (opcional),
+o seu entregável é **a leva em texto**: para cada seção do lote, `ideias.md` com 3–5 ideias no
 formato de `references/ideias-ascii.md` (nome curto, leitura da copy,
 mecanismo vivo, esboço ASCII, blocos de origem) e uma recomendação com o
 porquê. **Não escreva prompt de imagem nesta etapa.** O dono escolhe 1–2
@@ -48,7 +59,7 @@ Depois do prefixo, uma linha em branco e `LAYOUT.` seguido da cena.
 | <fade, blur de borda, moldura> | <"blur branco"; reprovado em todo projeto da casa> |
 | <marcador numérico de dobra> | <vira ornamento> |
 | <rosto real ou gerado> | <prova inventada; onde há foto, é slot> |
-| <mockup em nível de wireframe> | <"assets preguiçosos, extremamente toscos"> |
+| <mockup em nível de wireframe> | <recusado como preguiçoso> |
 | <cor de outro projeto> | <é de outro projeto; nada a ver com este> |
 | … | … |
 
@@ -67,8 +78,9 @@ Sem esta lista o resultado sai em nível de wireframe.>
 
 ## 6. O double-check — o que você decide por seção
 
-Roda **sobre a leva em texto**, antes de o dono escolher. Para cada ideia,
-responda por escrito no próprio `ideias.md`:
+Roda **sobre as ideias que o dono escolheu** (portão 1), **antes** de
+qualquer prompt ou imagem, num subagente de contexto limpo. Para cada ideia
+escolhida, responda por escrito no próprio arquivo da seção:
 **(a)** a ideia sustenta a função narrativa desta seção? **(b)** cabe em uma
 frase e não repete o dispositivo de outra seção? **(c)** dá para desenhar em
 alta fidelidade sem inventar rosto, número ou depoimento? **(d)** existe ideia

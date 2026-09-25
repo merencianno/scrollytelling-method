@@ -7,7 +7,7 @@ license: MIT
 # Tangibilização por mini-UIs CSS
 
 Técnica consolidada numa página de vendas real (seções de mecanismo,
-problema, currículo e bônus): cada item da copy ganha uma **mini-tela
+problema, oferta): cada item da copy ganha uma **mini-tela
 ilustrativa construída só com CSS/SVG** — um frame de "janela" com
 composições abstratas + os números/rótulos reais da copy — em vez de foto,
 stock ou ilustração gerada.

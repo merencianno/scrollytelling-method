@@ -131,9 +131,14 @@ versões até ficar satisfeito.
 
 ## Projeto novo
 
-**O jeito mais curto:** copie [`INICIAR-PROJETO.md`](INICIAR-PROJETO.md) para
-a pasta do projeto novo, abra o Claude Code nela e diga *"leia
-INICIAR-PROJETO.md e comece"*. Ele instala a skill, monta a estrutura, pede
+**O jeito mais curto:** baixe [`INICIAR-PROJETO.md`](INICIAR-PROJETO.md) para
+a pasta do projeto novo (funciona antes de a skill existir na máquina):
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/merencianno/scrollytelling-method/main/INICIAR-PROJETO.md -o INICIAR-PROJETO.md
+```
+
+Depois abra o Claude Code nela e diga *"leia INICIAR-PROJETO.md e comece"*. Ele instala a skill, monta a estrutura, pede
 a copy, os formatos, o briefing e a direção visual, **um de cada vez**, e
 depois conduz ideias em ASCII → prompts de imagem → veredito → peça final.
 

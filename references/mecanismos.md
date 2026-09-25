@@ -2,7 +2,7 @@
 
 Não é lista de componentes: cada entrada parte de um problema real ("como
 mostro isso?") e dá o mecanismo aprovado, construção suficiente para
-reimplementar em qualquer stack, e o limite de uso. Todos vêm da `/ref`.
+reimplementar em qualquer stack, e o limite de uso. Todos vêm da página de referência.
 
 Duas convenções valem para todas as entradas e por isso não se repetem:
 **loops de ambiente nascem pausados** e só rodam quando o bloco entra na
