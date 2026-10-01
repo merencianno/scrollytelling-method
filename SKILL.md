@@ -1,6 +1,6 @@
 ---
 name: scrollytelling-method
-description: Transformar uma copy aprovada em telas — landing com scrollytelling, deck de slides, carrossel, criativo de social ou UI de produto. Cobre a parte criativa, da copy à peça final: blocagem que trata texto e composição juntos, ideias por unidade em texto com esboço ASCII escolhidas pelo dono antes de qualquer imagem, prompt de imagem-conceito só das escolhidas na proporção do formato, veredito de quem aprova antes de qualquer código, três portões do dono (ideia, imagem, pronto), wireframe e layout em ficha de 7 camadas, mockup de interface com mock data (nunca prova), loops pausados até entrar em cena e copy inviolável. Inclui o roteiro de projeto novo com kit de SDD (log literal de pedidos, gestão com entregável, specs, changelog, checkpoint, prompt de retomada). Use sempre que o usuário pedir "página de vendas", "landing com scrollytelling", "transformar essa copy em página", "reimaginar a landing", "transformar essa copy em slides", "deck", "apresentação", "carrossel", "criativo", "tela de produto", "tangibilizar a copy", "ideias em ASCII", "imagem-conceito por seção", "projeto novo com a skill", ou quando existir uma copy dividida em blocos esperando virar tela. Não cobre build, teste, deploy nem gate de publicação.
+description: Transformar uma copy aprovada em telas — landing com scrollytelling, deck de slides, carrossel, criativo de social ou UI de produto. Cobre a parte criativa, da copy à peça final: blocagem que trata texto e composição juntos, nível de visualização N1–N5 escolhido antes, ideias por unidade em texto com esboço ASCII escolhidas pelo dono antes de qualquer imagem, prompt de imagem-conceito só das escolhidas na proporção do formato (o prompt basta em N2), veredito de quem aprova antes de qualquer código, três portões do dono (ideia, imagem, pronto), wireframe e layout em ficha de 7 camadas, mockup de interface com mock data (nunca prova), loops pausados até entrar em cena e copy inviolável. Fecha com estudo de caso. Inclui o roteiro de projeto novo com kit de SDD (log literal de pedidos, gestão com entregável, specs, changelog, checkpoint, prompt de retomada). Use sempre que o usuário pedir "página de vendas", "landing com scrollytelling", "transformar essa copy em página", "reimaginar a landing", "transformar essa copy em slides", "deck", "apresentação", "carrossel", "criativo", "tela de produto", "tangibilizar a copy", "ideias em ASCII", "imagem-conceito por seção", "projeto novo com a skill", ou quando existir uma copy dividida em blocos esperando virar tela. Não cobre build, teste, deploy nem gate de publicação.
 license: MIT
 ---
 
@@ -48,8 +48,12 @@ uma vez desperdiça contexto.
 | `references/direcao-visual.md` | Passo 0: escrever a direção quando não existe; extrair quando existe |
 | `references/copy-contrato.md` | Ao receber a copy; o que o mockup não pode afirmar |
 | `references/blocagem.md` · `conceitos-por-dobra.md` · `mecanismos.md` | Passo 1: planejar as unidades e escolher o conceito de cada uma |
+| `references/niveis-de-visualizacao.md` | **Passo 0.** N1–N5: quanto a ideia se materializa (ASCII, prompt, imagem, assets, vídeo) — decidido antes das ideias |
 | `references/ideias-ascii.md` | **Passo 2.** 3–5 ideias em texto com esboço ASCII por unidade; o dono escolhe antes de qualquer imagem |
-| `references/imagem-conceito.md` | Passos 3 e 4: o prompt só das escolhidas, o double-check, a geração e o veredito |
+| `references/imagem-conceito.md` | Passos 3 e 4: o prompt só das escolhidas, o double-check, a geração (de N3 em diante) e o veredito |
+| `assets/prompt-asset-template.md` | **N4.** Um prompt por asset que compõe a seção |
+| `references/video-frames-scroll.md` | **N5.** Seção-pico em vídeo → frames → scroll (mapeado, não testado) |
+| `references/assets-gerados.md` | Para o asset gerado que de fato entra na peça, em N4/N5 (a imagem-conceito não entra) |
 | `references/camadas.md` | Passos 5 e 6: a ficha de 7 camadas, wireframe e layout |
 | `references/animacao.md` | Antes da primeira linha de animação, se o formato tem eixo de tempo |
 | `references/orquestracao.md` | Antes do primeiro subagente: uma unidade por vez, dois trilhos, refino em fila |
@@ -60,7 +64,9 @@ uma vez desperdiça contexto.
 | `assets/sdd-kit/` | O esqueleto do projeto novo (`CLAUDE.md`, `docs/sdd/`, `pecas/_modelo/`, `/ctxt-full`), copiado no bootstrap |
 | `INICIAR-PROJETO.md` | A ordem de serviço do projeto novo: o dono copia para a pasta e manda ler; grill em quatro pedidos, um por vez |
 | `assets/prompt-novo-projeto.md` | O prompt colável que instala a skill e conduz o projeto novo |
-| `companions/` | Skills companheiras que viajam junto (`tangibilizacao-css`: mini-UIs 100% CSS) |
+| `companions/` | Skills companheiras que viajam junto (`tangibilizacao-css`: mini-UIs 100% CSS; `estudo-de-caso`: fecha cada aplicação, Passo 8) |
+| `estudos-de-caso/` | Um estudo por peça já feita, no `_modelo.md` — o que a skill aprendeu com cada uma |
+| `CHANGELOG.md` | O que mudou em cada versão da skill |
 | `stacks/next-tailwind-gsap.md` | Só se a peça for Next + Tailwind + GSAP: código colável |
 
 ## A regra de ouro
@@ -203,11 +209,11 @@ ficam lado a lado, visíveis, na pasta da unidade.
 
 | passo | o que produz | quem faz |
 |---|---|---|
-| **0 · Pasta e direção** | `projeto.md`, `direcao-visual.md` reescrito com nome e prefixo | você prepara, a skill reescreve |
+| **0 · Pasta e direção** | `projeto.md` (com o nível de visualização), `direcao-visual.md` reescrito com nome e prefixo | você prepara, a skill reescreve |
 | **1 · Blocagem** | `blocagem.md` — texto **e** composição, juntos | a skill |
 | **2 · Ideias em texto** | `secoes/NN-slug/ideias.md`: 3–5 ideias com esboço ASCII e uma recomendação | a skill propõe, **você escolhe** (portão 1) |
 | **3 · Prompts** | `secoes/NN-slug/prompt-vK.md`, só das ideias escolhidas | a skill |
-| **4 · Imagens e veredito** | as imagens e o `veredito.md` de cada unidade | **você** (ou o agente, por MCP) gera; **você aprova** (portão 2) |
+| **4 · Imagens e veredito** | as imagens (ou, em N2, o prompt) e o `veredito.md` de cada unidade | **você** (ou o agente, por MCP) gera; **você aprova** (portão 2) |
 | **5 · Wireframe** | camadas 1–3: fundo, estrutura, texto no lugar | a skill |
 | **6 · Layout** | camadas 4–7: estilo, cor, mockup, movimento | a skill |
 | **7 · Refinamento e revisão** | a peça fiel à imagem, a copy conferida e as aprovações congeladas | a skill refina, **você revisa** |
@@ -240,6 +246,13 @@ A direção **carrega assets** (marcas, ícones, fotos, texturas) e nasce de
 3–5 referências reais quando houver — sem referência, da leitura da copy, e
 diz isso —, **nunca por inércia do projeto anterior**.
 
+**O nível de visualização (N1–N5) também se decide aqui**, antes das ideias,
+pelo que há de ferramenta, porque muda como a ideia é escrita: N1 ASCII ·
+**N2 + prompt descritivo, o padrão mínimo, gerado ou não** · N3 + imagem
+gerada · N4 + prompts de asset por seção · N5 + seção em vídeo → frames →
+scroll. Vai no `projeto.md` e na direção. Detalhe em
+`references/niveis-de-visualizacao.md`.
+
 ### Passo 1 — Blocagem é diagramação E composição
 
 Uma linha por unidade: função narrativa → conceito nomeável → ato claro/escuro
@@ -250,6 +263,10 @@ critérios em `references/blocagem.md`.
 densa tenta você a resolver primeiro a disposição do texto e encaixar imagem
 depois — e o resultado é uma peça que já nasceu sem lugar para a cena. A
 blocagem decide, na mesma linha, **onde o texto fica e o que mais está ali**.
+
+**Este é o núcleo humano do método, e nenhum nível o substitui:** a ideia
+visual que sustenta o que está escrito decidida junto da diagramação — uma
+seção ou três, uma coluna ou duas, H1 com a coluna embaixo, imagem ao lado.
 
 A ordem padrão é blocagem antes dos prompts, porque a disposição precisa estar
 decidida antes de descrever a cena. A ordem inversa — gerar imagem primeiro e
@@ -265,7 +282,9 @@ na proporção da unidade (só o objeto e onde a copy mora nele; sem emoji) e,
 quando houver biblioteca, **blocos de origem**. A leva fecha com **uma
 recomendação** e o porquê, e vai para `secoes/NN-slug/ideias.md`, uma seção
 datada por leva. Quem escreve a leva é o agente principal; subagente de
-ideação é opcional, para peça longa.
+ideação é opcional, para peça longa. A profundidade segue o nível: em **N4**
+a composição pode ficar mais rascunho e cada ideia termina listando os assets
+que pede.
 
 **Portão 1: você escolhe 1–2 ideias por unidade** (entrada datada no
 `veredito.md`); só essas viram imagem. Imagem recusada custa crédito e não diz
@@ -293,6 +312,13 @@ repetido na peça. Quando a unidade não mostra o produto, dizer isso no
 
 Regras completas em `references/imagem-conceito.md`; o passo a passo de quem
 só aprova, em `GUIA-IMAGENS.md`.
+
+**O nível decide onde o fluxo para.** **N2 para no prompt**: descritivo, com
+ASCII do movimento, double-check e critério de aceite, e o portão 2 recai
+sobre ele — o código pode partir do prompt. N3 gera a imagem (Passo 4).
+**N4** soma um prompt por asset que compõe a seção
+(`assets/prompt-asset-template.md`) e, havendo ferramenta, o asset. **N5**
+soma a seção-pico em vídeo (`references/video-frames-scroll.md`).
 
 ### Passo 4 — Gerar, comparar, aprovar
 
@@ -326,7 +352,8 @@ template em `assets/camadas-template.md`):
 | **wireframe** | 1 fundo da página · 2 fundo da seção · 3 textos | o esqueleto: o que é bloco de texto, onde o mockup entra, que espaço ele ocupa |
 | **layout** | 4 estilo · 5 cores · 6 mockups · 7 animações | o acabamento: escala tipográfica, onde cai a cor de ação, a anatomia de cada mockup, e o que se move |
 
-A camada 7 é onde entra tudo o que a imagem não mostra — e é obrigatória:
+Em N4, a camada 6 lista os assets gerados e o que fica em HTML por cima
+deles. A camada 7 é onde entra tudo o que a imagem não mostra — e é obrigatória:
 **unidade sem mecanismo vivo ligado ao que a copy diz está incompleta**, mesmo
 com a composição aprovada.
 
@@ -391,6 +418,15 @@ Duas regras em qualquer um deles: **o que sai é rastreável** (de que versão d
 direção e de que prompt nasceu) e **artefato exportado não se edita à mão** sem
 registrar — a próxima geração apaga a edição em silêncio.
 
+**Ao fechar, o estudo de caso.** Toda aplicação termina rodando a companheira
+`scrollytelling-estudo-de-caso` (`companions/estudo-de-caso/`): linha do
+tempo com fonte, aprovações e vetos literais, o que custou rodada, **o que foi
+novo no método**, regras candidatas e o diff proposto. Sai em
+`estudos-de-caso/AAAA-MM-DD-<slug>.md`; cada regra de método nova vira uma
+mudança proposta para a skill (issue, ou um `BACKLOG.md` seu) e, aceita pelo
+dono, entra num release e no `CHANGELOG.md`. É assim que a skill melhora a
+cada uso.
+
 ## As regras que definem o estilo
 
 - **Interface quando a copy tem objeto reconhecível.** A pergunta não é "o
@@ -429,6 +465,7 @@ O método não tem versão curta: tem versão com menos versões. Sob prazo, cor
 
 | escala com o tempo disponível | não comprime, porque custa quase nada |
 |---|---|
+| nível de visualização (N5 → N2) | N1 e N2: esboço e prompt descritivo |
 | imagens-conceito por unidade (as ideias em texto não se cortam) | o contrato de copy (é script) |
 | elaboração da apresentação de direção | a direção **com nome** |
 | linhas de direção oferecidas (V1, V2…) | o conceito nomeável por unidade |
@@ -441,7 +478,7 @@ tentava poupar.
 ## Checklist
 
 1. **Projeto novo?** `references/bootstrap.md` seguido, `assets/sdd-kit/` copiado; intake e grill registrados no log
-2. `projeto.md` escrito: formato, unidade, **proporção**, arquivo final, prazo
+2. `projeto.md` escrito: formato, unidade, **proporção**, **nível de visualização** (N1–N5, padrão N2), arquivo final, prazo
 3. Copy dividida em blocos e congelada
 4. **Direção visual escrita**, com nome e prefixo comum colável — e apresentada
 5. `references/taste.md` lido antes do primeiro conceito (em cliente novo, só as lições de ofício)
@@ -449,7 +486,7 @@ tentava poupar.
 7. Blocagem em tabela, conceito nomeado em cada unidade, **texto e composição juntos**, sem dispositivo repetido na peça
 8. **Ideias em texto com esboço ASCII**, 3–5 por unidade, com recomendação — **você escolheu** (portão 1)
 9. Double-check em contexto limpo antes de gerar; prompts só das escolhidas, com o ASCII no `LAYOUT.`
-10. Imagens geradas e **aprovadas por quem decide** (portão 2) — ≤ 2 gerações por ideia, veredito datado, distribuição da copy conferida
+10. **Prompts ou imagens aprovados por quem decide**, conforme o nível (portão 2) — ≤ 2 gerações por ideia, veredito datado, distribuição da copy conferida; em N4, os prompts de asset
 11. Fichas de camadas: wireframe (1–3), depois layout (4–7)
 12. Unidades implementadas, uma por vez na revisão, um commit por unidade
 13. **Refinamento**: prints comparados com as imagens-conceito, medidas conferidas em vez de estimadas; **check final da copy**
@@ -457,6 +494,7 @@ tentava poupar.
 15. Aprovações congeladas e vetos registrados no `taste.md` da peça, com o motivo
 16. Rodada registrada: log de pedidos, gestão, checkpoint, prompt de retomada (`/ctxt-full`)
 17. **Você declarou pronto** (portão 3); peça final exportada no formato do `projeto.md`, rastreável
+18. **Estudo de caso escrito** (`scrollytelling-estudo-de-caso`) e as regras de método novas registradas como mudança proposta
 
 ## Projeto novo
 
@@ -497,8 +535,9 @@ pela plataforma.
   golden master de uma unidade é o modo executor e está no escopo.
 - Não decide oferta, preço ou posicionamento. Regra comercial de um projeto
   (`[projeto]` no `taste.md`) não se transporta: a copy do projeto vence.
-- Não gera o asset final por IA. A imagem gerada é ideia; o que vai na peça
-  nasce em HTML/CSS, ou no Figma.
+- Não gera asset final por IA abaixo do N4. A imagem-conceito é ideia; o que
+  vai na peça nasce em HTML/CSS, ou no Figma, e, em N4/N5, no asset gerado sob
+  `references/assets-gerados.md`.
 
 ## Limitações conhecidas
 
@@ -507,6 +546,10 @@ pela plataforma.
   trocadas, mas ainda não passaram por uma rodada real.
 - Em web, o método produz páginas **pesadas**: muitas unidades com mockup em
   HTML e SVG inline. Medir cedo se o público for majoritariamente móvel.
+- **N5 (vídeo → frames → scroll) está mapeado, não testado**: a primeira
+  aplicação fecha com estudo de caso e corrige `references/video-frames-scroll.md`.
+- A direção visual ainda nasce de conversa com o dono, e varia por projeto,
+  cliente e nível de qualidade; ensiná-la por escrito está em aberto.
 - A ficha de camadas tende a virar documentação a posteriori se o mesmo agente
   escreve ficha e código. Se a separação importa, exija a ficha como primeira
   entrega.
