@@ -11,7 +11,7 @@ Primeira versão numerada.
 
 - **Níveis de visualização N1–N5**, escolhidos no Passo 0, antes das ideias
   (`references/niveis-de-visualizacao.md`): N1 ASCII · **N2 + prompt descritivo,
-  o padrão mínimo, gerado ou não** · N3 + imagem gerada · N4 + prompts de asset
+  gerado ou não, o piso em modo autor** (com referência visual já existente, N1 basta) · N3 + imagem gerada · N4 + prompts de asset
   por seção (`assets/prompt-asset-template.md`) · N5 + seção vídeo → frames →
   scroll (`references/video-frames-scroll.md`, mapeado, não testado).
 - **N2 para no prompt**: o portão 2 pode recair sobre a descrição; o código

@@ -13,7 +13,7 @@ Não é tema visual nem biblioteca de componentes. É o processo.
 
 **Versão 1.0.0** (2026-10-01) — ver [`CHANGELOG.md`](CHANGELOG.md). Desde a 1.0.0,
 o quanto cada ideia se materializa antes do código é um **nível escolhido no
-começo** (N1 ASCII · N2 + prompt descritivo, o padrão mínimo · N3 + imagem ·
+começo** (N1 ASCII · N2 + prompt descritivo, o piso quando a ideia é nova · N3 + imagem ·
 N4 + prompts de asset · N5 + vídeo → frames → scroll), e toda aplicação fecha
 com um **estudo de caso** que alimenta a próxima.
 

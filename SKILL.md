@@ -248,9 +248,10 @@ diz isso —, **nunca por inércia do projeto anterior**.
 
 **O nível de visualização (N1–N5) também se decide aqui**, antes das ideias,
 pelo que há de ferramenta, porque muda como a ideia é escrita: N1 ASCII ·
-**N2 + prompt descritivo, o padrão mínimo, gerado ou não** · N3 + imagem
-gerada · N4 + prompts de asset por seção · N5 + seção em vídeo → frames →
-scroll. Vai no `projeto.md` e na direção. Detalhe em
+**N2 + prompt descritivo, gerado ou não — o piso em modo autor** · N3 +
+imagem gerada · N4 + prompts de asset por seção · N5 + seção em vídeo →
+frames → scroll. Com referência visual já existente, **N1 basta, com o porquê
+registrado**. Vai no `projeto.md` e na direção. Detalhe em
 `references/niveis-de-visualizacao.md`.
 
 ### Passo 1 — Blocagem é diagramação E composição
@@ -465,7 +466,7 @@ O método não tem versão curta: tem versão com menos versões. Sob prazo, cor
 
 | escala com o tempo disponível | não comprime, porque custa quase nada |
 |---|---|
-| nível de visualização (N5 → N2) | N1 e N2: esboço e prompt descritivo |
+| nível de visualização (N5 → N2) | N1 sempre; N2 (prompt descritivo) em modo autor |
 | imagens-conceito por unidade (as ideias em texto não se cortam) | o contrato de copy (é script) |
 | elaboração da apresentação de direção | a direção **com nome** |
 | linhas de direção oferecidas (V1, V2…) | o conceito nomeável por unidade |
@@ -478,7 +479,7 @@ tentava poupar.
 ## Checklist
 
 1. **Projeto novo?** `references/bootstrap.md` seguido, `assets/sdd-kit/` copiado; intake e grill registrados no log
-2. `projeto.md` escrito: formato, unidade, **proporção**, **nível de visualização** (N1–N5, padrão N2), arquivo final, prazo
+2. `projeto.md` escrito: formato, unidade, **proporção**, **nível de visualização** (N1–N5; N2 é o piso em modo autor, N1 basta com referência existente e porquê registrado), arquivo final, prazo
 3. Copy dividida em blocos e congelada
 4. **Direção visual escrita**, com nome e prefixo comum colável — e apresentada
 5. `references/taste.md` lido antes do primeiro conceito (em cliente novo, só as lições de ofício)
