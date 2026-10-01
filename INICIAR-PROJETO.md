@@ -113,6 +113,12 @@ nome). Anote **com que fidelidade** a direção chegou (nada, texto, moodboard,
 Figma de direção, Figma com medida). Isso define o modo; ver "Em que modo
 você está", no `SKILL.md`.
 
+No mesmo pedido, pergunte **o que ele tem para gerar**: gerador de imagem,
+ferramenta de acabamento (upscale, recorte), gerador de vídeo. A resposta
+define o **nível de visualização** (`references/niveis-de-visualizacao.md`):
+sem resposta, **N2** — esboço e prompt descritivo por seção, sem gerar. Grave
+o nível no `projeto.md` e na direção.
+
 **C5 — Só se sobrar lacuna.** **Abrir:** a Etapa 2 do `bootstrap.md` (já
 lido). Depois dos quatro, **uma** mensagem, numerada,
 só com o que ainda falta e é decisão do dono (conceito, copy, prova, publicação,
@@ -173,7 +179,10 @@ colar o esboço no `LAYOUT.`, cada frase vira marcador de lugar e peso
 (`<headline, 2 linhas>`, `<lista de 3 itens>`, `<CTA>`), porque o gerador
 escreve na imagem o que lê. O dono cola **só o bloco ```text** no gerador dele e gera **à
 mão**. Se houver MCP de imagem ligado e o dono pedir, você gera; senão, não
-ofereça duas vezes.
+ofereça duas vezes. Em **N2** o prompt é o entregável e o portão 2 recai
+sobre ele; em **N4**, some um `assets/asset-<nome>-vK.md` por asset que a
+ideia pede (`assets/prompt-asset-template.md`); em **N5**, a seção-pico segue
+`references/video-frames-scroll.md`.
 
 Diga ao dono, para cada prompt, **onde salvar a imagem e com que nome**:
 

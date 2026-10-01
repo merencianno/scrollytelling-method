@@ -10,6 +10,15 @@
 > (cena fotográfica de respiro, composição que não cabe em HTML) — e as
 > regras de ferramenta que valem para os dois usos.
 >
+> **Desde a 1.0.0 o asset gerado é um nível, não exceção.** Em
+> **N4** (`niveis-de-visualizacao.md`) cada seção pode pedir assets com prompt
+> próprio — objeto recortado, corpo de device, foto do expert retocada, persona
+> em ação, cena para ícones por cima — no `assets/prompt-asset-template.md`;
+> em **N5**, uma seção-pico em vídeo → frames (`video-frames-scroll.md`). A
+> imagem-conceito continua não sendo asset, e o mockup em HTML/CSS continua
+> sendo a primeira opção para interface: o asset gerado entra onde HTML não
+> chega (foto, material, luz), e o texto, a tela e o ícone ficam no código.
+>
 > O que a primeira execução real ensinou sobre ferramenta: cole **só o bloco
 > de prompt**, nunca o arquivo (o cabeçalho vira instrução); gere
 > **individualmente** (modo lista piora); mude **uma variável por vez**;
@@ -74,8 +83,11 @@ luz, fundo, proibições, acabamento.
 
 - **Nunca gerar texto legível dentro da imagem.** A copy é literal e vive no
   HTML; texto na imagem compete com ela, erra acentuação e não é revisável.
-- **Nunca gerar rostos.** Quando a marca já tem pessoas fotografadas, use-as; um
-  rosto sintético destoa e cria problema de direito de imagem sem necessidade.
+- **Nunca gerar o rosto de pessoa real.** Quando a marca já tem pessoas
+  fotografadas, use-as — em N4 a foto real pode ser retocada, reiluminada ou
+  ampliada, nunca substituída. Persona fictícia em ação (`persona-em-acao` no
+  template) é permitida quando a copy pede alguém fazendo algo e não há foto
+  real; confirmar direito de uso e que não se parece com alguém que existe.
 - **Nunca entregar imagem com fade, blur de borda ou moldura embutida.** Na página de referência
   o feedback ao vivo foi exatamente esse — "imagens com blur branco e cortadas".
   O respiro vem do espaço em volta da imagem, não de um degradê dentro dela.
@@ -88,8 +100,11 @@ luz, fundo, proibições, acabamento.
   criar do zero: serve para pegar um render simples, um PNG de totem ou um
   mockup exportado e dar-lhe acabamento fotográfico, inclusive por
   transferência de estilo a partir de uma referência da própria marca.
+  Remoção de fundo, recorte e extração de frames de vídeo fazem dele a mesa
+  de acabamento do N4 e do N5.
 - **Higgsfield** — geração do zero e, principalmente, **image-to-video**: é a
-  opção quando o slot pede movimento (um símbolo 3D respirando em loop de 6 s).
+  opção quando o slot pede movimento (um símbolo 3D respirando em loop de 6 s)
+  e, em N5, o vídeo da seção-pico que vira frames no scroll.
 - **Geração de imagem por GPT** — rascunho rápido de composição e teste de ideia,
   antes de gastar ciclo nas ferramentas de acabamento.
 

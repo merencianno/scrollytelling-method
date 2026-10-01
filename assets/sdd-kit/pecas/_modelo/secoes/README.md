@@ -5,9 +5,9 @@
 
 ## Estado por seção
 
-| # | Seção | Conceito por versão | Modelo | Estado |
-|---|---|---|---|---|
-| 01 | <slug> | v1 <nome da ideia> · v2 <…> | <sufixo> | <ideias · aguardando escolha · imagem · aprovada · implementada · congelada> |
+| # | Seção | Conceito por versão | Nível | Modelo | Estado |
+|---|---|---|---|---|---|
+| 01 | <slug> | v1 <nome da ideia> · v2 <…> | <N1–N5> | <sufixo> | <ideias · aguardando escolha · imagem · aprovada · implementada · congelada> |
 
 ## Modelo de imagem
 

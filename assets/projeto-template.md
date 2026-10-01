@@ -11,6 +11,7 @@
 | A unidade | dobra · slide · card · peça · tela/estado |
 | Eixo do tempo | scroll · avanço · swipe · nenhum · interação |
 | **Proporção da imagem-conceito** | 16:9 · 1:1 · 4:5 · 9:16 — herdada por todo prompt |
+| **Nível de visualização** | N1 ASCII · N2 + prompt (padrão mínimo) · N3 + imagem · N4 + assets · N5 + vídeo→frames — e por quê (`references/niveis-de-visualizacao.md`) |
 | Peça final | HTML/Next · `.pptx`/PDF · sequência de PNG · PNG · Figma pelo MCP · código |
 | Quem aprova | <NOME OU PAPEL> |
 | Prazo | <DATA — define o dial: enxuto ou elaborado> |

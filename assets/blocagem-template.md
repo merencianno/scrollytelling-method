@@ -18,6 +18,10 @@ fechamento), claro nos respiros (mecanismo, prova, qualificação, garantia). O
 contraste entre dobras é o que dá sensação de progresso — decidir isso na tabela
 evita descobrir na quinta seção que a página inteira ficou cinza.
 
+**Assets** marca o nível da unidade (`references/niveis-de-visualizacao.md`):
+`IC(N2)` prompt sem imagem, `IC(N3)` imagem gerada, `A×n` n assets com prompt
+próprio (N4), `V` seção em vídeo → frames (N5).
+
 **Motion** aqui é intenção, não implementação: "barras preenchem conforme rola",
 "placas pousam uma a uma". A escolha do padrão técnico vem depois.
 

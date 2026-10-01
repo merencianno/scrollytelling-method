@@ -19,6 +19,7 @@ traga mais cinco assim").
 ## Onde entra
 
 ```text
+Passo 0   Pasta e direção — inclui o NÍVEL DE VISUALIZAÇÃO (N1–N5)
 Passo 1   Blocagem
 Passo 2   ► IDEIAS EM TEXTO: 3–5 por unidade + recomendação
             ↳ PORTÃO 1 — o dono escolhe 1–2 por unidade (ideias.md / veredito.md)
@@ -30,6 +31,13 @@ Passos 5–7 Wireframe, layout, refinamento e revisão (+ check final da copy)
 Passo 8   Peça final
             ↳ PORTÃO 3 — o dono declara pronto
 ```
+
+O nível de visualização (`niveis-de-visualizacao.md`) já está decidido quando a
+leva começa. Em **N4**, cada ideia termina com uma linha "assets que esta ideia
+pede" (tipo do `assets/prompt-asset-template.md`), e a composição pode ficar
+mais rascunho porque a precisão vai para o prompt de cada asset. Em **N2**, a
+ideia escolhida vira prompt descritivo e para aí — o portão 2 recai sobre o
+prompt.
 
 ## Os três portões do dono
 
