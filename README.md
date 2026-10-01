@@ -11,6 +11,12 @@ entrega narrativa; quem pula entrega repaginação com cor nova.
 
 Não é tema visual nem biblioteca de componentes. É o processo.
 
+**Versão 1.0.0** (2026-10-01) — ver [`CHANGELOG.md`](CHANGELOG.md). Desde a 1.0.0,
+o quanto cada ideia se materializa antes do código é um **nível escolhido no
+começo** (N1 ASCII · N2 + prompt descritivo, o padrão mínimo · N3 + imagem ·
+N4 + prompts de asset · N5 + vídeo → frames → scroll), e toda aplicação fecha
+com um **estudo de caso** que alimenta a próxima.
+
 ## O formato decide três coisas
 
 A unidade, o eixo do tempo e a proporção da imagem. O resto do método não muda.
@@ -52,15 +58,15 @@ Aí é só pedir: *"roda a skill nesse projeto"*.
 
 | passo | o que produz | quem faz |
 |---|---|---|
-| **0 · Direção** | `direcao-visual.md` com nome e prefixo comum | você prepara, a skill reescreve |
+| **0 · Direção** | `direcao-visual.md` com nome e prefixo comum; o nível de visualização (N1–N5) | você prepara, a skill reescreve |
 | **1 · Blocagem** | `blocagem.md` — texto **e** composição, juntos | a skill |
 | **2 · Ideias em texto** | 3–5 ideias por unidade com esboço ASCII e uma recomendação | a skill propõe, **você escolhe** (portão 1) |
 | **3 · Prompts** | um prompt de imagem por ideia escolhida, na proporção do formato | a skill |
-| **4 · Imagens e veredito** | as imagens e o `veredito.md` de cada unidade | **você** (ou o agente, por MCP) gera; **você aprova** (portão 2) |
+| **4 · Imagens e veredito** | as imagens (em N2, só o prompt) e o `veredito.md` de cada unidade | **você** (ou o agente, por MCP) gera; **você aprova** (portão 2) |
 | **5 · Wireframe** | camadas 1–3: fundo, estrutura, texto no lugar | a skill |
 | **6 · Layout** | camadas 4–7: estilo, cor, mockup, movimento | a skill |
 | **7 · Refinamento e revisão** | a peça fiel à imagem, a copy conferida, as aprovações congeladas | a skill refina, **você revisa** |
-| **8 · Peça final** | a exportação no formato do `projeto.md` | a skill, **quando você declara pronto** (portão 3) |
+| **8 · Peça final** | a exportação no formato do `projeto.md` e o estudo de caso | a skill, **quando você declara pronto** (portão 3) |
 
 **Três portões, todos seus: qual ideia, qual imagem, está pronta.** O resto é
 trabalho da máquina. Imagem só das ideias escolhidas, no máximo duas gerações
@@ -158,8 +164,9 @@ Nenhuma é obrigatória; a skill diz quais faltam sem travar.
 | skill | o que a scrollytelling espera dela | onde instalar | obrigatória? |
 |---|---|---|---|
 | `tangibilizacao-css` | mini-UIs 100% CSS quando a copy tem objeto reconhecível | viaja em `companions/`; `ln -s ~/.claude/skills/scrollytelling-method/companions/tangibilizacao-css ~/.claude/skills/` | não |
+| `scrollytelling-estudo-de-caso` | fechar cada aplicação com estudo de caso (Passo 8) e registrar o aprendizado como mudança proposta para a skill | viaja em `companions/`; `ln -s ~/.claude/skills/scrollytelling-method/companions/estudo-de-caso ~/.claude/skills/scrollytelling-estudo-de-caso` | recomendada — sem ela, o fechamento segue o `estudos-de-caso/_modelo.md` à mão |
 | `impeccable` | auditoria e polish de UI no refinamento | upstream `pbakaus/impeccable` (Apache 2.0, versão testada 4.1.1), conforme o README dele; não vendorizada | não — sem ela, `taste.md` e o refinamento cobrem o piso |
-| MCP de geração de imagem (Magnific, Higgsfield…) | o agente gera as imagens-conceito | configuração do Claude Code | não — sem ele, o dono gera no navegador |
+| MCP de geração de imagem (Magnific, Higgsfield…) | o agente gera imagens-conceito (N3), assets (N4) e vídeo (N5) | configuração do Claude Code | não — sem ele, o dono gera no navegador ou o projeto fica em N2 |
 | `git lfs` | versionar as imagens-conceito | sistema | só se versionar imagens |
 
 Detalhe em [`companions/README.md`](companions/README.md).
@@ -172,8 +179,10 @@ Detalhe em [`companions/README.md`](companions/README.md).
 | `GUIA-IMAGENS.md` | o passo a passo de quem aprova as ideias: escolher, gerar, salvar, veredito |
 | `references/principios-de-trabalho.md` | a conduta do agente em qualquer cliente: portões, log literal, decidir o óbvio, anotar não é fazer |
 | `references/bootstrap.md` | projeto novo, máquina nova: instalação, intake, grill, estrutura, o que registrar onde |
+| `references/niveis-de-visualizacao.md` | N1–N5: quanto a ideia se materializa antes do código, decidido no Passo 0 |
 | `references/ideias-ascii.md` | 3–5 ideias em texto com esboço ASCII por unidade, antes de qualquer imagem |
 | `references/imagem-conceito.md` | o prompt só das ideias escolhidas, o double-check, o bake-off de modelos e o veredito datado |
+| `references/video-frames-scroll.md` | N5: a seção-pico em vídeo → frames → scroll (mapeado, não testado) |
 | `references/camadas.md` | a ficha de 7 camadas: wireframe e layout |
 | `references/direcao-visual.md` | escrever a direção quando não existe; extrair quando existe |
 | `references/blocagem.md` · `conceitos-por-dobra.md` · `mecanismos.md` | planejar as unidades e escolher o conceito de cada uma |
@@ -185,11 +194,13 @@ Detalhe em [`companions/README.md`](companions/README.md).
 | `references/armadilhas.md` | o que custou tempo real, para não custar de novo |
 | `references/taste.md` | o sistema de escopo, as lições de ofício que se repetem e como capturar o gosto do seu cliente |
 | `stacks/next-tailwind-gsap.md` | o único arquivo que assume uma stack: código colável |
-| `assets/` | os templates: `projeto-template.md`, direção, blocagem, prompt de unidade, briefing de ideação, camadas, subagente, checkpoint, tokens |
+| `assets/` | os templates: `projeto-template.md`, direção, blocagem, prompt de unidade, prompt de asset (N4), briefing de ideação, camadas, subagente, checkpoint, tokens |
 | `assets/sdd-kit/` | o esqueleto do projeto novo: `CLAUDE.md`, `docs/sdd/` (log, changelog, gestão, specs, checkpoint, retomada), `pecas/_modelo/`, `/ctxt-full` |
 | `INICIAR-PROJETO.md` | a ordem de serviço do projeto novo: copiar para a pasta e mandar ler |
 | `assets/prompt-novo-projeto.md` | o prompt colável que instala a skill e conduz o projeto novo |
-| `companions/` | skills companheiras que viajam junto (`tangibilizacao-css`) |
+| `companions/` | skills companheiras que viajam junto (`tangibilizacao-css`, `estudo-de-caso`) |
+| `estudos-de-caso/` | o modelo e o índice dos estudos de caso de cada peça |
+| `CHANGELOG.md` | o que mudou em cada versão |
 
 ## O que fica fora
 
