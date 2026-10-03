@@ -23,6 +23,12 @@ que promessa acontece em que lugar. É daqui que sai o vocabulário visual — n
 <3–5 referências quando houver, cada uma com o que ela empresta (e onde está: marca/ ou
 referencias/). Sem referência, escrever: "sem referência; a direção nasce da leitura da copy".>
 
+## Nível de visualização e ferramentas
+
+<N1–N5 (`references/niveis-de-visualizacao.md`), decidido antes das ideias, e as ferramentas
+que o sustentam: gerador de imagem, acabamento (upscale, relight, recorte), gerador de vídeo.
+Sem ferramenta, N2: o prompt descritivo é o entregável.>
+
 ## Tradução para a marca
 
 - **Cor:** <paleta com hex exatos; a cor de ação e o teto de pontos por seção; a cor escura da casa>

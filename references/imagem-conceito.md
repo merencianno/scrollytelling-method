@@ -23,11 +23,12 @@ os dois juntos custa contexto e produz seções que são wireframe com cor.
 ## Onde entra no pipeline
 
 ```text
-Passo 0    Pasta e direção — projeto.md, copy congelada, direção ESCRITA (references/direcao-visual.md §0)
+Passo 0    Pasta e direção — projeto.md, copy congelada, direção ESCRITA (references/direcao-visual.md §0), NÍVEL DE VISUALIZAÇÃO N1–N5
 Passo 1    Blocagem (coluna Assets ganha "IC" = imagem-conceito)
 Passo 2    ► IDEIAS EM TEXTO com esboço ASCII (references/ideias-ascii.md) → portão 1: o dono escolhe 1–2
 Passo 3    ► PROMPTS só das escolhidas: double-check → prompt com o ASCII no LAYOUT.
-Passo 4    ► IMAGEM → veredito datado (portão 2)
+Passo 4    ► [IMAGEM, de N3 em diante] → veredito datado (portão 2)
+             ↳ N2 para no prompt · N4 soma prompts de asset · N5 soma o vídeo (references/niveis-de-visualizacao.md)
 Passos 5–6 CAMADAS: wireframe (1–3) e layout (4–7) por seção aprovada (references/camadas.md)
 Passo 7    Refinamento e revisão (references/orquestracao.md)
 ```
@@ -51,7 +52,9 @@ pecas/<peça>/
 │     ├─ prompt-vK.md                    K = número do prompt; versão nova nasce AO LADO, nunca por cima
 │     ├─ ideia-vK-<modelo>.png           gerada pelo prompt K; o modelo vai só no sufixo
 │     ├─ ideia-vK-aprovada-<modelo>.png  a escolhida, renomeada; as outras ficam ao lado
-│     ├─ veredito.md                     log datado, append-only, com a citação literal do dono
+│     ├─ veredito.md                     log datado, append-only, com a citação literal do dono (em N2: "aprovado em prompt")
+│     ├─ assets/asset-<nome>-vK.md       N4: um prompt por asset (assets/prompt-asset-template.md) e o asset gerado ao lado
+│     ├─ video/                          N5: prompt do vídeo, vídeo aprovado e frames (references/video-frames-scroll.md)
 │     └─ camadas.md                      wireframe (camadas 1–3) e layout (camadas 4–7)
 ├─ referencias/            imagens que o dono traz no meio da rodada, com data no nome
 ├─ saida/                  a peça final, no formato do projeto.md
@@ -243,6 +246,11 @@ arquivo. O arquivo existe mesmo com veredito pendente. Na primeira execução
 ele foi especificado duas vezes e nunca criado; a aprovação veio em bloco.
 Aceite o que vier, mas escreva.
 
+**Em N2 o portão 2 recai sobre o prompt.** Sem imagem, o dono aprova a
+descrição (ou a delega); a entrada do veredito diz "aprovado em prompt" e o
+código parte dele. Se a imagem vier depois, é entrada nova — e, divergindo do
+prompt, a imagem aprovada vence.
+
 **O gate é a satisfação com as ideias, não a primeira imagem.** Regras de
 fechamento:
 
@@ -312,3 +320,18 @@ Lições das rodadas seguintes:
   e o excesso é cortado pela borda.
 - **Imagem aprovada sem ver a animação** foi descartada depois de
   implementada. Ideia que vive do movimento se prova rodando, não na imagem.
+
+## O que o primeiro N2 ensinou
+
+Duas seções entregues em prompt, sem imagem gerada (`niveis-de-visualizacao.md`).
+O código ainda esperava o teste do dono; o que o prompt já tinha decidido:
+
+- **ASCII em três quadros do movimento**, não um: estado de chegada, meio do
+  scroll, estado final. A cena que vive do movimento se descreve no tempo.
+- **Critério de aceite dentro do prompt**: três linhas que dizem quando a
+  imagem está certa. Servem a quem gera e a quem implementa sem a imagem.
+- **O double-check (d) técnico** amarra a cena ao código: "notebook centrado e
+  de frente, porque o zoom é um `scale` com origem no centro da tela".
+- **Anexos nomeados** (a referência de espírito, a tela real) entram no topo,
+  com caminho — e o que vira HTML por cima da imagem é dito no prompt, para a
+  tela gerada só precisar de luz e leitura.

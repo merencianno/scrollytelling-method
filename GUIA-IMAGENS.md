@@ -17,6 +17,23 @@ usa a sua copy, letra por letra.
 Você só aprova o código depois de aprovar as ideias. Isso evita refazer
 seção pronta.
 
+## Antes de tudo — até onde vamos materializar
+
+No começo do projeto o Claude pergunta o que você tem à mão, porque isso
+muda como ele escreve as ideias (`references/niveis-de-visualizacao.md`):
+
+- **Não tem gerador de imagem?** Tudo bem: ele entrega o esboço e um prompt
+  muito descritivo por seção, e o código parte daí. É o padrão mínimo, e já é
+  a maior parte do caminho.
+- **Tem gerador de imagem?** Você gera a imagem de cada ideia escolhida e
+  aprova olhando — fica melhor.
+- **Tem também ferramenta de acabamento (upscale, recorte, troca de fundo)?**
+  Ele escreve, além da imagem da seção, um prompt por peça que compõe a seção:
+  o objeto recortado, o notebook com a tela, a foto melhorada do expert, uma
+  pessoa fazendo a ação da copy.
+- **Tem gerador de vídeo?** Numa seção especial, a imagem vira um vídeo curto
+  que avança com o scroll.
+
 ## Passo 0 — Escolher entre as ideias em texto
 
 Antes de qualquer imagem, o Claude traz, para cada seção, um arquivo
