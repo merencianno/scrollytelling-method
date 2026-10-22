@@ -25,8 +25,8 @@ muda.
 | landing, página de vendas | a dobra | o scroll | 16:9, mais 9:16 quando o mobile muda a cena | HTML/CSS, Next |
 | deck, apresentação | o slide | o avanço | 16:9 | `.pptx`, PDF, HTML/Next, ou Figma pelo MCP |
 | carrossel de social | o card | o swipe | 1:1 ou 4:5 | PNG em sequência, na ordem |
-| story, reels estático | a peça | — | 9:16 | PNG |
-| criativo de feed | a peça | — | 1:1 ou 4:5 | PNG (CSS → export) ou Figma pelo MCP |
+| story, reels estático | a peça | — | 9:16 | PNG · régua em `references/estaticos.md` |
+| criativo de feed | a peça | — | 1:1 ou 4:5 | PNG (CSS → export) ou Figma pelo MCP · régua em `references/estaticos.md` |
 | UI de produto | a tela ou o estado | a interação | a do dispositivo | código ou Figma pelo MCP |
 
 **A proporção é parâmetro, não constante.** Decida no Passo 0, escreva no
@@ -57,6 +57,7 @@ uma vez desperdiça contexto.
 | `references/camadas.md` | Passos 5 e 6: a ficha de 7 camadas, wireframe e layout |
 | `references/animacao.md` | Antes da primeira linha de animação, se o formato tem eixo de tempo |
 | `references/orquestracao.md` | Antes do primeiro subagente: uma unidade por vez, dois trilhos, refino em fila |
+| `references/estaticos.md` | **Formato estático (post, ad de feed, story).** O princípio, os dois modos, a régua medida em 131 ads aprovados e o checklist |
 | `references/medicao.md` · `armadilhas.md` | Passo 7: medir em vez de estimar; o que já custou tempo real |
 | `references/revisao-por-audio.md` | Quando o feedback chegar em áudio — e o grill de perguntas |
 | `GUIA-IMAGENS.md` | Para quem aprova sem programar, e para o agente que gera por MCP |

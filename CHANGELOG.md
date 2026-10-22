@@ -5,6 +5,13 @@ Versão semântica: **maior** quando muda a ordem dos passos ou um portão;
 quando o texto se corrige sem mudar o método. Cada entrada diz o que mudou e,
 quando houver, o estudo de caso de onde veio.
 
+## Não lançado
+
+- **`references/estaticos.md`**: estáticos (post, ad de feed 1:1/4:5, story 9:16). O princípio (copy → mensagem →
+  complemento visual simbólico + assets; o ad pode ser o KV; série consistente; branding × performance), os dois
+  modos, a régua com mediana e faixa medida nas camadas de 131 ads aprovados e o checklist. Ligada na tabela de
+  formatos e no índice.
+
 ## 1.0.0 — 2026-10-01
 
 Primeira versão numerada.
