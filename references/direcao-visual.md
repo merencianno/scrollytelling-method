@@ -41,6 +41,12 @@ A amostra é o item de maior retorno da fase: direção lida como texto é
 aprovada por educação; direção com uma unidade já desenhada é aprovada ou
 vetada de verdade.
 
+**O KV se vende aplicado, nunca cru.** Candidato a KV passa pelo pipeline inteiro (blocagem, ideias com ASCII,
+taste, revisão por print) e chega materializado em peças com acabamento de entrega: uma hero, uma seção do meio, a
+FAQ, a oferta e um criativo de feed. Um kit solto (ícones, paleta, pattern) ou um hero de rascunho é a "ideia crua":
+tem boa intenção e sai grotesco. A peça aplicada é o que o dono consegue aprovar ou vetar de verdade; os criativos
+costumam ser a melhor régua de acabamento para o resto.
+
 **A direção carrega assets** — marcas exportadas, ícones, fotos, texturas
 viajam com ela. É o que faz peças diferentes do mesmo cliente parecerem da mesma
 família sem serem iguais: a casa dá paleta e tipografia (`[casa]`), a direção
