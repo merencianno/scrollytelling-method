@@ -6,6 +6,7 @@ skill completa; subpasta não é descoberta sozinha, então instale por symlink:
 ```bash
 ln -s ~/.claude/skills/scrollytelling-method/companions/tangibilizacao-css ~/.claude/skills/
 ln -s ~/.claude/skills/scrollytelling-method/companions/estudo-de-caso ~/.claude/skills/scrollytelling-estudo-de-caso
+ln -s ~/.claude/skills/scrollytelling-method/companions/direcao-visual ~/.claude/skills/direcao-visual
 ```
 
 (ou em `<projeto>/.claude/skills/` para instalar só no projeto).
