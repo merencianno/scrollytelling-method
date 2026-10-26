@@ -41,3 +41,11 @@ direção está aprovada.
 - Busca por nomes de pessoas da equipe, nomes de arquivo, "q01"-like, "token", "TODO" no texto visível.
 - Logos sobrepostas ao arquivo final: proporção idêntica.
 - Cinza antes da marca; nenhuma peça repetida.
+
+## Peças e aplicações
+
+- Aplicação é peça final: tela da plataforma, anúncio, página, asset de área de membros, asset isolado. O capítulo de
+  aplicações não abre com logo; abre pelas peças (por exemplo, os assets isolados).
+- **O asset é o foco:** centralizado na tela, com a altura de tela certa. O texto em volta é secundário e mínimo — uma
+  palavra que sinaliza, nunca diretriz técnica. Não rouba a ênfase.
+- Animação de peça que existe no produto se refaz em CSS com as telas reais do produto, em vez de vídeo exportado.
