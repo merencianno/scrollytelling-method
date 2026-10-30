@@ -49,3 +49,23 @@ direção está aprovada.
 - **O asset é o foco:** centralizado na tela, com a altura de tela certa. O texto em volta é secundário e mínimo — uma
   palavra que sinaliza, nunca diretriz técnica. Não rouba a ênfase.
 - Animação de peça que existe no produto se refaz em CSS com as telas reais do produto, em vez de vídeo exportado.
+
+## Antes da apresentação: a exploração em paralelo
+
+A apresentação é o entregável da direção. Antes dela vem a exploração (v2 desta skill, 2026-10-30; a v1 está na tag
+`direcao-visual-v1`). Cada etapa fecha com um entregável palpável: **direção visual = a apresentação → design system →
+peças** (páginas, anúncios).
+
+1. **Insumos sem ordem fixa.** Briefing, moodboard, brainstorm e pesquisa entram na ordem que o projeto pedir: às vezes
+   parte do conceito que o dono já tem (um esboço à mão), às vezes do moodboard, às vezes do briefing do cliente. O
+   briefing vira uma pasta com os arquivos e um macro que aponta para eles (calls, mensagens, documentos).
+2. **Logo e KV em paralelo, cada um num link.** Uma página só de logos e outra só de KVs, uma opção embaixo da outra,
+   cada uma com status "aguardando / aprovado / não aprovado". O dono aprova por ali e a leva seguinte parte do aprovado.
+3. **Contrapor, não só executar.** Da maior parte das opções seguir o conceito do dono; o resto o **complementa,
+   contraria ou cobre o ponto cego** dele. Cada opção leva o rótulo da origem ("conceito do dono", "complementa",
+   "contraria", "ponto cego").
+4. **KV se mostra aplicado** (hero, ad, oferta, e-mail), nunca cru. Logo se mostra com as variações (escura no claro,
+   clara no escuro, uma cor, pequena).
+5. **Diário de inputs.** Cada opção diz de que input nasceu e o que mudou de uma leva para a outra (só conceito → com
+   moodboard → com feedback). O diário termina com os passos seguidos, para o próximo processo.
+6. **Rápido.** Com know-how da marca, a primeira leva sai em horas: mesclar e aprovar, não idear sem fim.
