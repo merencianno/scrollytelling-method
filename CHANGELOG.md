@@ -7,6 +7,10 @@ quando houver, o estudo de caso de onde veio.
 
 ## Não lançado
 
+- **`references/carrosseis.md`**: carrossel (1:1, 4:5). O princípio (capa que promete com a imagem mais forte;
+  miolo clean em card; fundo no meio só na virada; moldura fixa; fecho com ação de plataforma; transição desenhada),
+  o roteiro, a régua por papel do slide (capa × interno × fecho) medida nas camadas de 63 slides de 7 carrosséis
+  aprovados, os tipos de slide em ASCII e o checklist. Ligada na tabela de formatos e no índice.
 - **`references/estaticos.md`**: estáticos (post, ad de feed 1:1/4:5, story 9:16). O princípio (copy → mensagem →
   complemento visual simbólico + assets; o ad pode ser o KV; série consistente; branding × performance), os dois
   modos, a régua com mediana e faixa medida nas camadas de 131 ads aprovados e o checklist. Ligada na tabela de
